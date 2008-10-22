@@ -1,0 +1,152 @@
+#ECHO
+T
+
+TEST
+krylov
+
+INCLUDE
+GM/restartIN/restart.H
+
+#PLANET
+NONE
+
+#IOUNITS
+NONE
+
+#NORMALIZATION
+USER
+
+#NONCONSERVATIVE
+F		UseNonConservative
+
+#CHECKGRIDSIZE
+24			nI
+4			nJ
+4			nK
+1			MinBlockALL
+
+#GRID
+2
+1
+1
+-0.03
+ 0.03
+-0.0025
+ 0.0025
+-0.0025
+ 0.0025
+
+#USER_FLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F			UseUserOuterBcs
+T			UseUserICs
+F			UseUserSpecifyRefinement
+F			UseUserLogFiles
+F			UseUserWritePlot
+F			UseUserAMR
+F			UseUserEchoInput
+F			UseUserB0
+T			UseUserInitSession
+T			UseUserUpdateStates
+
+#USERINPUTBEGIN ------------------------
+
+#RADIATIONTEST
+2			iRadiationTest
+initial_lowrie2.dat	NameInputFile
+
+#USERINPUTEND ----------------------------
+
+#GRAYDIFFUSION
+T			UseGrayDiffusion
+F			UseRadFluxLimiter
+
+#SHOCKPOSITION
+0.0             ShockPosition
+0.5             ShockSlope
+
+#OUTERBOUNDARY
+shear		xMinBc
+shear		xMaxBc
+shear		yMinBc
+shear		yMaxBc
+float		zMinBc
+float		zMaxBc
+
+#TIMESTEPPING
+2		nStage
+0.8		CflExpl
+
+#SCHEME
+2		nOrder
+Godunov		TypeFlux
+mc
+1.5
+
+#FIXEDTIMESTEP
+T		UseFixedTimeStep
+1.7E-4		DtFixed
+
+#KRYLOV
+gmres
+nul
+0.001
+1000
+
+#UPDATECHECK
+F
+
+#IMPLICIT
+F               UsePointImplicit
+F               UsePartImplicit
+T               UseFullImplicit
+1.0		CflImpl
+
+#SAVELOGFILE
+T		DoSaveLogfile
+raw		StringLogfile
+1		DnSaveLogfile
+-1.		DtSaveLogfile
+
+#SAVERESTART
+T		DoSaverestart
+100000
+-1.0
+
+This is set only for sake of the test_shocktube test
+#SAVEBINARY
+F		UseBinary
+
+PLOTFILENAME
+second
+
+#SAVEINITIAL
+T		DoSaveInitial
+
+#SAVEPLOT
+2		nPlotfile
+z=0 VAR idl	PlotString
+-1		DnSavePlot
+0.001		DtSavePlot
+-1.0		DxSavePlot
+Rho Ux Uy Tgas Trad rho0 Ux0 Uy0 Tgas0 Trad0
+g
+cut VAR idl	PlotString
+-1        	DnSavePlot
+0.001		DtSavePlot
+-0.5		xMinCut
+0.5		xMaxCut
+0.000001	yMinCut
+0.000002	yMaxCut
+0.000001	zMinCut
+0.000002	zMaxCut
+-1.0            DxSavePlot
+Rho Ux Uy Tgas Trad rho0 Ux0 Uy0 Tgas0 Trad0
+g
+
+#STOP
+-1		MaxIteration
+0.01		tSimulationMax
+
