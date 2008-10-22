@@ -1,40 +1,34 @@
 #ECHO
 T
 
-TEST
-krylov
-
-INCLUDE
-GM/restartIN/restart.H
-
 #PLANET
-NONE
+NONE			NamePlanet
 
 #IOUNITS
-NONE
+NONE			TypeIoUnit
 
 #NORMALIZATION
-USER
+USER			TypeNormalization
 
 #NONCONSERVATIVE
-F		UseNonConservative
+F			UseNonConservative
 
 #CHECKGRIDSIZE
-24			nI
-4			nJ
-4			nK
-1			MinBlockALL
+12			nI
+2			nJ
+2			nK
+32			MinBlockALL
 
 #GRID
-2
-1
-1
--0.03
- 0.03
--0.0025
- 0.0025
--0.0025
- 0.0025
+4			nRootBlockX
+1			nRootBlockY
+1			nRootBlockZ
+-0.03			xMin
+ 0.03			xMax
+-0.00125		yMinRes
+ 0.00125		yMaxRes
+-0.00125		zMin
+ 0.00125		zMax
 
 #USER_FLAGS
 F			UseUserInnerBcs
@@ -49,104 +43,101 @@ F			UseUserAMR
 F			UseUserEchoInput
 F			UseUserB0
 T			UseUserInitSession
-T			UseUserUpdateStates
+F			UseUserUpdateStates
 
 #USERINPUTBEGIN ------------------------
 
-#RADIATIONTEST
+#LOWRIETEST
 2			iRadiationTest
 initial_lowrie2.dat	NameInputFile
 
 #USERINPUTEND ----------------------------
 
-#GRAYDIFFUSION
+#RADIATION
 T			UseGrayDiffusion
 F			UseRadFluxLimiter
 
 #SHOCKPOSITION
-0.0             ShockPosition
-0.5             ShockSlope
+0.0			ShockPosition
+0.5			ShockSlope
 
 #OUTERBOUNDARY
-shear		xMinBc
-shear		xMaxBc
-shear		yMinBc
-shear		yMaxBc
-float		zMinBc
-float		zMaxBc
+shear			TypeBcEast
+shear			TypeBcWest
+shear			TypeBcSouth
+shear			TypeBcNorth
+float			TypeBcBottom
+float			TypeBcTop
 
 #TIMESTEPPING
-2		nStage
-0.8		CflExpl
+2			nStage
+0.8			CflExpl
 
 #SCHEME
-2		nOrder
-Godunov		TypeFlux
-mc
-1.5
+2			nOrder
+Godunov			TypeFlux
+mc			TypeLimiter
+1.5			LimiterBeta
 
 #FIXEDTIMESTEP
-T		UseFixedTimeStep
-1.7E-4		DtFixed
+T			UseDtFixed
+1.7E-4			DtFixedDim
 
 #KRYLOV
-gmres
-nul
-0.001
-1000
+gmres			TypeKrylov
+nul			TypeInitKrylov
+0.001			ErrorMaxKrylov
+1000			MaxMatvecKrylov
 
 #UPDATECHECK
-F
+F			UseUpdateCheck
 
 #IMPLICIT
-F               UsePointImplicit
-F               UsePartImplicit
-T               UseFullImplicit
-1.0		CflImpl
+F			UsePointImplicit
+F			UsePartImplicit
+T			UseFullImplicit
+1.0			ImplCFL
 
 #SAVELOGFILE
-T		DoSaveLogfile
-raw		StringLogfile
-1		DnSaveLogfile
--1.		DtSaveLogfile
+T			DoSaveLogfile
+raw			StringLogfile
+1			DnSaveLogfile
+-1.			DtSaveLogfile
 
 #SAVERESTART
-T		DoSaverestart
+T			DoSaveRestart
 100000
 -1.0
 
 This is set only for sake of the test_shocktube test
 #SAVEBINARY
-F		UseBinary
-
-PLOTFILENAME
-second
+F			DoSaveBinary
 
 #SAVEINITIAL
-T		DoSaveInitial
+T			DoSaveInitial
 
 #SAVEPLOT
-2		nPlotfile
-z=0 VAR idl	PlotString
--1		DnSavePlot
-0.001		DtSavePlot
--1.0		DxSavePlot
+2			nPlotfile
+z=0 VAR idl		StringPlot
+-1  			DnSavePlot
+0.001			DtSavePlot
+-1.0			DxSavePlot
 Rho Ux Uy Tgas Trad rho0 Ux0 Uy0 Tgas0 Trad0
 g
-cut VAR idl	PlotString
--1        	DnSavePlot
-0.001		DtSavePlot
--0.5		xMinCut
-0.5		xMaxCut
-0.000001	yMinCut
-0.000002	yMaxCut
-0.000001	zMinCut
-0.000002	zMaxCut
--1.0            DxSavePlot
+cut VAR idl		StringPlot
+-1  			DnSavePlot
+0.001			DtSavePlot
+-0.5			xMinCut
+0.5			xMaxCut
+0.000001		yMinCut
+0.000002		yMaxCut
+0.000001		zMinCut
+0.000002		zMaxCut
+-1.0			DxSavePlot
 Rho Ux Uy Tgas Trad rho0 Ux0 Uy0 Tgas0 Trad0
 g
 
 #STOP
--1		MaxIteration
-0.01		tSimulationMax
+-1			MaxIteration
+0.01			tSimulationMax
 

@@ -9,7 +9,7 @@ test:
 	@ls -l *.diff
 
 # Path to this test directory from the main directory
-TESTDIR = CRASHTEST/RadHydro/IdealGas/GrayDiffusion
+TESTDIR = CRASH_TEST/RadHydro/IdealGas/GrayDiffusion
 
 # Main BATSRUS/CRASH directory
 DIR = ../../../..
@@ -38,13 +38,13 @@ test_rundir:
 ### Lowrie's 1 test with AMR grid ###
 
 test_lowrie1_amr:
-	@echo "test_lowrie1_amr_compile..." > test_lowrie1_amr.diff
+	@echo "test_lowrie1_amr_compile..." > output/test_lowrie1_amr.diff
 	make test_lowrie1_amr_compile
-	@echo "test_lowrie1_amr_rundir..." >> test_lowrie1_amr.diff
+	@echo "test_lowrie1_amr_rundir..." >> output/test_lowrie1_amr.diff
 	make test_lowrie1_amr_rundir
-	@echo "test_lowrie1_amr_run..." >> test_lowrie1_amr.diff
+	@echo "test_lowrie1_amr_run..." >> output/test_lowrie1_amr.diff
 	make test_lowrie1_amr_run
-	@echo "test_lowrie1_amr_check..." >> test_lowrie1_amr.diff
+	@echo "test_lowrie1_amr_check..." >> output/test_lowrie1_amr.diff
 	make test_lowrie1_amr_check
 
 test_lowrie1_amr_compile:
@@ -78,6 +78,54 @@ test_lowrie1_amr_check:
 		diff test_lowrie1_amr.err test_lowrie1_amr.ref > test_lowrie1_amr.diff; \
 		ls -l test_lowrie1_amr.diff; \
 		idl test_lowrie1_amr_fig.pro
+
+
+### Lowrie's 2 test ###
+
+test_lowrie2_2d:
+	@echo "test_lowrie2_2d_compile..." > output/test_lowrie2_2d.diff
+	make test_lowrie2_2d_compile
+	@echo "test_lowrie2_2d_rundir..." >> output/test_lowrie2_2d.diff
+	make test_lowrie2_2d_rundir
+	@echo "test_lowrie2_2d_run..." >> output/test_lowrie2_2d.diff
+	make test_lowrie2_2d_run
+	@echo "test_lowrie2_2d_check..." >> output/test_lowrie2_2d.diff
+	make test_lowrie2_2d_check
+
+test_lowrie2_2d_compile:
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=12,2,2,32,32
+	cd ${DIR}; make BATSRUS PIDL
+
+test_lowrie2_2d_rundir: test_rundir
+	cp input/PARAM.in.lowrie2_2d ${DIR}/${RUNDIR}/PARAM.in
+	cp input/initial_lowrie2.dat  ${DIR}/${RUNDIR}/
+
+test_lowrie2_2d_run:
+	make test_lowrie2_2d_run_res RES=48
+	make test_lowrie2_2d_run_res RES=96
+	make test_lowrie2_2d_run_res RES=192
+	make test_lowrie2_2d_run_res RES=384
+	rm -rf output/test_lowrie2_2d_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie2_2d_results
+
+test_lowrie2_2d_run_res:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/12; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=-0.00125*48/${RES}; s/\S+(\s*yMinRes)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=0.00125*48/${RES}; s/\S+(\s*yMaxRes)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=1.7e-4*48/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_lowrie2_2d_check:
+	cd output; \
+		idl test_lowrie2_2d_error.pro; \
+		diff test_lowrie2_2d.err test_lowrie2_2d.ref > test_lowrie2_2d.diff; \
+		ls -l test_lowrie2_2d.diff; \
+		idl test_lowrie2_2d_fig.pro
+
+
 
 clean:
 	rm -f *~ input/*~ output/*~
