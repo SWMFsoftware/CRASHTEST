@@ -1,0 +1,44 @@
+Installation
+============
+If you don't have a working BATSRUS repository, check it out and install it:
+
+cvs checkout BATSRUS
+cd BATSRUS
+./Config.pl -install [options]
+
+Then checkout the CRASHTEST directory inside the BATSRUS directory:
+
+cvs checkout CRASHTEST
+
+Running tests
+=============
+
+Go into the CRASHTEST repository to run tests, e.g.
+
+cd RadHydro/IdealGas/GrayDiffusion/
+make help
+make test_lowrie1_amr MPIRUN="mpirun -np 4"
+
+You may need to do this in an interactive queue of a cluster, 
+because the largest resolution tests may not fit into the memory of a desktop.
+
+The results will be saved into the output/ directory:
+  _results/ directory containing the raw output from the test runs
+  .err      file containing the numerical errors
+  .diff     file showing the difference relative to the reference solution in .ref
+  .eps      file(s) showing figures 
+
+For example:
+
+output/test_lowrie1_amr_results/
+output/test_lowrie1_amr.err
+output/test_lowrie1_amr.diff
+output/test_lowrie1_amr.eps
+
+Clean up
+========
+Type
+
+make clean
+
+in the appropriate directory(ies)
