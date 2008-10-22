@@ -9,7 +9,7 @@ test:
 	@ls -l *.diff
 
 # Path to this test directory from the main directory
-TESTDIR = CRASH_TEST/RadHydro/IdealGas/GrayDiffusion
+TESTDIR = CRASHTEST/RadHydro/IdealGas/GrayDiffusion
 
 # Main BATSRUS/CRASH directory
 DIR = ../../../..
