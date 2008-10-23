@@ -6,10 +6,11 @@ test:
 	@rm -f *.diff
 	-@(make test_lowrie1_amr)
 	-@(make test_lowrie2_2d)
+	-@(make test_lowrie3_2d)
 	@ls -l *.diff
 
 # Path to this test directory from the main directory
-TESTDIR = CRASH_TEST/RadHydro/IdealGas/GrayDiffusion
+TESTDIR = CRASHTEST/RadHydro/IdealGas/GrayDiffusion
 
 # Main BATSRUS/CRASH directory
 DIR = ../../../..
@@ -125,6 +126,51 @@ test_lowrie2_2d_check:
 		ls -l test_lowrie2_2d.diff; \
 		idl test_lowrie2_2d_fig.pro
 
+
+### Lowrie's 3 test ###
+
+test_lowrie3_2d:
+	@echo "test_lowrie3_2d_compile..." > output/test_lowrie3_2d.diff
+	make test_lowrie3_2d_compile
+	@echo "test_lowrie3_2d_rundir..." >> output/test_lowrie3_2d.diff
+	make test_lowrie3_2d_rundir
+	@echo "test_lowrie3_2d_run..." >> output/test_lowrie3_2d.diff
+	make test_lowrie3_2d_run
+	@echo "test_lowrie3_2d_check..." >> output/test_lowrie3_2d.diff
+	make test_lowrie3_2d_check
+
+test_lowrie3_2d_compile:
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=50,2,2,16,16
+	cd ${DIR}; make BATSRUS PIDL
+
+test_lowrie3_2d_rundir: test_rundir
+	cp input/PARAM.in.lowrie3_2d ${DIR}/${RUNDIR}/PARAM.in
+	cp input/initial_lowrie3.dat  ${DIR}/${RUNDIR}/
+
+test_lowrie3_2d_run:
+	make test_lowrie3_2d_run_res RES=100
+	make test_lowrie3_2d_run_res RES=200
+	make test_lowrie3_2d_run_res RES=400
+	make test_lowrie3_2d_run_res RES=800
+	rm -rf output/test_lowrie3_2d_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie3_2d_results
+
+test_lowrie3_2d_run_res:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/50; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=-0.0008*100/${RES}; s/\S+(\s*yMinRes)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=0.0008*100/${RES}; s/\S+(\s*yMaxRes)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=4.4e-5*100/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_lowrie3_2d_check:
+	cd output; \
+		idl test_lowrie3_2d_error.pro; \
+		diff test_lowrie3_2d.err test_lowrie3_2d.ref > test_lowrie3_2d.diff; \
+		ls -l test_lowrie3_2d.diff; \
+		idl test_lowrie3_2d_fig.pro
 
 
 clean:

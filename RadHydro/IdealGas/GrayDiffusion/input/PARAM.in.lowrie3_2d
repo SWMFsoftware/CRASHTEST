@@ -14,21 +14,21 @@ USER			TypeNormalization
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-12			nI
+50			nI
 2			nJ
 2			nK
-32			MinBlockALL
+16			MinBlockALL
 
 #GRID
-4			nRootBlockX
+2			nRootBlockX
 1			nRootBlockY
 1			nRootBlockZ
--0.03			xMin
- 0.03			xMax
--0.00125		yMinRes
- 0.00125		yMaxRes
--0.00125		zMin
- 0.00125		zMax
+-0.04			xMin
+ 0.04			xMax
+-0.0008			yMinRes
+ 0.0008			yMaxRes
+-0.0008			zMin
+ 0.0008			zMax
 
 #USER_FLAGS
 F			UseUserInnerBcs
@@ -48,14 +48,17 @@ F			UseUserUpdateStates
 #USERINPUTBEGIN ------------------------
 
 #LOWRIETEST
-2			iRadiationTest
-initial_lowrie2.dat	NameInputFile
+3			iRadiationTest
+initial_lowrie3.dat	NameInputFile
 
 #USERINPUTEND ----------------------------
 
 #RADIATION
 T			UseGrayDiffusion
 F			UseRadFluxLimiter
+
+#MESSAGEPASS
+all			TypeMessagePass
 
 #SHOCKPOSITION
 0.0			ShockPosition
@@ -80,8 +83,8 @@ mc			TypeLimiter
 1.5			LimiterBeta
 
 #FIXEDTIMESTEP
-T			UseDtFixed
-1.7E-4			DtFixedDim
+T			UseFixedTimeStep
+4.4E-5			DtFixedDim
 
 #KRYLOV
 gmres			TypeKrylov
@@ -107,7 +110,6 @@ raw			StringLogfile
 #SAVERESTART
 F			DoSaveRestart
 
-This is set only for sake of the test_shocktube test
 #SAVEBINARY
 F			DoSaveBinary
 
@@ -118,13 +120,13 @@ T			DoSaveInitial
 2			nPlotfile
 z=0 VAR idl		StringPlot
 -1  			DnSavePlot
-0.001			DtSavePlot
+0.0005			DtSavePlot
 -1.0			DxSavePlot
 Rho Ux Uy Tgas Trad rho0 Ux0 Uy0 Tgas0 Trad0
 g
 cut VAR idl		StringPlot
 -1  			DnSavePlot
-0.001			DtSavePlot
+0.0005			DtSavePlot
 -0.5			xMinCut
 0.5			xMaxCut
 0.000001		yMinCut
@@ -137,5 +139,4 @@ g
 
 #STOP
 -1			MaxIteration
-0.01			tSimulationMax
-
+0.0035			tSimulationMax
