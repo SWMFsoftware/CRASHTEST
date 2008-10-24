@@ -112,6 +112,9 @@ F			UsePartImplicit
 T			UseFullImplicit
 1.0			ImplCFL
 
+#MESSAGEPASS
+all			TypeMessagePass
+
 #RESCHANGE
 T			UseAccurateResChange
 

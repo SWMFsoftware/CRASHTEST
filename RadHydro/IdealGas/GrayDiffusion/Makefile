@@ -28,6 +28,7 @@ help:
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_lowrie1_amr           (run Lowrie's test 1 with AMR only)"
 	@echo "    test_lowrie2_2d            (run Lowrie's test 2 in 2D only)"
+	@echo "    test_lowrie3_2d            (run Lowrie's test 3 in 2D only)"
 
 test_rundir:
 	cd ${DIR}; \
