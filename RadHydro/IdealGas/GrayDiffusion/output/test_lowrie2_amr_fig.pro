@@ -1,5 +1,5 @@
-set_device,'test_lowrie2_2d.eps',/eps
-logfilename='test_lowrie2_2d.err'
+set_device,'test_lowrie2_amr.eps',/eps
+logfilename='test_lowrie2_amr.err'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-3,1e-1],$
         psym=-4,charsize=2,thick=3, $

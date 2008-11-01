@@ -14,21 +14,35 @@ USER			TypeNormalization
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-50			nI
-2			nJ
-2			nK
-16			MinBlockALL
+32			nI
+4			nJ
+4			nK
+600			MinBlockALL
 
 #GRID
-2			nRootBlockX
-1			nRootBlockY
+3			nRootBlockX
+3			nRootBlockY
 1			nRootBlockZ
--0.04			xMin
- 0.04			xMax
--0.0008			yMinRes
- 0.0008			yMaxRes
--0.0008			zMin
- 0.0008			zMax
+-0.0384			xMin
+ 0.0384			xMax
+-0.0048			yMin
+ 0.0048			yMax
+-0.0016			zMin
+ 0.0016			zMax
+
+#GRIDLEVEL
+1			nLevelArea
+box			NameArea
+-0.0128			xMinBox
+-0.0016			yMinBox
+-0.0016			zMinBox
+ 0.0128			xMaxBox
+ 0.0016			yMaxBox
+ 0.0016			zMaxBox
+
+#GRIDLEVEL
+1			nLevelArea
+initial			NameArea
 
 #USER_FLAGS
 F			UseUserInnerBcs
@@ -57,9 +71,6 @@ initial_lowrie3.dat	NameInputFile
 T			UseGrayDiffusion
 F			UseRadFluxLimiter
 
-#MESSAGEPASS
-all			TypeMessagePass
-
 #SHOCKPOSITION
 0.0			ShockPosition
 0.5			ShockSlope
@@ -80,16 +91,22 @@ float			TypeBcTop
 2			nOrder
 Godunov			TypeFlux
 mc			TypeLimiter
-1.5			LimiterBeta
+1.2			LimiterBeta
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+#RESCHANGE
+T			UseAccurateResChange
 
 #FIXEDTIMESTEP
 T			UseFixedTimeStep
-4.4E-5			DtFixedDim
+2.3e-05			DtFixedDim
 
 #KRYLOV
 gmres			TypeKrylov
 nul			TypeInitKrylov
-0.001			ErrorMaxKrylov
+0.0001			ErrorMaxKrylov
 1000			MaxMatvecKrylov
 
 #UPDATECHECK
@@ -120,13 +137,13 @@ T			DoSaveInitial
 2			nPlotfile
 z=0 VAR idl		StringPlot
 -1  			DnSavePlot
-0.0005			DtSavePlot
+0.00025			DtSavePlot
 -1.0			DxSavePlot
 Rho Ux Uy Tgas Trad rho0 Ux0 Uy0 Tgas0 Trad0
 g
 cut VAR idl		StringPlot
 -1  			DnSavePlot
-0.0005			DtSavePlot
+0.00025			DtSavePlot
 -0.5			xMinCut
 0.5			xMaxCut
 0.000001		yMinCut
@@ -139,4 +156,4 @@ g
 
 #STOP
 -1			MaxIteration
-0.0035			tSimulationMax
+0.0025			tSimulationMax

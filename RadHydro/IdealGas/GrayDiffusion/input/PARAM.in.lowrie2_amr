@@ -14,21 +14,35 @@ USER			TypeNormalization
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-12			nI
-2			nJ
-2			nK
-32			MinBlockALL
+16			nI
+4			nJ
+4			nK
+600			MinBlockALL
 
 #GRID
-4			nRootBlockX
-1			nRootBlockY
+3			nRootBlockX
+3			nRootBlockY
 1			nRootBlockZ
 -0.03			xMin
  0.03			xMax
--0.00125		yMinRes
- 0.00125		yMaxRes
--0.00125		zMin
- 0.00125		zMax
+-0.0075			yMin
+ 0.0075			yMax
+-0.0025			zMin
+ 0.0025			zMax
+
+#GRIDLEVEL
+1			nLevelArea
+box			NameArea
+-0.01			xMinBox
+-0.0025			yMinBox
+-0.0025			zMinBox
+ 0.01			xMaxBox
+ 0.0025			yMaxBox
+ 0.0025			zMaxBox
+
+#GRIDLEVEL
+1			nLevelArea
+initial			NameArea
 
 #USER_FLAGS
 F			UseUserInnerBcs
@@ -77,11 +91,17 @@ float			TypeBcTop
 2			nOrder
 Godunov			TypeFlux
 mc			TypeLimiter
-1.5			LimiterBeta
+1.2			LimiterBeta
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+#RESCHANGE
+T			UseAccurateResChange
 
 #FIXEDTIMESTEP
 T			UseDtFixed
-1.7E-4			DtFixedDim
+8.5E-5			DtFixedDim
 
 #KRYLOV
 gmres			TypeKrylov
@@ -137,5 +157,5 @@ g
 
 #STOP
 -1			MaxIteration
-0.01			tSimulationMax
+0.011			tSimulationMax
 
