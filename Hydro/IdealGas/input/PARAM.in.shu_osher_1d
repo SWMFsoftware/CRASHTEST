@@ -93,7 +93,7 @@ float		zMaxBc
 #SCHEME
 2		nOrder
 Godunov		TypeFlux
-mc		TypeLimiter
+mc3		TypeLimiter
 2.0		LimiterBeta
 
 #SAVELOGFILE
