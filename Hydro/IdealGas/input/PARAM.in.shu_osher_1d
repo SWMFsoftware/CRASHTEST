@@ -1,0 +1,131 @@
+#ECHO
+T			DoEcho
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			NameIoUnits
+
+#NORMALIZATION
+NONE			NameNormalization
+
+#NONCONSERVATIVE
+F			UseNonConservative
+
+#CHECKGRIDSIZE
+100			nI
+2			nJ
+2			nK
+100			MinBlockALL
+
+#GRID
+128			nRootBlockX
+1			nRootBlockY
+1			nRootBlockZ
+-5.0			xMin
+ 5.0			xMax
+-0.05			yMin
+ 0.05			yMax
+-0.05			zMin
+ 0.05			zMax
+
+#GAMMA
+1.4			Gamma
+
+#SHOCKTUBE
+3.857143d0		rho (left state)
+2.629369d0		Ux
+0.0			Uy
+0.0			Uz
+10.333333d0		P
+1.0			rho (right state)
+0.0			Ux
+0.0			Uy
+0.0			Uz
+1.0			P
+
+#SHOCKPOSITION
+-4.0			ShockPosition
+0.0			ShockSlope
+
+#USERFLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F                       UseUserOuterBcs
+T                       UseUserICs
+F                       UseUserSpecifyRefinement
+F                       UseUserLogFiles
+F                       UseUserWritePlot
+F                       UseUserAMR
+F                       UseUserEchoInput
+F                       UseUserB0
+F                       UseUserInitSession
+F                       UseUserUpdateStates
+
+#USERINPUTBEGIN -----------------
+
+#WAVE
+1			Rho
+4.0			Width
+0.2			Amplitude  -0.01 for Alfven
+1.25664			LambdaX
+-1.0			LambdaY
+-1.0			LambdaZ
+-90.0			Phase
+
+#USERINPUTEND ---------------------
+
+Sheared boundary condition is used for non-zero shock slope
+#OUTERBOUNDARY
+shear		xMinBc
+shear		xMaxBc
+shear		yMinBc
+shear		yMaxBc
+float		zMinBc
+float		zMaxBc
+
+#TIMESTEPPING
+2		nStage
+0.8		CflExpl
+
+#SCHEME
+2		nOrder
+Godunov		TypeFlux
+mc		TypeLimiter
+2.0		LimiterBeta
+
+#SAVELOGFILE
+T		DoSaveLogfile
+raw		StringLogfile
+1		DnSaveLogfile
+-1.		DtSaveLogfile
+
+#SAVERESTART
+F		DoSaverestart
+
+#PLOTFILENAME
+second		NameMaxTimeUnit
+
+#SAVEINITIAL
+T		DoSaveInitial
+
+!The line is shifted slightly off the Y=Z=0 axis so that PostIDL.exe works OK
+#SAVEPLOT
+1		nPlotfile
+cut hd idl	PlotString
+-1              DnSavePlot
+0.2             DtSavePlot
+-5.0		xMinCut
++5.0		xMaxCut
+0.01		yMinCut
+0.011		yMaxCut
+0.01		zMinCut
+0.011		zMaxCut
+0.0             DxSavePlot
+
+!Final time on CLAWPACK page
+#STOP
+-1		MaxIteration
+1.8		tSimulationMax
