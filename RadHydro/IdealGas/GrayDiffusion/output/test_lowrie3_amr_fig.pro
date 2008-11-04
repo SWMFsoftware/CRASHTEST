@@ -8,8 +8,8 @@ plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-2],yrange=[1e-3,1e-1],$
         xtitle='Grid resolution', $
         ytitle='Relative error', $
         title="Lowrie radhydro test 3"
-oplot,[1e-3,1e-2],[2e-3,2e-2],linestyle=2  
-xyouts,0.004,0.0052,'1st order slope',charsize=2,charthick=1
+oplot,[1e-3,1e-2],[3e-3,3e-2],linestyle=2,thick=3
+xyouts,0.004,0.009,'1st order slope',charsize=2,charthick=1
 close_device
 
 ; 2. Create 2D figures to demonstrate the AMR grids
@@ -60,13 +60,16 @@ func='Trad'
 !y.range=[0.5,2]
 filename='test_lowrie3_amr_results/96/GM/cut_var_2_n0_109.outs'
 .r getpict
-plot,x,w(*,4),linestyle=0,/norm,POS=[0.475,0.25,0.875,0.65],/noerase,charsize=2
+plot,x,w(*,4),linestyle=0,/norm,POS=[0.475,0.25,0.875,0.65],/noerase,charsize=2,thick=3
 filename='test_lowrie3_amr_results/192/GM/cut_var_2_n0_218.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=1
+oplot,x,w(*,4),linestyle=1,thick=3
 filename='test_lowrie3_amr_results/384/GM/cut_var_2_n0_435.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=2
+oplot,x,w(*,4),linestyle=2,thick=3
+filename='test_lowrie3_amr_results/768/GM/cut_var_2_n0_870.outs'
+.r getpict
+oplot,x,w(*,4),linestyle=3,thick=3
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
 
 close_device
@@ -86,23 +89,25 @@ plot,x,w(*,3),psym=1,xtitle='x',ytitle='gas temperature',charsize=2, $
 filename='test_lowrie3_amr_results/384/GM/cut_var_2_n0_435.outs'
 .r getpict
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
-close_device
 
 npict=100
 bottomline=0
 multiplot=1
 func='Tgas'
 !x.range=[0.007,0.01]
-!y.range=[5,6]
+!y.range=[5,6.4]
 filename='test_lowrie3_amr_results/96/GM/cut_var_2_n0_109.outs'
 .r getpict
-plot,x,w(*,3),linestyle=0,/norm,POS=[0.475,0.25,0.875,0.65],/noerase,charsize=2
+plot,x,w(*,3),linestyle=0,/norm,POS=[0.475,0.25,0.875,0.65],/noerase,charsize=2,thick=3
 filename='test_lowrie3_amr_results/192/GM/cut_var_2_n0_218.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=1
+oplot,x,w(*,3),linestyle=1,thick=3
 filename='test_lowrie3_amr_results/384/GM/cut_var_2_n0_435.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=2
+oplot,x,w(*,3),linestyle=2,thick=3
+filename='test_lowrie3_amr_results/768/GM/cut_var_2_n0_870.outs'
+.r getpict
+oplot,x,w(*,3),linestyle=3,thick=3
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
 close_device
 

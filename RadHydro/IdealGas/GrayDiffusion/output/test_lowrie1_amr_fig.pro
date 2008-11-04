@@ -8,7 +8,7 @@ plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-4,1e-0],$
         xtitle='Grid resolution', $
         ytitle='Relative error', $
         title="Lowrie radhydro test 1"
-oplot,[1e-3,1e-1],[2e-4,2e+0],linestyle=2  
+oplot,[1e-3,1e-1],[2e-4,2e+0],linestyle=2,thick=3
 xyouts,0.01,0.3,'2nd order slope',charsize=2,charthick=1
 close_device
 
@@ -48,16 +48,16 @@ set_device,'test_lowrie1_amr_Trad.eps',/eps
 filename='test_lowrie1_amr_results/24/GM/cut_var_2_n0_59.outs'
 .r getpict
 plot,x,w(*,4),linestyle=0,xtitle='x',ytitle='radiation temperature',charsize=2, $
-     title="Lowrie's test 1 with constant opacities"
+     title="Lowrie's test 1 with constant opacities",thick=3
 filename='test_lowrie1_amr_results/48/GM/cut_var_2_n0_117.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=1
+oplot,x,w(*,4),linestyle=1,thick=3
 filename='test_lowrie1_amr_results/96/GM/cut_var_2_n0_234.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=2
+oplot,x,w(*,4),linestyle=2,thick=3
 filename='test_lowrie1_amr_results/192/GM/cut_var_2_n0_467.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=3
+oplot,x,w(*,4),linestyle=3,thick=3
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
 close_devise
 
@@ -72,16 +72,16 @@ set_device,'test_lowrie1_amr_Tgas.eps',/eps
 filename='test_lowrie1_amr_results/24/GM/cut_var_2_n0_59.outs'
 .r getpict
 plot,x,w(*,3),linestyle=0,xtitle='x',ytitle='gas temperature',charsize=2, $
-     title="Lowrie's test 1 with constant opacities"
+     title="Lowrie's test 1 with constant opacities",thick=3
 filename='test_lowrie1_amr_results/48/GM/cut_var_2_n0_117.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=1
+oplot,x,w(*,3),linestyle=1,thick=3
 filename='test_lowrie1_amr_results/96/GM/cut_var_2_n0_234.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=2
+oplot,x,w(*,3),linestyle=2,thick=3
 filename='test_lowrie1_amr_results/192/GM/cut_var_2_n0_467.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=3
+oplot,x,w(*,3),linestyle=3,thick=3
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
 close_device
 
