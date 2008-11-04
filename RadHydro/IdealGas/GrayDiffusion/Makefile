@@ -79,8 +79,7 @@ test_lowrie1_amr_check:
 		idl test_lowrie1_amr_error.pro; \
 		diff test_lowrie1_amr.err test_lowrie1_amr.ref > test_lowrie1_amr.diff; \
 		ls -l test_lowrie1_amr.diff; \
-		idl test_lowrie1_amr_fig.pro; \
-		idl test_lowrie1_amr_grid.pro
+		idl test_lowrie1_amr_fig.pro
 
 
 ### Lowrie's 2 test with AMR grid ###
@@ -125,8 +124,7 @@ test_lowrie2_amr_check:
 		idl test_lowrie2_amr_error.pro; \
 		diff test_lowrie2_amr.err test_lowrie2_amr.ref > test_lowrie2_amr.diff; \
 		ls -l test_lowrie2_amr.diff; \
-		idl test_lowrie2_amr_fig.pro; \
-		idl test_lowrie2_amr_grid.pro
+		idl test_lowrie2_amr_fig.pro
 
 
 ### Lowrie's 3 test with AMR grid ###
@@ -171,8 +169,7 @@ test_lowrie3_amr_check:
 		idl test_lowrie3_amr_error.pro; \
 		diff test_lowrie3_amr.err test_lowrie3_amr.ref > test_lowrie3_amr.diff; \
 		ls -l test_lowrie3_amr.diff; \
-		idl test_lowrie3_amr_fig.pro; \
-		idl test_lowrie3_amr_grid.pro
+		idl test_lowrie3_amr_fig.pro
 
 
 clean:
