@@ -48,7 +48,7 @@ filename='test_lowrie3_amr_results/96/GM/cut_var_2_n0_109.outs'
 .r getpict
 plot,x,w(*,4),psym=1,xtitle='x',ytitle='radiation temperature',charsize=2, $
      title="Lowrie's test 3 with variable opacities"
-filename='test_lowrie3_amr_results/384/GM/cut_var_2_n0_435.outs'
+filename='test_lowrie3_amr_results/768/GM/cut_var_2_n0_870.outs'
 .r getpict
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
 
@@ -86,7 +86,7 @@ filename='test_lowrie3_amr_results/96/GM/cut_var_2_n0_109.outs'
 .r getpict
 plot,x,w(*,3),psym=1,xtitle='x',ytitle='gas temperature',charsize=2, $
      title="Lowrie's test 3 with variable opacities"
-filename='test_lowrie3_amr_results/384/GM/cut_var_2_n0_435.outs'
+filename='test_lowrie3_amr_results/768/GM/cut_var_2_n0_870.outs'
 .r getpict
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
 
