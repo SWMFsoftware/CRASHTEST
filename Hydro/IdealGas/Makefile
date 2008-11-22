@@ -25,6 +25,7 @@ help:
 	@echo "    test MPIRUN='mpirun -np 3' (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_shu_osher_1d          (run Shu-Osher test in 1D)"
+	@echo "    test_shu_osher_amr         (run Shu-Osher test with 2D AMR)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -87,5 +88,55 @@ test_shu_osher_1d_check:
 	cd output; \
 		idl test_shu_osher_1d.pro; \
 		diff test_shu_osher_1d.err test_shu_osher_1d.ref \
-			> test_shu_osher_1d.diff; \
-		ls -l test_shu_osher_1d.diff
+			> test_shu_osher_1d.diff
+	ls -l output/test_shu_osher_1d.diff
+
+### Shu-Osher test on 2D AMR grid ###
+
+test_shu_osher_amr:
+	@echo "test_shu_osher_amr_compile..." > output/test_shu_osher_amr.diff
+	make test_shu_osher_amr_compile
+	@echo "test_shu_osher_amr_rundir..." >> output/test_shu_osher_amr.diff
+	make test_shu_osher_amr_rundir
+	@echo "test_shu_osher_amr_run..." >> output/test_shu_osher_amr.diff
+	make test_shu_osher_amr_run
+	@echo "test_shu_osher_amr_check..." >> output/test_shu_osher_amr.diff
+	make test_shu_osher_amr_check
+
+test_shu_osher_amr_compile:
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,4,4,1000,1
+	cd ${DIR}; make BATSRUS PIDL
+
+test_shu_osher_amr_rundir: test_rundir
+	cp input/PARAM.in.shu_osher_amr ${DIR}/${RUNDIR}/PARAM.in
+
+test_shu_osher_amr_run:
+	make test_shu_osher_amr_run1 RES=200 SOLVER=Rusanov
+	make test_shu_osher_amr_run1 RES=200 SOLVER=Linde
+	make test_shu_osher_amr_run1 RES=200 SOLVER=Godunov
+	make test_shu_osher_amr_run1 RES=400 SOLVER=Rusanov
+	make test_shu_osher_amr_run1 RES=400 SOLVER=Linde
+	make test_shu_osher_amr_run1 RES=400 SOLVER=Godunov
+	make test_shu_osher_amr_run1 RES=800 SOLVER=Rusanov
+	make test_shu_osher_amr_run1 RES=800 SOLVER=Linde
+	rm -rf output/test_shu_osher_amr_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_shu_osher_amr_results
+
+test_shu_osher_amr_run1:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
+		perl -pi -e '$$a=3*${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
+		perl -pi -e 's/\S+(\s*TypeFlux)/${SOLVER}$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${SOLVER}_${RES}
+
+test_shu_osher_amr_check:
+	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \
+		output/test_shu_osher_amr_ref.out
+	cd output; \
+		idl test_shu_osher_amr.pro; \
+		diff test_shu_osher_amr.err test_shu_osher_amr.ref \
+			> test_shu_osher_amr.diff; \
+		ls -l test_shu_osher_amr.diff
+
