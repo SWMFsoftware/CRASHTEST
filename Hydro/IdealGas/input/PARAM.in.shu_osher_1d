@@ -69,7 +69,7 @@ F                       UseUserUpdateStates
 #WAVE
 1			Rho
 4.0			Width
-0.2			Amplitude  -0.01 for Alfven
+0.2			Amplitude
 1.25664			LambdaX
 -1.0			LambdaY
 -1.0			LambdaZ
