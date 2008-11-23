@@ -46,19 +46,19 @@ wref = w
 ; read the last snapshot 
 npict=10
 
-filename=resdir+'*_200/GM/*.outs'
+filename=resdir+'*_200/GM/cut*.outs'
 .r getpict
 printf,99,200,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
-filename=resdir+'*_400/GM/*.outs'
+filename=resdir+'*_400/GM/cut*.outs'
 .r getpict
 printf,99,400,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
-filename=resdir+'*_800/GM/*.outs'
+filename=resdir+'*_800/GM/cut*.outs'
 .r getpict
 printf,99,800,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
-filename=resdir+'*_1600/GM/*.outs'
+filename=resdir+'*_1600/GM/cut*.outs'
 .r getpict
 printf,99,1600,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
