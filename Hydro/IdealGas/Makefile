@@ -174,13 +174,14 @@ test_shu_osher_amr_run:
 	make test_shu_osher_amr_run1 RES=400 SOLVER=Godunov
 	make test_shu_osher_amr_run1 RES=800 SOLVER=Rusanov
 	make test_shu_osher_amr_run1 RES=800 SOLVER=Linde
+	make test_shu_osher_amr_run1 RES=800 SOLVER=Godunov
 	rm -rf output/test_shu_osher_amr_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_shu_osher_amr_results
 
 test_shu_osher_amr_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
-		perl -pi -e '$$a=3*${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
+		perl -pi -e '$$a=3*${RES}/200; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in;\
 		perl -pi -e 's/\S+(\s*TypeFlux)/${SOLVER}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
@@ -188,10 +189,11 @@ test_shu_osher_amr_run1:
 
 test_shu_osher_amr_check:
 	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \
-		output/test_shu_osher_amr_ref.out
+		output/test_shu_osher_1d_ref.out
 	cd output; \
 		idl test_shu_osher_amr.pro; \
-		diff test_shu_osher_amr.err test_shu_osher_amr.ref \
-			> test_shu_osher_amr.diff; \
-		ls -l test_shu_osher_amr.diff
+		diff test_shu_osher_amr_results/error.dat \
+		     test_shu_osher_amr.ref \
+			> test_shu_osher_amr.diff
+	ls -l output/test_shu_osher_amr.diff
 
