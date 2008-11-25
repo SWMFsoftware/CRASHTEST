@@ -13,19 +13,19 @@ multiplot=1
 
 filename = filename_ref + resdir+'Rusanov_*/GM/cut*.outs'
 plottitle='Rusanov n=200, 400, 800, 1600'
-set_device,'test_shu_osher_1d_rusanov.eps',/eps
+set_device, resdir + 'Rusanov.eps', /eps
 .r animate
 close_device
 
 filename = filename_ref + resdir+'Linde_*/GM/cut*.outs'
 plottitle='Linde n=200, 400, 800, 1600'
-set_device,'test_shu_osher_1d_linde.eps',/eps
+set_device, resdir + 'Linde.eps', /eps
 .r animate
 close_device
 
 filename = filename_ref + resdir+'Godunov_*/GM/cut*.outs'
 plottitle='Godunov n=200, 400, 800, 1600'
-set_device,'test_shu_osher_1d_godunov.eps',/eps
+set_device, resdir + 'Godunov.eps',/eps
 .r animate
 close_device
 
@@ -33,7 +33,7 @@ close_device
 
 ; 2. calculate errors and save it into a file
 ; order is Godunov, Linde, Rusanov (alphabetical) for sake of simplicity
-openw,99,'test_shu_osher_1d.err'
+openw, 99, resdir + 'error.dat'
 printf,99,'Shu-Osher test in 1D'
 printf,99,'n godunov_error linde_error rusanov_error'
 
@@ -46,19 +46,19 @@ wref = w
 ; read the last snapshot 
 npict=10
 
-filename=resdir+'*_200/GM/*.outs'
+filename=resdir+'*_200/GM/cut*.outs'
 .r getpict
 printf,99,200,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
-filename=resdir+'*_400/GM/*.outs'
+filename=resdir+'*_400/GM/cut*.outs'
 .r getpict
 printf,99,400,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
-filename=resdir+'*_800/GM/*.outs'
+filename=resdir+'*_800/GM/cut*.outs'
 .r getpict
 printf,99,800,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
-filename=resdir+'*_1600/GM/*.outs'
+filename=resdir+'*_1600/GM/cut*.outs'
 .r getpict
 printf,99,1600,calc_error(w0,wref),calc_error(w1,wref),calc_error(w2,wref)
 
@@ -68,8 +68,8 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device,'test_shu_osher_1d_error.eps',/eps
-logfilename='test_shu_osher_1d.err'
+set_device, resdir + 'error.eps', /eps
+logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
   xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
