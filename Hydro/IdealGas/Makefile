@@ -89,7 +89,7 @@ test_shu_osher_1d_check:
 	cd output; idl test_shu_osher_1d.pro
 	-(diff  output/test_shu_osher_1d_results/error.dat \
 		output/test_shu_osher_1d.ref \
-		> test_shu_osher_1d.diff)
+		> output/test_shu_osher_1d.diff)
 	ls -l output/test_shu_osher_1d.diff
 
 ### Shu-Osher test on 2D grid ###
@@ -143,7 +143,7 @@ test_shu_osher_2d_check:
 	cd output; idl test_shu_osher_2d.pro
 	-(diff  output/test_shu_osher_2d_results/error.dat \
 		output/test_shu_osher_2d.ref\
-		> test_shu_osher_2d.diff)
+		> output/test_shu_osher_2d.diff)
 	ls -l output/test_shu_osher_2d.diff
 
 ### Shu-Osher test on 2D AMR grid ###
@@ -193,6 +193,6 @@ test_shu_osher_amr_check:
 	cd output; idl test_shu_osher_amr.pro
 	-(diff  output/test_shu_osher_amr_results/error.dat \
 		output/test_shu_osher_amr.ref \
-		> test_shu_osher_amr.diff)
+		> output/test_shu_osher_amr.diff)
 	ls -l output/test_shu_osher_amr.diff
 
