@@ -1,6 +1,9 @@
 #ECHO
 T
 
+#TEST
+krylov
+
 #PLANET
 NONE			NamePlanet
 
@@ -117,6 +120,11 @@ F			UsePointImplicit
 F			UsePartImplicit
 T			UseFullImplicit
 1.0			ImplCFL
+
+#IMPLSTEP
+1.0                     ImplCoeff
+T                       UseBdf2
+T                       UseSourceImpl
 
 #SAVELOGFILE
 T			DoSaveLogfile
