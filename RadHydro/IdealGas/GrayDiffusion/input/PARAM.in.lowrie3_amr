@@ -110,7 +110,7 @@ T			UseFixedTimeStep
 gmres			TypeKrylov
 nul			TypeInitKrylov
 0.0001			ErrorMaxKrylov
-1000			MaxMatvecKrylov
+50			MaxMatvecKrylov
 
 #UPDATECHECK
 F			UseUpdateCheck
