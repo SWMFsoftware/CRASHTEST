@@ -165,12 +165,11 @@ test_lowrie3_amr_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_lowrie3_amr_check:
-	cd output; \
-		idl test_lowrie3_amr_error.pro; \
-		diff test_lowrie3_amr.err test_lowrie3_amr.ref > test_lowrie3_amr.diff; \
-		ls -l test_lowrie3_amr.diff; \
-		idl test_lowrie3_amr_fig.pro
-
+	cd output; idl test_lowrie3_amr.pro
+	-(diff  output/test_lowrie3_amr_results/error.dat \
+		output/test_lowrie3_amr.ref \
+		> output/test_lowrie3_amr.diff)
+	ls -l output/test_lowrie3_amr.diff
 
 clean:
 	rm -f *~ input/*~ output/*~
