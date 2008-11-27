@@ -120,11 +120,11 @@ test_lowrie2_amr_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_lowrie2_amr_check:
-	cd output; \
-		idl test_lowrie2_amr_error.pro; \
-		diff test_lowrie2_amr.err test_lowrie2_amr.ref > test_lowrie2_amr.diff; \
-		ls -l test_lowrie2_amr.diff; \
-		idl test_lowrie2_amr_fig.pro
+	cd output; idl test_lowrie2_amr.pro
+	-(diff  output/test_lowrie2_amr_results/error.dat \
+		output/test_lowrie2_amr.ref \
+		> output/test_lowrie2_amr.diff)
+	ls -l output/test_lowrie2_amr.diff
 
 
 ### Lowrie's 3 test with AMR grid ###
