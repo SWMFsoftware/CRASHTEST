@@ -18,9 +18,9 @@ printf,99,192,calc_error(w)
 filename=resdir+'384/GM/cut*.outs'
 .r getpict
 printf,99,384,calc_error(w)
-filename=resdir+'768/GM/cut*.outs'
-.r getpict
-printf,99,768,calc_error(w)
+;filename=resdir+'768/GM/cut*.outs'
+;.r getpict
+;printf,99,768,calc_error(w)
 
 close,99
 
@@ -59,7 +59,7 @@ multiplot=0
 
 ; 3. plot 1D profiles
 
-!x.range=0
+!x.range=[-0.02,0.04]
 !y.range=0
 func='Trad'
 firstpict=[11,11]
@@ -70,7 +70,7 @@ filename= resdir+'96/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),psym=1,xtitle='x',ytitle='radiation temperature',charsize=2, $
      title="Lowrie's test 3 with variable opacities"
-filename= resdir+'768/GM/cut*.outs'
+filename= resdir+'384/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
 
@@ -86,10 +86,10 @@ plot,x,w(*,4),linestyle=0,/norm,POS=[0.475,0.25,0.875,0.65], $
      /noerase,charsize=2,thick=3
 filename= resdir+'???/GM/cut*.outs'
 .r getpict
-oplot,x,w0(*,4),linestyle=1,thick=3
-oplot,x,w1(*,4),linestyle=2,thick=3
-oplot,x,w2(*,4),linestyle=3,thick=3
-oplot,x,w2(*,9),psym=0,linestyle=0,color=40,thick=3
+oplot,x0,w0(*,4),linestyle=1,thick=3
+oplot,x1,w1(*,4),linestyle=2,thick=3
+;oplot,x2,w2(*,4),linestyle=3,thick=3
+oplot,x1,w1(*,9),psym=0,linestyle=0,color=40,thick=3
 
 close_device
 spawn,'cd '+resdir+'; ps2pdf Trad.eps'
@@ -101,12 +101,10 @@ firstpict=[11,11]
 .r getpict
 bottomline=0
 set_device, resdir+'Tgas.eps',/eps
-filename= resdir+'96/GM/cut*.outs'
+filename= resdir+'384/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),psym=1,xtitle='x',ytitle='gas temperature',charsize=2, $
      title="Lowrie's test 3 with variable opacities"
-filename= resdir+'768/GM/cut*.outs'
-.r getpict
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
 
 npict=100
@@ -120,10 +118,10 @@ filename= resdir+'96/GM/cut*.outs'
 plot,x,w(*,3),linestyle=0,/norm,POS=[0.475,0.25,0.875,0.65],/noerase,charsize=2,thick=3
 filename= resdir+'???/GM/cut*.outs'
 .r getpict
-oplot,x,w0(*,3),linestyle=1,thick=3
-oplot,x,w1(*,3),linestyle=2,thick=3
-oplot,x,w2(*,3),linestyle=3,thick=3
-oplot,x,w2(*,8),psym=0,linestyle=0,color=40,thick=3
+oplot,x0,w0(*,3),linestyle=1,thick=3
+oplot,x1,w1(*,3),linestyle=2,thick=3
+;oplot,x2,w2(*,3),linestyle=3,thick=3
+oplot,x1,w1(*,8),psym=0,linestyle=0,color=40,thick=3
 close_device
 spawn,'cd '+resdir+'; ps2pdf Tgas.eps'
 

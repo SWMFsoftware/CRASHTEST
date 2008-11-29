@@ -151,7 +151,7 @@ test_lowrie3_amr_run:
 	make test_lowrie3_amr_run_res RES=96
 	make test_lowrie3_amr_run_res RES=192
 	make test_lowrie3_amr_run_res RES=384
-	make test_lowrie3_amr_run_res RES=768
+	#make test_lowrie3_amr_run_res RES=768
 	rm -rf output/test_lowrie3_amr_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie3_amr_results
 
@@ -173,6 +173,6 @@ test_lowrie3_amr_check:
 
 clean:
 	rm -f *~ input/*~ output/*~
-	cd output; rm -rf *.diff *.err *.eps *_results
+	cd output; rm -rf *.diff *_results
 
 distclean: clean
