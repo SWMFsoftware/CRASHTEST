@@ -103,7 +103,7 @@ T			UseDtFixed
 #KRYLOV
 gmres			TypeKrylov
 nul			TypeInitKrylov
-0.001			ErrorMaxKrylov
+1.0e-5			ErrorMaxKrylov
 50			MaxMatvecKrylov
 
 #UPDATECHECK
