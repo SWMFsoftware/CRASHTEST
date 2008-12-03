@@ -3,11 +3,11 @@
 ### RADHYDRO TESTS FOR IDEAL GAS WITH GREY DIFFUSION ###
 
 test: 
-	@rm -f *.diff
+	@rm -f output/*.diff
 	-@(make test_lowrie1_amr)
 	-@(make test_lowrie2_amr)
 	-@(make test_lowrie3_amr)
-	@ls -l *.diff
+	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
 TESTDIR = CRASHTEST/RadHydro/IdealGas/GrayDiffusion
