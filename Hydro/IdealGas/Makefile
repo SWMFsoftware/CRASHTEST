@@ -3,9 +3,9 @@
 ### RADHYDRO TESTS FOR IDEAL GAS WITH GREY DIFFUSION ###
 
 test: 
-	@rm -f *.diff
+	@rm -f output/*.diff
 	-@(make test_shu_osher_amr)
-	@ls -l *.diff
+	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
 TESTDIR = CRASHTEST/Hydro/IdealGas
