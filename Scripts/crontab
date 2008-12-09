@@ -1,0 +1,3 @@
+MAILTO=""
+00 03 * * 6 ${HOME}/Sites/test_crash.sh
+00 23 * * 6 ${HOME}/Sites/test_crash.pl
