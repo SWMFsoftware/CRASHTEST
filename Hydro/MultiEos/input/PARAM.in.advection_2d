@@ -131,7 +131,7 @@ tube is 5mm = 500um long, 625 um wide
 F			DoUpdateCheck
 
 #NONCONSERVATIVE
-F			UseNonConservative
+T			UseNonConservative
 
 Sheared boundary condition is used for non-zero shock slope
 
