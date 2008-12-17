@@ -57,36 +57,49 @@ test_advection_2d_compile:
 test_advection_2d_rundir: test_rundir
 	cp input/PARAM.in.advection_2d ${DIR}/${RUNDIR}/PARAM.in
 
+# These commands are switched off by default
+COMMANDS = LOOKUP|MIXED|LIMITER|NONCONSERVATIVE|CYLINDRICAL
+
 test_advection_2d_run:
 	make test_advection_2d_run1 RES=40 SOLVER=Linde
 	make test_advection_2d_run1 RES=40 SOLVER=Godunov
-	make test_advection_2d_run1 RES=40 SOLVER=Linde LOOKUP='#'
-	make test_advection_2d_run1 RES=40 SOLVER=Godunov LOOKUP='#'
-	make test_advection_2d_run1 RES=40 SOLVER=Linde MIXED='#'
-	make test_advection_2d_run1 RES=40 SOLVER=Godunov MIXED='#'
-	make test_advection_2d_run1 RES=40 SOLVER=Linde MIXED='#' LOOKUP='#'
-	make test_advection_2d_run1 RES=40 SOLVER=Godunov MIXED='#' LOOKUP='#'
+	make test_advection_2d_run1 RES=40 SOLVER=Linde ON=NONCONS
+	make test_advection_2d_run1 RES=40 SOLVER=Godunov ON=NONCONS
+	make test_advection_2d_run1 RES=40 SOLVER=Linde ON=LIMIT
+	make test_advection_2d_run1 RES=40 SOLVER=Godunov ON=LIMIT
+	make test_advection_2d_run1 RES=40 SOLVER=Linde ON=LIMIT_LOOKUP
+	make test_advection_2d_run1 RES=40 SOLVER=Godunov ON=LIMIT_LOOKUP
+	make test_advection_2d_run1 RES=40 SOLVER=Linde ON=LIMIT_MIXED
+	make test_advection_2d_run1 RES=40 SOLVER=Godunov ON=LIMIT_MIXED
+	make test_advection_2d_run1 RES=40 SOLVER=Linde ON=LIMIT_MIXED_LOOKUP
+	make test_advection_2d_run1 RES=40 SOLVER=Godunov ON=LIMIT_MIXED_LOOKUP
 	make test_advection_2d_run1 RES=80 SOLVER=Linde
 	make test_advection_2d_run1 RES=80 SOLVER=Godunov
-	make test_advection_2d_run1 RES=80 SOLVER=Linde LOOKUP='#'
-	make test_advection_2d_run1 RES=80 SOLVER=Godunov LOOKUP='#'
-	make test_advection_2d_run1 RES=80 SOLVER=Linde MIXED='#'
-	make test_advection_2d_run1 RES=80 SOLVER=Godunov MIXED='#'
-	make test_advection_2d_run1 RES=80 SOLVER=Linde MIXED='#' LOOKUP='#'
-	make test_advection_2d_run1 RES=80 SOLVER=Godunov MIXED='#' LOOKUP='#'
+	make test_advection_2d_run1 RES=80 SOLVER=Linde ON=NONCONS
+	make test_advection_2d_run1 RES=80 SOLVER=Godunov ON=NONCONS
+	make test_advection_2d_run1 RES=80 SOLVER=Linde ON=LIMIT
+	make test_advection_2d_run1 RES=80 SOLVER=Godunov ON=LIMIT
+	make test_advection_2d_run1 RES=80 SOLVER=Linde ON=LIMIT_LOOKUP
+	make test_advection_2d_run1 RES=80 SOLVER=Godunov ON=LIMIT_LOOKUP
+	make test_advection_2d_run1 RES=80 SOLVER=Linde ON=LIMIT_MIXED
+	make test_advection_2d_run1 RES=80 SOLVER=Godunov ON=LIMIT_MIXED
+	make test_advection_2d_run1 RES=80 SOLVER=Linde ON=LIMIT_MIXED_LOOKUP
+	make test_advection_2d_run1 RES=80 SOLVER=Godunov ON=LIMIT_MIXED_LOOKUP
 	rm -rf output/test_advection_2d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_advection_2d_results
 
+# Set solver and resolution, then fist switch off all optional commands, and
+# finally switch on the commands listed in ${ON}
 test_advection_2d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/\S+(\s*TypeFlux)/${SOLVER}$$1/' PARAM.in; \
 	perl -pi -e '$$a=${RES}/4; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
 	perl -pi -e '$$a=${RES}/8; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
-	perl -pi -e 's/^#?LOOKUP/${LOOKUP}LOOKUP/' PARAM.in; \
-	perl -pi -e 's/^#?MIXED/${MIXED}MIXED/' PARAM.in
+	perl -pi -e 's/^#(${COMMANDS})/$$1/' PARAM.in; \
+	perl -pi -e '$$a="${ON}"; $$a=~s/_/|/; s/^($$a)/#$$1/ if $$a' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 	${MPIRUN} ./CRASH.exe > runlog; \
-	PostProc.pl -M RESULTS/${SOLVER}_${RES}_${MIXED}MIXED_${LOOKUP}LOOKUP
+	PostProc.pl -M RESULTS/${SOLVER}_${RES}_${ON}
 
 test_advection_2d_check:
 	cd output; idl test_advection_2d.pro
