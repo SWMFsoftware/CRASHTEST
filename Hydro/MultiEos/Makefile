@@ -32,7 +32,7 @@ test_rundir:
 
 clean:
 	rm -f *~ input/*~ output/*~
-	cd output; rm -rf *.diff *.err *.eps *_results
+	cd output; rm -rf *.diff *_results
 
 distclean: clean
 
@@ -84,7 +84,8 @@ test_advection_1d_run1:
 	PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
 
 test_advection_1d_check:
-	cd output; idl test_advection_1d.pro
+	cd output; idl test_advection_1d.pro; \
+		rm -f test_advection_1d_results/*.eps
 	-(diff  output/test_advection_1d_results/error.dat \
 		output/test_advection_1d.ref\
 		> output/test_advection_1d.diff)
