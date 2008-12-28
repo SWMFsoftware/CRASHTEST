@@ -66,21 +66,21 @@ test_advection_1d_run:
 	 for ON in \
 	    "" NONCONS LIMIT LIMIT_LOOKUP LIMIT_MIXED LIMIT_MIXED_LOOKUP; do \
 	  for FLUX in Linde Godunov; do \
- 	   make test_advection_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
+	   make test_advection_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
 	  done \
          done \
 	done
 	rm -rf output/test_advection_1d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_advection_1d_results
 
-# Set solver and resolution, then fist switch off all optional commands, and
-# finally switch on the commands listed in ${ON}
+# Set solver and resolution, then first switch off all optional commands, 
+# and then switch on the commands listed in ${ON}
 test_advection_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/' PARAM.in; \
 	perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
 	perl -pi -e 's/^#(${COMMANDS})/$$1/' PARAM.in; \
-	perl -pi -e '$$a="${ON}"; $$a=~s/_/|/; s/^($$a)/#$$1/ if $$a' PARAM.in
+	perl -pi -e '$$a="${ON}"; $$a=~s/_/|/g; s/^($$a)/#$$1/ if $$a' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 	${MPIRUN} ./CRASH.exe > runlog; \
 	PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
@@ -116,7 +116,7 @@ test_advection_2d_run:
 	 for ON in \
 	    "" NONCONS LIMIT LIMIT_LOOKUP LIMIT_MIXED LIMIT_MIXED_LOOKUP; do \
 	  for FLUX in Linde Godunov; do \
- 	   make test_advection_2d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
+	   make test_advection_2d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
 	  done \
          done \
 	done
@@ -131,7 +131,7 @@ test_advection_2d_run1:
 	perl -pi -e '$$a=${RES}/4; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
 	perl -pi -e '$$a=${RES}/8; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
 	perl -pi -e 's/^#(${COMMANDS})/$$1/' PARAM.in; \
-	perl -pi -e '$$a="${ON}"; $$a=~s/_/|/; s/^($$a)/#$$1/ if $$a' PARAM.in
+	perl -pi -e '$$a="${ON}"; $$a=~s/_/|/g; s/^($$a)/#$$1/ if $$a' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 	${MPIRUN} ./CRASH.exe > runlog; \
 	PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
