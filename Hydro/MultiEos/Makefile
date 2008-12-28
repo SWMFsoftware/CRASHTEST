@@ -1,14 +1,11 @@
 #^CFG FILE TESTING
 
-### RADHYDRO TESTS FOR IDEAL GAS WITH GREY DIFFUSION ###
+### TESTS FOR MULTIMATERIAL HYDRO ###
 
 test: 
 	@rm -f output/*.diff
-	-@(make test_advection_2d)
+	-@(make test_advection_1d)
 	@ls -l output/*.diff
-
-# Path to this test directory from the main directory
-TESTDIR = CRASHTEST/Hydro/IdealGas
 
 # Main BATSRUS/CRASH directory
 DIR = ../../..
