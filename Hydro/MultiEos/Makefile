@@ -27,7 +27,7 @@ help:
 test_rundir:
 	cd ${DIR}; \
 		rm -rf ${RUNDIR}; \
-		make rundir RUNDIR=${RUNDIR} STANDALONE=YES GMDIR=`pwd`; \
+		make rundir RUNDIR=${RUNDIR} STANDALONE=YES GMDIR=`pwd` \
 			DEFAULT_EXE=CRASH.exe
 
 clean:
