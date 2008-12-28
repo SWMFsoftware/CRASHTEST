@@ -61,8 +61,9 @@ test_advection_1d_rundir: test_rundir
 # These commands are switched off by default
 COMMANDS = LOOKUP|MIXED|LIMITER|NONCONSERVATIVE|CYLINDRICAL
 
+
 test_advection_1d_run:
-	for RES in 40 80 160; do \
+	for RES in 40 80 160 320; do \
 	 for ON in \
 	    "" NONCONS LIMIT LIMIT_LOOKUP LIMIT_MIXED LIMIT_MIXED_LOOKUP; do \
 	  for FLUX in Linde Godunov; do \
