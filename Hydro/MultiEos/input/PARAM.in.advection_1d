@@ -81,7 +81,7 @@ tube is 5mm = 500um long, 625 um wide
 1			nRootBlockY
 1			nRootBlockZ
 0.0			xMin
-1000.0			xMax
+2000.0			xMax
  -12.5			yMin
   12.5			yMax
  -12.5			zMin
@@ -161,7 +161,7 @@ cut VAR idl		PlotString
 -1                      DnSavePlot
 1.0e-9                  DtSavePlot
 0.0			xMinCut
-1000.0			xMaxCut
+2000.0			xMaxCut
 -0.0001			yMinCut
  0.0001			yMaxCut
 -0.0001			zMinCut
