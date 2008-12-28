@@ -1,0 +1,31 @@
+These advection tests are testing the various schemes used 
+for multi-material hydrodynamics. The initial condition has
+constant pressure p = 1e11 Pa (high enough to ionize
+the materials). The analytic solution is a simple advection 
+of the material interfaces with the flow. 
+
+In the 1D test there are two materials: Be and Xe. 
+There is a density jump from 100 g/cc to 50 g/cc,
+the velocity is uniformly 100km/s.
+
+In the 2D test there is an additional plastic tube
+parallel with the Y axis, with density 1400 kg/m3 and
+zero velocity so there is a huge shear flow at the boundary.
+
+The test runs are named according to the method used:
+
+- Godunov or Linde schemes
+
+- 40, 80, 160, or 320 grid cells along the X axis
+
+- LIMIT:   the levelset function/rho is limited 
+           in the 2nd order TVD reconstruction
+
+- MIXED:   the mixed cell approach is used
+
+- LOOKUP:  the EOS is interpolated from lookup tables
+
+- NONCONS: solve for the pressure instead of energy. Note that this is not
+           fully implemented, but for this particular test the result is
+           probably the same as it would be for the full implementation. 
+
