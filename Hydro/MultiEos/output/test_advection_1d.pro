@@ -9,22 +9,45 @@ resdir='test_advection_1d_results/'
 
 firstpict=6
 npictmax=1
-func='p ux'
-!p.charsize=1.6
-
-filename = resdir+'Linde_*_/GM/*.outs'
-plottitle='p (Linde);ux (Linde)'
-set_device,resdir+'Linde.eps',/eps
-.r animate
-close_device
-spawn,'cd '+resdir+'; convert Linde.eps Linde.pdf'
+func='rho ux p Eint'
+!p.charsize=1.4
 
 filename = resdir+'Godunov_*_/GM/*.outs'
-plottitle='p (Godunov);ux (Godunov)'
-set_device,resdir+'Godunov.eps',/eps
+set_device,resdir+'godunov.eps',/eps
 .r animate
 close_device
-spawn,'cd '+resdir+'; convert Godunov.eps Godunov.pdf'
+spawn,'cd '+resdir+'; convert godunov.eps godunov.pdf'
+
+filename = resdir+'Godunov_*_LIMIT/GM/*.outs'
+set_device,resdir+'godunov_limit.eps',/eps
+.r animate
+close_device
+spawn,'cd '+resdir+'; convert godunov_limit.eps godunov_limit.pdf'
+
+filename = resdir+'Godunov_*_LIMIT_LOOKUP/GM/*.outs'
+set_device,resdir+'godunov_limit_lookup.eps',/eps
+.r animate
+close_device
+spawn,'cd '+resdir+';convert godunov_limit_lookup.eps godunov_limit_lookup.pdf'
+
+filename = resdir+'Godunov_*_NONCONS/GM/*.outs'
+set_device,resdir+'godunov_noncons.eps',/eps
+.r animate
+close_device
+spawn,'cd '+resdir+'; convert godunov_noncons.eps godunov_noncons.pdf'
+
+filename = resdir+'Godunov_*_LIMIT_MIXED/GM/*.outs'
+set_device,resdir+'godunov_limit_mixed.eps',/eps
+.r animate
+close_device
+spawn,'cd '+resdir+'; convert godunov_limit_mixed.eps godunov_limit_mixed.pdf'
+
+filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
+set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps
+.r animate
+close_device
+spawn,'cd '+resdir+ $
+      '; convert godunov_limit_mixed_lookup.eps godunov_limit_mixed_lookup.pdf'
 
 ; 2. calculate errors and save it into a file
 ; order is Godunov, Linde, Rusanov (alphabetical) for sake of simplicity
@@ -41,8 +64,8 @@ errors = fltarr(12)
 filename=resdir+'Linde_40_/GM/c*.outs'
 npict=1
 .r getpict
-; the left state is advected up to 3/4 of the domain
-for i=1,29 do w(i,*)=w(0,*)
+; the left state is advected up to 3/8 of the domain
+for i=1,14 do w(i,*)=w(0,*)
 ; store the reference solution
 wref = w
 
@@ -92,8 +115,8 @@ printf,99,40,errors,format='(i3,12f7.4)'
 filename=resdir+'Linde_80_/GM/c*.outs'
 npict=1
 .r getpict
-; the left state is advected up to 3/4 of the domain
-for i=1,59 do w(i,*)=w(0,*)
+; the left state is advected up to 3/8 of the domain
+for i=1,29 do w(i,*)=w(0,*)
 ; store the reference solution
 wref = w
 
@@ -135,8 +158,8 @@ printf,99,80,errors,format='(i3,12f7.4)'
 filename=resdir+'Linde_160_/GM/c*.outs'
 npict=1
 .r getpict
-; the left state is advected up to 3/4 of the domain
-for i=1,119 do w(i,*)=w(0,*)
+; the left state is advected up to 3/8 of the domain
+for i=1,59 do w(i,*)=w(0,*)
 ; store the reference solution
 wref = w
 
@@ -178,8 +201,8 @@ printf,99,160,errors,format='(i3,12f7.4)'
 filename=resdir+'Linde_320_/GM/c*.outs'
 npict=1
 .r getpict
-; the left state is advected up to 3/4 of the domain
-for i=1,239 do w(i,*)=w(0,*)
+; the left state is advected up to 3/8 of the domain
+for i=1,119 do w(i,*)=w(0,*)
 ; store the reference solution
 wref = w
 
