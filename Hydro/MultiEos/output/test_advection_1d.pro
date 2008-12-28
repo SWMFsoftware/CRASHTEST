@@ -174,8 +174,50 @@ errors(11)=calc_error(w2,wref)
 
 printf,99,160,errors,format='(i3,12f7.4)'
 
+; resolution 320
+filename=resdir+'Linde_320_/GM/c*.outs'
+npict=1
+.r getpict
+; the left state is advected up to 3/4 of the domain
+for i=1,239 do w(i,*)=w(0,*)
+; store the reference solution
+wref = w
+
+; read the last state for comparison
+npict=10
+
+; read at most 3 files at a time
+filename=resdir+'Godunov_320_/GM/c*.outs ' $
+  +      resdir+'Godunov_320_LIMIT/GM/c*.outs ' $
+  +      resdir+'Godunov_320_NONCONS/GM/c*.outs'
+.r getpict
+errors(0)=calc_error(w0,wref)
+errors(1)=calc_error(w1,wref)
+errors(2)=calc_error(w2,wref)
+
+filename=resdir+'Godunov_320_LIMIT_*/GM/c*.outs'
+.r getpict
+errors(3)=calc_error(w0,wref)
+errors(4)=calc_error(w1,wref)
+errors(5)=calc_error(w2,wref)
+
+filename=resdir+'Linde_320_/GM/c*.outs ' $
+  +      resdir+'Linde_320_LIMIT/GM/c*.outs ' $
+  +      resdir+'Linde_320_NONCONS/GM/c*.outs'
+.r getpict
+errors(6)=calc_error(w0,wref)
+errors(7)=calc_error(w1,wref)
+errors(8)=calc_error(w2,wref)
+
+filename=resdir+'Linde_320_LIMIT_*/GM/c*.outs'
+.r getpict
+errors(9)=calc_error(w0,wref)
+errors(10)=calc_error(w1,wref)
+errors(11)=calc_error(w2,wref)
+
+printf,99,320,errors,format='(i3,12f7.4)'
+
 close,99
-exit
 
 ; 3. Create a figure of convergence rates
 !p.charsize=2
@@ -184,22 +226,31 @@ exit
 set_device,resdir+'error.eps',/eps
 logfilename=resdir+'error.dat'
 .r getlog
+
+; The Godunov part of the header of error.dat:
+; n godunov g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look
+
 plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
   xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
   xtitle='Grid resolution', $
   ytitle='Relative error', $
-  title="Shu-Osher test in 2D"
-oplot,10/wlog(*,0),wlog(*,1),psym=-4,thick=3
-oplot,10/wlog(*,0),wlog(*,2),psym=-5,thick=3
-oplot,10/wlog(*,0),wlog(*,3),psym=-6,thick=3
+  title="Be/Xe advection test in 1D"
+oplot,4/wlog(*,0),wlog(*,1),psym=-1,thick=3
+oplot,4/wlog(*,0),wlog(*,2),psym=-2,thick=3
+oplot,4/wlog(*,0),wlog(*,3),psym=-4,thick=3
+oplot,4/wlog(*,0),wlog(*,5),psym=-5,thick=3
+oplot,4/wlog(*,0),wlog(*,6),psym=-6,thick=3
 
-oplot,[0.0012,0.0017],[0.01,0.01],linestyle=2
-xyouts,0.002,0.01,'1st order slope'
-oplot,[0.0015],[0.02],psym=4 & xyouts,0.002,0.02,'Godunov'
-oplot,[0.0015],[0.04],psym=5 & xyouts,0.002,0.04,'Linde'
-oplot,[0.0015],[0.08],psym=6 & xyouts,0.002,0.08,'Rusanov'
+oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
+xyouts,0.002,0.005,'1st order slope'
+oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.16,'Godunov'
+oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
+oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
+oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
+oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
 
 close_device
 spawn,'cd '+resdir+'; ps2pdf error.eps'
 
 exit
+
