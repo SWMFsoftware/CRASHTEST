@@ -59,21 +59,9 @@ READ
 
 #USERINPUTBEGIN ----------------
 
-#TUBE
-0.0			xEndTube
-300.0			rInnerTube
-400.0			rOuterTube
-1400.0			RhoDimTube
-50.0			RhoDimOutside
-1e11			pDimOutside
--1.0			xUniformXe
-
 MIXEDCELL
 T			UseMixedCell
 0.97			MixLimit
-
-CYLINDRICAL
-T			UseCylindrical
 
 #USERINPUTEND   ----------------
 
@@ -81,8 +69,8 @@ T			UseCylindrical
 T			IsTimeAccurate
 
 #CHECKGRIDSIZE
-4			nI
-4			nJ
+10			nI
+2			nJ
 2			nK
 500			MinBlockALL
 
@@ -90,12 +78,12 @@ tube is 5mm = 500um long, 625 um wide
 
 #GRID
 10			nRootBlockX
-5			nRootBlockY
+1			nRootBlockY
 1			nRootBlockZ
 0.0			xMin
 1000.0			xMax
-0.0			yMin
-500.0			yMax
+ -12.5			yMin
+  12.5			yMax
  -12.5			zMin
   12.5			zMax
 
@@ -169,9 +157,15 @@ T			DoSaveInitial
 
 #SAVEPLOT
 1			nPlotfile
-z=0 VAR idl		PlotString
+cut VAR idl		PlotString
 -1                      DnSavePlot
 1.0e-9                  DtSavePlot
+0.0			xMinCut
+1000.0			xMaxCut
+-0.0001			yMinCut
+ 0.0001			yMaxCut
+-0.0001			zMinCut
+ 0.0001			zMaxCut
 0.0			DxSavePlot
 rho ux uy uz Eint p Xe Be Pl level
 gamma
