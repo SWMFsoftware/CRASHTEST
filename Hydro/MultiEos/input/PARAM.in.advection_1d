@@ -88,24 +88,24 @@ tube is 5mm = 500um long, 625 um wide
   12.5			zMax
 
 #SHOCKTUBE
-100.		rho (left state)
-1e5		Ux
+100.		rho  [kg/m3] (left state)
+1e5		Ux   [100km/s]
 0.		Uy
 0.		Uz
 0.		Xe
 1.		Be
 0.		Pl
 0.		Eint
-1e11		P
-50.0		rho (left state)
-1e5		Ux (100km/s)
+1e11		P    [1e5 MPa]
+50.0		rho (right state)
+1e5		Ux
 0.		Uy
 0.		Uz
 1.		Xe
 0.		Be
 0.		Pl
 0.		Eint
-1e11		P (1e5 Pa)
+1e11		P
 
 #SHOCKPOSITION
 250.0			ShockPosition
