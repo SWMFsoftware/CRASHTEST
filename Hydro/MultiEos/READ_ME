@@ -5,7 +5,7 @@ the materials). The analytic solution is a simple advection
 of the material interfaces with the flow. 
 
 In the 1D test there are two materials: Be and Xe. 
-There is a density jump from 100 g/cc to 50 g/cc,
+There is a density jump from 100 kg/m3 to 50 kg/m3,
 the velocity is uniformly 100km/s.
 
 In the 2D test there is an additional plastic tube
