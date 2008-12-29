@@ -49,8 +49,7 @@ close_device
 spawn,'cd '+resdir+ $
       '; convert godunov_limit_mixed_lookup.eps godunov_limit_mixed_lookup.pdf'
 
-; 2. calculate errors and save it into a file
-; order is Godunov, Linde, Rusanov (alphabetical) for sake of simplicity
+; 2. calculate errors and save them into a file
 
 openw,99,resdir+'error.dat'
 printf,99,'Advection test in 1D'
