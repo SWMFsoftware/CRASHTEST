@@ -136,7 +136,8 @@ test_advection_2d_run1:
 	PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
 
 test_advection_2d_check:
-	cd output; idl test_advection_2d.pro
+	cd output; idl test_advection_2d.pro; \
+		rm -f test_advection_2d_results/*.eps
 	-(diff  output/test_advection_2d_results/error.dat \
 		output/test_advection_2d.ref\
 		> output/test_advection_2d.diff)
