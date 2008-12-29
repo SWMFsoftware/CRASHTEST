@@ -5,6 +5,7 @@
 test: 
 	@rm -f output/*.diff
 	-@(make test_advection_1d)
+	-@(make test_advection_2d)
 	@ls -l output/*.diff
 
 # Main BATSRUS/CRASH directory
