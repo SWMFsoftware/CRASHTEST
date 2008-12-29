@@ -63,7 +63,7 @@ READ
 0.0			xEndTube
 300.0			rInnerTube
 400.0			rOuterTube
-1400.0			RhoDimTube
+150.0			RhoDimTube
 50.0			RhoDimOutside
 1e11			pDimOutside
 -1.0			xUniformXe
