@@ -14,12 +14,14 @@ test:
 	-@(cd Hydro/IdealGas;                  make test)
 	-@(cd Hydro/MultiEos;                  make test)
 	-@(cd RadHydro/IdealGas/GrayDiffusion; make test)
+	-@(cd FullSystem/Version1;             make test)
 	ls -l ${FILEDIFF} > test.results
 
 clean:
 	-@(cd Hydro/IdealGas;                  make clean)
 	-@(cd Hydro/MultiEos;                  make clean)
 	-@(cd RadHydro/IdealGas/GrayDiffusion; make clean)
+	-@(cd FullSystem/Version1;             make clean)
 
 distclean: clean
 	@rm -f test.results
