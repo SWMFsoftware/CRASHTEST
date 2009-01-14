@@ -1,0 +1,16 @@
+These three tests by Lowrie are used to verify the gray diffusion solver in
+the CRASH code. The first test contains a shock that has been smoothed out
+by the radiation. In the second test there is a discontinuity. The 1st and 2nd
+tests use constant opacities. In the third test there is a jump,
+and the opacity varies with temperature. This last test is the most challenging
+as it contains a spike in the gas temperature right behind the shock.
+
+The tests are done on a 2D non-uniform grid. The initial condition is rotated
+by atan$(1/2)$ and the solution is advected orthogonal to the shock front
+(a constant velocity was added to the steady state solution). The
+semi-analytic solution (provided by Lowrie) is advected together with the flow.
+The errors are calculated relative to the semi-analytic solution with
+various grid resolutions.
+
+We expect second order convergence rate for the first test, and first order
+convergence for the second and third tests.
