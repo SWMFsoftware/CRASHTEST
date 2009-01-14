@@ -86,7 +86,8 @@ test_shu_osher_1d_run1:
 test_shu_osher_1d_check:
 	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \
 		output/test_shu_osher_1d_ref.out
-	cd output; idl test_shu_osher_1d.pro
+	cd output; idl test_shu_osher_1d.pro; \
+		rm -f test_shu_osher_1d_results/*.eps
 	-(diff  output/test_shu_osher_1d_results/error.dat \
 		output/test_shu_osher_1d.ref \
 		> output/test_shu_osher_1d.diff)
@@ -140,7 +141,8 @@ test_shu_osher_2d_run1:
 test_shu_osher_2d_check:
 	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \
 		output/test_shu_osher_1d_ref.out
-	cd output; idl test_shu_osher_2d.pro
+	cd output; idl test_shu_osher_2d.pro; \
+		rm -f test_shu_osher_2d_results/*.eps
 	-(diff  output/test_shu_osher_2d_results/error.dat \
 		output/test_shu_osher_2d.ref\
 		> output/test_shu_osher_2d.diff)
@@ -190,9 +192,9 @@ test_shu_osher_amr_run1:
 test_shu_osher_amr_check:
 	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \
 		output/test_shu_osher_1d_ref.out
-	cd output; idl test_shu_osher_amr.pro
+	cd output; idl test_shu_osher_amr.pro; \
+		rm -f test_shu_osher_amr_results/*.eps
 	-(diff  output/test_shu_osher_amr_results/error.dat \
 		output/test_shu_osher_amr.ref \
 		> output/test_shu_osher_amr.diff)
 	ls -l output/test_shu_osher_amr.diff
-

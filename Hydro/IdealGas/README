@@ -1,0 +1,14 @@
+The Shu-Osher test is used to verify the correctness and 
+accuracy of the hydro solvers. The test consists of a shock
+passing through sinusoidal entropy waves (constant pressure,
+varying density and temperature). The shock compresses the
+waves and the resulting density peaks and troughs are quite
+challenging to capture. We do the simulation on 1D and 2D 
+uniform grids (with the shock front rotated by atan(1/2))
+and 2D grid with non-uniform resolution.
+
+The weekly test runs the last test only. Three different
+solvers are tested: Rusanov (Lax-Friedrichs), Linde (HLLE),
+and Godunov scheme. The results are compared to a very 
+high resolution run. We expect first order convergence rate
+due to the presence of the shock.
