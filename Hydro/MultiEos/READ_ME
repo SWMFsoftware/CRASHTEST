@@ -9,7 +9,7 @@ There is a density jump from 100 kg/m3 to 50 kg/m3,
 the velocity is uniformly 100km/s.
 
 In the 2D test there is an additional plastic tube
-parallel with the Y axis, with density 1400 kg/m3 and
+parallel with the Y axis, with density 150 kg/m3 and
 zero velocity so there is a huge shear flow at the boundary.
 
 The test runs are named according to the method used:
