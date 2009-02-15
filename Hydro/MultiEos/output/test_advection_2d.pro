@@ -21,6 +21,7 @@ func='rho ux p Eint'
 
 filename = resdir+'Godunov_*_/GM/*.outs'
 set_device,resdir+'godunov.eps',/eps
+loadct,39
 .r animate
 close_device
 spawn,'cd '+resdir+'; convert godunov.eps godunov.pdf'
