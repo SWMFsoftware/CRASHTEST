@@ -45,11 +45,11 @@ func='Trad'
 physics='hd33'
 plotmode='contbargrid'
 transform='n'
-loadct,26
 bottomline=0
 plottitle="radiation temperature"
 multiplot=[1,2,0]
 set_device, resdir+'grid.eps', /eps
+loadct,26
 dpict=11
 .r animate
 close_device
