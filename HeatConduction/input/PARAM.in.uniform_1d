@@ -54,7 +54,7 @@ T			UseUserUpdateStates
 #USERINPUTBEGIN ------------------------
 
 #HEATCONDUCTIONTEST
-1                       iHeatConductionTest
+gaussian		TypeProblem
 
 #USERINPUTEND ----------------------------
 
@@ -109,7 +109,7 @@ z=0 VAR idl             PlotString
 -1                      DnSavePlot
 1.0                     DtSavePlot
 0.0                     DxSavePlot
-te te0 ux rho
+t t0
 g
 
 #TIMESIMULATION
