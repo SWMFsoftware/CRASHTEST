@@ -1,0 +1,7 @@
+uniform heat conduction test in 1D
+n error
+     200  8.53246e-05
+     400  3.67061e-05
+     800  1.68846e-05
+    1600  8.07976e-06
+    3200  3.94840e-06

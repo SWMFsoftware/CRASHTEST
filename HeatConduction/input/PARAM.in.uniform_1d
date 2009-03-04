@@ -1,0 +1,120 @@
+#ECHO
+T
+
+#TEST
+krylov
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			TypeIoUnit
+
+#NORMALIZATION
+READ			TypeNormalization
+1.0			No2SiUnitX
+1.0			No2SiUnitU
+1.0			No2SiUnitRho
+
+#NONCONSERVATIVE
+F			UseNonConservative
+
+#CHECKGRIDSIZE
+100			nI
+2			nJ
+2			nK
+2			MinBlockALL
+
+#GRID
+2			nRootBlockX
+1			nRootBlockY
+1			nRootBlockZ
+-5.0			xMin
+ 5.0			xMax
+-1.0			yMin
+ 1.0			yMax
+-1.0			zMin
+ 1.0			zMax
+
+#USER_FLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F			UseUserOuterBcs
+T			UseUserICs
+F			UseUserSpecifyRefinement
+F			UseUserLogFiles
+F			UseUserWritePlot
+F			UseUserAMR
+F			UseUserEchoInput
+F			UseUserB0
+T			UseUserInitSession
+T			UseUserUpdateStates
+
+#USERINPUTBEGIN ------------------------
+
+#HEATCONDUCTIONTEST
+1                       iHeatConductionTest
+
+#USERINPUTEND ----------------------------
+
+#GAMMA
+2.0			Gamma
+
+#IMPLICITTEMPERATURE
+T                       UseTemperatureDiffusion
+T                       UseTemperatureVariable
+dilu			TypePreconditioner
+rel                     TypeStopCriterion
+1e-8                    MaxErrorResidual
+
+#HEATCONDUCTION
+T			UseHeatConduction
+
+#OUTERBOUNDARY
+float			TypeBcEast
+float			TypeBcWest
+reflect			TypeBcSouth
+reflect			TypeBcNorth
+reflect			TypeBcBottom
+reflect			TypeBcTop
+
+#SCHEME
+2			nOrder
+Rusanov			TypeFlux
+minmod			TypeLimiter
+
+#TIMESTEPPING
+1			nStage
+1.0			CflExpl
+
+#UPDATECHECK
+F			UseUpdateCheck
+
+#SAVELOGFILE
+T			DoSaveLogfile
+raw			StringLogfile
+1			DnSaveLogfile
+-1.			DtSaveLogfile
+
+#SAVERESTART
+F			DoSaveRestart
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#SAVEPLOT
+1			nPlotfile
+z=0 VAR idl             PlotString
+-1                      DnSavePlot
+1.0                     DtSavePlot
+0.0                     DxSavePlot
+te te0 ux rho
+g
+
+#TIMESIMULATION
+1.0			tSimulation
+
+#STOP
+-20			MaxIteration
+3.0			tSimulationMax
