@@ -49,7 +49,7 @@ test_uniform_1d:
 	make test_uniform_1d_check
 
 test_uniform_1d_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=Hd -g=100,2,2,16,1
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=100,2,2,16,16
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_1d_rundir: test_rundir
@@ -60,7 +60,6 @@ test_uniform_1d_run:
 	make test_uniform_1d_run_res RES=400
 	make test_uniform_1d_run_res RES=800
 	make test_uniform_1d_run_res RES=1600
-	make test_uniform_1d_run_res RES=3200
 	rm -rf output/test_uniform_1d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_uniform_1d_results
 
@@ -92,7 +91,7 @@ test_uniform_2d:
 	make test_uniform_2d_check
 
 test_uniform_2d_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=Hd -g=20,20,2,800,1
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,2,800,800
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_2d_rundir: test_rundir
@@ -102,7 +101,7 @@ test_uniform_2d_run:
 	make test_uniform_2d_run_res RES=100
 	make test_uniform_2d_run_res RES=200
 	make test_uniform_2d_run_res RES=400
-	make test_uniform_2d_run_res RES=800
+	#make test_uniform_2d_run_res RES=800
 	rm -rf output/test_uniform_2d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_uniform_2d_results
 

@@ -61,15 +61,20 @@ gaussian		TypeProblem
 #GAMMA
 2.0			Gamma
 
-#IMPLICITTEMPERATURE
-T                       UseTemperatureDiffusion
-T                       UseTemperatureVariable
-dilu			TypePreconditioner
-rel                     TypeStopCriterion
-1e-8                    MaxErrorResidual
+#SEMIIMPLICIT
+T			UseSemiImplicit
+cond			TypeSemiImplicit
 
-#HEATCONDUCTION
-T			UseHeatConduction
+#KRYLOV
+gmres			TypeKrylov
+nul			TypeInitKrylov
+1.0e-8			ErrorMaxKrylov
+100			MaxMatvecKrylov
+
+#PRECONDITIONER
+symmetric               TypePrecondSide (left, symmetric, right)
+mbilu                   TypePrecond (MBILU)
+0.0                     GustafssonPar (0. no modification, 1. full modification
 
 #OUTERBOUNDARY
 float			TypeBcEast
@@ -87,6 +92,11 @@ minmod			TypeLimiter
 #TIMESTEPPING
 1			nStage
 1.0			CflExpl
+
+#IMPLSTEP
+0.5			ImplCoeff
+F			UseBdf2
+F			UseSourceImpl
 
 #UPDATECHECK
 F			UseUpdateCheck

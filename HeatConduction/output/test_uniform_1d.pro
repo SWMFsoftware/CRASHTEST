@@ -29,10 +29,6 @@ filename=resdir+'1600/GM/z*.outs'
 .r getpict
 printf,99,1600,calc_error(w)
 
-filename=resdir+'3200/GM/z*.outs'
-.r getpict
-printf,99,3200,calc_error(w)
-
 close,99
 
 ; 3. Create a figure of convergence rates
@@ -42,13 +38,13 @@ close,99
 set_device, resdir + 'error.eps', /eps
 logfilename = resdir + 'error.dat'
 .r getlog
-plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-4,1e-2],yrange=[1e-6,1e-4],$
+plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-4,1e-2],yrange=[1e-7,1e-4],$
         psym=-4,charsize=2,thick=3, $
         xtitle='Grid resolution', $
         ytitle='Relative error', $
         title="uniform heat conduction test in 1D"
-oplot,[1e-4,1e-2],[1e-6,1e-4],linestyle=2,thick=3
-xyouts,0.0008,0.000006,'1st order slope',charsize=2,charthick=1
+oplot,[1e-4,1e-2],[1e-8,1e-4],linestyle=2,thick=3
+xyouts,0.00014,0.00000025,'2nd order slope',charsize=2,charthick=1
 close_device
 spawn,'cd '+resdir+'; ps2pdf error.eps'
 
