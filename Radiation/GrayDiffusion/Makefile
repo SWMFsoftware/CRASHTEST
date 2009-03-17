@@ -54,20 +54,25 @@ test_suolson_1d_rundir: test_rundir
 	cp input/PARAM.in.suolson_1d ${DIR}/${RUNDIR}/PARAM.in
 
 test_suolson_1d_run:
-	make test_suolson_1d_run_res RES=80
-	make test_suolson_1d_run_res RES=160
-	make test_suolson_1d_run_res RES=320
-	make test_suolson_1d_run_res RES=960
+	make test_suolson_1d_run1 RES=80  SOLVER=radiation
+	make test_suolson_1d_run1 RES=80  SOLVER=radcond
+	make test_suolson_1d_run1 RES=160 SOLVER=radiation
+	make test_suolson_1d_run1 RES=160 SOLVER=radcond
+	make test_suolson_1d_run1 RES=320 SOLVER=radiation
+	make test_suolson_1d_run1 RES=320 SOLVER=radcond
+	make test_suolson_1d_run1 RES=960 SOLVER=radiation
+	make test_suolson_1d_run1 RES=960 SOLVER=radcond
 	rm -rf output/test_suolson_1d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_suolson_1d_results
 
-test_suolson_1d_run_res:
+test_suolson_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/20; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=2.0e-14*100/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+		perl -pi -e '$$a=2.0e-14*100/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
+		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
-		PostProc.pl -M RESULTS/${RES}
+		PostProc.pl -M RESULTS/${SOLVER}_${RES}
 
 test_suolson_1d_check:
 	cd output; idl test_suolson_1d.pro

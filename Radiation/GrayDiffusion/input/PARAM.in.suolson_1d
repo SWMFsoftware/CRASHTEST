@@ -23,7 +23,7 @@ F			UseNonConservative
 20			nI
 2			nJ
 2			nK
-160			MinBlockALL
+48			MinBlockALL
 
 #GRID
 4			nRootBlockX
