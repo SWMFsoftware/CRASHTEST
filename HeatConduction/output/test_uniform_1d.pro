@@ -5,6 +5,30 @@ physics='hd33'
 ; 1. plot results for various solvers and resolutions
 resdir='test_uniform_1d_results/'
 
+!p.charsize=2
+!p.charthick=1
+
+filename=resdir+'200/GM/z*.outs'
+npict=1
+.r getpict
+cut=grid(*,1)
+set_device, resdir + 'Tmat.eps', /eps
+plot,x,w(*,1), $
+     xrange=[-5.,5.],yrange=[8.,20.],$
+     linestyle=0,thick=3, $
+     xtitle='x', $
+     ytitle='material temperature', $
+     title="uniform heat conduction test in 1D"
+oplot,x,w(*,0),psym=-4,thick=2
+npict=3
+.r getpict
+oplot,x,w(*,1),linestyle=0,thick=3
+oplot,x,w(*,0),psym=-5,thick=2
+oplot,[2.8],[18.15],psym=4,thick=3 & xyouts,3.,18.,'time = 0'
+oplot,[2.8],[17.15],psym=5,thick=3 & xyouts,3.,17.,'time = 3'
+close_device
+spawn,'cd '+resdir+'; ps2pdf Tmat.eps'
+
 ; 2. calculate errors and save it into a file
 openw, 99, resdir + 'error.dat'
 printf,99,'uniform heat conduction test in 1D'
