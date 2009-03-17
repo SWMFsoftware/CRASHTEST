@@ -1,15 +1,46 @@
-physics='hd33'
+physics='hd11'
 
 ; 1. plot results, 2. calculate errors, 3. plot errors
 
 resdir='test_suolson_1d_results/'
 
-; read the reference solutions
-filename = resdir+'*_960/GM/cut*.outs'
-npict=2
+filename = resdir+'radiation_960/GM/cut*.outs suolson_0.02ns.out'
+npict = 2
 .r getpict
-wref0 = w0
-wref1 = w1
+
+!x.range=[0.,5.]
+!y.range=[0.,1000.]
+
+!p.charsize=2
+!p.charthick=1
+set_device, resdir + 'Tmat.eps', /eps
+func='tmat
+plot,x,w0(*,0), $
+     xrange=[0.,5.],yrange=[0.,1000.],$
+     linestyle=0,thick=3, $
+     xtitle='x (cm)', $
+     ytitle='material temperature (eV)', $
+     title="Su-Olson test in 1D"
+oplot,x,w1(*,0),linestyle=2,thick=3
+oplot,[2.8,2.95],[715.,715.],linestyle=0,thick=3 & xyouts,3.,700.,'reference'
+oplot,[2.8,2.95],[815.,815.],linestyle=2,thick=3 & xyouts,3.,800.,'radiation'
+close_device
+spawn,'cd '+resdir+'; ps2pdf Tmat.eps'
+
+set_device, resdir + 'Trad.eps', /eps
+func='trad
+plot,x,w0(*,1), $
+     xrange=[0.,5.],yrange=[0.,1000.],$
+     linestyle=0,thick=3, $
+     xtitle='x (cm)', $
+     ytitle='radiation temperature (eV)', $
+     title="Su-Olson test in 1D"
+oplot,x,w1(*,1),linestyle=2,thick=3
+oplot,[2.8,2.95],[715.,715.],linestyle=0,thick=3 & xyouts,3.,700.,'reference'
+oplot,[2.8,2.95],[815.,815.],linestyle=2,thick=3 & xyouts,3.,800.,'radiation'
+close_device
+spawn,'cd '+resdir+'; ps2pdf Trad.eps'
+
 
 ; 2. calculate errors and save it into a file
 openw, 99, resdir + 'error.dat'
@@ -18,6 +49,12 @@ printf,99,'n radcond_error radiation_error'
 
 ; read the last snapshot
 npict=2
+
+; read the high resolution solutions
+filename = resdir+'*_960/GM/cut*.outs'
+.r getpict
+wref0 = w0
+wref1 = w1
 
 filename=resdir+'*_80/GM/cut*.outs'
 .r getpict
