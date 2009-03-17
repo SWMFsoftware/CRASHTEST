@@ -1,0 +1,28 @@
+Test the radiography post processing algorithm of CRASH
+
+sphere_3d integrates a sphere of radius R with density varying as 
+rho = R^2-r^2, where r is the radial distance from the center of the sphere. 
+For r>R, the density is 0.
+
+One can easily integrate analytically the density along a line
+that goes across this sphere at a distance D from the center.
+The line cuts the sphere at S = sqrt(R^2 - D^2) distance from the middle
+of the inside line segment:
+
+I = \int_{-\infty}^{+\infty} \rho(s) ds 
+  = \int_{-S}^{+S} (R^2 - D^2 - s^2) ds
+  = [s*S^2 - s^3/3]_{-S}^{+S}
+  = 4/3*S^3 = 4/3*(R^2 - D^2)^(3/2)
+
+If the viewing point is at distance L from the center then the line
+belonging to pixel at x,y coordinates will be at a distance
+
+D = d*L/sqrt(L^2 + d^2)
+
+from the center of the sphere, where d = sqrt(x^2+y^2). So the final 
+formula for the integral is
+
+I(x,y) = max[ 0, 4/3*(R^2 - L^2/(1 + L^2/(x^2 + y^2)))^(3/2) ]
+
+In the test R = 10 and the viewing point is at X = 60, Y = 80 and Z = 100, 
+so L^2 = 20,000.
