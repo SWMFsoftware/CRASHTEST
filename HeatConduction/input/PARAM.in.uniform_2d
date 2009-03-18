@@ -117,10 +117,34 @@ F			DoSaveRestart
 T			DoSaveInitial
 
 #SAVEPLOT
-1			nPlotfile
+3			nPlotfile
 z=0 VAR idl             PlotString
 -1                      DnSavePlot
 0.1                     DtSavePlot
+0.0                     DxSavePlot
+t t0
+g
+cut VAR idl             StringPlot
+-1                      DnSavePlot
+0.1                     DtSavePlot
+-3.0                    xMinCut
+3.0                     xMaxCut
+-0.0001                 yMinCut
++0.0001                 yMaxCut
+-0.0001                 zMinCut
++0.0001                 zMaxCut
+0.0                     DxSavePlot
+t t0
+g
+cut VAR idl             StringPlot
+-1                      DnSavePlot
+0.1                     DtSavePlot
+-0.0001                 xMinCut
++0.0001                 xMaxCut
+0.0                     yMinCut
+1.0                     yMaxCut
+-0.0001                 zMinCut
++0.0001                 zMaxCut
 0.0                     DxSavePlot
 t t0
 g
