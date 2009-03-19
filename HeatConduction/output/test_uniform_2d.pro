@@ -11,7 +11,7 @@ npict=1
 .r getpict
 set_device, resdir + 'Tmat_r=0.eps', /eps
 plot,x,w(*,1), $
-     xrange=[-3.,3.],yrange=[3.,5.5],$
+     xrange=[-3.,3.],yrange=[2.,6.],$
      linestyle=0,thick=3, $
      xtitle='z', $
      ytitle='material temperature', $
@@ -45,6 +45,20 @@ oplot,[0.62],[5.15],psym=4,thick=3 & xyouts,0.65,5.1,'time = 1'
 oplot,[0.62],[4.85],psym=5,thick=3 & xyouts,0.65,4.8,'time = 1.2'
 close_device
 spawn,'cd '+resdir+'; ps2pdf Tmat_z=0.eps'
+
+filename = resdir + '100/GM/z*.outs'
+func='t'
+plotmode='contbar'
+transform='n'
+bottomline=1
+plottitle="material temperature"
+multiplot=[1,2,0]
+set_device, resdir+'isotemperature.eps', /eps
+loadct,26
+dpict=2
+.r animate
+close_device
+spawn,'cd '+resdir+'; ps2pdf isotemperature.eps'
 
 
 ; 2. calculate errors and save it into a file

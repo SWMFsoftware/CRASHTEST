@@ -1,0 +1,11 @@
+The heat conduction tests are used to verify the correctness and
+accuracy of the time-dependent heat conduction model. There are two
+tests, a one dimensional slab and a two dimensional rz-geometry
+test, both assuming uniform heat conduction coefficient. The one
+dimensional problem is the diffusion of a gaussian temperature
+profile. The two dimensional test is a combination of a gaussian
+temperature profile in the z-direction and a elevated J0 Bessel
+function in the r-direction.
+For both tests we use a Crank-Nicolson approach to achieve second
+order accurate time-integration. The results are compared with the
+analytical solutions. We expect second order convergence rate.
