@@ -1,0 +1,24 @@
+The Su-Olson test is a one-dimensional, non-equilibrium Marshak
+wave test and is used to verify the correctness and accuracy of the
+time-dependent gray radiation diffusion model. This test is a
+linearized radiation transport problem in slab geometry. The
+linearization is achieved by the choice of specific heat of material
+proportional to the material temperature cubed. Initially both the
+material and radiation temperature are zero. On the left boundary
+the incoming radiation source is specified as a black body source
+radiating with a radiation temperature of 1keV. The radiation
+diffuses into the cold half space on the right. The material
+temperature also rises due to the energy exchange between radiation
+and matter.
+
+The convergence study is performed with two different semi-implicit
+schemes:
+
+- radiation: solves for radiation energy density and it sets the the
+             internal energy in a point implicit manner.
+- radcond:   solves implicitly the gray diffusion with the radiation
+             and internal energy densities being the unknowns.
+
+For both schemes we use a Crank-Nicolson approach to achieve second
+order accurate time-integration. We expect second order convergence
+rate.

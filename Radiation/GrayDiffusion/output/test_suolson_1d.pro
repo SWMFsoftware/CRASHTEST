@@ -87,8 +87,8 @@ oplot,1/wlog(*,0),wlog(*,1),psym=-4,thick=3
 oplot,1/wlog(*,0),wlog(*,2),psym=-5,thick=3
 oplot,[2e-3,2e-1],[1e-4,1e-0],linestyle=2,thick=3
 xyouts,0.017,0.005,'2nd order slope',charsize=2,charthick=1
-oplot,[0.0015],[0.003],psym=4 & xyouts,0.002,0.003,'radcond'
-oplot,[0.0015],[0.004],psym=5 & xyouts,0.002,0.004,'radiation'
+oplot,[0.0017],[0.0033],psym=4,thick=3 & xyouts,0.002,0.003,'radcond'
+oplot,[0.0017],[0.0043],psym=5,thick=3 & xyouts,0.002,0.004,'radiation'
 close_device
 spawn,'cd '+resdir+'; ps2pdf error.eps'
 
