@@ -75,7 +75,8 @@ test_suolson_1d_run1:
 		PostProc.pl -M RESULTS/${SOLVER}_${RES}
 
 test_suolson_1d_check:
-	cd output; idl test_suolson_1d.pro
+	cd output; idl test_suolson_1d.pro; \
+		rm -f test_suolson_1d_results/*.eps
 	-(diff  output/test_suolson_1d_results/error.dat \
 		output/test_suolson_1d.ref \
 		> output/test_suolson_1d.diff)

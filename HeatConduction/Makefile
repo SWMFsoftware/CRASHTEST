@@ -71,7 +71,8 @@ test_uniform_1d_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_uniform_1d_check:
-	cd output; idl test_uniform_1d.pro
+	cd output; idl test_uniform_1d.pro; \
+		rm -f test_uniform_1d_results/*.eps
 	-(diff  output/test_uniform_1d_results/error.dat \
 		output/test_uniform_1d.ref \
 		> output/test_uniform_1d.diff)
@@ -114,7 +115,8 @@ test_uniform_2d_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_uniform_2d_check:
-	cd output; idl test_uniform_2d.pro
+	cd output; idl test_uniform_2d.pro; \
+		rm -f test_uniform_2d_results/*.eps
 	-(diff  output/test_uniform_2d_results/error.dat \
 		output/test_uniform_2d.ref \
 		> output/test_uniform_2d.diff)

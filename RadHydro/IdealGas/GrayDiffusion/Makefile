@@ -75,7 +75,8 @@ test_lowrie1_amr_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_lowrie1_amr_check:
-	cd output; idl test_lowrie1_amr.pro
+	cd output; idl test_lowrie1_amr.pro; \
+		rm -f test_lowrie1_amr_results/*.eps
 	-(diff  output/test_lowrie1_amr_results/error.dat \
 		output/test_lowrie1_amr.ref \
 		> output/test_lowrie1_amr.diff)
@@ -120,7 +121,8 @@ test_lowrie2_amr_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_lowrie2_amr_check:
-	cd output; idl test_lowrie2_amr.pro
+	cd output; idl test_lowrie2_amr.pro; \
+		rm -f test_lowrie2_amr_results/*.eps
 	-(diff  output/test_lowrie2_amr_results/error.dat \
 		output/test_lowrie2_amr.ref \
 		> output/test_lowrie2_amr.diff)
@@ -165,7 +167,8 @@ test_lowrie3_amr_run_res:
 		PostProc.pl -M RESULTS/${RES}
 
 test_lowrie3_amr_check:
-	cd output; idl test_lowrie3_amr.pro
+	cd output; idl test_lowrie3_amr.pro; \
+		rm -f test_lowrie3_amr_results/*.eps
 	-(diff  output/test_lowrie3_amr_results/error.dat \
 		output/test_lowrie3_amr.ref \
 		> output/test_lowrie3_amr.diff)
