@@ -1,6 +1,16 @@
-Test the radiography post processing algorithm of CRASH
+Test the radiography post processing algorithm of CRASH. There are the
+folowing tests (so far):
 
-sphere_3d integrates a sphere of radius R with density varying as 
+test_sphere_3d
+test_sphere_amr
+test_tube_3d
+
+The three tests are described below.
+
+============================================================================
+test_sphere_3d 
+==============
+integrates a sphere of radius R with density varying as 
 rho = R^2-r^2, where r is the radial distance from the center of the sphere. 
 For r>R, the density is 0.
 
@@ -26,3 +36,32 @@ I(x,y) = max[ 0, 4/3*(R^2 - L^2/(1 + L^2/(x^2 + y^2)))^(3/2) ]
 
 In the test R = 10 and the viewing point is at X = 60, Y = 80 and Z = 100, 
 so L^2 = 20,000.
+
+============================================================================
+test_sphere_amr 
+===============
+does the same as test_sphere_3d, but the grid resolution is
+increased by a factor of 2 in the +X, +Y, +Z octant.
+
+============================================================================
+test_tube_3d 
+============
+creates LOS images of a shocktube including the cylindrical
+plastic tube. The Be/Xe interface is at X=5, the Be density is 10, the Xe
+density is 20 inside the plastic tube. The plastic tube starts at X=-5,
+its inner radius is 10, the outer radius is 15. The plastic density is 30,
+the Xe density outside the tube is 10.
+
+The total, Xe, Be, and plastic densities (rho, rhoxe, rhobe and rhopl)
+are shown in the X=0, Y=0 and Z=0 cuts and are also integrated
+taken from the X,Y,Z = (100,0,0), (0,100,0) and (0,0,100) points.
+The plots show the difference rho-rhoxe-rhobe-rhopl that should be
+zero down to roundoff error. The "cube10" plot variable is shown in the
+LOS images so that the orientation of the plot can be better understood. 
+The center of the cube is at X=Y=Z=10, it's size is 20 by 20 by 20.
+The cube should always be above the center of the plot, since we want the
+"vertical" coordinate of the LOS image to be aligned with the +Z or +Y axes.
+
+Since densities of the Xe, Be and Plastic are differently calculated with 
+the levelset and the mixed cell methods, both of them are tested and compared
+in the level_mixed_diff plot. The difference should be zero to round-off error.

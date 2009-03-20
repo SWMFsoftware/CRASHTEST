@@ -27,6 +27,20 @@ NONE
 -20.0			zMin
  20.0			zMax
 
+#GRIDLEVEL
+1                       nLevel
+initial			NameArea
+
+#GRIDLEVEL
+1                       nLevel
+box                     NameArea
+0.0                     xMinBox
+0.0                   yMinBox
+0.0                   zMinBox
+20.0                   xMaxBox
+20.0                   yMaxBox
+20.0                   zMaxBox
+
 #OUTERBOUNDARY
 float
 float

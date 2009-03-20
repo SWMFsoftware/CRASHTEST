@@ -1,0 +1,163 @@
+#ECHO
+T
+
+#PLANET
+NONE
+
+#IOUNITS
+NONE
+
+#NORMALIZATION
+NONE
+
+#CHECKGRIDSIZE
+10			nI
+10			nJ
+10			nK
+100			MinBlockALL
+
+#GRID
+4			nRootBlockX
+4			nRootBlockY
+4			nRootBlockZ
+-20.0			xMin
+ 20.0			xMax
+-20.0			yMin
+ 20.0			yMax
+-20.0			zMin
+ 20.0			zMax
+
+#OUTERBOUNDARY
+float
+float
+float
+float
+float
+float
+
+#SAVERESTART
+F			DoSaverestart
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#SHOCKTUBE
+10.		rho 
+0.		Ux  
+0.		Uy
+0.		Uz
+0.		Xe
+1.		Be
+0.		Pl
+0.5		Erad
+0.5		Eint
+1.0		P
+20.0		rho (right state)
+0.		Ux
+0.		Uy
+0.		Uz
+1.		Xe
+0.		Be
+0.		Pl
+0.5		Erad
+0.5		Eint
+1.0		P
+
+#SHOCKPOSITION
+5.0			ShockPosition
+0.0			ShockSlope
+
+#USERINPUTBEGIN ----------------
+
+#TUBE
+-5.0			xEndTube
+10.0			rInnerTube
+15.0			rOuterTube
+30.0			RhoDimTube
+10.0			RhoDimOutside
+1.0			pDimOutside
+-1.0			xUniformXe
+
+#THREEDIM
+T
+
+MIXEDCELL
+T			UseMixedCell
+0.97			MixLimit
+
+CYLINDRICAL
+T			UseCylindrical
+
+#USERINPUTEND   ----------------
+
+#SAVEPLOT
+6			nPlotfile
+idl_real8 x=0 var	StringPlot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.			DxSavePlot
+rho rhoxe rhobe rhopl xe be pl level
+g
+idl_real8 y=0 var	StringPlot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.			DxSavePlot
+rho rhoxe rhobe rhopl xe be pl level
+g
+idl_real8 z=0 var	StringPlot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.			DxSavePlot
+rho rhoxe rhobe rhopl xe be pl level
+g
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+100.                    ObsPosX
+0.0                     ObsPosY
+0.0                     ObsPosZ
+0.                      OffsetAngle
+30.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+40                     nPix
+cube10 rho rhoxe rhobe rhopl	NameVar
+g			NamePar
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.0                    ObsPosX
+100.0                     ObsPosY
+0.0                     ObsPosZ
+0.                      OffsetAngle
+30.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+40                      nPix
+cube10 rho rhoxe rhobe rhopl	NameVar
+g			NamePar
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.0                     ObsPosX
+0.0                     ObsPosY
+100.0                   ObsPosZ
+0.                      OffsetAngle
+30.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+40                      nPix
+cube10 rho rhoxe rhobe rhopl	NameVar
+g			NamePar
+
+#STOP
+0			MaxIteration
+-1.0                   tSimulationMax
+
+#END
