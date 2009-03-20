@@ -77,7 +77,8 @@ test_sphere_3d_run_res:
 		PostProc.pl RESULTS/${RES}
 
 test_sphere_3d_check:
-	cd output; idl test_sphere_3d.pro
+	cd output; idl test_sphere_3d.pro; \
+		rm -f test_sphere_3d_results/*.eps
 	-(diff  output/test_sphere_3d_results/error.dat \
 		output/test_sphere_3d.ref \
 		> output/test_sphere_3d.diff)
@@ -117,7 +118,8 @@ test_sphere_amr_run_res:
 		PostProc.pl RESULTS/${RES}
 
 test_sphere_amr_check:
-	cd output; idl test_sphere_amr.pro
+	cd output; idl test_sphere_amr.pro; \
+		rm -f test_sphere_amr_results/*.eps
 	-(diff  output/test_sphere_amr_results/error.dat \
 		output/test_sphere_amr.ref \
 		> output/test_sphere_amr.diff)
@@ -157,5 +159,6 @@ test_tube_3d_run1:
 		PostProc.pl RESULTS/tube_${ON}
 
 test_tube_3d_check:
-	cd output; idl test_tube_3d.pro
+	cd output; idl test_tube_3d.pro; \
+		rm -f test_tube_3d_results/*.eps
 	ls -l output/test_tube_3d.diff
