@@ -37,6 +37,23 @@ I(x,y) = max[ 0, 4/3*(R^2 - L^2/(1 + L^2/(x^2 + y^2)))^(3/2) ]
 In the test R = 10 and the viewing point is at X = 60, Y = 80 and Z = 100, 
 so L^2 = 20,000.
 
+Figures:
+--------
+sphere.pdf 
+----------
+shows the LOS image of the sphere10 function (top row) and its difference 
+relative to the analytic solution (middle row). The bottom row shows the
+difference between an interpolated usersphere10 function and the analytic
+solution. The grid resolutions varies from 20 (left column), to 40 
+(middle column) and 80 (right column). 
+
+error.pdf
+---------
+shows the relative errors for the interpolated usersphere10 function 
+(top line) and the pointwise exact sphere10 function (bottom line)
+as a function of grid resolution. Note that the integration step along
+the line of sight is proportional to the grid resolution.
+
 ============================================================================
 test_sphere_amr 
 ===============
@@ -52,16 +69,41 @@ density is 20 inside the plastic tube. The plastic tube starts at X=-5,
 its inner radius is 10, the outer radius is 15. The plastic density is 30,
 the Xe density outside the tube is 10.
 
-The total, Xe, Be, and plastic densities (rho, rhoxe, rhobe and rhopl)
-are shown in the X=0, Y=0 and Z=0 cuts and are also integrated
-taken from the X,Y,Z = (100,0,0), (0,100,0) and (0,0,100) points.
-The plots show the difference rho-rhoxe-rhobe-rhopl that should be
-zero down to roundoff error. The "cube10" plot variable is shown in the
-LOS images so that the orientation of the plot can be better understood. 
-The center of the cube is at X=Y=Z=10, it's size is 20 by 20 by 20.
-The cube should always be above the center of the plot, since we want the
-"vertical" coordinate of the LOS image to be aligned with the +Z or +Y axes.
+Figures
+-------
+tube_cuts.pdf
+-------------
+shows the X=0 (left column), Y=0 (middle column) and Z=0 (right column)
+cuts of the shocktube. The rows show the total, Xe, Be, and plastic densities 
+(rho, rhoxe, rhobe and rhopl) and the difference rho-rhoxe-rhobe-rhopl that 
+should be zero down to roundoff error. 
 
-Since densities of the Xe, Be and Plastic are differently calculated with 
-the levelset and the mixed cell methods, both of them are tested and compared
-in the level_mixed_diff plot. The difference should be zero to round-off error.
+tube_los.pdf
+------------
+shows LOS images taken from the X,Y,Z = (100,0,0), (0,100,0) and (0,0,100) 
+points in the left, middle and right colums, respectively.
+
+The top row shows the "cube10" plot variable so that the orientation of the 
+LOS plots can be better understood. The center of the 20 by 20 by 20 cube 
+is at X=Y=Z=+10. The cube should always be above the center of the plot, 
+since we want the "vertical" coordinate of the LOS image to be aligned 
+with the +Z or +Y axes. For the LOS image taken from the +Y direction the
+cube is to the left, because the +X axis points to the left when viewed
+from this direction. This means that this LOS image is flipped relative to
+the Y=0 cut.
+
+The rows below show the LOS integrals of the total, Xe, Be, and plastic 
+densities: rho, rhoxe, rhobe and rhopl, respectively.
+The bottom row shows the difference rho-rhoxe-rhobe-rhopl that should be
+zero down to roundoff error. 
+
+Note that the LOS image is 60 by 60, which is larger than the computational
+domain that is 40 by 40 by 40, so there are 0 values at the outer edges of
+the LOS images.
+
+level_mixed_diff.pdf
+--------------------
+shows the difference between the LOS integrated densities obtained with
+the levelset and mixed cell methods. The difference should be zero to 
+round-off error in all densities.
+
