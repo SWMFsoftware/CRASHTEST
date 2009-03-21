@@ -1,0 +1,114 @@
+#ECHO
+T
+
+#PLANET
+NONE
+
+#IOUNITS
+NONE
+
+#NORMALIZATION
+NONE
+
+#CHECKGRIDSIZE
+10			nI
+10			nJ
+2			nK
+100			MinBlockALL
+
+#GRID
+2			nRootBlockX
+2			nRootBlockY
+1			nRootBlockZ
+-20.0			xMin
+ 20.0			xMax
+-20.0			yMin
+ 20.0			yMax
+-2.0			zMin
+ 2.0			zMax
+
+#GRIDGEOMETRY
+rz			TypeGeometry
+
+#OUTERBOUNDARY
+float
+float
+float
+float
+float
+float
+
+#SAVERESTART
+F			DoSaverestart
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#SAVEPLOT
+4			nPlotfile
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+60.                     ObsPosX
+80.0                    ObsPosY
+100.0                   ObsPosZ
+0.                      OffsetAngle
+20.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+100                     nPix
+cube10 sphere10 usersphere10
+g			NamePar
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+100.                    ObsPosX
+0.0                     ObsPosY
+0.0                     ObsPosZ
+0.                      OffsetAngle
+20.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+100                     nPix
+cube10 sphere10 usersphere10
+g			NamePar
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.0                     ObsPosX
+100.0                   ObsPosY
+0.0                     ObsPosZ
+0.                      OffsetAngle
+20.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+100                     nPix
+cube10 sphere10 usersphere10
+g			NamePar
+idl_real8 los VAR	StringPlot ! line of sight plot
+1                       DnSavePlot
+-1.                     DtSavePlot
+0.0                     ObsPosX
+0.0                     ObsPosY
+100.0                   ObsPosZ
+0.                      OffsetAngle
+20.                     rSizeImage
+0.                      xOffset
+0.                      yOffset
+0.                      rOccult
+0.                      MuLimbDarkening
+100                     nPix
+cube10 sphere10 usersphere10
+g			NamePar
+
+#STOP
+0			MaxIteration
+-1.0                    tSimulationMax
+
+#END

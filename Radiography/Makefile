@@ -7,6 +7,7 @@ test:
 	-@(make test_sphere_3d)
 	-@(make test_sphere_amr)
 	-@(make test_tube_3d)
+	-@(make test_sphere_rz)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -27,6 +28,7 @@ help:
 	@echo "    test MPIRUN='mpirun -np 3' (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_sphere_3d             (run sphere LOS test in 3D)"
+	@echo "    test_sphere_rz             (run sphere test in RZ coords)"
 	@echo "    test_sphere_amr            (run sphere LOS test with AMR)"
 	@echo "    test_tube_3d               (run tube LOS test in 3D)"
 
@@ -83,6 +85,47 @@ test_sphere_3d_check:
 		output/test_sphere_3d.ref \
 		> output/test_sphere_3d.diff)
 	ls -l output/test_sphere_3d.diff
+
+### Radiography test integrating a sphere on a uniform RZ grid ###
+
+test_sphere_rz:
+	@echo "test_sphere_rz_compile..." > output/test_sphere_rz.diff
+	make test_sphere_rz_compile
+	@echo "test_sphere_rz_rundir..." >> output/test_sphere_rz.diff
+	make test_sphere_rz_rundir
+	@echo "test_sphere_rz_run..." >> output/test_sphere_rz.diff
+	make test_sphere_rz_run
+	@echo "test_sphere_rz_check..." >> output/test_sphere_rz.diff
+	make test_sphere_rz_check
+
+test_sphere_rz_compile:
+	cd ${DIR}; ./Config.pl  -e=HdRadCrash -u=Crash -g=10,10,2,600,1
+	cd ${DIR}; make CRASH PIDL
+
+test_sphere_rz_rundir: test_rundir
+	cp input/PARAM.in.sphere_rz ${DIR}/${RUNDIR}/PARAM.in
+
+test_sphere_rz_run:
+	make test_sphere_rz_run_res RES=20
+	make test_sphere_rz_run_res RES=40
+	make test_sphere_rz_run_res RES=80
+	rm -rf output/test_sphere_rz_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_sphere_rz_results
+
+test_sphere_rz_run_res:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlock[XY])/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./CRASH.exe > runlog; \
+		PostProc.pl RESULTS/${RES}
+
+test_sphere_rz_check:
+	cd output; idl test_sphere_rz.pro; \
+		rm -f test_sphere_rz_results/*.eps
+	-(diff  output/test_sphere_rz_results/error.dat \
+		output/test_sphere_rz.ref \
+		> output/test_sphere_rz.diff)
+	ls -l output/test_sphere_rz.diff
 
 ### Radiography test integrating a sphere on a uniform 3D grid ###
 
