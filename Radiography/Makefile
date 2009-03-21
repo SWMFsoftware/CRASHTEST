@@ -8,6 +8,7 @@ test:
 	-@(make test_sphere_amr)
 	-@(make test_tube_3d)
 	-@(make test_sphere_rz)
+	-@(make test_tube_rz)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -205,3 +206,34 @@ test_tube_3d_check:
 	cd output; idl test_tube_3d.pro; \
 		rm -f test_tube_3d_results/*.eps
 	ls -l output/test_tube_3d.diff
+
+### Radiography test integrating a cylindrical shock tube on a uniform 3D grid
+
+test_tube_rz:
+	@echo "test_tube_rz_compile..." > output/test_tube_rz.diff
+	make test_tube_rz_compile
+	@echo "test_tube_rz_rundir..." >> output/test_tube_rz.diff
+	make test_tube_rz_rundir
+	@echo "test_tube_rz_run..." >> output/test_tube_rz.diff
+	make test_tube_rz_run
+	@echo "test_tube_rz_check..." >> output/test_tube_rz.diff
+	make test_tube_rz_check
+
+test_tube_rz_compile:
+	cd ${DIR}; ./Config.pl  -e=HdRadCrash -u=Crash -g=10,10,2,600,1
+	cd ${DIR}; make CRASH PIDL
+
+test_tube_rz_rundir: test_rundir
+	cp input/PARAM.in.tube_rz ${DIR}/${RUNDIR}/PARAM.in
+
+test_tube_rz_run:
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./CRASH.exe > runlog; \
+		PostProc.pl RESULTS/tube_rz
+	rm -rf output/test_tube_rz_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_tube_rz_results
+
+test_tube_rz_check:
+	cd output; idl test_tube_rz.pro; \
+		rm -f test_tube_rz_results/*.eps
+	ls -l output/test_tube_rz.diff

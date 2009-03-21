@@ -1,9 +1,10 @@
-Test the radiography post processing algorithm of CRASH. There are the
-folowing tests (so far):
+Test the radiography post processing algorithm of CRASH. There are 5 tests:
 
 test_sphere_3d
 test_sphere_amr
+test_sphere_rz
 test_tube_3d
+test_tube_rz
 
 The three tests are described below.
 
@@ -61,6 +62,12 @@ does the same as test_sphere_3d, but the grid resolution is
 increased by a factor of 2 in the +X, +Y, +Z octant.
 
 ============================================================================
+test_sphere_rz
+==============
+does the same as test_sphere_3d, but in RZ geometry. The sphere is actually
+a circle rotated around the X axis. 
+
+============================================================================
 test_tube_3d 
 ============
 creates LOS images of a shocktube including the cylindrical
@@ -106,4 +113,25 @@ level_mixed_diff.pdf
 shows the difference between the LOS integrated densities obtained with
 the levelset and mixed cell methods. The difference should be zero to 
 round-off error in all densities.
+
+============================================================================
+test_tube_rz
+============
+does the same as test_tube_3d, but in RZ geometry. The 2D initial condition
+is rotated around the X axis. 
+
+Figures
+-------
+tube_rz_cuts.pdf
+----------------
+Note that the tube is 2D, so the first two cuts are "flat", because there are 
+only 2 grid points in the "phi" direction.
+
+tube_rz_los.pdf
+---------------
+This figure should be compared with the tube_los.pdf figure of the tube_3d test.
+The computational domain is a cylinder here, while it is a brick in the tube_3d test.
+Consequently the integrals of Xe and Be (that extend to the edges of the domain) 
+look different. The cylindrical plastic tube, on the other hand, looks similar.
+
 
