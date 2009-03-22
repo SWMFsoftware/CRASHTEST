@@ -20,6 +20,9 @@ test:
 	-@(cd FullSystem/Version1;             make test)
 	ls -l ${FILEDIFF} > test.results
 
+check:
+	ls -l ${FILEDIFF} > test.results
+
 clean:
 	-@(cd HeatConduction;                  make clean)
 	-@(cd Radiation/GrayDiffusion;         make clean)
