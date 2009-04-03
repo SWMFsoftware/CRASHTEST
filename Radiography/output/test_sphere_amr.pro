@@ -49,7 +49,10 @@ plot_oo,1/wlog(*,0),(wlog(*,1)),psym=-4,$
 oplot,1/wlog(*,0),wlog(*,2),psym=-5,thick=3
 
 oplot,[1e-2,1e-1],[1e-3,1e-1],linestyle=2,thick=3
-xyouts,0.015,0.002,'2nd order slope',charsize=2,charthick=1
+xyouts, 0.015, 0.002, '2nd order slope', charsize=2, charthick=1
+xyouts, 1/wlog(0,0)+0.005, wlog(0,1), 'analytic'
+xyouts, 1/wlog(0,0)+0.005, wlog(0,2), 'interpolated'
+
 close_device,/pdf
 
 exit
