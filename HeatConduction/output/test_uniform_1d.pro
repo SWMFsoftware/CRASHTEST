@@ -26,8 +26,7 @@ oplot,x,w(*,1),linestyle=0,thick=3
 oplot,x,w(*,0),psym=-5,thick=2
 oplot,[2.8],[18.15],psym=4,thick=3 & xyouts,3.,18.,'time = 0'
 oplot,[2.8],[17.15],psym=5,thick=3 & xyouts,3.,17.,'time = 3'
-close_device
-spawn,'cd '+resdir+'; ps2pdf Tmat.eps'
+close_device,/pdf
 
 ; 2. calculate errors and save it into a file
 openw, 99, resdir + 'error.dat'
@@ -69,7 +68,6 @@ plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-4,1e-2],yrange=[1e-7,1e-4],$
         title="uniform heat conduction test in 1D"
 oplot,[1e-4,1e-2],[1e-8,1e-4],linestyle=2,thick=3
 xyouts,0.00014,0.00000025,'2nd order slope',charsize=2,charthick=1
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 exit

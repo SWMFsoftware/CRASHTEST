@@ -15,22 +15,19 @@ filename = resdir+'Rusanov_*/GM/cut*.outs'
 plottitle='Rusanov n=200, 400, 800, 1600'
 set_device,resdir+'Rusanov.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; ps2pdf Rusanov.eps'
+close_device,/pdf
 
 filename = resdir+'Linde_*/GM/cut*.outs'
 plottitle='Linde n=200, 400, 800, 1600'
 set_device,resdir+'Linde.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; ps2pdf Linde.eps'
+close_device,/pdf
 
 filename = resdir+'Godunov_*/GM/cut*.outs'
 plottitle='Godunov n=200, 400, 800, 1600'
 set_device,resdir+'Godunov.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; ps2pdf Godunov.eps'
+close_device,/pdf
 
 !x.range=0
 
@@ -89,7 +86,6 @@ oplot,[0.0015],[0.02],psym=4 & xyouts,0.002,0.02,'Godunov'
 oplot,[0.0015],[0.04],psym=5 & xyouts,0.002,0.04,'Linde'
 oplot,[0.0015],[0.08],psym=6 & xyouts,0.002,0.08,'Rusanov'
 
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 exit

@@ -9,15 +9,13 @@ bottomline=0
 set_device, resdir + 'tube_rz_los.eps', /eps, /port
 loadct,39
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert tube_rz_los.eps tube_rz_los.pdf'
+close_device,/pdf
 
 filename=resdir+'tube_rz/GM/?=*.out'
 func='rho rhoxe rhobe rhopl rho-{rhoxe}-{rhobe}-{rhopl}'
 set_device, resdir + 'tube_rz_cuts.eps', /eps, /port
 loadct,39
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert tube_rz_cuts.eps tube_rz_cuts.pdf'
+close_device,/pdf
 
 exit

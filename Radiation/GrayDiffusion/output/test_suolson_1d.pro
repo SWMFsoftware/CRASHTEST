@@ -24,8 +24,7 @@ plot,x,w0(*,0), $
 oplot,x,w1(*,0),linestyle=2,thick=3
 oplot,[2.8,2.95],[715.,715.],linestyle=0,thick=3 & xyouts,3.,700.,'reference'
 oplot,[2.8,2.95],[815.,815.],linestyle=2,thick=3 & xyouts,3.,800.,'radiation'
-close_device
-spawn,'cd '+resdir+'; ps2pdf Tmat.eps'
+close_device,/pdf
 
 set_device, resdir + 'Trad.eps', /eps
 func='trad
@@ -38,8 +37,7 @@ plot,x,w0(*,1), $
 oplot,x,w1(*,1),linestyle=2,thick=3
 oplot,[2.8,2.95],[715.,715.],linestyle=0,thick=3 & xyouts,3.,700.,'reference'
 oplot,[2.8,2.95],[815.,815.],linestyle=2,thick=3 & xyouts,3.,800.,'radiation'
-close_device
-spawn,'cd '+resdir+'; ps2pdf Trad.eps'
+close_device,/pdf
 
 
 ; 2. calculate errors and save it into a file
@@ -89,7 +87,6 @@ oplot,[2e-3,2e-1],[1e-4,1e-0],linestyle=2,thick=3
 xyouts,0.017,0.005,'2nd order slope',charsize=2,charthick=1
 oplot,[0.0017],[0.0033],psym=4,thick=3 & xyouts,0.002,0.003,'radcond'
 oplot,[0.0017],[0.0043],psym=5,thick=3 & xyouts,0.002,0.004,'radiation'
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 exit

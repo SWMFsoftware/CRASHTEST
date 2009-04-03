@@ -23,8 +23,7 @@ oplot,x,w(*,1),linestyle=0,thick=3
 oplot,x,w(*,0),psym=-5,thick=2
 oplot,[1.8],[5.05],psym=4,thick=3 & xyouts,2.,5.,'time = 1'
 oplot,[1.8],[4.85],psym=5,thick=3 & xyouts,2.,4.8,'time = 1.2'
-close_device
-spawn,'cd '+resdir+'; ps2pdf Tmat_r=0.eps'
+close_device,/pdf
 
 filename=resdir+'100/GM/cut_var_3*.outs'
 npict=1
@@ -43,8 +42,7 @@ oplot,x,w(*,1),linestyle=0,thick=3
 oplot,x,w(*,0),psym=-5,thick=2
 oplot,[0.62],[5.15],psym=4,thick=3 & xyouts,0.65,5.1,'time = 1'
 oplot,[0.62],[4.85],psym=5,thick=3 & xyouts,0.65,4.8,'time = 1.2'
-close_device
-spawn,'cd '+resdir+'; ps2pdf Tmat_z=0.eps'
+close_device,/pdf
 
 filename = resdir + '100/GM/z*.outs'
 func='t'
@@ -57,8 +55,7 @@ set_device, resdir+'isotemperature.eps', /eps
 loadct,26
 dpict=2
 .r animate
-close_device
-spawn,'cd '+resdir+'; ps2pdf isotemperature.eps'
+close_device,/pdf
 
 
 ; 2. calculate errors and save it into a file
@@ -101,7 +98,6 @@ plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-2],yrange=[1e-7,1e-4],$
         title="uniform heat conduction in rz-geometry"
 oplot,[1e-3,1e-2],[1e-7,1e-5],linestyle=2,thick=3
 xyouts,0.002,0.0000003,'2nd order slope',charsize=2,charthick=1
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 exit

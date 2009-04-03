@@ -23,75 +23,62 @@ filename = resdir+'Godunov_*_/GM/*.outs'
 set_device,resdir+'godunov.eps',/eps
 loadct,39
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov.eps godunov.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT/GM/*.outs'
 set_device,resdir+'godunov_limit.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov_limit.eps godunov_limit.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_lookup.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+';convert godunov_limit_lookup.eps godunov_limit_lookup.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_NONCONS/GM/*.outs'
 set_device,resdir+'godunov_noncons.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov_noncons.eps godunov_noncons.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov_limit_mixed.eps godunov_limit_mixed.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+ $
-      '; convert godunov_limit_mixed_lookup.eps godunov_limit_mixed_lookup.pdf'
+close_device,/pdf
 
 filename = resdir+'Linde_*_/GM/*.outs'
 set_device,resdir+'linde.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert linde.eps linde.pdf'
+close_device,/pdf
 
 filename = resdir+'Linde_*_LIMIT/GM/*.outs'
 set_device,resdir+'linde_limit.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert linde_limit.eps linde_limit.pdf'
+close_device,/pdf
 
 filename = resdir+'Linde_*_LIMIT_LOOKUP/GM/*.outs'
 set_device,resdir+'linde_limit_lookup.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+';convert linde_limit_lookup.eps linde_limit_lookup.pdf'
+close_device,/pdf
 
 filename = resdir+'Linde_*_NONCONS/GM/*.outs'
 set_device,resdir+'linde_noncons.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert linde_noncons.eps linde_noncons.pdf'
+close_device,/pdf
 
 filename = resdir+'Linde_*_LIMIT_MIXED/GM/*.outs'
 set_device,resdir+'linde_limit_mixed.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert linde_limit_mixed.eps linde_limit_mixed.pdf'
+close_device,/pdf
 
 filename = resdir+'Linde_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'linde_limit_mixed_lookup.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+ $
+close_device,/pdf
       '; convert linde_limit_mixed_lookup.eps linde_limit_mixed_lookup.pdf'
 
 ; 2. calculate errors and save them into a file
@@ -119,7 +106,7 @@ time = 5e-9
 multiplot=-2
 set_device,resdir+'reference_n40.eps',/eps,/port
 .r plotfunc
-close_device
+close_device,/pdf
 
 ; read the last state for comparison
 npict=10
@@ -265,8 +252,7 @@ oplot,[0.0015],[0.02],psym=4 & xyouts,0.002,0.02,'Godunov'
 oplot,[0.0015],[0.04],psym=5 & xyouts,0.002,0.04,'Linde'
 oplot,[0.0015],[0.08],psym=6 & xyouts,0.002,0.08,'Rusanov'
 
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 ; 3. Create a figure of convergence rates
 !p.charsize=2
@@ -299,8 +285,7 @@ oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
 oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
 
-close_device
-spawn,'cd '+resdir+'; ps2pdf error_godunov.eps'
+close_device,/pdf
 
 ; The Linde part of the header of error.dat:
 ; n linde g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look
@@ -326,7 +311,6 @@ oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
 oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
 
-close_device
-spawn,'cd '+resdir+'; ps2pdf error_linde.eps'
+close_device,/pdf
 
 exit

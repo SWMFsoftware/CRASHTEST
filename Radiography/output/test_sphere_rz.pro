@@ -10,8 +10,7 @@ bottomline=0
 set_device, resdir + 'sphere.eps', /eps
 loadct,39
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert sphere.eps sphere.pdf'
+close_device,/pdf
 
 ; 2. calculate errors and save it into a file
 openw, 99, resdir + 'error.dat'
@@ -51,7 +50,6 @@ oplot,1/wlog(*,0),wlog(*,2),psym=-5,thick=3
 
 oplot,[1e-2,1e-1],[1e-3,1e-1],linestyle=2,thick=3
 xyouts,0.015,0.002,'2nd order slope',charsize=2,charthick=1
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 exit

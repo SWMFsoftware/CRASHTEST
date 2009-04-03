@@ -35,8 +35,7 @@ plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-4,1e-0],$
         title="Lowrie radhydro test 1"
 oplot,[1e-3,1e-1],[2e-4,2e+0],linestyle=2,thick=3
 xyouts,0.01,0.3,'2nd order slope',charsize=2,charthick=1
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 ; 2. Create 2D figures to demonstrate the AMR grids
 
@@ -52,8 +51,7 @@ set_device, resdir+'grid.eps', /eps
 loadct,26
 dpict=7
 .r animate
-close_device
-spawn,'cd '+resdir+'; ps2pdf grid.eps'
+close_device,/pdf
 multiplot=0
 
 ; 3. plot 1D profiles
@@ -78,8 +76,7 @@ filename = resdir+'192/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,4),linestyle=3,thick=3
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
-close_device
-spawn,'cd '+resdir+'; ps2pdf Trad.eps'
+close_device,/pdf
 
 !x.range=[-0.08,0.0]
 !y.range=[0.6,0.63]
@@ -101,7 +98,6 @@ filename = resdir+'192/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,3),linestyle=3,thick=3
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
-close_device
-spawn,'cd '+resdir+'; ps2pdf Tgas.eps'
+close_device,/pdf
 
 exit

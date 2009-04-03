@@ -15,39 +15,32 @@ func='rho ux p Eint'
 filename = resdir+'Godunov_*_/GM/*.outs'
 set_device,resdir+'godunov.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov.eps godunov.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT/GM/*.outs'
 set_device,resdir+'godunov_limit.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov_limit.eps godunov_limit.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_lookup.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+';convert godunov_limit_lookup.eps godunov_limit_lookup.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_NONCONS/GM/*.outs'
 set_device,resdir+'godunov_noncons.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov_noncons.eps godunov_noncons.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+'; convert godunov_limit_mixed.eps godunov_limit_mixed.pdf'
+close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps
 .r animate
-close_device
-spawn,'cd '+resdir+ $
-      '; convert godunov_limit_mixed_lookup.eps godunov_limit_mixed_lookup.pdf'
+close_device,/pdf
 
 ; 2. calculate errors and save them into a file
 
@@ -74,7 +67,7 @@ time = 5e-9
 multiplot=-2
 set_device,resdir+'reference_n40.eps',/eps,/port
 .r plotfunc
-close_device
+close_device,/pdf
 
 ; read the last state for comparison
 npict=10
@@ -271,8 +264,7 @@ oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
 oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
 
-close_device
-spawn,'cd '+resdir+'; ps2pdf error.eps'
+close_device,/pdf
 
 exit
 
