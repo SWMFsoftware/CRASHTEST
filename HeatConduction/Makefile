@@ -27,6 +27,7 @@ help:
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_uniform_1d            (run uniform heat conduction test in 1D)"
 	@echo "    test_uniform_2d            (run uniform heat conduction test in 2D)"
+	@echo "    test_uniform_2d_amr        (run uniform heat conduction test in 2D with AMR)"
 
 
 test_rundir:
@@ -121,6 +122,49 @@ test_uniform_2d_check:
 		output/test_uniform_2d.ref \
 		> output/test_uniform_2d.diff)
 	ls -l output/test_uniform_2d.diff
+
+
+### Heat conduction test in 2D with AMR and uniform diffusion coefficient ###
+
+test_uniform_2d_amr:
+	@echo "test_uniform_2d_amr_compile..." > output/test_uniform_2d_amr.diff
+	make test_uniform_2d_amr_compile
+	@echo "test_uniform_2d_amr_rundir..." >> output/test_uniform_2d_amr.diff
+	make test_uniform_2d_amr_rundir
+	@echo "test_uniform_2d_amr_run..." >> output/test_uniform_2d_amr.diff
+	make test_uniform_2d_amr_run
+	@echo "test_uniform_2d_amr_check..." >> output/test_uniform_2d_amr.diff
+	make test_uniform_2d_amr_check
+
+test_uniform_2d_amr_compile:
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=30,30,4,256,256
+	cd ${DIR}; make BATSRUS PIDL
+
+test_uniform_2d_amr_rundir: test_rundir
+	cp input/PARAM.in.uniform_2d_amr ${DIR}/${RUNDIR}/PARAM.in
+
+test_uniform_2d_amr_run:
+	make test_uniform_2d_amr_run_res RES=90
+	make test_uniform_2d_amr_run_res RES=180
+	make test_uniform_2d_amr_run_res RES=360
+	rm -rf output/test_uniform_2d_amr_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_uniform_2d_amr_results
+
+test_uniform_2d_amr_run_res:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/30; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
+		perl -pi -e '$$a=${RES}/30; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_uniform_2d_amr_check:
+	cd output; idl test_uniform_2d_amr.pro; \
+		rm -f test_uniform_2d_amr_results/*.eps
+	-(diff  output/test_uniform_2d_amr_results/error.dat \
+		output/test_uniform_2d_amr.ref \
+		> output/test_uniform_2d_amr.diff)
+	ls -l output/test_uniform_2d_amr.diff
 
 
 clean:

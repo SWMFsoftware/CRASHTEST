@@ -1,0 +1,174 @@
+#ECHO
+T
+
+#TEST
+krylov
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			TypeIoUnit
+
+#NORMALIZATION
+READ			TypeNormalization
+1.0			No2SiUnitX
+1.0			No2SiUnitU
+1.0			No2SiUnitRho
+
+#NONCONSERVATIVE
+F			UseNonConservative
+
+#CHECKGRIDSIZE
+30			nI
+30			nJ
+4			nK
+256			MinBlockALL
+
+#GRIDGEOMETRY
+rz			TypeGeometry
+
+#GRID
+3			nRootBlockX
+3			nRootBlockY
+1			nRootBlockZ
+-3.0			xMin
+ 3.0			xMax
+ 0.0			yMin
+ 1.0			yMax
+-1.0			zMin
+ 1.0			zMax
+
+#GRIDLEVEL
+1			nLevelArea
+box			NameArea
+-1.0			xMinBox
+ 0.3334			yMinBox
+-1.0			zMinBox
+ 1.0			xMaxBox
+ 0.6666			yMaxBox
+ 1.0			zMaxBox
+
+#GRIDLEVEL
+1			nLevelArea
+initial			NameArea
+
+#USER_FLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F			UseUserOuterBcs
+T			UseUserICs
+F			UseUserSpecifyRefinement
+F			UseUserLogFiles
+F			UseUserWritePlot
+F			UseUserAMR
+F			UseUserEchoInput
+F			UseUserB0
+T			UseUserInitSession
+T			UseUserUpdateStates
+
+#USERINPUTBEGIN ------------------------
+
+#HEATCONDUCTIONTEST
+rz			TypeProblem
+
+#USERINPUTEND ----------------------------
+
+#GAMMA
+2.0			Gamma
+
+#SEMIIMPLICIT
+T			UseSemiImplicit
+cond			TypeSemiImplicit
+
+#KRYLOV
+gmres			TypeKrylov
+nul			TypeInitKrylov
+1.0e-8			ErrorMaxKrylov
+100			MaxMatvecKrylov
+
+#PRECONDITIONER
+symmetric		TypePrecondSide (left, symmetric, right)
+mbilu			TypePrecond (MBILU)
+0.0			GustafssonPar (0. no modification, 1. full modification
+
+#OUTERBOUNDARY
+float			TypeBcEast
+float			TypeBcWest
+reflect			TypeBcSouth
+reflect			TypeBcNorth
+reflect			TypeBcBottom
+reflect			TypeBcTop
+
+#SCHEME
+2			nOrder
+Rusanov			TypeFlux
+minmod			TypeLimiter
+
+#TIMESTEPPING
+1			nStage
+1.0			CflExpl
+
+#IMPLSTEP
+0.5			ImplCoeff
+F			UseBdf2
+F			UseSourceImpl
+
+#UPDATECHECK
+F			UseUpdateCheck
+
+#SAVELOGFILE
+T			DoSaveLogfile
+raw			StringLogfile
+1			DnSaveLogfile
+-1.			DtSaveLogfile
+
+#SAVERESTART
+F			DoSaveRestart
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#SAVEPLOT
+3			nPlotfile
+z=0 VAR idl		PlotString
+-1  			DnSavePlot
+0.1			DtSavePlot
+-1.0			DxSavePlot
+t t0
+g
+cut VAR idl		StringPlot
+-1  			DnSavePlot
+0.1			DtSavePlot
+-3.0			xMinCut
+3.0			xMaxCut
+-0.0001			yMinCut
++0.0001			yMaxCut
+-0.0001			zMinCut
++0.0001			zMaxCut
+-1.0			DxSavePlot
+t t0
+g
+cut VAR idl		StringPlot
+-1  			DnSavePlot
+0.1			DtSavePlot
+-0.0001			xMinCut
++0.0001			xMaxCut
+0.0			yMinCut
+1.0			yMaxCut
+-0.0001			zMinCut
++0.0001			zMaxCut
+-1.0			DxSavePlot
+t t0
+g
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#TIMESIMULATION
+1.0			tSimulation
+
+#STOP
+-1			MaxIteration
+1.2			tSimulationMax
