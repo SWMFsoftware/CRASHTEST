@@ -29,6 +29,7 @@ help:
 	@echo "    test_lowrie1_amr           (run Lowrie's test 1 with AMR)"
 	@echo "    test_lowrie2_amr           (run Lowrie's test 2 with AMR)"
 	@echo "    test_lowrie3_amr           (run Lowrie's test 3 with AMR)"
+	@echo "    test_lowrie3_semi          (run Lowrie's test 3 with AMR and semi-implicit)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -173,6 +174,51 @@ test_lowrie3_amr_check:
 		output/test_lowrie3_amr.ref \
 		> output/test_lowrie3_amr.diff)
 	ls -l output/test_lowrie3_amr.diff
+
+
+### Lowrie's 3 test with AMR grid and operate split - semi-implicit ###
+
+test_lowrie3_semi:
+	@echo "test_lowrie3_semi_compile..." > output/test_lowrie3_semi.diff
+	make test_lowrie3_semi_compile
+	@echo "test_lowrie3_semi_rundir..." >> output/test_lowrie3_semi.diff
+	make test_lowrie3_semi_rundir
+	@echo "test_lowrie3_semi_run..." >> output/test_lowrie3_semi.diff
+	make test_lowrie3_semi_run
+	@echo "test_lowrie3_semi_check..." >> output/test_lowrie3_semi.diff
+	make test_lowrie3_semi_check
+
+test_lowrie3_semi_compile:
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,600,600
+	cd ${DIR}; make BATSRUS PIDL
+
+test_lowrie3_semi_rundir: test_rundir
+	cp input/PARAM.in.lowrie3_semi ${DIR}/${RUNDIR}/PARAM.in
+	cp input/initial_lowrie3.dat  ${DIR}/${RUNDIR}/
+
+test_lowrie3_semi_run:
+	make test_lowrie3_semi_run_res RES=96
+	make test_lowrie3_semi_run_res RES=192
+	make test_lowrie3_semi_run_res RES=384
+	#make test_lowrie3_semi_run_res RES=768
+	rm -rf output/test_lowrie3_semi_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie3_semi_results
+
+test_lowrie3_semi_run_res:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/32; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=${RES}/32; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_lowrie3_semi_check:
+	cd output; idl test_lowrie3_semi.pro; \
+		rm -f test_lowrie3_semi_results/*.eps
+	-(diff  output/test_lowrie3_semi_results/error.dat \
+		output/test_lowrie3_semi.ref \
+		> output/test_lowrie3_semi.diff)
+	ls -l output/test_lowrie3_semi.diff
 
 clean:
 	rm -f *~ input/*~ output/*~
