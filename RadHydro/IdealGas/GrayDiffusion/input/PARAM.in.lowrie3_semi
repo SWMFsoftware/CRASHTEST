@@ -90,15 +90,15 @@ T			UseGrayDiffusion
 F			UseRadFluxLimiter
 0.0			TradMinSi
 
-SHOCKPOSITION
+#SHOCKPOSITION
 0.0			ShockPosition
 0.5			ShockSlope
 
 #OUTERBOUNDARY
-float			TypeBcEast  shear
-float			TypeBcWest  shear
-reflect			TypeBcSouth shear
-reflect			TypeBcNorth shear
+float			TypeBcEast
+float			TypeBcWest
+shear			TypeBcSouth
+shear			TypeBcNorth
 reflect			TypeBcBottom
 reflect			TypeBcTop
 

@@ -7,6 +7,7 @@ test:
 	-@(make test_lowrie1_amr)
 	-@(make test_lowrie2_amr)
 	-@(make test_lowrie3_amr)
+	-@(make test_lowrie3_semi)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
