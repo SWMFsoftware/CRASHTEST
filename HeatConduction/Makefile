@@ -6,6 +6,7 @@ test:
 	@rm -f output/*.diff
 	-@(make test_uniform_1d)
 	-@(make test_uniform_2d)
+	-@(make test_uniform_2d_amr)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
