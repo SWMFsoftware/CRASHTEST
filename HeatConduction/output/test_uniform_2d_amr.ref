@@ -1,4 +1,4 @@
-uniform heat conduction test in 2D
+uniform heat conduction test in 2D with amr
 n error
       90  1.95022e-05
      180  4.23030e-06
