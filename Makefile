@@ -18,10 +18,13 @@ test:
 	-@(cd Hydro/MultiEos;                  make test)
 	-@(cd RadHydro/IdealGas/GrayDiffusion; make test)
 	-@(cd FullSystem/Version1;             make test)
-	ls -l ${FILEDIFF} > test.results
+	make check
 
 check:
-	ls -l ${FILEDIFF} > test.results
+	@echo "<PRE>"      >  test_results.html
+	ls -l ${FILEDIFF} >> test_results.html
+	@echo "</PRE>"     >> test_results.html
+	@perl -pi -e 's/(\S+diff)$$/<A HREF=$$1\>$$1<\/A>/' test_results.html
 
 clean:
 	-@(cd HeatConduction;                  make clean)
