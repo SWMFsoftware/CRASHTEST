@@ -45,8 +45,8 @@ oplot,[0.62],[4.85],psym=5,thick=3 & xyouts,0.65,4.8,'time = 1.2'
 close_device,/pdf
 
 filename = resdir + '90/GM/z*.outs'
-func='t'
-plotmode='contbar'
+func='t blkall'
+plotmode='contbar contover'
 transform='n'
 bottomline=1
 plottitle="material temperature"

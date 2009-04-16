@@ -136,7 +136,7 @@ z=0 VAR idl		PlotString
 -1  			DnSavePlot
 0.1			DtSavePlot
 -1.0			DxSavePlot
-t t0
+t t0 dx blkall
 g
 cut VAR idl		StringPlot
 -1  			DnSavePlot
