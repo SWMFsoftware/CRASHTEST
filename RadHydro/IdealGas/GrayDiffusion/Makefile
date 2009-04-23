@@ -7,6 +7,7 @@ test:
 	-@(make test_lowrie1_amr)
 	-@(make test_lowrie2_amr)
 	-@(make test_lowrie3_amr)
+	-@(make test_lowrie1_semi)
 	-@(make test_lowrie2_semi)
 	-@(make test_lowrie3_semi)
 	@ls -l output/*.diff
@@ -31,6 +32,7 @@ help:
 	@echo "    test_lowrie1_amr           (run Lowrie's test 1 with AMR)"
 	@echo "    test_lowrie2_amr           (run Lowrie's test 2 with AMR)"
 	@echo "    test_lowrie3_amr           (run Lowrie's test 3 with AMR)"
+	@echo "    test_lowrie1_semi          (run Lowrie's test 1 with AMR and semi-implicit)"
 	@echo "    test_lowrie2_semi          (run Lowrie's test 2 with AMR and semi-implicit)"
 	@echo "    test_lowrie3_semi          (run Lowrie's test 3 with AMR and semi-implicit)"
 
@@ -177,6 +179,52 @@ test_lowrie3_amr_check:
 		output/test_lowrie3_amr.ref \
 		> output/test_lowrie3_amr.diff)
 	ls -l output/test_lowrie3_amr.diff
+
+
+### Lowrie's 1 test with AMR grid and operator split - semi-implicit ###
+
+test_lowrie1_semi:
+	@echo "test_lowrie1_semi_compile..." > output/test_lowrie1_semi.diff
+	make test_lowrie1_semi_compile
+	@echo "test_lowrie1_semi_rundir..." >> output/test_lowrie1_semi.diff
+	make test_lowrie1_semi_rundir
+	@echo "test_lowrie1_semi_run..." >> output/test_lowrie1_semi.diff
+	make test_lowrie1_semi_run
+	@echo "test_lowrie1_semi_check..." >> output/test_lowrie1_semi.diff
+	make test_lowrie1_semi_check
+
+test_lowrie1_semi_compile:
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=8,4,4,600,600
+	cd ${DIR}; make BATSRUS PIDL
+
+test_lowrie1_semi_rundir: test_rundir
+	cp input/PARAM.in.lowrie1_semi ${DIR}/${RUNDIR}/PARAM.in
+	cp input/initial_lowrie1.dat  ${DIR}/${RUNDIR}/
+
+test_lowrie1_semi_run:
+	make test_lowrie1_semi_run_res RES=24
+	make test_lowrie1_semi_run_res RES=48
+	make test_lowrie1_semi_run_res RES=96
+	make test_lowrie1_semi_run_res RES=192
+	rm -rf output/test_lowrie1_semi_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie1_semi_results
+
+test_lowrie1_semi_run_res:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/8; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=${RES}/8; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=1.2e-3*(24/${RES})**2; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_lowrie1_semi_check:
+	cd output; idl test_lowrie1_semi.pro; \
+		rm -f test_lowrie1_semi_results/*.eps
+	-(diff  output/test_lowrie1_semi_results/error.dat \
+		output/test_lowrie1_semi.ref \
+		> output/test_lowrie1_semi.diff)
+	ls -l output/test_lowrie1_semi.diff
 
 
 ### Lowrie's 2 test with AMR grid and operator split - semi-implicit ###
