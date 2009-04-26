@@ -9,7 +9,7 @@ resdir='test_uniform_2d_amr_results/'
 filename=resdir+'90/GM/cut_var_2*.outs'
 npict=1
 .r getpict
-set_device, resdir + 'Tmat_r=0.eps', /eps
+set_device, resdir + 'Tmat_r=0.eps', /eps, /land
 plot,x,w(*,1), $
      xrange=[-3.,3.],yrange=[2.,6.],$
      linestyle=0,thick=3, $
@@ -28,7 +28,7 @@ close_device,/pdf
 filename=resdir+'90/GM/cut_var_3*.outs'
 npict=1
 .r getpict
-set_device, resdir + 'Tmat_z=0.eps', /eps
+set_device, resdir + 'Tmat_z=0.eps', /eps, /land
 plot,x,w(*,1), $
      xrange=[0.,1.],yrange=[2.,6.], $
      linestyle=0,thick=3, $
@@ -51,7 +51,7 @@ transform='n'
 bottomline=1
 plottitle="material temperature"
 multiplot=[1,2,0]
-set_device, resdir+'isotemperature.eps', /eps
+set_device, resdir+'isotemperature.eps', /eps, /land
 loadct,26
 dpict=2
 .r animate
@@ -105,7 +105,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-7,1e-4],$
@@ -117,7 +117,7 @@ oplot,[1e-3,1e-1],[1e-7,1e-3],linestyle=2,thick=3
 xyouts,0.002,0.0000003,'2nd order slope',charsize=2,charthick=1
 close_device,/pdf
 
-set_device, resdir + 'error_linf.eps', /eps
+set_device, resdir + 'error_linf.eps', /eps, /land
 logfilename = resdir + 'error_linf.dat'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-5,1e-3],$
