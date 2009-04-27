@@ -13,32 +13,32 @@ func='rho ux p Eint'
 !p.charsize=1.4
 
 filename = resdir+'Godunov_*_/GM/*.outs'
-set_device,resdir+'godunov.eps',/eps
+set_device,resdir+'godunov.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT/GM/*.outs'
-set_device,resdir+'godunov_limit.eps',/eps
+set_device,resdir+'godunov_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_limit_lookup.eps',/eps
+set_device,resdir+'godunov_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*_NONCONS/GM/*.outs'
-set_device,resdir+'godunov_noncons.eps',/eps
+set_device,resdir+'godunov_noncons.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED/GM/*.outs'
-set_device,resdir+'godunov_limit_mixed.eps',/eps
+set_device,resdir+'godunov_limit_mixed.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps
+set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
@@ -238,7 +238,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device,resdir+'error.eps',/eps
+set_device,resdir+'error.eps',/eps, /land
 logfilename=resdir+'error.dat'
 .r getlog
 

@@ -25,7 +25,7 @@ close,99
 
 ; 1. Create figure for convergence rate
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-3,1e-1],$
@@ -47,7 +47,7 @@ transform='n'
 bottomline=0
 plottitle="radiation temperature"
 multiplot=[1,2,0]
-set_device, resdir+'grid.eps', /eps
+set_device, resdir+'grid.eps', /eps, /land
 loadct,26
 dpict=11
 .r animate
@@ -61,7 +61,7 @@ multiplot=0
 func='Trad'
 npict=100
 bottomline=0
-set_device, resdir+'Trad.eps', /eps
+set_device, resdir+'Trad.eps', /eps, /land
 filename = resdir+'48/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),linestyle=0,xtitle='x',ytitle='radiation temperature',charsize=2, $
@@ -83,7 +83,7 @@ close_device,/pdf
 func='Tgas'
 npict=100
 bottomline=0
-set_device, resdir+'Tgas.eps', /eps
+set_device, resdir+'Tgas.eps', /eps, /land
 filename = resdir+'48/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),linestyle=0,xtitle='x',ytitle='gas temperature',charsize=2, $
