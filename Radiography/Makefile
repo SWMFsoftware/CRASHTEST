@@ -32,6 +32,7 @@ help:
 	@echo "    test_sphere_rz             (run sphere test in RZ coords)"
 	@echo "    test_sphere_amr            (run sphere LOS test with AMR)"
 	@echo "    test_tube_3d               (run tube LOS test in 3D)"
+	@echo "    test_tube_rz               (run tube LOS test in RZ coords)"
 
 test_rundir:
 	cd ${DIR}; \
