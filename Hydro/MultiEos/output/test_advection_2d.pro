@@ -234,30 +234,6 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device,resdir+'error.eps',/eps, /land
-logfilename=resdir+'error.dat'
-.r getlog
-plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
-  xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
-  xtitle='Grid resolution', $
-  ytitle='Relative error', $
-  title="Shu-Osher test in 2D"
-oplot,10/wlog(*,0),wlog(*,1),psym=-4,thick=3
-oplot,10/wlog(*,0),wlog(*,2),psym=-5,thick=3
-oplot,10/wlog(*,0),wlog(*,3),psym=-6,thick=3
-
-oplot,[0.0012,0.0017],[0.01,0.01],linestyle=2
-xyouts,0.002,0.01,'1st order slope'
-oplot,[0.0015],[0.02],psym=4 & xyouts,0.002,0.02,'Godunov'
-oplot,[0.0015],[0.04],psym=5 & xyouts,0.002,0.04,'Linde'
-oplot,[0.0015],[0.08],psym=6 & xyouts,0.002,0.08,'Rusanov'
-
-close_device,/pdf
-
-; 3. Create a figure of convergence rates
-!p.charsize=2
-!p.charthick=1
-
 logfilename=resdir+'error.dat'
 .r getlog
 
