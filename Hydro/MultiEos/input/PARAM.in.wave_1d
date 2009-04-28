@@ -1,0 +1,185 @@
+Begin session: 1
+
+#ECHO
+T
+
+LOOKUPTABLE
+pPerE(rho,e/rho)	NameTable
+save			NameCommand
+table_rho_ePerRho.out	NameFile
+real4			TypeFile
+pPerE(rho,e/rho) for Xe, Be, Plastic
+logrho logE/Rho pPerEXe pPerEBe pPerEPl
+200			nIndex1
+0.01			Index1Min
+1e6			Index1Max
+200			nIndex2
+1e5			Index2Min
+1e14			Index2Max
+
+LOOKUPTABLE
+ePerP(rho,p/rho)	NameTable
+save			NameCommand
+table_rho_pPerRho.out	NameFile
+real4			TypeFile
+ePerP(rho,p/rho) for Xe, Be, Plastic
+logrho logpPerRho ePerPXe ePerPBe ePerPPl
+200			nIndex1
+0.01			Index1Min
+1e6			Index1Max
+200			nIndex2
+1e5			Index2Min
+1e13			Index2Max
+
+LOOKUPTABLE
+CvGammaTe(rho,p/rho)	NameTable
+save			NameCommand
+table_CvGammaTe.out	NameFile
+real4			TypeFile
+CvGammaTe(rho,p/rho) for Xe, Be, Plastic
+logrho logpPerRho CvXe GammaXe TeXe CvBe GammaBe TeBe CvPl GammaPl TePl
+200			nIndex1
+0.01			Index1Min
+1e6			Index1Max
+200			nIndex2
+1e5			Index2Min
+1e13			Index2Max
+
+#PLANET
+NONE
+
+#IOUNITS
+SI
+
+#NORMALIZATION
+READ
+1.0e-6			Micron
+1.0e+3			km/s
+1000.0			g/cm^3
+
+#USERINPUTBEGIN ----------------
+
+#WAVE
+T			UseSoundWave
+400.0			xStartWave
+800.0			xEndWave
+1e10			DpWave
+
+MIXEDCELL
+T			UseMixedCell
+0.97			MixLimit
+
+#USERINPUTEND   ----------------
+
+#TIMEACCURATE
+T			IsTimeAccurate
+
+#CHECKGRIDSIZE
+10			nI
+2			nJ
+2			nK
+500			MinBlockALL
+
+tube is 5mm = 500um long, 625 um wide
+
+#GRID
+10			nRootBlockX
+1			nRootBlockY
+1			nRootBlockZ
+0.0			xMin
+2000.0			xMax
+ -12.5			yMin
+  12.5			yMax
+ -12.5			zMin
+  12.5			zMax
+
+#SHOCKTUBE
+100.		rho  [kg/m3] (left state)
+0.		Ux
+0.		Uy
+0.		Uz
+0.		Xe
+1.		Be
+0.		Pl
+0.		Eint
+1e11		P    [1e5 MPa]
+100.0		rho (right state)
+0.		Ux
+0.		Uy
+0.		Uz
+1.		Xe
+0.		Be
+0.		Pl
+0.		Eint
+1e11		P
+
+#SHOCKPOSITION
+1000.0			ShockPosition
+0.0			ShockSlope
+
+#UPDATECHECK
+F			DoUpdateCheck
+
+#NONCONSERVATIVE
+T			UseNonConservative
+
+Sheared boundary condition is used for non-zero shock slope
+
+#OUTERBOUNDARY
+float			xMinBc
+float			xMaxBc
+float			yMinBc
+float			yMaxBc
+float			zMinBc
+float			zMaxBc
+
+#TIMESTEPPING
+2			nStage
+0.8			CflExpl
+
+#SCHEME
+2			nOrder
+Godunov			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
+
+LIMITER
+F			UseLogRhoLimiter
+F       	        UseLogPLimiter
+T               	UseRhoRatioLimiter
+Xe Be Pl EInt		NameVarLimitRatio
+
+#SAVERESTART
+F			DoSaverestart
+
+#SAVELOGFILE
+T			DoSaveLogfile
+RAW			StringLogfile
+1			DnSaveLogfile
+-1.0			DtSaveLogfile
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#SAVEPLOT
+1			nPlotfile
+cut VAR idl		PlotString
+-1                      DnSavePlot
+1.0e-9                  DtSavePlot
+0.0			xMinCut
+2000.0			xMaxCut
+-0.0001			yMinCut
+ 0.0001			yMaxCut
+-0.0001			zMinCut
+ 0.0001			zMaxCut
+0.0			DxSavePlot
+rho ux uy uz Eint p Xe Be Pl level
+gamma
+
+#STOP
+-1			MaxIteration
+2.0e-8			tSimulationMax
+
+End session: 1
+
+
