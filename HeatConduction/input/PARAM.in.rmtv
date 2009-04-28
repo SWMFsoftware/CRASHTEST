@@ -11,27 +11,27 @@ NONE			NamePlanet
 NONE			TypeIoUnit
 
 #NORMALIZATION
-READ			TypeNormalization
-1.0			No2SiUnitX
-1.0			No2SiUnitU
-1.0			No2SiUnitRho
+NONE
 
 #NONCONSERVATIVE
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-100			nI
-2			nJ
+20			nI
+20			nJ
 2			nK
-2			MinBlockALL
+400			MinBlockALL
+
+#GRIDGEOMETRY
+rz			TypeGeometry
 
 #GRID
-2			nRootBlockX
-1			nRootBlockY
+5			nRootBlockX
+5			nRootBlockY
 1			nRootBlockZ
--5.0			xMin
- 5.0			xMax
--1.0			yMin
+ 0.0			xMin
+ 1.0			xMax
+ 0.0			yMin
  1.0			yMax
 -1.0			zMin
  1.0			zMax
@@ -49,17 +49,17 @@ F			UseUserAMR
 F			UseUserEchoInput
 F			UseUserB0
 T			UseUserInitSession
-T			UseUserUpdateStates
+F			UseUserUpdateStates
 
 #USERINPUTBEGIN ------------------------
 
 #HEATCONDUCTIONTEST
-gaussian		TypeProblem
+rmtv			TypeProblem
 
 #USERINPUTEND ----------------------------
 
 #GAMMA
-2.0			Gamma
+1.25			Gamma
 
 #SEMIIMPLICIT
 T			UseSemiImplicit
@@ -68,34 +68,30 @@ cond			TypeSemiImplicit
 #KRYLOV
 cg			TypeKrylov
 nul			TypeInitKrylov
-1.0e-8			ErrorMaxKrylov
-100			MaxMatvecKrylov
+1.0e-6			ErrorMaxKrylov
+200			MaxMatvecKrylov
 
 #PRECONDITIONER
 left			TypePrecondSide (left, symmetric, right)
 bilu			TypePrecond (MBILU)
 
 #OUTERBOUNDARY
-float			TypeBcEast
-float			TypeBcWest
+reflect			TypeBcEast
+user			TypeBcWest
 reflect			TypeBcSouth
-reflect			TypeBcNorth
+user			TypeBcNorth
 reflect			TypeBcBottom
 reflect			TypeBcTop
 
 #SCHEME
 2			nOrder
-Rusanov			TypeFlux
-minmod			TypeLimiter
+Linde			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
 
 #TIMESTEPPING
-1			nStage
-1.0			CflExpl
-
-#IMPLSTEP
-0.5			ImplCoeff
-F			UseBdf2
-F			UseSourceImpl
+2			nStage
+0.4			CflExpl
 
 #UPDATECHECK
 F			UseUpdateCheck
@@ -113,17 +109,41 @@ F			DoSaveRestart
 T			DoSaveInitial
 
 #SAVEPLOT
-1			nPlotfile
-z=0 VAR idl             PlotString
--1                      DnSavePlot
-1.0                     DtSavePlot
-0.0                     DxSavePlot
-t t0
+3			nPlotfile
+z=0 var idl		PlotString
+-1  			DnSavePlot
+5.1251245238645798e-3	DtSavePlot
+-1.0			DxSavePlot
+rho temp ux uy rho0 temp0 ux0 uy0
+g
+cut var idl		PlotString
+-1  			DnSavePlot
+5.1251245238645798e-3	DtSavePlot
+0.0			xMinCut
+1.0			xMaxCut
+-0.0001			yMinCut
+0.0001			yMaxCut
+-0.0001			zMinCut
+0.0001			zMaxCut
+-1.0			DxSavePlot
+rho temp ux uy rho0 temp0 ux0 uy0
+g
+cut var idl		PlotString
+-1  			DnSavePlot
+5.1251245238645798e-3	DtSavePlot
+-0.0001			xMinCut
+0.0001			xMaxCut
+0.0			yMinCut
+1.0			yMaxCut
+-0.0001			zMinCut
+0.0001			zMaxCut
+-1.0			DxSavePlot
+rho temp ux uy rho0 temp0 ux0 uy0
 g
 
 #TIMESIMULATION
-1.0			tSimulation
+1.8831430724828322E-2	tSimulation
 
 #STOP
--20			MaxIteration
-3.0			tSimulationMax
+-1			MaxIteration
+5.1251245238645798e-2	tSimulationMax

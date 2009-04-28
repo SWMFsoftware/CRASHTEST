@@ -68,27 +68,6 @@ npict=100
 
 filename=resdir+'90/GM/z*.outs'
 .r getpict
-printf,99,90,calc_error(w)
-
-filename=resdir+'180/GM/z*.outs'
-.r getpict
-printf,99,180,calc_error(w)
-
-filename=resdir+'360/GM/z*.outs'
-.r getpict
-printf,99,360,calc_error(w)
-
-close,99
-
-openw, 99, resdir + 'error_linf.dat'
-printf,99,'uniform heat conduction test in 2D with amr'
-printf,99,'n error'
-
-; read the last snapshot 
-npict=100
-
-filename=resdir+'90/GM/z*.outs'
-.r getpict
 printf,99,90,calc_linf(w)
 
 filename=resdir+'180/GM/z*.outs'
@@ -108,22 +87,10 @@ close,99
 set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
-plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-7,1e-4],$
-        psym=-4,charsize=2,thick=3, $
-        xtitle='Grid resolution', $
-        ytitle='Relative error', $
-        title="uniform heat conduction in rz-geometry"
-oplot,[1e-3,1e-1],[1e-7,1e-3],linestyle=2,thick=3
-xyouts,0.002,0.0000003,'2nd order slope',charsize=2,charthick=1
-close_device,/pdf
-
-set_device, resdir + 'error_linf.eps', /eps, /land
-logfilename = resdir + 'error_linf.dat'
-.r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-5,1e-3],$
         psym=-4,charsize=2,thick=3, $
         xtitle='Grid resolution', $
-        ytitle='Linf error', $
+        ytitle='Maximum absolute error (Linf)', $
         title="uniform heat conduction in rz-geometry"
 oplot,[1e-3,1e-1],[1e-5,1e-1],linestyle=2,thick=3
 xyouts,0.002,0.00003,'2nd order slope',charsize=2,charthick=1

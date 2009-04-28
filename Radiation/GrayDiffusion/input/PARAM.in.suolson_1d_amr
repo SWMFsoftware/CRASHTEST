@@ -77,15 +77,14 @@ T                       UseSemiImplicit
 radcond                 TypeSemiImplicit
 
 #KRYLOV
-gmres			TypeKrylov
+cg			TypeKrylov
 nul                     TypeInitKrylov
 1.0e-8                  ErrorMaxKrylov
 100                     MaxMatvecKrylov
 
 #PRECONDITIONER
-symmetric               TypePrecondSide (left, symmetric, right)
-mbilu                   TypePrecond (MBILU)
-0.0                     GustafssonPar (0. no modification, 1. full modification
+left			TypePrecondSide (left, symmetric, right)
+bilu			TypePrecond (MBILU)
 
 #RADIATION
 T                       UseGrayDiffusion

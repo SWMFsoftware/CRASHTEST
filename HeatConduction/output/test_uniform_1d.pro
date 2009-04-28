@@ -38,19 +38,19 @@ npict=100
 
 filename=resdir+'200/GM/z*.outs'
 .r getpict
-printf,99,200,calc_error(w)
+printf,99,200,calc_linf(w)
 
 filename=resdir+'400/GM/z*.outs'
 .r getpict
-printf,99,400,calc_error(w)
+printf,99,400,calc_linf(w)
 
 filename=resdir+'800/GM/z*.outs'
 .r getpict
-printf,99,800,calc_error(w)
+printf,99,800,calc_linf(w)
 
 filename=resdir+'1600/GM/z*.outs'
 .r getpict
-printf,99,1600,calc_error(w)
+printf,99,1600,calc_linf(w)
 
 close,99
 
@@ -61,13 +61,13 @@ close,99
 set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
-plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-4,1e-2],yrange=[1e-7,1e-4],$
+plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-4,1e-2],yrange=[1e-5,1e-2],$
         psym=-4,charsize=2,thick=3, $
         xtitle='Grid resolution', $
-        ytitle='Relative error', $
+        ytitle='Maximum absolute error (Linf)', $
         title="uniform heat conduction test in 1D"
-oplot,[1e-4,1e-2],[1e-8,1e-4],linestyle=2,thick=3
-xyouts,0.00014,0.00000025,'2nd order slope',charsize=2,charthick=1
+oplot,[1e-4,1e-2],[8e-7,8e-3],linestyle=2,thick=3
+xyouts,0.00014,0.000025,'2nd order slope',charsize=2,charthick=1
 close_device,/pdf
 
 exit

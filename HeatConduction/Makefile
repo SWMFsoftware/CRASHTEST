@@ -7,6 +7,7 @@ test:
 	-@(make test_uniform_1d)
 	-@(make test_uniform_2d)
 	-@(make test_uniform_2d_amr)
+	-@(make test_rmtv)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -29,6 +30,7 @@ help:
 	@echo "    test_uniform_1d            (run uniform heat conduction test in 1D)"
 	@echo "    test_uniform_2d            (run uniform heat conduction test in 2D)"
 	@echo "    test_uniform_2d_amr        (run uniform heat conduction test in 2D with AMR)"
+	@echo "    test_rmtv                  (run Reinicke Meyer-ter Vehn test)"
 
 
 test_rundir:
@@ -166,6 +168,51 @@ test_uniform_2d_amr_check:
 		output/test_uniform_2d_amr.ref \
 		> output/test_uniform_2d_amr.diff)
 	ls -l output/test_uniform_2d_amr.diff
+
+
+### Reinicke Meyer-ter Vehn test ###
+
+test_rmtv:
+	@echo "test_rmtv_compile..." > output/test_rmtv.diff
+	make test_rmtv_compile
+	@echo "test_rmtv_rundir..." >> output/test_rmtv.diff
+	make test_rmtv_rundir
+	@echo "test_rmtv_run..." >> output/test_rmtv.diff
+	make test_rmtv_run
+	@echo "test_rmtv_check..." >> output/test_rmtv.diff
+	make test_rmtv_check
+
+test_rmtv_compile:
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,2,400,400
+	cd ${DIR}; make BATSRUS PIDL
+
+test_rmtv_rundir: test_rundir
+	cp input/rmtv_initial.out ${DIR}/${RUNDIR}/
+	cp input/rmtv_final.out ${DIR}/${RUNDIR}/
+	cp input/PARAM.in.rmtv ${DIR}/${RUNDIR}/PARAM.in
+
+test_rmtv_run:
+	make test_rmtv_run_res RES=100
+	make test_rmtv_run_res RES=200
+	make test_rmtv_run_res RES=400
+	rm -rf output/test_rmtv_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_rmtv_results
+
+test_rmtv_run_res:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=${RES}/20; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in;\
+		perl -pi -e '$$a=${RES}/20; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_rmtv_check:
+	cd output; idl test_rmtv.pro; \
+		rm -f test_rmtv_results/*.eps
+	-(diff  output/test_rmtv_results/error.dat \
+		output/test_rmtv.ref \
+		> output/test_rmtv.diff)
+	ls -l output/test_rmtv.diff
 
 
 clean:
