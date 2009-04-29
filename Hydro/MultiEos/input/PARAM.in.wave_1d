@@ -61,8 +61,8 @@ READ
 
 #WAVE
 T			UseSoundWave
-400.0			xStartWave
-800.0			xEndWave
+ 800.0			xStartWave
+1200.0			xEndWave
 1e10			DpWave
 
 MIXEDCELL
@@ -79,8 +79,6 @@ T			IsTimeAccurate
 2			nJ
 2			nK
 500			MinBlockALL
-
-tube is 5mm = 500um long, 625 um wide
 
 #GRID
 10			nRootBlockX
@@ -114,7 +112,7 @@ tube is 5mm = 500um long, 625 um wide
 1e11		P
 
 #SHOCKPOSITION
-1000.0			ShockPosition
+1400.0			ShockPosition
 0.0			ShockSlope
 
 #UPDATECHECK
@@ -141,7 +139,7 @@ float			zMaxBc
 2			nOrder
 Godunov			TypeFlux
 mc3			TypeLimiter
-2.0			LimiterBeta
+1.5			LimiterBeta
 
 LIMITER
 F			UseLogRhoLimiter
@@ -179,7 +177,5 @@ gamma
 #STOP
 -1			MaxIteration
 2.0e-8			tSimulationMax
-
-End session: 1
 
 
