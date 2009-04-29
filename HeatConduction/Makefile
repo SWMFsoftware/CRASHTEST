@@ -195,6 +195,7 @@ test_rmtv_run:
 	make test_rmtv_run_res RES=100
 	make test_rmtv_run_res RES=200
 	make test_rmtv_run_res RES=400
+	#make test_rmtv_run_res RES=800
 	rm -rf output/test_rmtv_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_rmtv_results
 
