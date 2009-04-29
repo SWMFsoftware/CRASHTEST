@@ -1,5 +1,8 @@
-These advection tests are testing the various schemes used 
-for multi-material hydrodynamics. The initial condition has
+These runs are testing the various schemes used 
+for multi-material hydrodynamics. 
+
+=======================================================================
+In the advection tests the initial condition has
 constant pressure p = 1e11 Pa (high enough to ionize
 the materials). The analytic solution is a simple advection 
 of the material interfaces with the flow. 
@@ -29,3 +32,15 @@ The test runs are named according to the method used:
            fully implemented, but for this particular test the result is
            probably the same as it would be for the full implementation. 
 
+
+=======================================================================
+In the wave test a sound wave is propagating through a Be/Xe interface.
+Two sound waves are initiated by a smooth pressure enhancement in the
+800 < x < 1200 interval. The left going wave is traveling inside Be,
+the right going wave crosses the Be/Xe interface at x=1400 microns. 
+The initial velocity is zero, the density is 100 kg/m^3, and the background 
+pressure is 1e11 Pa. The maximum perturbation amplitude is 1e10 Pa.
+
+Solving for the conservative energy equation results in spurios peaks at
+the material interface for all combination of schemes. The non-conservative
+approach results in smooth and accurate solutions.
