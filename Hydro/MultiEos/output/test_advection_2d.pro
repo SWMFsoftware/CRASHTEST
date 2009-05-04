@@ -242,8 +242,10 @@ logfilename=resdir+'error.dat'
 
 set_device,resdir+'error_godunov.eps',/eps, /land
 
+!p.thick=3
+
 plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
-  xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
+  xrange=[1e-3,1e-1],yrange=[1e-3,2e-1],linestyle=2,ystyle=1, $
   xtitle='Grid resolution', $
   ytitle='Relative error', $
   title="Be/Xe/Plastic advection test in 2D"
@@ -255,11 +257,11 @@ oplot,2/wlog(*,0),wlog(*,6),psym=-6,thick=3
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
 xyouts,0.002,0.005,'1st order slope'
-oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.16,'Godunov'
+oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.14,'Godunov'
 oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
 oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
-oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
-oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
+oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.02,'+ #MIXED + #LOOKUP'
+oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.01,'+ #MIXED'
 
 close_device,/pdf
 
@@ -269,7 +271,7 @@ close_device,/pdf
 set_device,resdir+'error_linde.eps',/eps, /land
 
 plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
-  xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
+  xrange=[1e-3,1e-1],yrange=[1e-3,2e-1],linestyle=2,ystyle=1, $
   xtitle='Grid resolution', $
   ytitle='Relative error', $
   title="Be/Xe/Plastic advection test in 2D"
@@ -281,7 +283,7 @@ oplot,2/wlog(*,0),wlog(*,11),psym=-6,thick=3
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
 xyouts,0.002,0.005,'1st order slope'
-oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.16,'Linde'
+oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.14,'Linde'
 oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
 oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'

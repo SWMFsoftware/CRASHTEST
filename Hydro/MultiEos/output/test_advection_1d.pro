@@ -245,8 +245,10 @@ logfilename=resdir+'error.dat'
 ; The Godunov part of the header of error.dat:
 ; n godunov g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look
 
-plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
-  xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
+!p.thick=3
+
+plot_oo,[1e-3,2e-1],[1e-3,2e-1], $
+  xrange=[1e-3,2e-1],yrange=[1e-3,2e-1],linestyle=2,xstyle=1,ystyle=1, $
   xtitle='Grid resolution', $
   ytitle='Relative error', $
   title="Be/Xe advection test in 1D"
