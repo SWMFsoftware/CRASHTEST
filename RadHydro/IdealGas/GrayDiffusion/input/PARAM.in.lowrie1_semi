@@ -17,10 +17,10 @@ USER			TypeNormalization
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-8			nI
+24			nI
 4			nJ
 4			nK
-600			MinBlockALL
+256			MinBlockALL
 
 #GRID
 3			nRootBlockX
@@ -28,19 +28,19 @@ F			UseNonConservative
 1			nRootBlockZ
 -0.12			xMin
  0.12			xMax
--0.06			yMin
- 0.06			yMax
--0.02			zMin
- 0.02			zMax
+-0.02			yMin
+ 0.02			yMax
+-1.0			zMin
+ 1.0			zMax
 
 #GRIDLEVEL
 1			nLevelArea
 box			NameArea
 -0.04			xMinBox
--0.02			yMinBox
+-0.006666		yMinBox
 -0.02			zMinBox
  0.04			xMaxBox
- 0.02			yMaxBox
+ 0.006666		yMaxBox
  0.02			zMaxBox
 
 #GRIDLEVEL
@@ -60,7 +60,7 @@ F			UseUserAMR
 F			UseUserEchoInput
 F			UseUserB0
 T			UseUserInitSession
-F			UseUserUpdateStates
+T			UseUserUpdateStates
 
 #USERINPUTBEGIN ------------------------
 
@@ -69,6 +69,9 @@ F			UseUserUpdateStates
 initial_lowrie1.dat	NameLowrieFile
 
 #USERINPUTEND ----------------------------
+
+#GAMMA
+2.0			Gamma
 
 #SEMIIMPLICIT
 T                       UseSemiImplicit
@@ -110,10 +113,6 @@ reflect			TypeBcTop
 Godunov			TypeFlux
 mc			TypeLimiter
 1.2			LimiterBeta
-
-#FIXEDTIMESTEP
-T                       UseDtFixed
-1.2E-3                  DtFixedDim
 
 #UPDATECHECK
 F			UseUpdateCheck
