@@ -92,231 +92,77 @@ set_device,resdir+'linde_noncons_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-exit
-
 ; 2. calculate errors and save them into a file
+
+filename='test_wave_1d_ref_noncons.out'
+.r getpict
+wnonc = w
+
+filename='test_wave_1d_ref_cons.out'
+.r getpict
+wcons = w
 
 openw,99,resdir+'error.dat'
 printf,99,'Wave test in 1D'
-printf,99,'n godunov g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look ' $
-  +          ' linde l_lim l_noncons l_lim_look l_lim_mix l_lim_mix_look'
+printf,99,'n godunov g_noncons linde l_noncons'
 
 ; array of errors for a given resolution
-errors = fltarr(12)
-
-; read the first snapshot and make it into reference solution
-filename=resdir+'Linde_40_/GM/c*.outs'
-npict=1
-.r getpict
-; the left state is advected up to 3/8 of the domain
-for i=1,14 do w(i,*)=w(0,*)
-; store the reference solution
-wref = w
-
-; plot the reference solution
-func='rho level'
-time = 5e-9
-multiplot=-2
-set_device,resdir+'reference_n40.eps',/eps,/port
-.r plotfunc
-close_device,/pdf
+errors = fltarr(4,3)
 
 ; read the last state for comparison
-npict=10
+npict=21
 
 ; read at most 3 files at a time
-filename=resdir+'Godunov_40_/GM/c*.outs ' $
-  +      resdir+'Godunov_40_LIMIT/GM/c*.outs ' $
-  +      resdir+'Godunov_40_NONCONS/GM/c*.outs'
+filename=resdir+'Godunov_???_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(0)=calc_error(w0,wref)
-errors(1)=calc_error(w1,wref)
-errors(2)=calc_error(w2,wref)
+errors(0,*)=[calc_error(w0,wcons), calc_error(w1,wcons), calc_error(w2,wcons)]
 
-filename=resdir+'Godunov_40_LIMIT_*/GM/c*.outs'
+filename=resdir+'Godunov_???_NONCONS_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
+errors(1,*)=[calc_error(w0,wnonc), calc_error(w1,wnonc), calc_error(w2,wnonc)]
 
-filename=resdir+'Linde_40_/GM/c*.outs ' $
-  +      resdir+'Linde_40_LIMIT/GM/c*.outs ' $
-  +      resdir+'Linde_40_NONCONS/GM/c*.outs'
+filename=resdir+'Linde_???_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
+errors(2,*)=[calc_error(w0,wcons), calc_error(w1,wcons), calc_error(w2,wcons)]
 
-filename=resdir+'Linde_40_LIMIT_*/GM/c*.outs'
+filename=resdir+'Linde_???_NONCONS_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(9)=calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
+errors(3,*)=[calc_error(w0,wnonc), calc_error(w1,wnonc), calc_error(w2,wnonc)]
 
-printf,99,40,errors,format='(i3,12f7.4)'
-
-; resolution 80
-filename=resdir+'Linde_80_/GM/c*.outs'
-npict=1
-.r getpict
-; the left state is advected up to 3/8 of the domain
-for i=1,29 do w(i,*)=w(0,*)
-; store the reference solution
-wref = w
-
-; read the last state for comparison
-npict=10
-
-; read at most 3 files at a time
-filename=resdir+'Godunov_80_/GM/c*.outs ' $
-  +      resdir+'Godunov_80_LIMIT/GM/c*.outs ' $
-  +      resdir+'Godunov_80_NONCONS/GM/c*.outs'
-.r getpict
-errors(0)=calc_error(w0,wref)
-errors(1)=calc_error(w1,wref)
-errors(2)=calc_error(w2,wref)
-
-filename=resdir+'Godunov_80_LIMIT_*/GM/c*.outs'
-.r getpict
-errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
-
-filename=resdir+'Linde_80_/GM/c*.outs ' $
-  +      resdir+'Linde_80_LIMIT/GM/c*.outs ' $
-  +      resdir+'Linde_80_NONCONS/GM/c*.outs'
-.r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
-
-filename=resdir+'Linde_80_LIMIT_*/GM/c*.outs'
-.r getpict
-errors(9) =calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
-
-printf,99,80,errors,format='(i3,12f7.4)'
-
-; resolution 160
-filename=resdir+'Linde_160_/GM/c*.outs'
-npict=1
-.r getpict
-; the left state is advected up to 3/8 of the domain
-for i=1,59 do w(i,*)=w(0,*)
-; store the reference solution
-wref = w
-
-; read the last state for comparison
-npict=10
-
-; read at most 3 files at a time
-filename=resdir+'Godunov_160_/GM/c*.outs ' $
-  +      resdir+'Godunov_160_LIMIT/GM/c*.outs ' $
-  +      resdir+'Godunov_160_NONCONS/GM/c*.outs'
-.r getpict
-errors(0)=calc_error(w0,wref)
-errors(1)=calc_error(w1,wref)
-errors(2)=calc_error(w2,wref)
-
-filename=resdir+'Godunov_160_LIMIT_*/GM/c*.outs'
-.r getpict
-errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
-
-filename=resdir+'Linde_160_/GM/c*.outs ' $
-  +      resdir+'Linde_160_LIMIT/GM/c*.outs ' $
-  +      resdir+'Linde_160_NONCONS/GM/c*.outs'
-.r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
-
-filename=resdir+'Linde_160_LIMIT_*/GM/c*.outs'
-.r getpict
-errors(9)=calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
-
-printf,99,160,errors,format='(i3,12f7.4)'
-
-; resolution 320
-filename=resdir+'Linde_320_/GM/c*.outs'
-npict=1
-.r getpict
-; the left state is advected up to 3/8 of the domain
-for i=1,119 do w(i,*)=w(0,*)
-; store the reference solution
-wref = w
-
-; read the last state for comparison
-npict=10
-
-; read at most 3 files at a time
-filename=resdir+'Godunov_320_/GM/c*.outs ' $
-  +      resdir+'Godunov_320_LIMIT/GM/c*.outs ' $
-  +      resdir+'Godunov_320_NONCONS/GM/c*.outs'
-.r getpict
-errors(0)=calc_error(w0,wref)
-errors(1)=calc_error(w1,wref)
-errors(2)=calc_error(w2,wref)
-
-filename=resdir+'Godunov_320_LIMIT_*/GM/c*.outs'
-.r getpict
-errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
-
-filename=resdir+'Linde_320_/GM/c*.outs ' $
-  +      resdir+'Linde_320_LIMIT/GM/c*.outs ' $
-  +      resdir+'Linde_320_NONCONS/GM/c*.outs'
-.r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
-
-filename=resdir+'Linde_320_LIMIT_*/GM/c*.outs'
-.r getpict
-errors(9)=calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
-
-printf,99,320,errors,format='(i3,12f7.4)'
+printf,99,100,errors(*,0),format='(i3,12f7.4)'
+printf,99,200,errors(*,1),format='(i3,12f7.4)'
+printf,99,400,errors(*,2),format='(i3,12f7.4)'
 
 close,99
 
 ; 3. Create a figure of convergence rates
 !p.charsize=2
 !p.charthick=1
+!p.thick=3
 
 set_device,resdir+'error.eps',/eps, /land
 logfilename=resdir+'error.dat'
 .r getlog
 
-; The Godunov part of the header of error.dat:
-; n godunov g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look
+; error.dat header: 'n godunov g_noncons linde l_noncons'
 
-plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
-  xrange=[1e-3,1e-1],yrange=[2e-3,2e-1],linestyle=2,ystyle=1, $
+plot_oo,[1e-2,1e-1],[1e-3,1e-1], $
+  xrange=[1e-3,1e-1],yrange=[1e-3,5e-1],linestyle=2,ystyle=1, $
   xtitle='Grid resolution', $
   ytitle='Relative error', $
   title="Be/Xe wave test in 1D"
-oplot,4/wlog(*,0),wlog(*,1),psym=-1,thick=3
-oplot,4/wlog(*,0),wlog(*,2),psym=-2,thick=3
-oplot,4/wlog(*,0),wlog(*,3),psym=-4,thick=3
-oplot,4/wlog(*,0),wlog(*,5),psym=-5,thick=3
-oplot,4/wlog(*,0),wlog(*,6),psym=-6,thick=3
+oplot,4/wlog(*,0),wlog(*,1),psym=-1
+oplot,4/wlog(*,0),wlog(*,2),psym=-2
+oplot,4/wlog(*,0),wlog(*,3),psym=-4
+oplot,4/wlog(*,0),wlog(*,4),psym=-5
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
-xyouts,0.002,0.005,'1st order slope'
-oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.16,'Godunov'
-oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
-oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
-oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
-oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
+xyouts,0.002,0.005,'2nd order slope'
+oplot,[0.0015],[0.16],psym=4 & xyouts,0.002,0.16,'Linde conserv.'
+oplot,[0.0015],[0.08],psym=1 & xyouts,0.002,0.08,'Godunov conserv.'
+oplot,[0.0015],[0.04],psym=5 & xyouts,0.002,0.04,'Linde noncons.'
+oplot,[0.0015],[0.02],psym=2 & xyouts,0.002,0.02,'Godunov noncons.'
 
 close_device,/pdf
 
 exit
-
