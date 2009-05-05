@@ -94,13 +94,9 @@ close_device,/pdf
 
 ; 2. calculate errors and save them into a file
 
-filename='test_wave_1d_ref_noncons.out'
+filename='test_wave_1d_ref.out'
 .r getpict
-wnonc = w
-
-filename='test_wave_1d_ref_cons.out'
-.r getpict
-wcons = w
+wref = w
 
 openw,99,resdir+'error.dat'
 printf,99,'Wave test in 1D'
@@ -115,19 +111,19 @@ npict=21
 ; read at most 3 files at a time
 filename=resdir+'Godunov_???_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(0,*)=[calc_error(w0,wcons), calc_error(w1,wcons), calc_error(w2,wcons)]
+errors(0,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
 filename=resdir+'Godunov_???_NONCONS_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(1,*)=[calc_error(w0,wnonc), calc_error(w1,wnonc), calc_error(w2,wnonc)]
+errors(1,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
 filename=resdir+'Linde_???_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(2,*)=[calc_error(w0,wcons), calc_error(w1,wcons), calc_error(w2,wcons)]
+errors(2,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
 filename=resdir+'Linde_???_NONCONS_LIMIT_LOOKUP/GM/c*.outs'
 .r getpict
-errors(3,*)=[calc_error(w0,wnonc), calc_error(w1,wnonc), calc_error(w2,wnonc)]
+errors(3,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
 printf,99,100,errors(*,0),format='(i3,12f7.4)'
 printf,99,200,errors(*,1),format='(i3,12f7.4)'
