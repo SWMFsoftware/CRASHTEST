@@ -214,8 +214,12 @@ test_lowrie1_semi_run_res:
 		perl -pi -e '$$a=${RES}/24; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
 		perl -pi -e '$$a=0.8*(72/${RES}); s/\S+(\s*CflExpl)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=F; s/\S+(\s*UseNonConservative)/$$a$$1/' PARAM.in; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
-		PostProc.pl -M RESULTS/${RES}
+		PostProc.pl -M RESULTS/CONS/${RES}; \
+		perl -pi -e '$$a=T; s/\S+(\s*UseNonConservative)/$$a$$1/' PARAM.in; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/NONCONS/${RES}
 
 test_lowrie1_semi_check:
 	cd output; idl test_lowrie1_semi.pro; \
