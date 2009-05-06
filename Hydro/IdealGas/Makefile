@@ -4,6 +4,7 @@
 
 test: 
 	@rm -f output/*.diff
+	-@(make test_wave_1d)
 	-@(make test_shu_osher_amr)
 	@ls -l output/*.diff
 
@@ -27,6 +28,7 @@ help:
 	@echo "    test_shu_osher_1d          (run Shu-Osher test in 1D)"
 	@echo "    test_shu_osher_2d          (run Shu-Osher test in 2D)"
 	@echo "    test_shu_osher_amr         (run Shu-Osher test with 2D AMR)"
+	@echo "    test_wave_1d               (run wave test in 1D)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -39,6 +41,55 @@ clean:
 	cd output; rm -rf *.diff *.err *.eps *_results
 
 distclean: clean
+
+### Shu-Osher test on 1D grid ###
+
+test_wave_1d:
+	@echo "test_wave_1d_compile..." > output/test_wave_1d.diff
+	make test_wave_1d_compile
+	@echo "test_wave_1d_rundir..." >> output/test_wave_1d.diff
+	make test_wave_1d_rundir
+	@echo "test_wave_1d_run..." >> output/test_wave_1d.diff
+	make test_wave_1d_run
+	@echo "test_wave_1d_check..." >> output/test_wave_1d.diff
+	make test_wave_1d_check
+
+test_wave_1d_compile:
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,2,100,1
+	cd ${DIR}; make BATSRUS PIDL
+
+test_wave_1d_rundir: test_rundir
+	cp input/PARAM.in.wave_1d ${DIR}/${RUNDIR}/PARAM.in
+
+test_wave_1d_run:
+	for RES in 100 200 400; do \
+	 for ON in "" NONCONS; do \
+	  for FLUX in Linde Godunov; do \
+           make test_wave_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON}; \
+	  done \
+	 done \
+	done
+	rm -rf output/test_wave_1d_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_wave_1d_results
+
+test_wave_1d_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
+		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
+		     $$a=${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
+
+test_wave_1d_check:
+	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \
+		output/test_wave_1d_ref.out
+	cd output; idl test_wave_1d.pro; \
+		rm -f test_wave_1d_results/*.eps
+	-(diff  output/test_wave_1d_results/error.dat \
+		output/test_wave_1d.ref \
+		> output/test_wave_1d.diff)
+	ls -l output/test_wave_1d.diff
 
 ### Shu-Osher test on 1D grid ###
 
