@@ -1,3 +1,19 @@
+These tests verify the hydro code for single-material ideal gas.
+----------------------------------------------------------------------------
+The sound wave problem has uniform density 1, pressure 0.6, and velocity 0.
+The adiabatic index is 5/3, so the background sound speed is 1.
+There is a smooth (cos^2) pressure and density perturbation of 10% amplitude
+in the middle of the grid. The perturbation is isothermal, not adaiabatic,
+so the solution has two sound waves going left and right plus an entropy 
+at rest.
+
+The solution is obtained with the Linde and Godunov fluxes using the MC3 
+limiter with maximum beta parameter 2 (Koren's limiter). Both the 
+conservative energy and non-conservative pressure equations are tested.
+The grid resolution varies from 100, 200 to 400 cells.
+The reference solution is calculated with 2000 grid points. 
+We expect a second order convergence rate.
+-----------------------------------------------------------------------------
 The Shu-Osher test is used to verify the correctness and 
 accuracy of the hydro solvers. The test consists of a shock
 passing through sinusoidal entropy waves (constant pressure,
