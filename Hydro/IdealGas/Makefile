@@ -4,7 +4,7 @@
 
 test: 
 	@rm -f output/*.diff
-	-@(make test_wave_2d)
+	-@(make test_wave_amr)
 	-@(make test_shu_osher_amr)
 	@ls -l output/*.diff
 
@@ -30,6 +30,7 @@ help:
 	@echo "    test_shu_osher_amr         (run Shu-Osher test with 2D AMR)"
 	@echo "    test_wave_1d               (run wave test in 1D)"
 	@echo "    test_wave_2d               (run wave test in 2D)"
+	@echo "    test_wave_amr              (run wave test with 2D AMR)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -137,6 +138,54 @@ test_wave_2d_check:
 		output/test_wave_2d.ref \
 		> output/test_wave_2d.diff)
 	ls -l output/test_wave_2d.diff
+
+### Sound wave test on 2D AMR grid ###
+
+test_wave_amr:
+	@echo "test_wave_amr_compile..." > output/test_wave_amr.diff
+	make test_wave_amr_compile
+	@echo "test_wave_amr_rundir..." >> output/test_wave_amr.diff
+	make test_wave_amr_rundir
+	@echo "test_wave_amr_run..." >> output/test_wave_amr.diff
+	make test_wave_amr_run
+	@echo "test_wave_amr_check..." >> output/test_wave_amr.diff
+	make test_wave_amr_check
+
+test_wave_amr_compile:
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,4,4,1000,1
+	cd ${DIR}; make BATSRUS PIDL
+
+test_wave_amr_rundir: test_rundir
+	cp input/PARAM.in.wave_amr ${DIR}/${RUNDIR}/PARAM.in
+
+test_wave_amr_run:
+	for RES in 100 200 400; do \
+	 for ON in "" NONCONS; do \
+	  for FLUX in Linde Godunov; do \
+           make test_wave_amr_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON}; \
+	  done \
+	 done \
+	done
+	rm -rf output/test_wave_amr_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_wave_amr_results
+
+test_wave_amr_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
+		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
+		     $$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		     $$a=3*${RES}/100; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
+
+test_wave_amr_check:
+	cd output; idl test_wave_amr.pro; \
+		rm -f test_wave_amr_results/*.eps
+	-(diff  output/test_wave_amr_results/error.dat \
+		output/test_wave_amr.ref \
+		> output/test_wave_amr.diff)
+	ls -l output/test_wave_amr.diff
 
 ### Shu-Osher test on 1D grid ###
 
