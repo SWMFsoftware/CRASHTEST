@@ -21,15 +21,15 @@ F			UseNonConservative
 
 !Grid [-5,5] is stretched by sqrt(5)/2 since the problem is tilted by atan(0.5)
 #GRID
-2			nRootBlockX
+1			nRootBlockX
 3			nRootBlockY
 1			nRootBlockZ
 -5.590169943749d0	xMin
  5.590169943749d0	xMax
--0.167705098312d0/1	yMin
- 0.167705098312d0/1	yMax
--0.056			zMin
- 0.056			zMax
+-0.335410196624d0/1	yMin
+ 0.335410196624d0/1	yMax
+-0.112/1		zMin
+ 0.112/1		zMax
 
 #GAMMA
 1.4			Gamma
@@ -113,7 +113,6 @@ second		NameMaxTimeUnit
 #SAVEINITIAL
 T		DoSaveInitial
 
-!The line is shifted slightly off the Y=Z=0 axis so that PostIDL.exe works OK
 #SAVEPLOT
 2		nPlotfile
 cut hd idl	PlotString
