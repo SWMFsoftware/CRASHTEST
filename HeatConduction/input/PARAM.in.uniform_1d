@@ -76,8 +76,8 @@ left			TypePrecondSide (left, symmetric, right)
 bilu			TypePrecond (MBILU)
 
 #OUTERBOUNDARY
-float			TypeBcEast
-float			TypeBcWest
+user			TypeBcEast
+user			TypeBcWest
 reflect			TypeBcSouth
 reflect			TypeBcNorth
 reflect			TypeBcBottom

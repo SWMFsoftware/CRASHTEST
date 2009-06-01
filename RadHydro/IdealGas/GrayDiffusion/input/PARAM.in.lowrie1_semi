@@ -38,10 +38,10 @@ F			UseNonConservative
 box			NameArea
 -0.04			xMinBox
 -0.006666		yMinBox
--0.02			zMinBox
+-1.0			zMinBox
  0.04			xMaxBox
  0.006666		yMaxBox
- 0.02			zMaxBox
+ 1.0			zMaxBox
 
 #GRIDLEVEL
 1			nLevelArea
@@ -97,8 +97,8 @@ F                       UseRadFluxLimiter
 0.5			ShockSlope
 
 #OUTERBOUNDARY
-shear			TypeBcEast
-shear			TypeBcWest
+user			TypeBcEast
+user			TypeBcWest
 shear			TypeBcSouth
 shear			TypeBcNorth
 reflect			TypeBcBottom
@@ -132,9 +132,6 @@ rho mx my Erad E pmin pmax
 
 #SAVERESTART
 F			DoSaveRestart
-
-#SAVEBINARY
-F			DoSaveBinary
 
 #SAVEINITIAL
 T			DoSaveInitial

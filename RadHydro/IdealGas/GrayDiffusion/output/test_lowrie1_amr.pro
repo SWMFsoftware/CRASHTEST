@@ -8,18 +8,15 @@ printf, 99, 'n error'
 ; read the last snapshot
 npict=100
 
-filename = resdir+'24/GM/cut*.outs' 
+filename = resdir+'72/GM/cut*.outs' 
 .r getpict
-printf,99,24,calc_error(w)
-filename = resdir+'48/GM/cut*.outs' 
+printf,99,72,calc_error(w)
+filename = resdir+'144/GM/cut*.outs' 
 .r getpict
-printf,99,48,calc_error(w)
-filename = resdir+'96/GM/cut*.outs' 
+printf,99,144,calc_error(w)
+filename = resdir+'288/GM/cut*.outs' 
 .r getpict
-printf,99,96,calc_error(w)
-filename = resdir+'192/GM/cut*.outs' 
-.r getpict
-printf,99,192,calc_error(w)
+printf,99,288,calc_error(w)
 
 close,99
 
@@ -28,7 +25,7 @@ close,99
 set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
-plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-4,1e-0],$
+plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-3,1e-1],$
         psym=-4,charsize=2,thick=3, $
         xtitle='Grid resolution', $
         ytitle='Relative error', $
@@ -39,7 +36,7 @@ close_device,/pdf
 
 ; 2. Create 2D figures to demonstrate the AMR grids
 
-filename = resdir + '48/GM/z*.outs'
+filename = resdir + '72/GM/z*.outs'
 func='Trad'
 physics='hd33'
 plotmode='contbargrid'
@@ -62,19 +59,16 @@ func='Trad'
 npict=100
 bottomline=0
 set_device, resdir+'Trad.eps', /eps, /land
-filename = resdir+'24/GM/cut*.outs'
+filename = resdir+'72/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),linestyle=0,xtitle='x',ytitle='radiation temperature',charsize=2, $
      title="Lowrie's test 1 with constant opacities",thick=3
-filename = resdir+'48/GM/cut*.outs'
+filename = resdir+'144/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,4),linestyle=1,thick=3
-filename = resdir+'96/GM/cut*.outs'
+filename = resdir+'288/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,4),linestyle=2,thick=3
-filename = resdir+'192/GM/cut*.outs'
-.r getpict
-oplot,x,w(*,4),linestyle=3,thick=3
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
 close_device,/pdf
 
@@ -84,19 +78,16 @@ func='Tgas'
 npict=100
 bottomline=0
 set_device, resdir+'Tgas.eps', /eps, /land
-filename = resdir+'24/GM/cut*.outs'
+filename = resdir+'72/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),linestyle=0,xtitle='x',ytitle='gas temperature',charsize=2, $
      title="Lowrie's test 1 with constant opacities",thick=3
-filename = resdir+'48/GM/cut*.outs'
+filename = resdir+'144/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,3),linestyle=1,thick=3
-filename = resdir+'96/GM/cut*.outs'
+filename = resdir+'288/GM/cut*.outs'
 .r getpict
 oplot,x,w(*,3),linestyle=2,thick=3
-filename = resdir+'192/GM/cut*.outs'
-.r getpict
-oplot,x,w(*,3),linestyle=3,thick=3
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
 close_device,/pdf
 

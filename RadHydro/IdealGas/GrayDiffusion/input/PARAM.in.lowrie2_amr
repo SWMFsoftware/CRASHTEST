@@ -17,10 +17,10 @@ USER			TypeNormalization
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-16			nI
+32			nI
 4			nJ
 4			nK
-600			MinBlockALL
+256			MinBlockALL
 
 #GRID
 3			nRootBlockX
@@ -28,20 +28,20 @@ F			UseNonConservative
 1			nRootBlockZ
 -0.03			xMin
  0.03			xMax
--0.0075			yMin
- 0.0075			yMax
--0.0025			zMin
- 0.0025			zMax
+-0.00375		yMin
+ 0.00375		yMax
+-1.0			zMin
+ 1.0			zMax
 
 #GRIDLEVEL
 1			nLevelArea
 box			NameArea
 -0.01			xMinBox
--0.0025			yMinBox
--0.0025			zMinBox
+-0.00125		yMinBox
+-1.0			zMinBox
  0.01			xMaxBox
- 0.0025			yMaxBox
- 0.0025			zMaxBox
+ 0.00125		yMaxBox
+ 1.0			zMaxBox
 
 #GRIDLEVEL
 1			nLevelArea
@@ -80,12 +80,12 @@ F			UseRadFluxLimiter
 0.5			ShockSlope
 
 #OUTERBOUNDARY
-shear			TypeBcEast
-shear			TypeBcWest
+user			TypeBcEast
+user			TypeBcWest
 shear			TypeBcSouth
 shear			TypeBcNorth
-float			TypeBcBottom
-float			TypeBcTop
+reflect			TypeBcBottom
+reflect			TypeBcTop
 
 #TIMESTEPPING
 2			nStage
@@ -105,12 +105,12 @@ T			UseAccurateResChange
 
 #FIXEDTIMESTEP
 T			UseDtFixed
-8.5E-5			DtFixedDim
+4.8E-5			DtFixedDim
 
 #KRYLOV
 gmres			TypeKrylov
 nul			TypeInitKrylov
-1.0e-5			ErrorMaxKrylov
+1.0e-6			ErrorMaxKrylov
 50			MaxMatvecKrylov
 
 #UPDATECHECK
@@ -135,10 +135,6 @@ raw			StringLogfile
 
 #SAVERESTART
 F			DoSaveRestart
-
-This is set only for sake of the test_shocktube test
-#SAVEBINARY
-F			DoSaveBinary
 
 #SAVEINITIAL
 T			DoSaveInitial

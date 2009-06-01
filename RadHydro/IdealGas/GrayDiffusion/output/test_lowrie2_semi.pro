@@ -8,9 +8,6 @@ printf, 99, 'n error'
 ; read the last snapshot
 npict=100
 
-filename = resdir+'48/GM/cut*.outs' 
-.r getpict
-printf,99,48,calc_error(w)
 filename = resdir+'96/GM/cut*.outs' 
 .r getpict
 printf,99,96,calc_error(w)
@@ -39,7 +36,7 @@ close_device,/pdf
 
 ; 2. Create 2D figures to demonstrate the AMR grids
 
-filename = resdir + '48/GM/z*.outs'
+filename = resdir + '96/GM/z*.outs'
 func='Trad'
 physics='hd33'
 plotmode='contbargrid'
@@ -62,19 +59,16 @@ func='Trad'
 npict=100
 bottomline=0
 set_device, resdir+'Trad.eps', /eps, /land
-filename = resdir+'48/GM/cut*.outs'
+filename = resdir+'96/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),linestyle=0,xtitle='x',ytitle='radiation temperature',charsize=2, $
      title="Lowrie's test 2 with constant opacities",thick=3
-filename = resdir+'96/GM/cut*.outs'
-.r getpict
-oplot,x,w(*,4),linestyle=1,thick=3
 filename = resdir+'192/GM/cut*.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=2,thick=3
+oplot,x,w(*,4),linestyle=1,thick=3
 filename = resdir+'384/GM/cut*.outs'
 .r getpict
-oplot,x,w(*,4),linestyle=3,thick=3
+oplot,x,w(*,4),linestyle=2,thick=3
 oplot,x,w(*,9),psym=0,linestyle=0,color=40,thick=3
 close_device,/pdf
 
@@ -84,19 +78,16 @@ func='Tgas'
 npict=100
 bottomline=0
 set_device, resdir+'Tgas.eps', /eps, /land
-filename = resdir+'48/GM/cut*.outs'
+filename = resdir+'96/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),linestyle=0,xtitle='x',ytitle='gas temperature',charsize=2, $
      title="Lowrie's test 2 with constant opacities",thick=3
-filename = resdir+'96/GM/cut*.outs'
-.r getpict
-oplot,x,w(*,3),linestyle=1,thick=3
 filename = resdir+'192/GM/cut*.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=2,thick=3
+oplot,x,w(*,3),linestyle=1,thick=3
 filename = resdir+'384/GM/cut*.outs'
 .r getpict
-oplot,x,w(*,3),linestyle=3,thick=3
+oplot,x,w(*,3),linestyle=2,thick=3
 oplot,x,w(*,8),psym=0,linestyle=0,color=40,thick=3
 close_device,/pdf
 

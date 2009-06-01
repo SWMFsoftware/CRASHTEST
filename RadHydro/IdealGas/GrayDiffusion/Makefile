@@ -56,7 +56,7 @@ test_lowrie1_amr:
 	make test_lowrie1_amr_check
 
 test_lowrie1_amr_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=8,4,4,600,512
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=24,4,4,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie1_amr_rundir: test_rundir
@@ -64,18 +64,17 @@ test_lowrie1_amr_rundir: test_rundir
 	cp input/initial_lowrie1.dat  ${DIR}/${RUNDIR}/
 
 test_lowrie1_amr_run:
-	make test_lowrie1_amr_run_res RES=24
-	make test_lowrie1_amr_run_res RES=48
-	make test_lowrie1_amr_run_res RES=96
-	make test_lowrie1_amr_run_res RES=192
+	make test_lowrie1_amr_run_res RES=72
+	make test_lowrie1_amr_run_res RES=144
+	make test_lowrie1_amr_run_res RES=288
 	rm -rf output/test_lowrie1_amr_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie1_amr_results
 
 test_lowrie1_amr_run_res:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=${RES}/8; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=${RES}/8; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=1.2e-3*24/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+		perl -pi -e '$$a=${RES}/24; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=${RES}/24; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=6.0e-4*72/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
 		PostProc.pl -M RESULTS/${RES}
@@ -102,7 +101,7 @@ test_lowrie2_amr:
 	make test_lowrie2_amr_check
 
 test_lowrie2_amr_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=16,4,4,600,512
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie2_amr_rundir: test_rundir
@@ -110,7 +109,6 @@ test_lowrie2_amr_rundir: test_rundir
 	cp input/initial_lowrie2.dat  ${DIR}/${RUNDIR}/
 
 test_lowrie2_amr_run:
-	make test_lowrie2_amr_run_res RES=48
 	make test_lowrie2_amr_run_res RES=96
 	make test_lowrie2_amr_run_res RES=192
 	make test_lowrie2_amr_run_res RES=384
@@ -119,9 +117,9 @@ test_lowrie2_amr_run:
 
 test_lowrie2_amr_run_res:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=${RES}/16; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=${RES}/16; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=8.5e-5*48/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+		perl -pi -e '$$a=${RES}/32; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=${RES}/32; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=4.8e-5*96/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
 		PostProc.pl -M RESULTS/${RES}
@@ -148,7 +146,7 @@ test_lowrie3_amr:
 	make test_lowrie3_amr_check
 
 test_lowrie3_amr_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,600,512
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie3_amr_rundir: test_rundir
@@ -159,7 +157,6 @@ test_lowrie3_amr_run:
 	make test_lowrie3_amr_run_res RES=96
 	make test_lowrie3_amr_run_res RES=192
 	make test_lowrie3_amr_run_res RES=384
-	#make test_lowrie3_amr_run_res RES=768
 	rm -rf output/test_lowrie3_amr_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie3_amr_results
 
@@ -243,7 +240,7 @@ test_lowrie2_semi:
 	make test_lowrie2_semi_check
 
 test_lowrie2_semi_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=16,4,4,600,600
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie2_semi_rundir: test_rundir
@@ -251,7 +248,6 @@ test_lowrie2_semi_rundir: test_rundir
 	cp input/initial_lowrie2.dat  ${DIR}/${RUNDIR}/
 
 test_lowrie2_semi_run:
-	make test_lowrie2_semi_run_res RES=48
 	make test_lowrie2_semi_run_res RES=96
 	make test_lowrie2_semi_run_res RES=192
 	make test_lowrie2_semi_run_res RES=384
@@ -260,8 +256,8 @@ test_lowrie2_semi_run:
 
 test_lowrie2_semi_run_res:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=${RES}/16; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=${RES}/16; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+		perl -pi -e '$$a=${RES}/32; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=${RES}/32; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
 		PostProc.pl -M RESULTS/${RES}
@@ -288,7 +284,7 @@ test_lowrie3_semi:
 	make test_lowrie3_semi_check
 
 test_lowrie3_semi_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,600,600
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie3_semi_rundir: test_rundir
@@ -299,7 +295,6 @@ test_lowrie3_semi_run:
 	make test_lowrie3_semi_run_res RES=96
 	make test_lowrie3_semi_run_res RES=192
 	make test_lowrie3_semi_run_res RES=384
-	#make test_lowrie3_semi_run_res RES=768
 	rm -rf output/test_lowrie3_semi_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie3_semi_results
 
