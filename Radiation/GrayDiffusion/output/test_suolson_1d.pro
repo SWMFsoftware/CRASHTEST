@@ -54,17 +54,17 @@ filename = resdir+'*_960/GM/cut*.outs'
 wref0 = w0
 wref1 = w1
 
-filename=resdir+'*_80/GM/cut*.outs'
+filename=resdir+'*_60/GM/cut*.outs'
 .r getpict
-printf,99,80,calc_error(w0,wref0),calc_error(w1,wref1)
+printf,99,60,calc_error(w0,wref0),calc_error(w1,wref1)
 
-filename=resdir+'*_160/GM/cut*.outs'
+filename=resdir+'*_120/GM/cut*.outs'
 .r getpict
-printf,99,160,calc_error(w0,wref0),calc_error(w1,wref1)
+printf,99,120,calc_error(w0,wref0),calc_error(w1,wref1)
 
-filename=resdir+'*_320/GM/cut*.outs'
+filename=resdir+'*_240/GM/cut*.outs'
 .r getpict
-printf,99,320,calc_error(w0,wref0),calc_error(w1,wref1)
+printf,99,240,calc_error(w0,wref0),calc_error(w1,wref1)
 
 close,99
 

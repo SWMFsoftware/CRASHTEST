@@ -20,13 +20,13 @@ READ
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-20			nI
+10			nI
 4			nJ
 4			nK
 256			MinBlockALL
 
 #GRID
-4			nRootBlockX
+6			nRootBlockX
 1			nRootBlockY
 1			nRootBlockZ
 0.0			xMin
@@ -39,10 +39,10 @@ F			UseNonConservative
 #GRIDLEVEL
 1                       nLevelArea
 box                     NameArea
- 1.25			xMinBox
+ 0.8334			xMinBox
 -1.0			yMinBox
 -1.0                    zMinBox
- 2.5			xMaxBox
+ 1.6666			xMaxBox
  1.0			yMaxBox
  1.0                    zMaxBox
 
@@ -93,7 +93,7 @@ F                       UseRadFluxLimiter
 
 #OUTERBOUNDARY
 user			TypeBcEast
-float			TypeBcWest
+user			TypeBcWest
 reflect			TypeBcSouth
 reflect			TypeBcNorth
 reflect			TypeBcBottom
@@ -101,7 +101,7 @@ reflect			TypeBcTop
 
 #FIXEDTIMESTEP
 T                       UseFixedTimeStep
-2.0e-14                 DtFixedDim
+5.0e-13                 DtFixedDim
 
 #SCHEME
 2			nOrder
