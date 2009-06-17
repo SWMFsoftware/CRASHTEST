@@ -59,13 +59,14 @@ test_advection_1d_rundir: test_rundir
 	cp input/PARAM.in.advection_1d ${DIR}/${RUNDIR}/PARAM.in
 
 # These commands are switched off by default
-COMMANDS = LOOKUP|MIXED|LIMITER|NONCONSERVATIVE|CYLINDRICAL
+COMMANDS = LOOKUP|MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
 
 
 test_advection_1d_run:
 	for RES in 40 80 160 320; do \
 	 for ON in \
-	    "" NONCONS LIMIT LIMIT_LOOKUP LIMIT_MIXED LIMIT_MIXED_LOOKUP; do \
+	 "" NONCONS LIMIT LIMIT_MIXED LIMIT_MIXED_LOOKUP LIMIT_VOLUME_LOOKUP; \
+	 do \
 	  for FLUX in Linde Godunov; do \
 	   make test_advection_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
 	  done \

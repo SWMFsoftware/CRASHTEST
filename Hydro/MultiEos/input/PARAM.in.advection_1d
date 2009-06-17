@@ -63,6 +63,9 @@ MIXEDCELL
 T			UseMixedCell
 0.97			MixLimit
 
+VOLUMEFRACTION
+T			UseVolumeFraction
+
 #USERINPUTEND   ----------------
 
 #TIMEACCURATE
