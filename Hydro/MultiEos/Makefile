@@ -39,6 +39,9 @@ clean:
 
 distclean: clean
 
+# These commands are switched off by default
+COMMANDS = LOOKUP|MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
+
 ### Advection on 1D grid ###
 
 test_advection_1d:
@@ -57,10 +60,6 @@ test_advection_1d_compile:
 
 test_advection_1d_rundir: test_rundir
 	cp input/PARAM.in.advection_1d ${DIR}/${RUNDIR}/PARAM.in
-
-# These commands are switched off by default
-COMMANDS = LOOKUP|MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
-
 
 test_advection_1d_run:
 	for RES in 40 80 160 320; do \
@@ -168,7 +167,6 @@ test_wave_1d_rundir: test_rundir
 	cp input/PARAM.in.wave_1d ${DIR}/${RUNDIR}/PARAM.in
 
 # These commands are switched off by default
-COMMANDS = LOOKUP|MIXED|LIMITER|NONCONSERVATIVE|CYLINDRICAL
 
 test_wave_1d_run:
 	for RES in 100 200 400; do \
