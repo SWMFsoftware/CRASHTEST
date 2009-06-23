@@ -1,2 +1,12 @@
+Showing crontab
+
+crontab -l
+
+Editing crontab (uses the editor defined in EDITOR / VISUAL):
+
+crontab -e
+
+For execution every Saturday at 3am put this into crontab:
+
 MAILTO=""
 00 03 * * 6 ${HOME}/bin/test_crash.sh
