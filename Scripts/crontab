@@ -1,3 +1,2 @@
 MAILTO=""
-00 03 * * 6 ${HOME}/Sites/test_crash.sh
-00 23 * * 6 ${HOME}/Sites/test_crash.pl
+00 03 * * 6 ${HOME}/bin/test_crash.sh
