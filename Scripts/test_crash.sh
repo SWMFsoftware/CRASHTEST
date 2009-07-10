@@ -6,7 +6,7 @@ rm -rf CRASH_OLD
 mv CRASH CRASH_OLD
 
 # do this on herot too for the webpage
-ssh herot "cd Sites; rm -rf CRASH_OLD; mv CRASH CRASH_OLD"
+ssh herot "cd Sites; rm -rf CRASH_OLD; mv CRASH CRASH_OLD; mkdir CRASH"
 
 # checkout BATSRUS code and rename it as CRASH
 cvs co BATSRUS
@@ -25,4 +25,7 @@ cd CRASHTEST
 make test MPIRUN='mpirun -np 16' >& test.log < /dev/null
 
 # Copy results to a web site
-rsync -az --delete ~/CRASHTEST/CRASH/CRASHTEST/ herot:Sites/CRASH/CRASHTEST/
+rsync -az --delete ~/CRASHTEST/CRASH/CRASHTEST/ herot:Sites/CRASH/CRASHTEST/ \
+    >& test.log < /dev/null
+
+
