@@ -11,9 +11,9 @@ NONE			NamePlanet
 NONE			TypeIoUnit
 
 #NORMALIZATION
-READ
+READ                    cm-g-shake units
 1.0e-2                  cm
-1.0e-2                  cm/s
+1.0e+6                  cm/sh
 1000.0                  g/cm^3
 
 #NONCONSERVATIVE
@@ -101,7 +101,7 @@ reflect			TypeBcTop
 
 #FIXEDTIMESTEP
 T                       UseFixedTimeStep
-5.0e-13                 DtFixedDim
+5.0e-5                  DtFixedDim
 
 #SCHEME
 2			nOrder
@@ -136,7 +136,7 @@ T			DoSaveInitial
 1			nPlotfile
 cut VAR idl             PlotString
 -1                      DnSavePlot
-2.0e-11                 DtSavePlot
+2.0e-3                  DtSavePlot
 0.0                     xMinCut
 5.0                     xMaxCut
 0.0001                  yMinCut

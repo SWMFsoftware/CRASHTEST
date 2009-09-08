@@ -70,7 +70,7 @@ test_suolson_1d_run:
 test_suolson_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=5.0e-13*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=5.0e-5*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
 		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
@@ -118,7 +118,7 @@ test_suolson_1d_amr_run:
 test_suolson_1d_amr_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=5.0e-13*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=5.0e-5*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
 		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
