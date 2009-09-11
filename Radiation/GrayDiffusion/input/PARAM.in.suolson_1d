@@ -122,7 +122,7 @@ T			DoSaveInitial
 1			nPlotfile
 cut VAR idl             PlotString
 -1                      DnSavePlot
-2.0e-3                  DtSavePlot
+2.0e-11                 DtSavePlot
 0.0                     xMinCut
 5.0                     xMaxCut
 0.0001                  yMinCut
