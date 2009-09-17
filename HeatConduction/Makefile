@@ -8,6 +8,7 @@ test:
 	-@(make test_uniform_2d)
 	-@(make test_uniform_2d_amr)
 	-@(make test_rmtv)
+	-@(make test_lowrie3)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -31,6 +32,7 @@ help:
 	@echo "    test_uniform_2d            (run uniform heat conduction test in 2D)"
 	@echo "    test_uniform_2d_amr        (run uniform heat conduction test in 2D with AMR)"
 	@echo "    test_rmtv                  (run Reinicke Meyer-ter Vehn test)"
+	@echo "    test_lowrie3               (run lowrie3 test modified for heat conduction)"
 
 
 test_rundir:
@@ -214,6 +216,53 @@ test_rmtv_check:
 		output/test_rmtv.ref \
 		> output/test_rmtv.diff)
 	ls -l output/test_rmtv.diff
+
+
+### Lowrie's 3 radiation test modified for heat conduction ###
+
+test_lowrie3:
+	@echo "test_lowrie3_compile..." > output/test_lowrie3.diff
+	make test_lowrie3_compile
+	@echo "test_lowrie3_rundir..." >> output/test_lowrie3.diff
+	make test_lowrie3_rundir
+	@echo "test_lowrie3_run..." >> output/test_lowrie3.diff
+	make test_lowrie3_run
+	@echo "test_lowrie3_check..." >> output/test_lowrie3.diff
+	make test_lowrie3_check
+
+test_lowrie3_compile:
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=Crash -g=32,4,4,256,256
+	cd ${DIR}; make BATSRUS PIDL
+
+test_lowrie3_rundir: test_rundir
+	cp input/PARAM.in.lowrie3 ${DIR}/${RUNDIR}/PARAM.in
+	cp input/lowrie3.out  ${DIR}/${RUNDIR}/
+
+test_lowrie3_run:
+	for RES in 96 192 384; do \
+	 for FLUX in Linde Godunov; do \
+	  make test_lowrie3_run1 RES=$${RES} FLUX=$${FLUX}; \
+	 done \
+	done
+	rm -rf output/test_lowrie3_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_lowrie3_results
+
+test_lowrie3_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
+		$$a=${RES}/32; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		$$a=${RES}/32; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${FLUX}_${RES}
+
+test_lowrie3_check:
+	cd output; idl test_lowrie3.pro; \
+		rm -f test_lowrie3_results/*.eps
+	-(diff  output/test_lowrie3_results/error.dat \
+		output/test_lowrie3.ref \
+		> output/test_lowrie3.diff)
+	ls -l output/test_lowrie3.diff
 
 
 clean:
