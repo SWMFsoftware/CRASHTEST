@@ -96,6 +96,9 @@ initial_lowrie3.dat	NameInputFile
 
 #USERINPUTEND ----------------------------
 
+#GAMMA
+2.0                     Gamma
+
 #SEMIIMPLICIT
 T			UseSemiImplicit
 radiation			TypeSemiImplicit
