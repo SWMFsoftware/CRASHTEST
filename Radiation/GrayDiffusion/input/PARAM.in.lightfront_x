@@ -26,34 +26,34 @@ F			UseNonConservative
 2			MinBlockALL
 
 #GRID
-1			nRootBlockX
-10			nRootBlockY
+10			nRootBlockX
+1			nRootBlockY
 1			nRootBlockZ
--1.0			xMin
- 1.0			xMax
-0.0			yMin
-1.0			yMax
+0.0			xMin
+1.0			xMax
+-1.0			yMin
+ 1.0			yMax
 -1.0			zMin
  1.0			zMax
 
 #GRIDLEVEL
 1			nLevelArea
 box			NameArea
--1.0			xMinBox
- 0.1			yMinBox
+ 0.1			xMinBox
+-1.0			yMinBox
 -1.0			zMinBox
- 1.0			xMaxBox
- 0.2			yMaxBox
+ 0.2			xMaxBox
+ 1.0			yMaxBox
  1.0			zMaxBox
 
 #GRIDLEVEL
 1			nLevelArea
 box			NameArea
--1.0			xMinBox
- 0.8			yMinBox
+ 0.8			xMinBox
+-1.0			yMinBox
 -1.0			zMinBox
- 1.0			xMaxBox
- 0.9			yMaxBox
+ 0.9			xMaxBox
+ 1.0			yMaxBox
  1.0			zMaxBox
 
 #GRIDLEVEL
@@ -83,8 +83,8 @@ lightfront		TypeProblem
 #USERINPUTEND ----------------------------
 
 #SEMIIMPLICIT
-T                       UseSemiImplicit
-radiation                 TypeSemiImplicit
+T			UseSemiImplicit
+radiation		TypeSemiImplicit
 
 #KRYLOV
 cg			TypeKrylov
@@ -103,10 +103,10 @@ larsen                  TypeRadFluxLimiter
 1.0e-12                 TradMinSi
 
 #OUTERBOUNDARY
-reflect			TypeBcEast
-reflect			TypeBcWest
-user			TypeBcSouth
-user			TypeBcNorth
+user			TypeBcEast
+user			TypeBcWest
+reflect			TypeBcSouth
+reflect			TypeBcNorth
 reflect			TypeBcBottom
 reflect			TypeBcTop
 
@@ -146,14 +146,14 @@ T			DoSaveInitial
 cut VAR idl		PlotString
 -1			DnSavePlot
 1.667834e-12		DtSavePlot
-0.0001			xMinCut
-0.0002			xMaxCut
-0.0			yMinCut
-1.0			yMaxCut
+0.0			xMinCut
+1.0			xMaxCut
+0.0001			yMinCut
+0.0002			yMaxCut
 0.0001			zMinCut
 0.0002			zMaxCut
 -1.0			DxSavePlot
-erad1 erad2 dy
+erad dx
 g
 
 #STOP

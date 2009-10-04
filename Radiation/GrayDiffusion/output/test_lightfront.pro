@@ -6,8 +6,8 @@ resdir='test_lightfront_results/'
 
 firstpict = 11
 !p.psym=-1
-multiplot=-2
-func='erad1 erad2'
+multiplot=-1
+func='erad'
 
 filename = resdir+'X_*/GM/cut*.outs'
 set_device, resdir + 'lightfront_x.eps', /eps, /land
@@ -71,12 +71,12 @@ plot_oo,1/wlog(*,0),wlog(*,1),psym=-1,thick=4, $
         xrange=[1e-3,1e-1],yrange=[1e-2,0.1],$
         xtitle='Grid resolution', $
         ytitle='L1 error', $
-        title="lightfront test with two groups"
+        title="lightfront test"
 oplot,1/wlog(*,0),wlog(*,2),psym=-2,thick=4
 oplot,1/wlog(*,0),wlog(*,3),psym=-4,thick=4
-oplot,[0.015],[0.037],psym=1 & xyouts,0.018,0.036,'x-direction'
-oplot,[0.015],[0.031],psym=2 & xyouts,0.018,0.03,'y-direction'
-oplot,[0.015],[0.026],psym=4 & xyouts,0.018,0.025,'z-direction'
+oplot,[0.0015],[0.037],psym=1 & xyouts,0.0018,0.036,'x-direction'
+oplot,[0.0015],[0.031],psym=2 & xyouts,0.0018,0.03, 'y-direction'
+oplot,[0.0015],[0.026],psym=4 & xyouts,0.0018,0.025,'z-direction'
 close_device,/pdf
 
 exit

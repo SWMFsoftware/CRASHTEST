@@ -153,7 +153,7 @@ cut VAR idl		PlotString
 0.0			zMinCut
 1.0			zMaxCut
 -1.0			DxSavePlot
-erad1 erad2
+erad1 erad2 dz
 g
 
 #STOP

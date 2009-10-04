@@ -30,8 +30,8 @@ help:
 test_rundir:
 	cd ${DIR}; \
 		rm -rf ${RUNDIR}; \
-		make rundir RUNDIR=${RUNDIR} STANDALONE=YES GMDIR=`pwd`; \
-			DEFAULT_EXE=BATSRUS.exe
+		make rundir RUNDIR=${RUNDIR} STANDALONE=YES GMDIR=`pwd` \
+			DEFAULT_EXE=CRASH.exe
 
 
 ### lightfront test in 1D ###
@@ -48,7 +48,7 @@ test_lightfront:
 
 test_lightfront_compile:
 	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,1000,1000 -setvar=nWave=2
-	cd ${DIR}; make BATSRUS PIDL
+	cd ${DIR}; make CRASH PIDL
 
 test_lightfront_rundir: test_rundir
 
@@ -67,7 +67,7 @@ test_lightfront_run1:
 		perl -pi -e '$$a=${RES}/4; s/\S+(\s*nRootBlock${DIM})/$$a$$1/' PARAM.in; \
 		perl -pi -e '$$a=4.16959e-6*40/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
-		${MPIRUN} ./BATSRUS.exe > runlog; \
+		${MPIRUN} ./CRASH.exe > runlog; \
 		PostProc.pl -M RESULTS/${DIM}_${RES}
 
 test_lightfront_check:

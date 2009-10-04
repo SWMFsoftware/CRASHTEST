@@ -10,6 +10,6 @@ function calc_error_lightfront,x,w
         wref(ix,1)=1
      endelse
   endfor
-  return,( total(abs(w(*,0)-wref(*,0)))/total(abs(wref(*,0))) + $
-           total(abs(w(*,1)-wref(*,1)))/total(abs(wref(*,1))) )/2
+  return,total(abs(w(*,0)-wref(*,0))*w(*,2)) + $
+         total(abs(w(*,1)-wref(*,1))*w(*,2))
 end
