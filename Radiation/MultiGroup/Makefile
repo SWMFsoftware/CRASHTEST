@@ -5,6 +5,8 @@
 test: 
 	@rm -f output/*.diff
 	-@(make test_lightfront)
+	-@(make test_infinitemedium)
+	-@(make test_planckian)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -25,6 +27,8 @@ help:
 	@echo "    test MPIRUN='mpirun -np 3' (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_lightfront            (run lightfront test in 1D)"
+	@echo "    test_infinitemedium        (run infinitemedium test in 1D)"
+	@echo "    test_planckian             (run planckian test)"
 
 
 test_rundir:
@@ -77,6 +81,87 @@ test_lightfront_check:
 		output/test_lightfront.ref \
 		> output/test_lightfront.diff)
 	ls -l output/test_lightfront.diff
+
+
+### infinite medium test ###
+
+test_infinitemedium:
+	@echo "test_infinitemedium_compile..." > output/test_infinitemedium.diff
+	make test_infinitemedium_compile
+	@echo "test_infinitemedium_rundir..." >> output/test_infinitemedium.diff
+	make test_infinitemedium_rundir
+	@echo "test_infinitemedium_run..." >> output/test_infinitemedium.diff
+	make test_infinitemedium_run
+	@echo "test_infinitemedium_check..." >> output/test_infinitemedium.diff
+	make test_infinitemedium_check
+
+test_infinitemedium_compile:
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -setvar=nWave=2
+	cd ${DIR}; make CRASH PIDL
+
+test_infinitemedium_rundir: test_rundir
+
+test_infinitemedium_run:
+	cp input/PARAM.in.infinitemedium ${DIR}/${RUNDIR}/PARAM.in; \
+	for REDUCEDT in 2 4 8; do \
+	 make test_infinitemedium_run1 REDUCEDT=$${REDUCEDT}; \
+	done
+	rm -rf output/test_infinitemedium_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_infinitemedium_results
+
+test_infinitemedium_run1:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=1.667834e-6/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		./CRASH.exe > runlog; \
+		PostProc.pl -M RESULTS/${REDUCEDT}
+
+test_infinitemedium_check:
+	cd output; idl test_infinitemedium.pro; \
+		rm -f test_infinitemedium_results/*.eps
+	-(diff  output/test_infinitemedium_results/error.dat \
+		output/test_infinitemedium.ref \
+		> output/test_infinitemedium.diff)
+	ls -l output/test_infinitemedium.diff
+
+
+### planckian test ###
+
+test_planckian:
+	@echo "test_planckian_compile..." > output/test_planckian.diff
+	make test_planckian_compile
+	@echo "test_planckian_rundir..." >> output/test_planckian.diff
+	make test_planckian_rundir
+	@echo "test_planckian_run..." >> output/test_planckian.diff
+	make test_planckian_run
+	@echo "test_planckian_check..." >> output/test_planckian.diff
+	make test_planckian_check
+
+test_planckian_compile:
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -setvar=nWave=80
+	cd ${DIR}; make CRASH PIDL
+
+test_planckian_rundir: test_rundir
+
+test_planckian_run:
+	cp input/PARAM.in.planckian ${DIR}/${RUNDIR}/PARAM.in; \
+	make test_planckian_run1
+	rm -rf output/test_planckian_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_planckian_results
+
+test_planckian_run1:
+	cd ${DIR}/${RUNDIR}; \
+		./CRASH.exe > runlog; \
+		PostProc.pl -M RESULTS/
+
+test_planckian_check:
+	cd output; idl test_planckian.pro; \
+		rm -f test_planckian_results/*.eps
+	-(diff  output/test_planckian_results/error.dat \
+		output/test_planckian.ref \
+		> output/test_planckian.diff)
+	ls -l output/test_planckian.diff
+
 
 
 clean:

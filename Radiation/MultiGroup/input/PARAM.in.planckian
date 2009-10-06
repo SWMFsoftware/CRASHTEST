@@ -54,7 +54,7 @@ T			UseUserUpdateStates
 #USERINPUTBEGIN ------------------------
 
 #TYPEPROBLEM
-infinitemedium		TypeProblem
+planckian		TypeProblem
 
 #USERINPUTEND ----------------------------
 
@@ -66,7 +66,7 @@ radiation		TypeSemiImplicit  radcond or radiation
 cg			TypeKrylov
 nul                     TypeInitKrylov
 1.0e-8                  ErrorMaxKrylov
-400                     MaxMatvecKrylov
+100                     MaxMatvecKrylov
 
 #PRECONDITIONER
 left	                TypePrecondSide (left, symmetric, right)
@@ -87,7 +87,7 @@ reflect			TypeBcTop
 
 #FIXEDTIMESTEP
 T                       UseFixedTimeStep
-1.667834e-6		DtFixedDim
+1.667834e-4		DtFixedDim
 
 #SCHEME
 2			nOrder
@@ -116,8 +116,8 @@ T			DoSaveInitial
 #SAVEPLOT
 1			nPlotfile
 cut VAR idl		PlotString
--1			DnSavePlot
-1.667834e-11		DtSavePlot
+2			DnSavePlot
+-0.1			DtSavePlot
 -1.0			xMinCut
  1.0			xMaxCut
 0.0001			yMinCut
@@ -125,7 +125,7 @@ cut VAR idl		PlotString
 0.0001			zMinCut
 0.0002			zMaxCut
 -1.0			DxSavePlot
-planck erad1 erad2
+tkev trkev etotal
 g
 
 #STOP
