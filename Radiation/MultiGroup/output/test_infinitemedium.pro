@@ -36,7 +36,7 @@ plot_oo,[0.1,1.0],[1e-4,1e-3],linestyle=2,ystyle=1, $
         xrange=[0.1,1.0],yrange=[1e-4,1e-3],$
         xtitle='time step (arbitrary units)', $
         ytitle='Linf error (at e-folding time)', $
-        title="infinite test with two groups"
+        title="infinite medium test with two groups"
 xyouts,0.5,0.0004,'1st order slope',charsize=2,charthick=1
 oplot,wlog(*,0),wlog(*,1),psym=-1,thick=4
 oplot,wlog(*,0),wlog(*,2),psym=-2,thick=4

@@ -27,7 +27,7 @@ help:
 	@echo "    test MPIRUN='mpirun -np 3' (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_lightfront            (run lightfront test in 1D)"
-	@echo "    test_infinitemedium        (run infinitemedium test in 1D)"
+	@echo "    test_infinitemedium        (run infinitemedium test)"
 	@echo "    test_planckian             (run planckian test)"
 
 

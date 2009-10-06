@@ -1,0 +1,5 @@
+gray-diffusion infinite medium test
+Dt radcond_error radiation_error
+     0.500000  0.000916958  0.000916958
+     0.250000  0.000459373  0.000459373
+     0.125000  0.000229776  0.000229776

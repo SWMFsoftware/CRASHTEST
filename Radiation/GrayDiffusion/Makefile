@@ -7,6 +7,7 @@ test:
 	-@(make test_suolson_1d)
 	-@(make test_suolson_1d_amr)
 	-@(make test_lightfront)
+	-@(make test_infinitemedium)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -28,6 +29,7 @@ help:
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_suolson_1d            (run Su-Olson Marshak test in 1D)"
 	@echo "    test_suolson_1d_amr        (run Su-Olson Marshak test in 1D with AMR)"
+	@echo "    test_infinitemedium        (run infinitemedium test)"
 	@echo "    test_lightfront            (run lightfront test in 1D)"
 
 
@@ -178,6 +180,51 @@ test_lightfront_check:
 		output/test_lightfront.ref \
 		> output/test_lightfront.diff)
 	ls -l output/test_lightfront.diff
+
+
+### infinite medium test ###
+
+test_infinitemedium:
+	@echo "test_infinitemedium_compile..." > output/test_infinitemedium.diff
+	make test_infinitemedium_compile
+	@echo "test_infinitemedium_rundir..." >> output/test_infinitemedium.diff
+	make test_infinitemedium_rundir
+	@echo "test_infinitemedium_run..." >> output/test_infinitemedium.diff
+	make test_infinitemedium_run
+	@echo "test_infinitemedium_check..." >> output/test_infinitemedium.diff
+	make test_infinitemedium_check
+
+test_infinitemedium_compile:
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1
+	cd ${DIR}; make CRASH PIDL
+
+test_infinitemedium_rundir: test_rundir
+
+test_infinitemedium_run:
+	cp input/PARAM.in.infinitemedium ${DIR}/${RUNDIR}/PARAM.in; \
+	for SOLVER in radiation radcond; do \
+	 for REDUCEDT in 2 4 8; do \
+	  make test_infinitemedium_run1 REDUCEDT=$${REDUCEDT} SOLVER=$${SOLVER}; \
+	 done \
+	done
+	rm -rf output/test_infinitemedium_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_infinitemedium_results
+
+test_infinitemedium_run1:
+	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=1.667834e-5/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
+		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		./CRASH.exe > runlog; \
+		PostProc.pl -M RESULTS/${SOLVER}_${REDUCEDT}
+
+test_infinitemedium_check:
+	cd output; idl test_infinitemedium.pro; \
+		rm -f test_infinitemedium_results/*.eps
+	-(diff  output/test_infinitemedium_results/error.dat \
+		output/test_infinitemedium.ref \
+		> output/test_infinitemedium.diff)
+	ls -l output/test_infinitemedium.diff
 
 
 
