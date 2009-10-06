@@ -111,7 +111,7 @@ test_infinitemedium_run:
 
 test_infinitemedium_run1:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=1.667834e-6/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+		perl -pi -e '$$a=0.5559447e-6/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		./CRASH.exe > runlog; \
 		PostProc.pl -M RESULTS/${REDUCEDT}

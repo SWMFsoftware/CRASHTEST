@@ -72,6 +72,11 @@ nul                     TypeInitKrylov
 left	                TypePrecondSide (left, symmetric, right)
 dilu                    TypePrecond (MBILU)
 
+#IMPLSTEP
+0.5			ImplCoeff
+F			UseBdf2
+F			UseSourceImpl
+
 #RADIATION
 T                       UseRadDiffusion
 F                       UseRadFluxLimiter
@@ -87,7 +92,7 @@ reflect			TypeBcTop
 
 #FIXEDTIMESTEP
 T                       UseFixedTimeStep
-1.667834e-6		DtFixedDim
+1.667834e-5		DtFixedDim
 
 #SCHEME
 2			nOrder
@@ -117,7 +122,7 @@ T			DoSaveInitial
 1			nPlotfile
 cut VAR idl		PlotString
 -1			DnSavePlot
-1.667834e-11		DtSavePlot
+0.833917e-11		DtSavePlot
 -1.0			xMinCut
  1.0			xMaxCut
 0.0001			yMinCut
@@ -125,7 +130,7 @@ cut VAR idl		PlotString
 0.0001			zMinCut
 0.0002			zMaxCut
 -1.0			DxSavePlot
-planck erad1 erad2
+planck bfinal erad
 g
 
 #STOP

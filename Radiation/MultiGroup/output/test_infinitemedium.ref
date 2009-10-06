@@ -1,0 +1,5 @@
+multigroup infinite medium test
+Dt bin1_error bin2_error
+     0.500000  0.000281215  0.000281215
+     0.250000  0.000124812  0.000124812
+     0.125000  5.59688e-05  5.59688e-05

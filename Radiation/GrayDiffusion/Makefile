@@ -212,7 +212,7 @@ test_infinitemedium_run:
 
 test_infinitemedium_run1:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=1.667834e-5/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
+		perl -pi -e '$$a=1.667834e-3/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
 		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		./CRASH.exe > runlog; \
