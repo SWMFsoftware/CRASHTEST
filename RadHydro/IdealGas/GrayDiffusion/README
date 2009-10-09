@@ -14,3 +14,12 @@ various grid resolutions.
 
 We expect second order convergence rate for the first test, and first order
 convergence for the second and third tests.
+
+In the *_amr tests use the fully implicit BDF2 scheme (second order in time).
+
+The *_semi tests use the semi-implicit scheme that is only first order accurate in time.
+This is compensated by reducing the CFL number proportional to the grid resolution
+in the first test, so that second order accuracy can be achieved. 
+
+The test3_dynamic test uses the semi-implicit scheme together with a dynamic grid
+adaptation. 
