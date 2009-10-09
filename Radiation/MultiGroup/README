@@ -1,0 +1,37 @@
+There are 3 tests.
+----------------------------------------------------------------------
+1. Infinite medium with two independent gray groups
+
+This test checks the material-radiation relaxation rate.
+There are two energy groups (to excersize the multi-group code). 
+Initially the material temperature is positive while the radiation
+group temperatures are zero. The final temperature is 1 keV. The 
+initial material temperature is determined from energy conservation.
+
+The temporal evolution is an exponential relaxation towards the
+equilibrium temperature. We expect first order accuracy in time
+using the semi-implicit scheme based on spectral temperatures.
+
+----------------------------------------------------------------------
+2. Infinite medium with several radiation energy groups
+
+This test checks the material-radiation relaxation rate and
+the proper interaction of the radiation energy groups with
+the material. The equilibrium state has to be a Planckian 
+energy distribution among the groups. 
+
+----------------------------------------------------------------------
+3. Double light front test
+
+There are two groups. The initial radiation energy is zero. 
+The radiation energy for group 1 enters from the left boundary, 
+for group 2 it enters from the right boundary. 
+Both fronts propagate with the speed of light. This is ensured
+by the flux-limiter in the flux-limited gray diffusion algorithm.
+The relaxation term between radiation and material is switched off,
+so that the two radiation groups evolve independently.
+
+The expected convergence rate is less than 1 (but at least 0.5) 
+due to the numerical diffusion of the discontinuities.
+
+
