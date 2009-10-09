@@ -1,11 +1,40 @@
 The heat conduction tests are used to verify the correctness and
-accuracy of the time-dependent heat conduction model. There are two
-tests, a one dimensional slab and a two dimensional rz-geometry
-test, both assuming uniform heat conduction coefficient. The one
-dimensional problem is the diffusion of a gaussian temperature
-profile. The two dimensional test is a combination of a gaussian
-temperature profile in the z-direction and a elevated J0 Bessel
-function in the r-direction.
+accuracy of the time-dependent heat conduction model. 
+
+There are 3 tests:
+----------------------------------------------------------------------------------
+1. Uniform tests: uniform heat conduction coefficient
+
+- 1D diffusion of a Gaussian temperature profile. 
+
+- 2D rz-geometry: combination of a Gaussian temperature profile 
+  in the z-direction and a elevated J0 Bessel function in the r-direction.
+
 For both tests we use a Crank-Nicolson approach to achieve second
 order accurate time-integration. The results are compared with the
 analytical solutions. We expect second order convergence rate.
+----------------------------------------------------------------------------------
+2. RMTV: Reinicke and Meyer-ter Vehn test 
+
+The Reinicke Meyer-ter Vehn test considers an initially strong and
+concentrated explosion in an ambient gas for which Te = Ti.
+The heat conduction dominates the fluid flow, leading to a
+sizeable thermal front leading the shock front. This test uses a
+non-linear heat conduction model.
+
+The spherical blast wave is calculated in the rz-geometry and compared with the 
+known self-similar solutions.
+
+----------------------------------------------------------------------------------
+3. Lowrie3: Lowrie's third radhydro test turned into a heat conduction test
+
+In this test there is a discontinuity, and the heat conduction and the electron-ion
+relaxation rate varies with temperature. 
+The test is done on a 2D non-uniform grid. The initial condition is rotated
+by atan$(1/2)$ and the solution is advected orthogonal to the shock front
+(a constant velocity was added to the steady state solution). The
+semi-analytic solution (provided by Lowrie) is advected together with the flow.
+The errors are calculated relative to the semi-analytic solution with
+various grid resolutions. 
+
+We expect first order convergence.
