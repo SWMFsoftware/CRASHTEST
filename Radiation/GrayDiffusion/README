@@ -1,4 +1,26 @@
-The Su-Olson test is a one-dimensional, non-equilibrium Marshak
+There are three tests
+----------------------------------------------------------------------
+1. Infinite medium: uniform material interacts with radiation
+This test checks the material-radiation relaxation rate. 
+Initially the material temperature is positive while the radiation 
+temperature is zero. The final temperature is 1 keV. The initial
+material temperature is determined from energy conservation. 
+
+The temporal evolution is an exponential relaxation towards the
+equilibrium temperature. We expect second order accuracy in time 
+using the semi-implicit scheme with Crank-Nicolson scheme (there is
+no hydro update). 
+----------------------------------------------------------------------
+2. Lightfront: propagation of a discontinuity in the radiation field.
+
+The initial radiation field is zero. At the left boundary a constant
+radiation energy is applied. The radiation should propagate inward 
+with the speed of light. This is ensured by the flux-limiter in the
+flux-limited gray diffusion algorithm. The expected convergence rate 
+is less than 1 (but at least 0.5) due to the numerical diffusion of the
+discontinuity.
+----------------------------------------------------------------------
+3. Su-Olson test is a one-dimensional, non-equilibrium Marshak
 wave test and is used to verify the correctness and accuracy of the
 time-dependent gray radiation diffusion model. This test is a
 linearized radiation transport problem in slab geometry. The
