@@ -63,7 +63,7 @@ T			UseSemiImplicit
 radiation		TypeSemiImplicit  radcond or radiation
 
 #KRYLOV
-cg			TypeKrylov
+gmres			TypeKrylov
 nul                     TypeInitKrylov
 1.0e-8                  ErrorMaxKrylov
 400                     MaxMatvecKrylov
@@ -71,6 +71,11 @@ nul                     TypeInitKrylov
 #PRECONDITIONER
 left	                TypePrecondSide (left, symmetric, right)
 dilu                    TypePrecond (MBILU)
+
+#IMPLSTEP
+0.5                     ImplCoeff
+F                       UseBdf2
+F                       UseSourceImpl
 
 #RADIATION
 T                       UseRadDiffusion

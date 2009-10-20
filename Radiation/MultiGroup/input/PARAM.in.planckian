@@ -40,7 +40,7 @@ F			UseNonConservative
 F			UseUserInnerBcs
 F			UseUserSource
 F			UseUserPerturbation
-T			UseUserOuterBcs
+F			UseUserOuterBcs
 T			UseUserICs
 F			UseUserSpecifyRefinement
 F			UseUserLogFiles
@@ -63,10 +63,15 @@ T			UseSemiImplicit
 radiation		TypeSemiImplicit  radcond or radiation
 
 #KRYLOV
-cg			TypeKrylov
+gmres			TypeKrylov
 nul                     TypeInitKrylov
 1.0e-8                  ErrorMaxKrylov
 100                     MaxMatvecKrylov
+
+#IMPLSTEP
+0.5                     ImplCoeff
+F                       UseBdf2
+F                       UseSourceImpl
 
 #PRECONDITIONER
 left	                TypePrecondSide (left, symmetric, right)
@@ -87,7 +92,7 @@ reflect			TypeBcTop
 
 #FIXEDTIMESTEP
 T                       UseFixedTimeStep
-1.667834e-4		DtFixedDim
+1.667834e-6		DtFixedDim
 
 #SCHEME
 2			nOrder
@@ -116,8 +121,8 @@ T			DoSaveInitial
 #SAVEPLOT
 1			nPlotfile
 cut VAR idl		PlotString
-2			DnSavePlot
--0.1			DtSavePlot
+-1			DnSavePlot
+1.667834e-11		DtSavePlot
 -1.0			xMinCut
  1.0			xMaxCut
 0.0001			yMinCut
@@ -125,7 +130,7 @@ cut VAR idl		PlotString
 0.0001			zMinCut
 0.0002			zMaxCut
 -1.0			DxSavePlot
-tkev trkev etotal
+tkev trkev etotal planckian
 g
 
 #STOP

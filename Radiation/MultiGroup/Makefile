@@ -103,7 +103,7 @@ test_infinitemedium_rundir: test_rundir
 
 test_infinitemedium_run:
 	cp input/PARAM.in.infinitemedium ${DIR}/${RUNDIR}/PARAM.in; \
-	for REDUCEDT in 2 4 8; do \
+	for REDUCEDT in 1 2 4; do \
 	 make test_infinitemedium_run1 REDUCEDT=$${REDUCEDT}; \
 	done
 	rm -rf output/test_infinitemedium_results
@@ -111,7 +111,7 @@ test_infinitemedium_run:
 
 test_infinitemedium_run1:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=0.5559447e-6/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+		perl -pi -e '$$a=0.5559447e-4/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		./CRASH.exe > runlog; \
 		PostProc.pl -M RESULTS/${REDUCEDT}
@@ -145,14 +145,18 @@ test_planckian_rundir: test_rundir
 
 test_planckian_run:
 	cp input/PARAM.in.planckian ${DIR}/${RUNDIR}/PARAM.in; \
-	make test_planckian_run1
+	for REDUCEDT in 2 4 8; do \
+	 make test_planckian_run1 REDUCEDT=$${REDUCEDT}; \
+	done
 	rm -rf output/test_planckian_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_planckian_results
 
 test_planckian_run1:
 	cd ${DIR}/${RUNDIR}; \
+		perl -pi -e '$$a=1.667834e-3/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
 		./CRASH.exe > runlog; \
-		PostProc.pl -M RESULTS/
+		PostProc.pl -M RESULTS/${REDUCEDT}
 
 test_planckian_check:
 	cd output; idl test_planckian.pro; \

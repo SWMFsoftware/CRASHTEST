@@ -1,0 +1,5 @@
+80 group infinite medium test
+Dt absolute_error 
+     0.500000    0.0078794157
+     0.250000    0.0019291043
+     0.125000   0.00047979821
