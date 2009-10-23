@@ -13,7 +13,6 @@ test:
 	@rm -f test.results ${FILEDIFF}
 	-@(cd HeatConduction;                  make test)
 	-@(cd Radiation/GrayDiffusion;         make test)
-	-@(cd Radiation/LightFront;            make test)
 	-@(cd Radiation/MultiGroup;            make test)
 	-@(cd Radiography;                     make test)
 	-@(cd Hydro/IdealGas;                  make test)
@@ -31,7 +30,6 @@ check:
 clean:
 	-@(cd HeatConduction;                  make clean)
 	-@(cd Radiation/GrayDiffusion;         make clean)
-	-@(cd Radiation/LightFront;            make clean)
 	-@(cd Radiation/MultiGroup;            make clean)
 	-@(cd Radiography;                     make clean)
 	-@(cd Hydro/IdealGas;                  make clean)
