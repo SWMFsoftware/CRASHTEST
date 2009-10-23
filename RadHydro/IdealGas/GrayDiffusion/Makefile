@@ -19,6 +19,8 @@ TESTDIR = CRASHTEST/RadHydro/IdealGas/GrayDiffusion
 # Main BATSRUS/CRASH directory
 DIR = ../../../..
 
+SCRIPTDIR = ${DIR}/share/Scripts
+
 # All tests are done in this directory:
 RUNDIR = run_test
 
@@ -84,7 +86,7 @@ test_lowrie1_amr_run_res:
 test_lowrie1_amr_check:
 	cd output; idl test_lowrie1_amr.pro; \
 		rm -f test_lowrie1_amr_results/*.eps
-	-(diff  output/test_lowrie1_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -a=2e-6  output/test_lowrie1_amr_results/error.dat \
 		output/test_lowrie1_amr.ref \
 		> output/test_lowrie1_amr.diff)
 	ls -l output/test_lowrie1_amr.diff
@@ -129,7 +131,7 @@ test_lowrie2_amr_run_res:
 test_lowrie2_amr_check:
 	cd output; idl test_lowrie2_amr.pro; \
 		rm -f test_lowrie2_amr_results/*.eps
-	-(diff  output/test_lowrie2_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -a=5e-7  output/test_lowrie2_amr_results/error.dat \
 		output/test_lowrie2_amr.ref \
 		> output/test_lowrie2_amr.diff)
 	ls -l output/test_lowrie2_amr.diff
@@ -174,7 +176,7 @@ test_lowrie3_amr_run_res:
 test_lowrie3_amr_check:
 	cd output; idl test_lowrie3_amr.pro; \
 		rm -f test_lowrie3_amr_results/*.eps
-	-(diff  output/test_lowrie3_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -a=1e-7  output/test_lowrie3_amr_results/error.dat \
 		output/test_lowrie3_amr.ref \
 		> output/test_lowrie3_amr.diff)
 	ls -l output/test_lowrie3_amr.diff
