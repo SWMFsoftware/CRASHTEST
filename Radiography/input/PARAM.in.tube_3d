@@ -110,7 +110,7 @@ idl_real8 z=0 var	StringPlot
 0.			DxSavePlot
 rho rhoxe rhobe rhopl xe be pl level
 g
-idl_real8 los VAR	StringPlot ! line of sight plot
+idl_ascii los VAR	StringPlot ! line of sight plot
 1                       DnSavePlot
 -1.                     DtSavePlot
 100.                    ObsPosX
@@ -125,7 +125,7 @@ idl_real8 los VAR	StringPlot ! line of sight plot
 40                     nPix
 cube10 rho rhoxe rhobe rhopl	NameVar
 g			NamePar
-idl_real8 los VAR	StringPlot ! line of sight plot
+idl_ascii los VAR	StringPlot ! line of sight plot
 1                       DnSavePlot
 -1.                     DtSavePlot
 0.0                    ObsPosX
@@ -140,7 +140,7 @@ idl_real8 los VAR	StringPlot ! line of sight plot
 40                      nPix
 cube10 rho rhoxe rhobe rhopl	NameVar
 g			NamePar
-idl_real8 los VAR	StringPlot ! line of sight plot
+idl_ascii los VAR	StringPlot ! line of sight plot
 1                       DnSavePlot
 -1.                     DtSavePlot
 0.0                     ObsPosX
