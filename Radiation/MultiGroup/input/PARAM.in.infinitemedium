@@ -82,6 +82,9 @@ T                       UseRadDiffusion
 F                       UseRadFluxLimiter
 0.0e-12                 TradMinSi
 
+#EXTRAINTERNALENERGY
+-1.0e30			ExtraEintMinSi
+
 #OUTERBOUNDARY
 reflect			TypeBcEast
 reflect			TypeBcWest

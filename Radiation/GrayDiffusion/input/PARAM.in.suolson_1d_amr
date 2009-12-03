@@ -91,6 +91,9 @@ T                       UseGrayDiffusion
 F                       UseRadFluxLimiter
 1.0e-6                  TradMinSi
 
+#EXTRAINTERNALENERGY
+-1.0e30			ExtraEintMinSi
+
 #OUTERBOUNDARY
 user			TypeBcEast
 user			TypeBcWest
