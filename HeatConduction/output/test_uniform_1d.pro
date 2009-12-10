@@ -8,10 +8,9 @@ resdir='test_uniform_1d_results/'
 !p.charsize=2
 !p.charthick=1
 
-filename=resdir+'200/GM/z*.outs'
+filename=resdir+'200/GM/cut*.outs'
 npict=1
 .r getpict
-cut=grid(*,1)
 set_device, resdir + 'Tmat.eps', /eps, /land
 plot,x,w(*,1), $
      xrange=[-5.,5.],yrange=[8.,20.],$
@@ -36,19 +35,19 @@ printf,99,'n error'
 ; read the last snapshot 
 npict=100
 
-filename=resdir+'200/GM/z*.outs'
+filename=resdir+'200/GM/cut*.outs'
 .r getpict
 printf,99,200,calc_linf(w)
 
-filename=resdir+'400/GM/z*.outs'
+filename=resdir+'400/GM/cut*.outs'
 .r getpict
 printf,99,400,calc_linf(w)
 
-filename=resdir+'800/GM/z*.outs'
+filename=resdir+'800/GM/cut*.outs'
 .r getpict
 printf,99,800,calc_linf(w)
 
-filename=resdir+'1600/GM/z*.outs'
+filename=resdir+'1600/GM/cut*.outs'
 .r getpict
 printf,99,1600,calc_linf(w)
 

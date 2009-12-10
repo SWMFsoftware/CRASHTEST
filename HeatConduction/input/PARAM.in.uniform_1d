@@ -1,6 +1,9 @@
 #ECHO
 T
 
+#BATL
+T			UseBatl
+
 #TEST
 krylov
 
@@ -21,8 +24,8 @@ F			UseNonConservative
 
 #CHECKGRIDSIZE
 100			nI
-2			nJ
-2			nK
+1			nJ
+1			nK
 2			MinBlockALL
 
 #GRID
@@ -114,10 +117,16 @@ T			DoSaveInitial
 
 #SAVEPLOT
 1			nPlotfile
-z=0 VAR idl             PlotString
--1                      DnSavePlot
-1.0                     DtSavePlot
-0.0                     DxSavePlot
+cut VAR idl		StringPlot
+-1  			DnSavePlot
+0.1			DtSavePlot
+-5.0			xMinCut
+5.0			xMaxCut
+-0.0001			yMinCut
++0.0001			yMaxCut
+-0.0001			zMinCut
++0.0001			zMaxCut
+0.0			DxSavePlot
 t t0
 g
 

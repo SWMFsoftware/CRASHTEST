@@ -55,7 +55,7 @@ test_uniform_1d:
 	make test_uniform_1d_check
 
 test_uniform_1d_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=100,2,2,16,16
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=100,1,1,16,16
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_1d_rundir: test_rundir
@@ -98,7 +98,7 @@ test_uniform_2d:
 	make test_uniform_2d_check
 
 test_uniform_2d_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,2,800,800
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,1,800,800
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_2d_rundir: test_rundir

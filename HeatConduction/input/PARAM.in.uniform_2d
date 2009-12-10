@@ -1,6 +1,9 @@
 #ECHO
 T
 
+#BATL
+T			UseBatl
+
 #TEST
 krylov
 
@@ -22,7 +25,7 @@ F			UseNonConservative
 #CHECKGRIDSIZE
 20			nI
 20			nJ
-2			nK
+1			nK
 2			MinBlockALL
 
 #GRIDGEOMETRY
