@@ -53,7 +53,7 @@ test_suolson_1d:
 	make test_suolson_1d_check
 
 test_suolson_1d_compile:
-	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,2,2,48,48
+	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,1,1,48,48
 	cd ${DIR}; make CRASH PIDL
 
 test_suolson_1d_rundir: test_rundir
@@ -101,7 +101,7 @@ test_suolson_1d_amr:
 	make test_suolson_1d_amr_check
 
 test_suolson_1d_amr_compile:
-	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,4,4,256,256
+	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,1,1,256,256
 	cd ${DIR}; make CRASH PIDL
 
 test_suolson_1d_amr_rundir: test_rundir

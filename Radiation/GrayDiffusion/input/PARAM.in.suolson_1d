@@ -1,6 +1,9 @@
 #ECHO
 T
 
+#BATL
+T			UseBatl
+
 #TEST
 krylov
 
@@ -21,8 +24,8 @@ F			UseNonConservative
 
 #CHECKGRIDSIZE
 10			nI
-2			nJ
-2			nK
+1			nJ
+1			nK
 48			MinBlockALL
 
 #GRID
