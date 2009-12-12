@@ -1,6 +1,9 @@
 #ECHO
 T
 
+#BATL
+T			UseBatl
+
 #TEST
 krylov
 
