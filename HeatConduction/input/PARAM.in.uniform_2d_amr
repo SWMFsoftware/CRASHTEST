@@ -108,6 +108,9 @@ reflect			TypeBcTop
 Rusanov			TypeFlux
 minmod			TypeLimiter
 
+#RESCHANGE
+T			UseAccurateResChange
+
 #TIMESTEPPING
 1			nStage
 1.0			CflExpl

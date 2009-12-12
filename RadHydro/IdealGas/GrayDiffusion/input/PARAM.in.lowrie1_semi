@@ -128,10 +128,9 @@ T			UseAccurateResChange
 
 #SAVELOGFILE
 T			DoSaveLogfile
-VAR			StringLogfile
+raw			StringLogfile
 1			DnSaveLogfile
 -1.			DtSaveLogfile
-rho mx my Erad E pmin pmax
 
 #SAVERESTART
 F			DoSaveRestart
