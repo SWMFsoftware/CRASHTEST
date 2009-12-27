@@ -60,7 +60,7 @@ test_lowrie1_amr:
 	make test_lowrie1_amr_check
 
 test_lowrie1_amr_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=24,4,4,256,256
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=24,4,1,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie1_amr_rundir: test_rundir
@@ -105,7 +105,7 @@ test_lowrie2_amr:
 	make test_lowrie2_amr_check
 
 test_lowrie2_amr_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,4,256,256
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,1,256,256
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie2_amr_rundir: test_rundir
