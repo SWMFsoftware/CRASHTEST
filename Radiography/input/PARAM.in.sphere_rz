@@ -1,6 +1,9 @@
 #ECHO
 T
 
+#BATL
+F
+
 #PLANET
 NONE
 
@@ -13,7 +16,7 @@ NONE
 #CHECKGRIDSIZE
 10			nI
 10			nJ
-2			nK
+1			nK
 100			MinBlockALL
 
 #GRID
