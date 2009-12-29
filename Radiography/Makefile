@@ -241,7 +241,7 @@ test_tube_rz:
 	make test_tube_rz_check
 
 test_tube_rz_compile:
-	cd ${DIR}; ./Config.pl  -e=HdRadCrash -u=Crash -g=10,10,2,600,1
+	cd ${DIR}; ./Config.pl  -e=HdRadCrash -u=Crash -g=10,10,1,600,1
 	cd ${DIR}; make CRASH PIDL
 
 test_tube_rz_rundir: test_rundir
