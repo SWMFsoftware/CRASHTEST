@@ -87,19 +87,7 @@ T			DoSaveInitial
 #USERINPUTEND   ----------------
 
 #SAVEPLOT
-6			nPlotfile
-idl_real8 x=0 var	StringPlot
-1                       DnSavePlot
--1.                     DtSavePlot
-0.			DxSavePlot
-rho rhoxe rhobe rhopl xe be pl level
-g
-idl_real8 y=0 var	StringPlot
-1                       DnSavePlot
--1.                     DtSavePlot
-0.			DxSavePlot
-rho rhoxe rhobe rhopl xe be pl level
-g
+4			nPlotfile
 idl_real8 z=0 var	StringPlot
 1                       DnSavePlot
 -1.                     DtSavePlot

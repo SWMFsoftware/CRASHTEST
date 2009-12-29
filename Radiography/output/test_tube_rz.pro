@@ -11,9 +11,9 @@ loadct,39
 .r animate
 close_device,/pdf
 
-filename=resdir+'tube_rz/GM/?=*.out'
+filename=resdir+'tube_rz/GM/z*.out'
 func='rho rhoxe rhobe rhopl rho-{rhoxe}-{rhobe}-{rhopl}'
-set_device, resdir + 'tube_rz_cuts.eps', /eps, /port
+set_device, resdir + 'tube_rz_z0cut.eps', /eps, /port
 loadct,39
 .r animate
 close_device,/pdf
