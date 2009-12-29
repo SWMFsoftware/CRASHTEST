@@ -258,12 +258,12 @@ test_tube_rz_check:
 	cd output; idl test_tube_rz.pro; \
 		rm -f test_tube_rz_results/*.eps
 	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_tube_rz_results/tube_rz/GM/los_var_4*.out \
+		output/test_tube_rz_results/tube_rz/GM/los_var_2*.out \
 		output/test_tube_rz_x.ref > output/test_tube_rz.diff)
 	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_tube_rz_results/tube_rz/GM/los_var_5*.out \
+		output/test_tube_rz_results/tube_rz/GM/los_var_3*.out \
 		output/test_tube_rz_y.ref >> output/test_tube_rz.diff)
 	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_tube_rz_results/tube_rz/GM/los_var_6*.out \
+		output/test_tube_rz_results/tube_rz/GM/los_var_4*.out \
 		output/test_tube_rz_z.ref >> output/test_tube_rz.diff)
 	ls -l output/test_tube_rz.diff
