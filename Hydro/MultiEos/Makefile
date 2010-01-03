@@ -55,7 +55,7 @@ test_advection_1d:
 	make test_advection_1d_check
 
 test_advection_1d_compile:
-	cd ${DIR}; ./Config.pl -e=HdCrash -u=Crash -g=10,2,2,1000,1
+	cd ${DIR}; ./Config.pl -e=HdCrash -u=Crash -g=10,1,1,1000,1
 	cd ${DIR}; make CRASH PIDL
 
 test_advection_1d_rundir: test_rundir
@@ -107,7 +107,7 @@ test_advection_2d:
 	make test_advection_2d_check
 
 test_advection_2d_compile:
-	cd ${DIR}; ./Config.pl -e=HdCrash -u=Crash -g=4,4,2,1000,1
+	cd ${DIR}; ./Config.pl -e=HdCrash -u=Crash -g=4,4,1,1000,1
 	cd ${DIR}; make CRASH PIDL
 
 test_advection_2d_rundir: test_rundir
@@ -160,7 +160,7 @@ test_wave_1d:
 	make test_wave_1d_check
 
 test_wave_1d_compile:
-	cd ${DIR}; ./Config.pl -e=HdCrash -u=Crash -g=10,2,2,1000,1
+	cd ${DIR}; ./Config.pl -e=HdCrash -u=Crash -g=10,1,1,1000,1
 	cd ${DIR}; make CRASH PIDL
 
 test_wave_1d_rundir: test_rundir

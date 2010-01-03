@@ -1,7 +1,10 @@
 Begin session: 1
 
 #ECHO
-T
+T			DoEcho
+
+#BATL
+T			UseBatl
 
 LOOKUPTABLE
 pPerE(rho,e/rho)	NameTable
@@ -76,8 +79,8 @@ T			IsTimeAccurate
 
 #CHECKGRIDSIZE
 10			nI
-2			nJ
-2			nK
+1			nJ
+1			nK
 500			MinBlockALL
 
 #GRID
