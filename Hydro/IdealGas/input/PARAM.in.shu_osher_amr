@@ -1,6 +1,9 @@
 #ECHO
 T			DoEcho
 
+#BATL
+T			UseBatl
+
 #PLANET
 NONE			NamePlanet
 
@@ -16,7 +19,7 @@ F			UseNonConservative
 #CHECKGRIDSIZE
 10			nI
 4			nJ
-4			nK
+1			nK
 1000			MinBlockALL
 
 !Grid [-5,5] is stretched by sqrt(5)/2 since the problem is tilted by atan(0.5)
@@ -28,18 +31,18 @@ F			UseNonConservative
  5.590169943749d0	xMax
 -0.3354101966249d0	yMin
  0.3354101966249d0	yMax
--0.056			zMin
- 0.056			zMax
+-0.5			zMin
+ 0.5			zMax
 
 #GRIDLEVEL
 1			nLevelArea
 box			NameArea
 -3			xMinBox
 -0.05			yMinBox
--0.05			zMinBox
+-0.5			zMinBox
  3.0			xMaxBox
  0.05			yMaxBox
- 0.05			zMaxBox
+ 0.5			zMaxBox
 
 #GRIDLEVEL
 1			nLevelArea
