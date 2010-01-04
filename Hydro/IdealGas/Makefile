@@ -14,6 +14,8 @@ TESTDIR = CRASHTEST/Hydro/IdealGas
 # Main BATSRUS/CRASH directory
 DIR = ../../..
 
+SCRIPTDIR = ${DIR}/share/Scripts
+
 # All tests are done in this directory:
 RUNDIR = run_test
 
@@ -57,7 +59,7 @@ test_wave_1d:
 	make test_wave_1d_check
 
 test_wave_1d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,2,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,1,1,100,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_wave_1d_rundir: test_rundir
@@ -86,7 +88,8 @@ test_wave_1d_run1:
 test_wave_1d_check:
 	cd output; idl test_wave_1d.pro; \
 		rm -f test_wave_1d_results/*.eps
-	-(diff  output/test_wave_1d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_wave_1d_results/error.dat \
 		output/test_wave_1d.ref \
 		> output/test_wave_1d.diff)
 	ls -l output/test_wave_1d.diff
@@ -104,7 +107,7 @@ test_wave_2d:
 	make test_wave_2d_check
 
 test_wave_2d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,2,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,1,100,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_wave_2d_rundir: test_rundir
@@ -126,7 +129,7 @@ test_wave_2d_run1:
 	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
 		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
 		     $$a=${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/; \
-		     s/\/\d+(\s*[yz](Min|Max))/\/$$a$$1/' PARAM.in
+		     s/\/\d+(\s*y(Min|Max))/\/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
 		PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
@@ -134,7 +137,8 @@ test_wave_2d_run1:
 test_wave_2d_check:
 	cd output; idl test_wave_2d.pro; \
 		rm -f test_wave_2d_results/*.eps
-	-(diff  output/test_wave_2d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_wave_2d_results/error.dat \
 		output/test_wave_2d.ref \
 		> output/test_wave_2d.diff)
 	ls -l output/test_wave_2d.diff
@@ -152,7 +156,7 @@ test_wave_amr:
 	make test_wave_amr_check
 
 test_wave_amr_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,4,4,1000,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,4,1,1000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_wave_amr_rundir: test_rundir
@@ -182,7 +186,8 @@ test_wave_amr_run1:
 test_wave_amr_check:
 	cd output; idl test_wave_amr.pro; \
 		rm -f test_wave_amr_results/*.eps
-	-(diff  output/test_wave_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl 
+		output/test_wave_amr_results/error.dat \
 		output/test_wave_amr.ref \
 		> output/test_wave_amr.diff)
 	ls -l output/test_wave_amr.diff
@@ -200,7 +205,7 @@ test_shu_osher_1d:
 	make test_shu_osher_1d_check
 
 test_shu_osher_1d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,2,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,1,1,100,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_shu_osher_1d_rundir: test_rundir
@@ -228,7 +233,8 @@ test_shu_osher_1d_check:
 		output/test_shu_osher_1d_ref.out
 	cd output; idl test_shu_osher_1d.pro; \
 		rm -f test_shu_osher_1d_results/*.eps
-	-(diff  output/test_shu_osher_1d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_shu_osher_1d_results/error.dat \
 		output/test_shu_osher_1d.ref \
 		> output/test_shu_osher_1d.diff)
 	ls -l output/test_shu_osher_1d.diff
@@ -246,7 +252,7 @@ test_shu_osher_2d:
 	make test_shu_osher_2d_check
 
 test_shu_osher_2d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,2,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,1,100,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_shu_osher_2d_rundir: test_rundir
@@ -264,7 +270,7 @@ test_shu_osher_2d_run:
 test_shu_osher_2d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e '$$a=${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/; \
-		     s/\/\d+(\s*[yz](Min|Max))/\/$$a$$1/; \
+		     s/\/\d+(\s*y(Min|Max))/\/$$a$$1/; \
 		     s/\S+(\s*TypeFlux)/${FLUX}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
@@ -275,7 +281,8 @@ test_shu_osher_2d_check:
 		output/test_shu_osher_1d_ref.out
 	cd output; idl test_shu_osher_2d.pro; \
 		rm -f test_shu_osher_2d_results/*.eps
-	-(diff  output/test_shu_osher_2d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_shu_osher_2d_results/error.dat \
 		output/test_shu_osher_2d.ref\
 		> output/test_shu_osher_2d.diff)
 	ls -l output/test_shu_osher_2d.diff
@@ -293,7 +300,7 @@ test_shu_osher_amr:
 	make test_shu_osher_amr_check
 
 test_shu_osher_amr_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,4,4,1000,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,4,1,1000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_shu_osher_amr_rundir: test_rundir
@@ -322,7 +329,8 @@ test_shu_osher_amr_check:
 		output/test_shu_osher_1d_ref.out
 	cd output; idl test_shu_osher_amr.pro; \
 		rm -f test_shu_osher_amr_results/*.eps
-	-(diff  output/test_shu_osher_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_shu_osher_amr_results/error.dat \
 		output/test_shu_osher_amr.ref \
 		> output/test_shu_osher_amr.diff)
 	ls -l output/test_shu_osher_amr.diff
