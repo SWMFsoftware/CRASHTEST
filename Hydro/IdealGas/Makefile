@@ -186,7 +186,7 @@ test_wave_amr_run1:
 test_wave_amr_check:
 	cd output; idl test_wave_amr.pro; \
 		rm -f test_wave_amr_results/*.eps
-	-(${SCRIPTDIR}/DiffNum.pl 
+	-(${SCRIPTDIR}/DiffNum.pl \
 		output/test_wave_amr_results/error.dat \
 		output/test_wave_amr.ref \
 		> output/test_wave_amr.diff)
@@ -329,7 +329,7 @@ test_shu_osher_amr_check:
 		output/test_shu_osher_1d_ref.out
 	cd output; idl test_shu_osher_amr.pro; \
 		rm -f test_shu_osher_amr_results/*.eps
-	-(${SCRIPTDIR}/DiffNum.pl \
+	-(${SCRIPTDIR}/DiffNum.pl -r=1e-4 \
 		output/test_shu_osher_amr_results/error.dat \
 		output/test_shu_osher_amr.ref \
 		> output/test_shu_osher_amr.diff)
