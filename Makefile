@@ -19,6 +19,7 @@ test:
 	-@(cd Hydro/MultiEos;                  make test)
 	-@(cd RadHydro/IdealGas/GrayDiffusion; make test)
 	-@(cd FullSystem/Version1;             make test)
+	-@(cd FullSystem/Version2;             make test)
 	make check
 
 check:
@@ -36,6 +37,7 @@ clean:
 	-@(cd Hydro/MultiEos;                  make clean)
 	-@(cd RadHydro/IdealGas/GrayDiffusion; make clean)
 	-@(cd FullSystem/Version1;             make clean)
+	-@(cd FullSystem/Version2;             make clean)
 
 distclean: clean
 	@rm -f test.results
