@@ -17,6 +17,8 @@ TESTDIR = CRASHTEST/HeatConduction
 # Main BATSRUS/CRASH directory
 DIR = ../..
 
+SCRIPTDIR = ${DIR}/share/Scripts
+
 # All tests are done in this directory:
 RUNDIR = run_test
 
@@ -261,7 +263,8 @@ test_lowrie3_run1:
 test_lowrie3_check:
 	cd output; idl test_lowrie3.pro; \
 		rm -f test_lowrie3_results/*.eps
-	-(diff  output/test_lowrie3_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl  -t -a=2e-7 \
+		output/test_lowrie3_results/error.dat \
 		output/test_lowrie3.ref \
 		> output/test_lowrie3.diff)
 	ls -l output/test_lowrie3.diff
