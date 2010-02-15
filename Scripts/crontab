@@ -9,4 +9,5 @@ crontab -e
 For execution every Saturday at 3am put this into crontab:
 
 MAILTO=""
-00 03 * * 6 ${HOME}/bin/test_crash.sh
+00 19 * * * ${HOME}/bin/test_crash.sh
+
