@@ -24,10 +24,10 @@ cvs co CRASHTEST
 cd CRASHTEST
 make test MPIRUN='mpirun -np 16' >& test.log < /dev/null
 
+# Store result by yesterday's date
+scp test_results.txt herot:Sites/CRASH_RESULTS/`date -v-1d +%Y.%m.%d`
+
 # Copy results to a web site
 rsync -az --delete ~/CRASHTEST/CRASH/CRASHTEST/ herot:Sites/CRASH/CRASHTEST/ \
     >& test.log < /dev/null
 
-# Store result by yesterday's date
-scp CRASH/CRASHTEST/test_results.html \
-    herot:Sites/CRASH_RESULTS/`date -v-1d +%Y.%m.%d`
