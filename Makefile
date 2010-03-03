@@ -23,6 +23,7 @@ test:
 	make check
 
 check:
+	ls -ltr ${FILEDIFF} >> test_results.txt
 	@echo "<PRE>"      >  test_results.html
 	ls -ltr ${FILEDIFF} >> test_results.html
 	@echo "</PRE>"     >> test_results.html
