@@ -14,6 +14,6 @@ multiplot=0
 !x.range=0
 !y.range=0
 bottomline = "'time = ' + string(time*1e9, format='(f4.1)')+' ns'"
-set_device,'multigroupcondlos.eps',/pdf
+set_device,'crash_radiograph.eps',/eps
 .r plotfunc
-close_device
+close_device,/pdf
