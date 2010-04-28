@@ -58,7 +58,7 @@ test_lightfront_compile:
 test_lightfront_rundir: test_rundir
 
 test_lightfront_run:
-	for DIM in Z; do \
+	for DIM in X Y Z; do \
 	 for RES in 40 80 160; do \
 	  cp input/PARAM.in.lightfront_$${DIM} ${DIR}/${RUNDIR}/PARAM.in; \
 	  make test_lightfront_run1 RES=$${RES} DIM=$${DIM}; \
