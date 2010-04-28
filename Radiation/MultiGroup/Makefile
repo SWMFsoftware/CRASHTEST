@@ -51,13 +51,14 @@ test_lightfront:
 	make test_lightfront_check
 
 test_lightfront_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,1000,1000 -setvar=nWave=2
+	cd ${DIR}; \
+	 ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,100,100 -setvar=nWave=3
 	cd ${DIR}; make CRASH PIDL
 
 test_lightfront_rundir: test_rundir
 
 test_lightfront_run:
-	for DIM in X Y Z; do \
+	for DIM in Z; do \
 	 for RES in 40 80 160; do \
 	  cp input/PARAM.in.lightfront_$${DIM} ${DIR}/${RUNDIR}/PARAM.in; \
 	  make test_lightfront_run1 RES=$${RES} DIM=$${DIM}; \

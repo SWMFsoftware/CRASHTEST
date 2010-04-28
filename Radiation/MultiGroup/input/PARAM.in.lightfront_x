@@ -87,7 +87,7 @@ lightfront		TypeProblem
 
 #SEMIIMPLICIT
 T			UseSemiImplicit
-radiation		TypeSemiImplicit
+radiationsplit		TypeSemiImplicit
 
 #KRYLOV
 cg			TypeKrylov
@@ -96,8 +96,8 @@ nul                     TypeInitKrylov
 400                     MaxMatvecKrylov
 
 #PRECONDITIONER
-left	                TypePrecondSide (left, symmetric, right)
-dilu                    TypePrecond (MBILU)
+left	                TypePrecondSide
+dilu                    TypePrecond
 
 #RADIATION
 T                       UseGrayDiffusion
@@ -156,7 +156,7 @@ cut VAR idl		PlotString
 0.0001			zMinCut
 0.0002			zMaxCut
 -1.0			DxSavePlot
-erad1 erad2 dx
+I01 I02 I03 dx
 g
 
 #STOP

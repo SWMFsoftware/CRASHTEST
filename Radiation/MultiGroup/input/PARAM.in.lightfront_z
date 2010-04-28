@@ -87,7 +87,7 @@ lightfront		TypeProblem
 
 #SEMIIMPLICIT
 T                       UseSemiImplicit
-radiation                 TypeSemiImplicit
+radiationsplit          TypeSemiImplicit
 
 #KRYLOV
 cg			TypeKrylov
@@ -156,7 +156,7 @@ cut VAR idl		PlotString
 0.0			zMinCut
 1.0			zMaxCut
 -1.0			DxSavePlot
-erad1 erad2 dz
+I01 I02 I03 dz
 g
 
 #STOP
