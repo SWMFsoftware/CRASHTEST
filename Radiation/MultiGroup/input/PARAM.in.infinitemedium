@@ -133,7 +133,7 @@ cut VAR idl		PlotString
 0.0001			zMinCut
 0.0002			zMaxCut
 -1.0			DxSavePlot
-planck bfinal erad1 erad2
+planck bfinal I01 I02
 g
 
 #STOP
