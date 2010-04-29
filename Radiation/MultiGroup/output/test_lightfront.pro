@@ -40,23 +40,28 @@ printf,99,'n x_error y_error z_error'
 
 npict=11
 
+wref=fltarr(192,4)
+wref(0:95,0) = 1.0
+wref(96:191,1:2) = 1.0
+iws = [0,1,2]
+
 filename=resdir+'*_40/GM/cut*.outs'
 .r getpict
-printf,99,40,calc_error_lightfront(x0,w0), $
-       calc_error_lightfront(x1,w1), $
-       calc_error_lightfront(x2,w2)
+printf,99,40,rel_error(w0,wref,iws), $
+       rel_error(w1,wref,iws), $
+       rel_error(w2,wref,iws)
 
 filename=resdir+'*_80/GM/cut*.outs'
 .r getpict
-printf,99,80,calc_error_lightfront(x0,w0), $
-       calc_error_lightfront(x1,w1), $
-       calc_error_lightfront(x2,w2)
+printf,99,80,rel_error(w0,wref,iws), $
+       rel_error(w1,wref,iws), $
+       rel_error(w2,wref,iws)
 
 filename=resdir+'*_160/GM/cut*.outs'
 .r getpict
-printf,99,160,calc_error_lightfront(x0,w0), $
-       calc_error_lightfront(x1,w1), $
-       calc_error_lightfront(x2,w2)
+printf,99,160,rel_error(w0,wref,iws), $
+       rel_error(w1,wref,iws), $
+       rel_error(w2,wref,iws)
 
 close,99
 
