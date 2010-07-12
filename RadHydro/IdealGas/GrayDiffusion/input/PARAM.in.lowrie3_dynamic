@@ -72,6 +72,8 @@ T                       DoAutoRefine
 #AMRCRITERIA
 1                       nRefineCrit
 user                    TypeRefine
+0.5			CoarsenLimit
+0.5			RefineLimit
 
 #USER_FLAGS
 F			UseUserInnerBcs
