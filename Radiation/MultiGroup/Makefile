@@ -52,7 +52,7 @@ test_lightfront:
 
 test_lightfront_compile:
 	cd ${DIR}; \
-	 ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,100,100 -setvar=nWave=3
+	 ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,100,100 -nWave=3
 	cd ${DIR}; make CRASH PIDL
 
 test_lightfront_rundir: test_rundir
@@ -97,7 +97,7 @@ test_infinitemedium:
 	make test_infinitemedium_check
 
 test_infinitemedium_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -setvar=nWave=2
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -nWave=2
 	cd ${DIR}; make CRASH PIDL
 
 test_infinitemedium_rundir: test_rundir
@@ -139,7 +139,7 @@ test_planckian:
 	make test_planckian_check
 
 test_planckian_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -setvar=nWave=80
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -nWave=80
 	cd ${DIR}; make CRASH PIDL
 
 test_planckian_rundir: test_rundir
