@@ -148,7 +148,7 @@ LIMITER
 F			UseLogRhoLimiter
 F       	        UseLogPLimiter
 T               	UseRhoRatioLimiter
-Xe Be Pl EInt		NameVarLimitRatio
+M1 M2 M3 EInt		NameVarLimitRatio
 
 #SAVERESTART
 F			DoSaverestart
