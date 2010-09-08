@@ -12,6 +12,8 @@ test:
 # Main BATSRUS/CRASH directory
 DIR = ../../..
 
+SCRIPTDIR = ${DIR}/share/Scripts
+
 # All tests are done in this directory:
 RUNDIR = run_test
 
@@ -89,8 +91,9 @@ test_advection_1d_run1:
 test_advection_1d_check:
 	cd output; idl test_advection_1d.pro; \
 		rm -f test_advection_1d_results/*.eps
-	-(diff  output/test_advection_1d_results/error.dat \
-		output/test_advection_1d.ref\
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_advection_1d_results/error.dat \
+		output/test_advection_1d.ref \
 		> output/test_advection_1d.diff)
 	ls -l output/test_advection_1d.diff
 
@@ -141,8 +144,9 @@ test_advection_2d_run1:
 test_advection_2d_check:
 	cd output; idl test_advection_2d.pro; \
 		rm -f test_advection_2d_results/*.eps
-	-(diff  output/test_advection_2d_results/error.dat \
-		output/test_advection_2d.ref\
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_advection_2d_results/error.dat \
+		output/test_advection_2d.ref \
 		> output/test_advection_2d.diff)
 	ls -l output/test_advection_2d.diff
 
@@ -197,8 +201,9 @@ test_wave_1d_run1:
 test_wave_1d_check:
 	cd output; idl test_wave_1d.pro; \
 		rm -f test_wave_1d_results/*.eps
-	-(diff  output/test_wave_1d_results/error.dat \
-		output/test_wave_1d.ref\
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_wave_1d_results/error.dat \
+		output/test_wave_1d.ref \
 		> output/test_wave_1d.diff)
 	ls -l output/test_wave_1d.diff
 
