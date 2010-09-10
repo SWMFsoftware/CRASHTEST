@@ -52,7 +52,7 @@ initial			NameArea
 
 #USER_FLAGS
 F			UseUserInnerBcs
-F			UseUserSource
+T			UseUserSource
 F			UseUserPerturbation
 F			UseUserOuterBcs
 T			UseUserICs
