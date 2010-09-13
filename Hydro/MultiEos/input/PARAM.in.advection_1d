@@ -6,54 +6,6 @@ T			DoEcho
 #BATL
 T			UseBatl
 
-LOOKUPTABLE
-pPerE(rho,e/rho)	NameTable
-save			NameCommand
-table_pPerE.out		NameFile
-real4			TypeFile
-pPerE(rho,e/rho) for Xe, Be, Plastic
-logrho logE/Rho pPerEXe pPerEBe pPerEPl
-200			nIndex1
-0.01			Index1Min
-1e6			Index1Max
-200			nIndex2
-1e5			Index2Min
-1e14			Index2Max
-
-LOOKUPTABLE
-ePerP(rho,p/rho)	NameTable
-save			NameCommand
-table_ePerP.out		NameFile
-real4			TypeFile
-ePerP(rho,p/rho) for Xe, Be, Plastic
-logrho logpPerRho ePerPXe ePerPBe ePerPPl
-200			nIndex1
-0.01			Index1Min
-1e6			Index1Max
-200			nIndex2
-1e5			Index2Min
-1e13			Index2Max
-
-! notation:
-! T -> electron temperature
-! C -> specific heat
-! G -> gamma
-! Z -> average ion charge
-! H -> electron heat conduction coef
-LOOKUPTABLE
-Thermo(rho,p/rho)	NameTable
-save			NameCommand
-table_thermo.out	NameFile
-real4			TypeFile
-Thermo(rho,p/rho) for Xe, Be, Plastic
-logrho logpPerRho TXe CXe GXe ZXe HXe TBe CBe GBe ZBe HBe TPl CPl GPl ZPl HPl
-200			nIndex1
-0.01			Index1Min
-1e6			Index1Max
-200			nIndex2
-1e5			Index2Min
-1e13			Index2Max
-
 #PLANET
 NONE
 
@@ -67,6 +19,13 @@ READ
 1000.0			g/cm^3
 
 #USERINPUTBEGIN ----------------
+
+USEEOSTABLE
+T			Use Eos Table for Xe
+T			Use Eos Table for Be
+T			Use Eos Table for Pl
+F			Use Eos Table for Au
+F			Use Eos Table for Ay
 
 MIXEDCELL
 T			UseMixedCell

@@ -42,7 +42,7 @@ clean:
 distclean: clean
 
 # These commands are switched off by default
-COMMANDS = LOOKUP|MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
+COMMANDS = USEEOSTABLE|MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
 
 ### Advection on 1D grid ###
 
