@@ -27,6 +27,9 @@ T			Use Eos Table for Pl
 F			Use Eos Table for Au
 F			Use Eos Table for Ay
 
+#LEVELSET
+F			UseNonConsLevelSet
+
 MIXEDCELL
 T			UseMixedCell
 0.97			MixLimit

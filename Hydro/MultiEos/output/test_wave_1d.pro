@@ -17,7 +17,7 @@ set_device,resdir+'godunov.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*0_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Godunov_*0_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'godunov_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -27,17 +27,17 @@ set_device,resdir+'godunov_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*0_MIXED_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Godunov_*0_MIXED_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'godunov_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*0_NONCONS_LOOKUP/GM/*.outs'
+filename = resdir+'Godunov_*0_NONCONS_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'godunov_noncons_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*0_NONCONS_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Godunov_*0_NONCONS_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'godunov_noncons_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -47,7 +47,7 @@ set_device,resdir+'godunov_noncons_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*0_NONCONS_MIXED_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Godunov_*0_NONCONS_MIXED_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'godunov_noncons_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -57,7 +57,7 @@ set_device,resdir+'linde.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*0_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Linde_*0_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'linde_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -67,17 +67,17 @@ set_device,resdir+'linde_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*0_MIXED_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Linde_*0_MIXED_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'linde_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*0_NONCONS_LOOKUP/GM/*.outs'
+filename = resdir+'Linde_*0_NONCONS_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'linde_noncons_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*0_NONCONS_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Linde_*0_NONCONS_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'linde_noncons_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -87,7 +87,7 @@ set_device,resdir+'linde_noncons_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*0_NONCONS_MIXED_LIMIT_LOOKUP/GM/*.outs'
+filename = resdir+'Linde_*0_NONCONS_MIXED_LIMIT_USEEOSTABLE/GM/*.outs'
 set_device,resdir+'linde_noncons_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -109,19 +109,19 @@ errors = fltarr(4,3)
 npict=21
 
 ; read at most 3 files at a time
-filename=resdir+'Godunov_???_LIMIT_LOOKUP/GM/c*.outs'
+filename=resdir+'Godunov_???_LIMIT_USEEOSTABLE/GM/c*.outs'
 .r getpict
 errors(0,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
-filename=resdir+'Godunov_???_NONCONS_LIMIT_LOOKUP/GM/c*.outs'
+filename=resdir+'Godunov_???_NONCONS_LIMIT_USEEOSTABLE/GM/c*.outs'
 .r getpict
 errors(1,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
-filename=resdir+'Linde_???_LIMIT_LOOKUP/GM/c*.outs'
+filename=resdir+'Linde_???_LIMIT_USEEOSTABLE/GM/c*.outs'
 .r getpict
 errors(2,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
-filename=resdir+'Linde_???_NONCONS_LIMIT_LOOKUP/GM/c*.outs'
+filename=resdir+'Linde_???_NONCONS_LIMIT_USEEOSTABLE/GM/c*.outs'
 .r getpict
 errors(3,*)=[calc_error(w0,wref), calc_error(w1,wref), calc_error(w2,wref)]
 
