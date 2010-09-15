@@ -1,5 +1,5 @@
 ; create a figure for final state of a CRASH simulation
-filename = 'z*.outs'
+filename = 'z=0_var_1_*.outs'
 npict=1000
 transform = 'n'
 .r getpict
