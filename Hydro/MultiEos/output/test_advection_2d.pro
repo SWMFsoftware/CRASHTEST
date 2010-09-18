@@ -30,7 +30,7 @@ set_device,resdir+'godunov_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*_LIMIT_USEEOSTABLE/GM/*.outs'
+filename = resdir+'Godunov_*_LIMIT_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -45,7 +45,7 @@ set_device,resdir+'godunov_limit_mixed.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*_LIMIT_MIXED_USEEOSTABLE/GM/*.outs'
+filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -60,7 +60,7 @@ set_device,resdir+'linde_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*_LIMIT_USEEOSTABLE/GM/*.outs'
+filename = resdir+'Linde_*_LIMIT_LOOKUP/GM/*.outs'
 set_device,resdir+'linde_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
@@ -75,7 +75,7 @@ set_device,resdir+'linde_limit_mixed.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*_LIMIT_MIXED_USEEOSTABLE/GM/*.outs'
+filename = resdir+'Linde_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'linde_limit_mixed_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf

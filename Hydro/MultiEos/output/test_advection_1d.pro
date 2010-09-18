@@ -32,12 +32,12 @@ set_device,resdir+'godunov_limit_mixed.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*_LIMIT_MIXED_USEEOSTABLE/GM/*.outs'
+filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*_LIMIT_VOLUME_USEEOSTABLE/GM/*.outs'
+filename = resdir+'Godunov_*_LIMIT_VOLUME_LOOKUP/GM/*.outs'
 set_device,resdir+'godunov_limit_volume_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
