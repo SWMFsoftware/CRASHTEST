@@ -79,7 +79,6 @@ filename = resdir+'Linde_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
 set_device,resdir+'linde_limit_mixed_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
-      '; convert linde_limit_mixed_lookup.eps linde_limit_mixed_lookup.pdf'
 
 ; 2. calculate errors and save them into a file
 
