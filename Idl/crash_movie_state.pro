@@ -1,7 +1,7 @@
 ; create a movie for gray or multigroup full system runs
 ;window,xsize=640,ysize=388
 window,xsize=960,ysize=582
-filename = 'z*.outs'
+filename = 'z=0_var_1_*.outs'
 npict=1
 transform='n'
 .r getpict
