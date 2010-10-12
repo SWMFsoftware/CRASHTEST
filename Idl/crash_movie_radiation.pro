@@ -17,6 +17,12 @@ if fix(total(wnames eq 'pe')) then $
 else $
   func='level I11 I13 I15 trkev I17 I19 I21'
 
+autorange='y n n n y n n n'
+eradmin = 1e-8
+eradmax = 1e-1
+fmin=[1., eradmin, eradmin, eradmin, 1., eradmin, eradmin, eradmin]
+fmax=[1., eradmax, eradmax, eradmax, 1., eradmax, eradmax, eradmax]
+
 multiplot=[2,4,1]
 plotmode='contbar contbarlog contbarlog contbarlog contbarlog contbarlog contbarlog contbarlog'
 plottitle='Material level;I11;I13;I15;log Radiation Temp. [keV];I17;I19;I21'

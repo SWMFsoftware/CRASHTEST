@@ -17,6 +17,12 @@ if fix(total(wnames eq 'pe')) then $
 else $
   func='level dx ux tekev tekev rho uy trkev p'
 
+;autorange='y y y n n y y n y'
+;temin = 1e-4
+;temax = 1.
+;fmin=[1., 1., 1., temin, temin, 1., 1., temin, 1.]
+;fmax=[1., 1., 1., temax, temax, 1., 1., temax, 1.]
+
 multiplot=[2,4,1]
 plotmode='contbar contover contbar contbarlog contbarlog contbarlog contbar contbarlog contbarlog'
 plottitle='Material and AMR levels; ;X Velocity [km/s];log Electron Temp. [keV];log Ion Temp. [keV];log Density [g/cm!U3!N];Y Velocity [km/s];log Radiation Temp. [keV];log Pressure [GPa]'
