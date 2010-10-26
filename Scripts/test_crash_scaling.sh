@@ -1,5 +1,6 @@
 #!/bin/csh
-# crontab entry for hera (Pacific time) for execution on Fridays 19:00EDT
+# crontab entry for hera841 for execution on Fridays 19:00EDT 
+# note that hera is in the PDT zone
 # 00 16 * * 5 ${HOME}/bin/test_crash_scaling.sh
 
 set path = (~/bin /usr/local/bin ${path} .)
