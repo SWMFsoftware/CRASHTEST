@@ -1,4 +1,8 @@
 #!/bin/csh
+# crontab entry for hera (Pacific time) for execution on Fridays 19:00EDT
+# 00 16 * * 5 ${HOME}/bin/test_crash_scaling.sh
+
+set path = (~/bin /usr/local/bin ${path} .)
 
 # This script checks out the latest version of the CRASH and CRASHTEST
 # executes some tests in CRASHTEST on various number of processors
@@ -23,7 +27,7 @@ mv BATSRUS CRASH
 
 # Install CRASH
 cd CRASH
-Config.pl -install > test.log 
+./Config.pl -install > test.log 
 
 # Do the scaling tests
 Scripts/Scaling.pl -v -n=128,256 -radhydro -compile -rundir -submit \
