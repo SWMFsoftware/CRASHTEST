@@ -80,14 +80,19 @@ brick0			NameArea
 4.0			ySizeBrick
 4.0			zSizeBrick
 
-#NONCONSERVATIVE
-T
-
 #SCHEME
 2			nOrder
-Linde			TypeFlux
-mc3			TypeLimiter
-1.5			BetaLimiter
+Rusanov			TypeFlux
+minmod			TypeLimiter
+1.2			BetaLimiter
+
+#TIMESTEPPING
+1			nStage
+0.8			CflExpl
+
+#FIXEDTIMESTEP
+T			UseFixedTimeStep
+0.05			DtFixed
 
 #MESSAGEPASS
 all			TypeMessagePass
@@ -130,15 +135,6 @@ F                       UseUserUpdateStates
 -1.0                    LambdaZ
 0.0                     Phase
 
-#WAVE
-10                      Pe_
-1000.0                  Width
--0.1                    Amplitude
--1.0                    LambdaX
-20.0                    LambdaY
--1.0                    LambdaZ
-0.0                     Phase
-
 #USERINPUTEND  --------------------------
 
 HALLRESISTIVITY
@@ -162,10 +158,10 @@ RAW
 #SAVEPLOT
 1			nPlotFile
 z=0 ful idl_real8	StringPlot
--1   			DnSaveOutput
-0.1			DtSaveOutput
+1   			DnSaveOutput
+10.0			DtSaveOutput
 -1.0			DxSaveOutput
 
 #STOP
--1
-1.0
+1
+1000.0

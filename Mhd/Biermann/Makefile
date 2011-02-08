@@ -4,6 +4,7 @@
 
 test: 
 	@rm -f output/*.diff
+	-@(make test_wave_1step)
 	-@(make test_wave)
 	@ls -l output/*.diff
 
@@ -26,6 +27,7 @@ help:
 	@echo "    test MPIRUN=               (run all tests serially)"
 	@echo "    test MPIRUN='mpirun -np 3' (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
+	@echo "    test_wave_1step            (run wave test_1step)"
 	@echo "    test_wave                  (run wave test)"
 
 test_rundir:
@@ -39,6 +41,49 @@ clean:
 	cd output; rm -rf *.diff *.err *.eps *_results
 
 distclean: clean
+
+### Wave test on 2D AMR grid ###
+
+test_wave_1step:
+	@echo "test_wave_1step_compile..." > output/test_wave_1step.diff
+	make test_wave_1step_compile
+	@echo "test_wave_1step_rundir..." >> output/test_wave_1step.diff
+	make test_wave_1step_rundir
+	@echo "test_wave_1step_run..." >> output/test_wave_1step.diff
+	make test_wave_1step_run
+	@echo "test_wave_1step_check..." >> output/test_wave_1step.diff
+	make test_wave_1step_check
+
+test_wave_1step_compile:
+	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,2000,1
+	cd ${DIR}; make BATSRUS PIDL
+
+test_wave_1step_rundir: test_rundir
+	cp input/PARAM.in.wave_1step ${DIR}/${RUNDIR}/PARAM.in
+
+test_wave_1step_run:
+	for RES in 10 20 40; do \
+	 make test_wave_1step_run1 RES=$${RES}; \
+	done
+	rm -rf output/test_wave_1step_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_wave_1step_results
+
+test_wave_1step_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e '$$a=${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		     $$a=${RES}; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_wave_1step_check:
+	cd output; idl test_wave_1step.pro; \
+		rm -f test_wave_1step_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_wave_1step_results/error.dat \
+		output/test_wave_1step.ref \
+		> output/test_wave_1step.diff)
+	ls -l output/test_wave_1step.diff
 
 ### Wave test on 2D AMR grid ###
 
@@ -60,7 +105,7 @@ test_wave_rundir: test_rundir
 	cp input/PARAM.in.wave ${DIR}/${RUNDIR}/PARAM.in
 
 test_wave_run:
-	for RES in 10 20 40; do \
+	for RES in 10 20 40 80; do \
 	 make test_wave_run1 RES=$${RES}; \
 	done
 	rm -rf output/test_wave_results
