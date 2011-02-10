@@ -1,0 +1,170 @@
+#ECHO
+T                       DoEcho
+
+#BATL
+T			UseBatl
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			TypeIoUnit
+
+#NORMALIZATION
+NONE			TypeNormalization
+
+#SHOCKTUBE
+1.0			rho (left state)
+0.0			Ux
+0.0			Uy
+0.0			Uz
+0.0			Bx
+0.0			By
+0.0			Bz
+0.0			Hyp
+1.0			Pe
+1.0			P
+1.0			rho (right state)
+0.0			Ux
+0.0			Uy
+0.0			Uz
+0.0			Bx
+0.0			By
+0.0			Bz
+0.0			Hyp
+1.0			Pe
+1.0			P
+
+#HYPERBOLICDIVB
+F			UseHyperbolicDivb
+
+#STRICT
+F
+
+#DIVB
+F
+F
+F
+F
+
+#STRICT
+T
+
+#OUTERBOUNDARY
+periodic		TypeBcEast
+periodic		TypeBcWest
+reflect			TypeBcSouth
+reflect			TypeBcNorth
+float			TypeBcBottom
+float			TypeBcTop
+
+#GRID
+10			nRootBlockX
+5			nRootBlockY
+1			nRootBlockZ
+-10.0			xMin
+ 10.0			xMax
+  0.0			yMin
+ 10.0			yMax
+-1.0			zMin
+ 1.0			zMax
+
+GRIDLEVEL
+1			nLevel
+initial			NameArea
+
+GRIDLEVEL
+1			nLevel
+brick0			NameArea
+4.0			xSizeBrick
+4.0			ySizeBrick
+4.0			zSizeBrick
+
+#SCHEME
+2			nOrder
+Linde			TypeFlux
+mc3			TypeLimiter
+2.0			BetaLimiter
+
+#TIMESTEPPING
+1			nStage
+0.8			CflExpl
+
+#FIXEDTIMESTEP
+T			UseFixedTimeStep
+0.05			DtFixed
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+#RESCHANGE
+T			UseAccurateResChange
+
+#USERFLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F                       UseUserOuterBcs
+T                       UseUserICs
+F                       UseUserSpecifyRefinement
+T                       UseUserLogFiles
+F                       UseUserWritePlot
+F                       UseUserAMR
+F                       UseUserEchoInput
+F                       UseUserB0
+F                       UseUserInitSession
+F                       UseUserUpdateStates
+
+#USERINPUTBEGIN --------------------------
+
+#WAVE
+1                       Rho_
+1000.0                  Width
+0.1                     Amplitude
+-1.0                    LambdaX
+20.0                    LambdaY
+-1.0                    LambdaZ
+0.0                     Phase
+
+#WAVE
+9                       Pe_
+1000.0                  Width
+0.1                     Amplitude
+20.0                    LambdaX
+-1.0                    LambdaY
+-1.0                    LambdaZ
+0.0                     Phase
+
+#USERINPUTEND  --------------------------
+
+#GRIDGEOMETRY
+rz			TypeGeometry
+
+HALLRESISTIVITY
+T			UseHallResistFlux
+1.0			HallFactor
+1.0			HallCmaxFactor
+0.0			HallHyperFactor
+
+#BIERMANNBATTERY
+T			UseBiermannBattery
+
+#SAVERESTART
+F
+
+#SAVELOGFILE
+T                       DoSaveLogfile, rest of parameters read if true
+RAW
+1                       DnSaveLogfile
+-1.                     DtSaveLogfile [sec]
+
+#SAVEPLOT
+1			nPlotFile
+z=0 ful idl_real8	StringPlot
+1   			DnSaveOutput
+10.0			DtSaveOutput
+-1.0			DxSaveOutput
+
+#STOP
+1
+1000.0
