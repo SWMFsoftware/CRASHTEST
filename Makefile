@@ -21,6 +21,7 @@ test:
 	-@(cd FullSystem/Version1;             make test)
 	-@(cd FullSystem/Version2;             make test)
 	-@(cd Mhd/Biermann;                    make test)
+	-@(cd Mhd/Resistivity;                 make test)
 	make check
 
 check:
@@ -41,6 +42,7 @@ clean:
 	-@(cd FullSystem/Version1;             make clean)
 	-@(cd FullSystem/Version2;             make clean)
 	-@(cd Mhd/Biermann;                    make clean)
+	-@(cd Mhd/Resistivity;                 make clean)
 
 distclean: clean
 	@rm -f test.results
