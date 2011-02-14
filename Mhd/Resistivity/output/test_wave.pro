@@ -31,6 +31,7 @@ npict=2
 wref=w
 wref(*,*,4)= 0.5*(1.0-0.05*20*(!pi/5)^2)*cos(!pi/5*x(*,*,1))
 wref(*,*,6)=-0.5*(1.0-0.05*20*(!pi/5)^2)*sin(!pi/5*x(*,*,1))
+wref(*,*,8)=1.0+2.0/3*0.05*20*(0.5*!pi/5)^2
 printf,99,10,rel_error(w,wref,iws)
 
 filename=resdir+'20/GM/z*.outs'
@@ -38,6 +39,7 @@ filename=resdir+'20/GM/z*.outs'
 wref=w
 wref(*,*,4)= 0.5*(1.0-0.05*20*(!pi/5)^2)*cos(!pi/5*x(*,*,1))
 wref(*,*,6)=-0.5*(1.0-0.05*20*(!pi/5)^2)*sin(!pi/5*x(*,*,1))
+wref(*,*,8)=1.0+2.0/3*0.05*20*(0.5*!pi/5)^2
 printf,99,20,rel_error(w,wref,iws)
 
 filename=resdir+'40/GM/z*.outs'
@@ -45,6 +47,7 @@ filename=resdir+'40/GM/z*.outs'
 wref=w
 wref(*,*,4)= 0.5*(1.0-0.05*20*(!pi/5)^2)*cos(!pi/5*x(*,*,1))
 wref(*,*,6)=-0.5*(1.0-0.05*20*(!pi/5)^2)*sin(!pi/5*x(*,*,1))
+wref(*,*,8)=1.0+2.0/3*0.05*20*(0.5*!pi/5)^2
 printf,99,40,rel_error(w,wref,iws)
 close,99
 
