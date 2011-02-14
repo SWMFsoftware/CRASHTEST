@@ -57,11 +57,11 @@ rz			TypeGeometry
 -1.                   	zMin
  1.                   	zMax
 
-GRIDLEVEL
+#GRIDLEVEL
 1			nLevel
 initial			NameArea
 
-GRIDLEVEL
+#GRIDLEVEL
 1			nLevel
 brick			NameArea
 0.0			xCenter

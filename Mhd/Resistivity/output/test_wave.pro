@@ -23,7 +23,7 @@ openw, 99, resdir + 'error.dat'
 printf,99,'wave test in 2D'
 printf,99,'n l1_error'
 
-iws = [4,6]
+iws = [4,6,8]
 
 filename=resdir+'10/GM/z*.outs'
 npict=2

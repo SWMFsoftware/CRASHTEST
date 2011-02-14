@@ -47,8 +47,8 @@ filename=resdir+'40/GM/z*.outs'
 wref=w
 wref(*,*,4)= (cos(!pi/5*x(*,*,1))*(1-(!pi/5)^2)-!pi/5*sin(!pi/5*x(*,*,1))/x(*,*,1))
 wref(*,*,6)= ((1.0-cos(!pi/5*x(*,*,1)))*(1.0-1.0/x(*,*,1)^2)+(!pi/5)^2*cos(!pi/5*x(*,*,1))+!pi/5*sin(!pi/5*x(*,*,1))/x(*,*,1))
-printf,99,40,rel_error(w,wref,iws)
 wref(*,*,8)= 1.0+(5.0/3-1.0)*((!pi/5*sin(!pi/5*x(*,*,1)))^2+((1.0-cos(!pi/5*x(*,*,1)))/x(*,*,1)+!pi/5*sin(!pi/5*x(*,*,1)))^2)
+printf,99,40,rel_error(w,wref,iws)
 close,99
 
 ; 3. Create a figure of convergence rates
