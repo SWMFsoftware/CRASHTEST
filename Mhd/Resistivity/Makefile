@@ -5,6 +5,7 @@
 test: 
 	@rm -f output/*.diff
 	-@(make test_wave)
+	-@(make test_rzwave)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -27,6 +28,7 @@ help:
 	@echo "    test MPIRUN='mpirun -np 3' (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_wave                  (run wave test in xy-plane)"
+	@echo "    test_rzwave                (run wave test in rz-plane)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -83,3 +85,46 @@ test_wave_check:
 		output/test_wave.ref \
 		> output/test_wave.diff)
 	ls -l output/test_wave.diff
+
+### Wave test on 2D AMR grid ###
+
+test_rzwave:
+	@echo "test_rzwave_compile..." > output/test_rzwave.diff
+	make test_rzwave_compile
+	@echo "test_rzwave_rundir..." >> output/test_rzwave.diff
+	make test_rzwave_rundir
+	@echo "test_rzwave_run..." >> output/test_rzwave.diff
+	make test_rzwave_run
+	@echo "test_rzwave_check..." >> output/test_rzwave.diff
+	make test_rzwave_check
+
+test_rzwave_compile:
+	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; make BATSRUS PIDL
+
+test_rzwave_rundir: test_rundir
+	cp input/PARAM.in.rzwave ${DIR}/${RUNDIR}/PARAM.in
+
+test_rzwave_run:
+	for RES in 10 20 40; do \
+	 make test_rzwave_run1 RES=$${RES}; \
+	done
+	rm -rf output/test_rzwave_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_rzwave_results
+
+test_rzwave_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e '$$a=${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		     $$a=${RES}/2; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_rzwave_check:
+	cd output; idl test_rzwave.pro; \
+		rm -f test_rzwave_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_rzwave_results/error.dat \
+		output/test_rzwave.ref \
+		> output/test_rzwave.diff)
+	ls -l output/test_rzwave.diff

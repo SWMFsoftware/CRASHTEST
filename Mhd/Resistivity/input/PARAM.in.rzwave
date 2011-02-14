@@ -1,0 +1,193 @@
+Begin session: 1
+
+#ECHO
+T                       DoEcho
+
+#BATL
+T			UseBatl
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			TypeIoUnit
+
+#NORMALIZATION
+NONE			TypeNormalization
+
+#SHOCKTUBE
+1.0			Rho (left state)
+1.0			Ux
+0.0			Uy
+0.0			Uz
+0.0			Bx
+0.0			By
+1.0			Bz
+0.0			Hyp
+1.0			Pe
+1.0			P
+1.0			Rho (right state)
+1.0			Ux
+0.0			Uy
+0.0			Uz
+0.0			Bx
+0.0			By
+1.0			Bz
+0.0			Hyp
+1.0			Pe
+1.0			P
+
+#GRIDGEOMETRY
+rz			TypeGeometry
+
+#CHECKGRIDSIZE
+4			nI
+4			nJ
+1			nK
+4			MinBlockALL
+
+#GRID
+10                    	nRootBlockX
+5                     	nRootBlockY
+1                     	nRootBlockZ
+-5.                 	xMin
+ 5.                 	xMax
+ 0.                   	yMin
+ 5.                   	yMax
+-1.                   	zMin
+ 1.                   	zMax
+
+GRIDLEVEL
+1			nLevel
+initial			NameArea
+
+GRIDLEVEL
+1			nLevel
+brick			NameArea
+0.0			xCenter
+2.0			yCenter
+0.0			zCenter
+2.0			xSizeBrick
+2.0			ySizeBrick
+2.0			zSizeBrick
+
+#OUTERBOUNDARY
+periodic                TypeBcEast
+periodic                TypeBcWest
+reflect			TypeBcSouth
+float			TypeBcNorth
+float                   TypeBcBottom
+float                   TypeBcTop
+
+#USERFLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F                       UseUserOuterBcs
+T                       UseUserICs
+F                       UseUserSpecifyRefinement
+F                       UseUserLogFiles
+F                       UseUserWritePlot
+F                       UseUserAMR
+F                       UseUserEchoInput
+F                       UseUserB0
+F                       UseUserInitSession
+F                       UseUserUpdateStates
+
+#USERINPUTBEGIN ----------------
+
+#WAVE
+5			Bx_
+1000.0			Width
+1.0			Amplitude
+-1.0			LambdaX
+10.0			LambdaY
+-1.0			LambdaZ
+0.0			Phase
+
+#WAVE
+7			Bz_
+1000.0			Width
+-1.0			Amplitude
+-1.0			LambdaX
+10.0			LambdaY
+-1.0			LambdaZ
+0.0			Phase
+
+#USERINPUTEND   ----------------
+
+#DIVBSOURCE
+F			UseB0Source
+
+#STRICT
+F			UseStrict
+
+#DIVB
+F                       UseDivbSource
+F                       UseDivbDiffusion
+F                       UseProjection
+F                       UseConstrainB
+
+#STRICT
+T			UseStrict
+
+#NONCONSERVATIVE
+T			UseNonConservative
+
+#SCHEME
+2			nOrder
+Linde			TypeFlux
+mc3			TypeLimiter
+1.5			BetaLimiter
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+#RESCHANGE
+T			UseAccurateResChange
+
+#TIMESTEPPING
+1			nStage
+0.8			CflExpl
+
+#FIXEDTIMESTEP
+T			UseFixedTimeStep
+0.05			DtFixed
+
+#RESISTIVITY
+T			UseResistivity
+constant		TypeResistivity
+20.0			Eta0Si
+
+#RESISTIVITYOPTIONS
+T			UseResistiveFlux
+T			UseJouleHeating
+F			UseHeatExchange
+
+
+#SAVERESTART
+F			DoSaveRestart
+
+#SAVELOGFILE
+T			DoSaveLogfile
+raw			StringLog
+1			DnSaveLogfile
+-1.			DtSaveLogfile
+
+#SAVEPLOT
+1
+z=0 mhd idl_real8       StringPlot
+1			DnOutput
+10.0			DtOutput
+-5.0			xMin
++5.0			xMax
+ 0.0			yMin
++5.0			yMax
+-0.01			zMin
++0.01			zMax
+0.			DxOutput
+
+#STOP
+1			MaxIteration
+10.0			tSimulationMax
+
