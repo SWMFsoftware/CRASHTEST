@@ -6,6 +6,7 @@ test:
 	@rm -f output/*.diff
 	-@(make test_wave)
 	-@(make test_rzwave)
+	-@(make test_wavesemi)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -29,6 +30,7 @@ help:
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_wave                  (run wave test in xy-plane)"
 	@echo "    test_rzwave                (run wave test in rz-plane)"
+	@echo "    test_wavesemi              (run wave test in xy-plane and semi-implicit)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -128,3 +130,47 @@ test_rzwave_check:
 		output/test_rzwave.ref \
 		> output/test_rzwave.diff)
 	ls -l output/test_rzwave.diff
+
+### Wave test on 2D AMR grid ###
+
+test_wavesemi:
+	@echo "test_wavesemi_compile..." > output/test_wavesemi.diff
+	make test_wavesemi_compile
+	@echo "test_wavesemi_rundir..." >> output/test_wavesemi.diff
+	make test_wavesemi_rundir
+	@echo "test_wavesemi_run..." >> output/test_wavesemi.diff
+	make test_wavesemi_run
+	@echo "test_wavesemi_check..." >> output/test_wavesemi.diff
+	make test_wavesemi_check
+
+test_wavesemi_compile:
+	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; make BATSRUS PIDL
+
+test_wavesemi_rundir: test_rundir
+	cp input/PARAM.in.wavesemi ${DIR}/${RUNDIR}/PARAM.in
+
+test_wavesemi_run:
+	for RES in 10 20 40; do \
+	 make test_wavesemi_run1 RES=$${RES}; \
+	done
+	rm -rf output/test_wavesemi_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_wavesemi_results
+
+test_wavesemi_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e '$$a=${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		     $$a=${RES}; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+		     $$a=0.005*(10/${RES})**2; s/\S+(\s*DtFixed)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_wavesemi_check:
+	cd output; idl test_wavesemi.pro; \
+		rm -f test_wavesemi_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_wavesemi_results/error.dat \
+		output/test_wavesemi.ref \
+		> output/test_wavesemi.diff)
+	ls -l output/test_wavesemi.diff
