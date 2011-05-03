@@ -65,8 +65,8 @@ F                       DoFixBodyLevel
 #AMR
 2                       DnRefine
 T                       DoAutoRefine
-0.0                    PercentCoarsen
-0.0                    PercentRefine
+30.0                    PercentCoarsen
+30.0                    PercentRefine
 99999                   MaxTotalBlocks
 
 #AMRCRITERIA
