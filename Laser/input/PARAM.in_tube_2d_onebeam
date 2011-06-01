@@ -1,0 +1,469 @@
+#ECHO
+T
+
+#BATL
+T			UseBatl
+
+#VERBOSE
+1
+
+#PROGRESS
+10                       DnProgressShort
+100                     DnProgressLong
+
+TEST
+krylov calc_timestep write_plot_common set_outerbcs set_ics
+
+TEST
+set_outerbcs set_ics update_states 
+
+#TEST
+set_outerbcs set_ics calc_timestep control_time_step
+
+TESTXYZ
+-2.8901519224698779E+02
+50.9611762277879023
+0.0
+
+#TESTVAR
+2
+
+#TESTXYZ
+-0.03
+0.5
+0.0
+
+TESTIJK
+1
+3
+1
+1
+0
+
+TEST
+calc_timestep
+
+TEST
+write_plot_common
+
+TEST
+set_outerbcs
+
+TEST
+set_ics
+
+
+#DESCRIPTION
+Input file for the laser package
+
+#TIMEACCURATE
+T			DoTimeAccurate
+
+#SAVERESTART
+T			DoSaveRestart
+-1			DnSaveRestart
+0.1e-9			DtSaveRestart
+
+#PLANET
+NONE
+
+#INCLUDE
+Tables/5Materials
+
+LOOKUPTABLE
+{Xe Be Pl}_eos		NameTable
+load   			NameCommand
+{Xe Be Pl}_eos_CRASH.dat
+real8			TypeFile
+
+LOOKUPTABLE
+pPerRho(e/rho,rho)	NameTable
+save			NameCommand
+table_pPerRho.out	NameFile
+real8			TypeFile
+pPerRho(e/rho,rho) for Xe, Be, Plastic
+logE/Rho logrho pPerRhoXe pPerRhoBe pPerRhoPl
+200			nIndex1
+1e5			Index1Min
+1e14			Index1Max
+200			nIndex2
+0.01			Index2Min
+1e6			Index2Max
+
+! notation:
+! T -> electron temperature
+! C -> specific heat
+! G -> gamma
+! Z -> average ion charge
+! H -> electron heat conduction coef
+LOOKUPTABLE
+Thermo(rho,p/rho)	NameTable
+save			NameCommand
+table_thermo.out	NameFile
+real8			TypeFile
+Thermo(rho,p/rho) for Xe, Be, Plastic
+logrho logpPerRho TXe CXe GXe ZXe HXe TBe CBe GBe ZBe HBe TPl CPl GPl ZPl HPl
+200			nIndex1
+0.01			Index1Min
+1e6			Index1Max
+200			nIndex2
+1e5			Index2Min
+1e13			Index2Max
+
+LOOKUPTABLE
+Opacity(rho,T)		NameTable
+load                    NameCommand
+table_opacities.out	NameFile
+ascii			TypeFile
+
+
+USERINPUTBEGIN  ----------------------
+
+USEEOSTABLE
+T			Use Eos Table for Xe
+T			Use Eos Table for Be
+T			Use Eos Table for Pl
+F			Use Eos Table for Au
+F			Use Eos Table for Ay
+
+MIXEDCELL
+T			UseMixedCell
+0.97			MixLimit
+
+HYADES
+F			UseHyadesFile
+hyades2d_1.3ns.out	NameHyadesFile
+
+USERINPUTEND    ----------------------
+
+OPACITY
+T                       UseExcitation
+F                       UseCoulombCorrection
+T                       DoStateElimination
+
+GROUPRANGE
+0.1                     EnergyPhotonMin
+20000.0                 EnergyPhotonMax
+
+#IOUNITS
+SI
+
+#NORMALIZATION
+READ
+1.0e-6			Micron
+1.0e+3			km/s
+1000.0			g/cm^3
+
+#LASERPULSE
+T                UseLaserHeating
+3.9e9           order of mag below max 3.8e10   PowerSI;  IrradianceSI
+160.0e-12 	1.0e-10          tPulse
+100.0e-12          100.0e-12          tRaise
+30.0e-12	 100.0e-12          tDecay
+
+#LASERBEAMS 
+rz		TypeBeam
+336               nRayPerBeam; rays abaove the central ray; not total 
+56       	rBeam
+-25.0           xBeam
+
+#LASERBEAM
+10.0		 10.0              SlopeDeg
+-0.125               0.0              yBeam
+1.0              AmplitudeRel
+
+LASERBEAM
+20.0             SlopeDeg
+200.0            yBeam
+0.7              AmplitudeRel
+
+LASERBEAM
+30.0             SlopeDeg
+400.0            yBeam
+0.7              AmplitudeRel
+
+#USERINPUTBEGIN  ----------------------
+
+#PLASTIC
+18000.0			TeMaxColdPlasticSi
+
+#USERINPUTEND    ------------------------------------------------------
+
+#SEMIIMPLICIT
+T                       UseSemiImplicit
+radcond 	        TypeSemiImplicit
+
+#KRYLOV
+bicgstab              cg		bicgstab                TypeKrylov
+nul                     TypeInitKrylov
+1.0e-8   	1.0e-8                  ErrorMaxKrylov
+1200 	 	1200                    MaxMatvecKrylov
+
+#PRECONDITIONER
+left                    TypePrecondSide (left, symmetric, right)
+dilu                    TypePrecond (MBILU)
+
+#RADIATION
+T                       UseGrayDiffusion
+T                       UseRadFluxLimiter
+larsen                  TypeRadFluxLimiter
+300.0			TradMinSi
+
+#ELECTRONPRESSURE
+1.0			PeMinSi
+
+#CHECKGRIDSIZE
+8			nI
+8			nJ
+1			nK
+100			MinBlockALL
+
+#GRIDGEOMETRY
+rz			TypeGeometry
+
+#GRID
+6			nRootBlockX 300
+12			nRootBlockY  30
+1			nRootBlockZ
+-41.0			xMin
+ 7.0			xMax
+   0.0			yMin
+ 96.0			yMax
+ -12.5			zMin
+  12.5			zMax
+
+#UPDATECHECK
+F			DoUpdateCheck
+40.0  			RhoMinPercent
+400.0			RhoMaxPercent
+20.0			pMinPercent
+175.0			pMaxPercent
+
+#CONTROLVAR
+eint                   NameVarControl
+
+#CONTROLTIMESTEP
+T                       UseTimeStepControl
+
+#CONTROLDECREASE
+0.3                     RejectStepLevel
+0.6                     ReduceStepLevel
+0.8                     IncreaseStepLevel
+
+#CONTROLINCREASE
+1.6                     RejectStepLevel
+1.3                     ReduceStepLevel
+1.1                    IncreaseStepLevel
+
+#CONTROLFACTOR
+0.85                     RejectStepFactor
+0.95                    ReduceStepFactor
+1.05                    IncreaseStepFactor
+
+
+#NONCONSERVATIVE
+F			UseNonConservative
+
+
+#OUTERBOUNDARY
+float			xMinBc
+float			xMaxBc
+reflect			yMinBc
+float			yMaxBc
+reflect			zMinBc
+reflect			zMaxBc
+
+#SCHEME
+2			nOrder
+Linde			TypeFlux
+mc3			TypeLimiter
+1.5			LimiterBeta
+
+#SAVELOGFILE
+T			DoSaveLogfile
+RAW			StringLogfile
+-5			DnSaveLogfile
+1e-12			DtSaveLogfile
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#PLOTFILENAME
+nanosecond		NameMaxTimeUnit
+
+#SAVEPLOT
+1			nPlotfile
+z=0 var idl		PlotString
+-10                      DnSavePlot
+0.5e-12                 DtSavePlot
+-1.0			DxSavePlot
+rho ux uy Eint p pe level xe be pl tekev trkev tikev elaser
+gamma
+
+#TIMESTEPPING
+2			nStage
+1.0e-7		CflExpl  0.01 to start  (0.00075 works with small Dt
+
+#FIXEDTIMESTEP
+F                       UseDtFixed
+1.0e-16                     DtFixedDim [sec]
+
+#STOP
+-1			MaxIteration
+1.0e-12			tSimulationMax
+
+END
+
+#RUN #############################################################
+
+TIMESTEPPING
+2			nStage
+0.01			CflExpl
+
+FIXEDTIMESTEP
+F                       UseDtFixed
+1.0e-15                     DtFixedDim [sec]
+
+#SAVEPLOT
+1			nPlotfile
+z=0 var idl		PlotString
+-50                      DnSavePlot
+2.0e-12                 DtSavePlot
+-1.0			DxSavePlot
+rho ux uy Eint p pe level xe be pl tekev trkev tikev elaser
+gamma
+
+#STOP
+-1			MaxIteration
+40.0e-12			tSimulationMax
+
+#END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.1
+
+FIXEDTIMESTEP
+F                       UseDtFixed
+1.0e-14
+
+#STOP
+-1			MaxIteration
+30.0e-12			tSimulationMax
+
+#END
+
+#RUN #############################################################
+
+TIMESTEPPING
+2			nStage
+0.025
+
+#FIXEDTIMESTEP
+T                       UseDtFixed
+2.0e-14
+
+#SAVEPLOT
+1			nPlotfile
+z=0 var idl		PlotString
+-50                      DnSavePlot
+2.0e-12                 DtSavePlot
+-1.0			DxSavePlot
+rho ux uy Eint p pe level xe be pl tekev trkev tikev elaser
+gamma
+
+#STOP
+-1			MaxIteration
+1.1e-12			tSimulationMax
+
+END
+
+#RUN #############################################################
+
+TIMESTEPPING
+2			nStage
+0.0075
+
+#FIXEDTIMESTEP
+T                       UseDtFixed
+3.0e-14
+
+#STOP
+-1			MaxIteration
+30.0e-12 		2.0e-12			tSimulationMax
+
+#END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.015
+
+#STOP
+-1			MaxIteration
+30.0e-12			tSimulationMax
+
+#END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.025
+
+#STOP
+-1			MaxIteration
+5.0e-12			tSimulationMax
+
+END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.05
+
+#STOP
+-1			MaxIteration
+15.0e-12			tSimulationMax
+
+END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.1
+
+#STOP
+-1			MaxIteration
+25.0e-12			tSimulationMax
+
+END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.25
+
+#STOP
+-1			MaxIteration
+40.0e-12			tSimulationMax
+
+#END
+
+#RUN #############################################################
+
+#TIMESTEPPING
+2			nStage
+0.6
+
+#STOP
+-1			MaxIteration
+10.0e-12			tSimulationMax
+
+#END
