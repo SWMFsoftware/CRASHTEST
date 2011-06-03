@@ -1,8 +1,8 @@
-#ECHO
-T
+#INCLUDE
+Param/CRASH/START.in
 
-#BATL
-T			UseBatl
+#INCLUDE
+Tables/5Materials
 
 #VERBOSE
 1
@@ -63,96 +63,6 @@ T			DoTimeAccurate
 T			DoSaveRestart
 -1			DnSaveRestart
 0.1e-9			DtSaveRestart
-
-#PLANET
-NONE
-
-#INCLUDE
-Tables/5Materials
-
-LOOKUPTABLE
-{Xe Be Pl}_eos		NameTable
-load   			NameCommand
-{Xe Be Pl}_eos_CRASH.dat
-real8			TypeFile
-
-LOOKUPTABLE
-pPerRho(e/rho,rho)	NameTable
-save			NameCommand
-table_pPerRho.out	NameFile
-real8			TypeFile
-pPerRho(e/rho,rho) for Xe, Be, Plastic
-logE/Rho logrho pPerRhoXe pPerRhoBe pPerRhoPl
-200			nIndex1
-1e5			Index1Min
-1e14			Index1Max
-200			nIndex2
-0.01			Index2Min
-1e6			Index2Max
-
-! notation:
-! T -> electron temperature
-! C -> specific heat
-! G -> gamma
-! Z -> average ion charge
-! H -> electron heat conduction coef
-LOOKUPTABLE
-Thermo(rho,p/rho)	NameTable
-save			NameCommand
-table_thermo.out	NameFile
-real8			TypeFile
-Thermo(rho,p/rho) for Xe, Be, Plastic
-logrho logpPerRho TXe CXe GXe ZXe HXe TBe CBe GBe ZBe HBe TPl CPl GPl ZPl HPl
-200			nIndex1
-0.01			Index1Min
-1e6			Index1Max
-200			nIndex2
-1e5			Index2Min
-1e13			Index2Max
-
-LOOKUPTABLE
-Opacity(rho,T)		NameTable
-load                    NameCommand
-table_opacities.out	NameFile
-ascii			TypeFile
-
-
-USERINPUTBEGIN  ----------------------
-
-USEEOSTABLE
-T			Use Eos Table for Xe
-T			Use Eos Table for Be
-T			Use Eos Table for Pl
-F			Use Eos Table for Au
-F			Use Eos Table for Ay
-
-MIXEDCELL
-T			UseMixedCell
-0.97			MixLimit
-
-HYADES
-F			UseHyadesFile
-hyades2d_1.3ns.out	NameHyadesFile
-
-USERINPUTEND    ----------------------
-
-OPACITY
-T                       UseExcitation
-F                       UseCoulombCorrection
-T                       DoStateElimination
-
-GROUPRANGE
-0.1                     EnergyPhotonMin
-20000.0                 EnergyPhotonMax
-
-#IOUNITS
-SI
-
-#NORMALIZATION
-READ
-1.0e-6			Micron
-1.0e+3			km/s
-1000.0			g/cm^3
 
 #LASERPULSE
 T                UseLaserHeating
@@ -232,13 +142,6 @@ rz			TypeGeometry
  -12.5			zMin
   12.5			zMax
 
-#UPDATECHECK
-F			DoUpdateCheck
-40.0  			RhoMinPercent
-400.0			RhoMaxPercent
-20.0			pMinPercent
-175.0			pMaxPercent
-
 #CONTROLVAR
 eint                   NameVarControl
 
@@ -261,10 +164,6 @@ T                       UseTimeStepControl
 1.05                    IncreaseStepFactor
 
 
-#NONCONSERVATIVE
-F			UseNonConservative
-
-
 #OUTERBOUNDARY
 float			xMinBc
 float			xMaxBc
@@ -284,12 +183,6 @@ T			DoSaveLogfile
 RAW			StringLogfile
 -5			DnSaveLogfile
 1e-12			DtSaveLogfile
-
-#SAVEINITIAL
-T			DoSaveInitial
-
-#PLOTFILENAME
-nanosecond		NameMaxTimeUnit
 
 #SAVEPLOT
 1			nPlotfile
