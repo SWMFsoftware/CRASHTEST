@@ -134,12 +134,8 @@ Linde			TypeFlux
 mc3			TypeLimiter
 1.5			BetaLimiter
 
-#MESSAGEPASS
-all			TypeMessagePass
-
-#RESCHANGE
-T			UseAccurateResChange
-
+In this test we perform one time step to demonstrate that the resistive
+source terms are second order accurate in space
 #TIMESTEPPING
 1			nStage
 0.8			CflExpl
@@ -147,6 +143,12 @@ T			UseAccurateResChange
 #FIXEDTIMESTEP
 T			UseFixedTimeStep
 0.05			DtFixed
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+#RESCHANGE
+T			UseAccurateResChange
 
 #RESISTIVITY
 T			UseResistivity

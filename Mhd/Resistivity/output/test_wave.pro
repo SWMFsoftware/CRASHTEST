@@ -5,6 +5,7 @@
 resdir='test_wave_results/'
 
 set_device,resdir+'wave.eps',/eps,/port
+loadct,39
 filename=resdir+'*/GM/z*.outs'
 ; in the following Delta(t)=0.05, eta=20
 func='bx {bx}-0.5*(1.0-0.05*20*(!pi/5)^2)*cos(!pi/5*y) bz {bz}+0.5*(1.0-0.05*20*(!pi/5)^2)*sin(!pi/5*y) pe {pe}-(1.0+2.0/3*0.05*20*(0.5*!pi/5)^2)'

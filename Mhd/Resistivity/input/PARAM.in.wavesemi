@@ -151,12 +151,8 @@ Linde			TypeFlux
 mc3			TypeLimiter
 1.5			BetaLimiter
 
-#MESSAGEPASS
-all			TypeMessagePass
-
-#RESCHANGE
-T			UseAccurateResChange
-
+We use a one stage scheme and to demonstrate second order spatial convergence
+and the time step is reduced proportional to the cell size squared. 
 #TIMESTEPPING
 1			nStage
 0.8			CflExpl
@@ -164,6 +160,12 @@ T			UseAccurateResChange
 #FIXEDTIMESTEP
 T			UseFixedTimeStep
 0.005			DtFixed
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+#RESCHANGE
+T			UseAccurateResChange
 
 #RESISTIVITY
 T			UseResistivity

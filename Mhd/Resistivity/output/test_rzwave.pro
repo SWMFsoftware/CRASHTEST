@@ -5,6 +5,7 @@
 resdir='test_rzwave_results/'
 
 set_device,resdir+'rzwave.eps',/eps,/port
+loadct,39
 filename=resdir+'*/GM/z*.outs'
 ; in the following Delta(t)=0.05, eta=20
 func='bx {bx}-(cos(!pi/5*y)*(1-(!pi/5)^2)-!pi/5*sin(!pi/5*y)/y) bz {bz}-((1.0-cos(!pi/5*y))*(1.0-1.0/y^2)+(!pi/5)^2*cos(!pi/5*y)+!pi/5*sin(!pi/5*y)/y) pe {pe}-(1.0+(5.0/3-1.0)*((!pi/5*sin(!pi/5*y))^2+((1.0-cos(!pi/5*y))/y+!pi/5*sin(!pi/5*y))^2))'
