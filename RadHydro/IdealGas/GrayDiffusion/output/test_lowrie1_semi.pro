@@ -26,7 +26,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps, /land
+set_device, resdir + 'error.eps', /eps
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[1e-3,1e-1],[2e-4,2e+0], $
@@ -52,7 +52,7 @@ transform='n'
 bottomline=0
 plottitle="radiation temperature"
 multiplot=[1,2,0]
-set_device, resdir+'grid.eps', /eps, /land
+set_device, resdir+'grid.eps', /eps
 loadct,26
 dpict=7
 .r animate
@@ -66,7 +66,7 @@ multiplot=0
 func='Trad'
 npict=100
 bottomline=0
-set_device, resdir+'Trad_conservative.eps', /eps, /land
+set_device, resdir+'Trad_conservative.eps', /eps
 filename = resdir+'CONS/72/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),linestyle=0,xtitle='x',ytitle='radiation temperature',charsize=2, $
@@ -85,7 +85,7 @@ close_device,/pdf
 func='Tgas'
 npict=100
 bottomline=0
-set_device, resdir+'Tgas_conservative.eps', /eps, /land
+set_device, resdir+'Tgas_conservative.eps', /eps
 filename = resdir+'CONS/72/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),linestyle=0,xtitle='x',ytitle='gas temperature',charsize=2, $
@@ -104,7 +104,7 @@ close_device,/pdf
 func='Trad'
 npict=100
 bottomline=0
-set_device, resdir+'Trad_nonconservative.eps', /eps, /land
+set_device, resdir+'Trad_nonconservative.eps', /eps
 filename = resdir+'NONCONS/72/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),linestyle=0,xtitle='x',ytitle='radiation temperature',charsize=2, $
@@ -123,7 +123,7 @@ close_device,/pdf
 func='Tgas'
 npict=100
 bottomline=0
-set_device, resdir+'Tgas_nonconservative.eps', /eps, /land
+set_device, resdir+'Tgas_nonconservative.eps', /eps
 filename = resdir+'NONCONS/72/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),linestyle=0,xtitle='x',ytitle='gas temperature',charsize=2, $

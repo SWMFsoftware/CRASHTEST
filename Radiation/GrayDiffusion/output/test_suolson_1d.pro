@@ -13,7 +13,7 @@ npict = 2
 
 !p.charsize=2
 !p.charthick=1
-set_device, resdir + 'Tmat.eps', /eps, /land
+set_device, resdir + 'Tmat.eps', /eps
 func='tmat
 plot,x,w0(*,0), $
      xrange=[0.,5.],yrange=[0.,1000.],$
@@ -26,7 +26,7 @@ oplot,[2.8,2.95],[715.,715.],linestyle=0,thick=3 & xyouts,3.,700.,'reference'
 oplot,[2.8,2.95],[815.,815.],linestyle=2,thick=3 & xyouts,3.,800.,'radiation'
 close_device,/pdf
 
-set_device, resdir + 'Trad.eps', /eps, /land
+set_device, resdir + 'Trad.eps', /eps
 func='trad
 plot,x,w0(*,1), $
      xrange=[0.,5.],yrange=[0.,1000.],$
@@ -72,7 +72,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps, /land
+set_device, resdir + 'error.eps', /eps
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[2e-3,2e-1],[1e-4,1e-0], $

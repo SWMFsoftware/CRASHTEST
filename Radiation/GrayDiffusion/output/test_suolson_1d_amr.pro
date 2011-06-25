@@ -9,7 +9,7 @@ resdir='test_suolson_1d_amr_results/'
 
 !p.charsize=2
 !p.charthick=1
-set_device, resdir + 'Tmat.eps', /eps, /land
+set_device, resdir + 'Tmat.eps', /eps
 func='tmat'
 
 filename = 'suolson_0.02ns.out'
@@ -32,7 +32,7 @@ close_device,/pdf
 filename = 'suolson_0.02ns.out'
 npict = 1
 .r getpict
-set_device, resdir + 'Trad.eps', /eps, /land
+set_device, resdir + 'Trad.eps', /eps
 func='trad'
 plot,x,w(*,1), $
      xrange=[0.,5.],yrange=[0.,1000.],$
@@ -81,7 +81,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps, /land
+set_device, resdir + 'error.eps', /eps
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[2e-3,2e-1],[1e-4,1e-0], $

@@ -7,7 +7,7 @@ func='sphere10 {sphere10}-(4./3.)*(100-2e4/(1+2e4/(x^2+y^2))>0)^1.5 ' $
   +       '{usersphere10}-(4./3.)*(100-2e4/(1+2e4/(x^2+y^2))>0)^1.5'
 plotmode='contbar
 bottomline=0
-set_device, resdir + 'sphere.eps', /eps, /land
+set_device, resdir + 'sphere.eps', /eps
 loadct,39
 .r animate
 close_device,/pdf
@@ -36,7 +36,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps, /land
+set_device, resdir + 'error.eps', /eps
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),psym=-4,$
