@@ -22,6 +22,7 @@ test:
 	-@(cd FullSystem/Version2;             make test)
 	-@(cd Mhd/Biermann;                    make test)
 	-@(cd Mhd/Resistivity;                 make test)
+	-@(cd Laser;                           make test)
 	make check
 
 check:
@@ -43,6 +44,7 @@ clean:
 	-@(cd FullSystem/Version2;             make clean)
 	-@(cd Mhd/Biermann;                    make clean)
 	-@(cd Mhd/Resistivity;                 make clean)
+	-@(cd Laser;                           make clean)
 
 distclean: clean
 	@rm -f test.results
