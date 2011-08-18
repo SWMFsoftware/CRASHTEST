@@ -8,8 +8,8 @@ INCLUDE
 Param/CRASH/AMR2.in
 
 #PROGRESS
-1                       DnProgressShort
-10000                     DnProgressLong
+1			DnProgressShort
+10000			DnProgressLong
 
 #TEST
 control_time_step
@@ -23,39 +23,39 @@ T			DoTimeAccurate
 #SAVERESTART
 T			DoSaveRestart
 -1			DnSaveRestart
-1.e-9			DtSaveRestart
+1.e-10			DtSaveRestart
 
 #LASERPULSE
-T                UseLaserHeating
-3.800e12           order of mag below max 3.8e10   PowerSI;  IrradianceSI
-1.0e-09         	tPulse
-100.0e-12		tRaise
-100.0e-12          	tDecay
+T			UseLaserHeating
+3.8e12			order of mag below max 3.8e10   PowerSI;  IrradianceSI
+1.0e-9			tPulse
+1.0e-10			tRaise
+1.0e-10			tDecay
 
 #LASERBEAMS 
-rz		TypeBeam
-300               nRayPerBeam; rays abaove the central ray; not total 
-410.       	rBeam
--150.0           xBeam
+rz			TypeBeam
+300			nRayPerBeam; rays abaove the central ray; not total 
+410.			rBeam
+-150.0			xBeam
 
 #LASERBEAM
-10.0		 10.0              SlopeDeg
--0.125           0.0              yBeam
-1.0              AmplitudeRel
+10.0			SlopeDeg
+-0.125			yBeam
+1.0			AmplitudeRel
 
 #LASERBEAM
-30.0             SlopeDeg
--0.125           yBeam
-1.0              AmplitudeRel
+30.0			SlopeDeg
+-0.125			yBeam
+1.0			AmplitudeRel
 
 #LASERBEAM
-50.0             SlopeDeg
--0.125            yBeam
-1.0              AmplitudeRel
+50.0			SlopeDeg
+-0.125			yBeam
+1.0			AmplitudeRel
 
 #SEMIIMPLICIT
-T                       UseSemiImplicit
-radcondsplit 	        TypeSemiImplicit
+T			UseSemiImplicit
+radcondsplit		TypeSemiImplicit
 
 #KRYLOV
 cg			TypeKrylov
@@ -64,14 +64,18 @@ nul			TypeInitKrylov
 900			MaxMatvecKrylov
 
 #PRECONDITIONER
-left                    TypePrecondSide (left, symmetric, right)
-dilu                    TypePrecond (MBILU)
+left			TypePrecondSide (left, symmetric, right)
+dilu			TypePrecond (MBILU)
 
 #RADIATION
-T                       UseGrayDiffusion
-T                       UseRadFluxLimiter
-larsen                  TypeRadFluxLimiter
+T			UseGrayDiffusion
+T			UseRadFluxLimiter
+larsen			TypeRadFluxLimiter
 300.0			TradMinSi
+
+#HEATFLUXLIMITER
+T                       UseHeatFluxLimiter
+0.06                    HeatFluxLimiter
 
 #ELECTRONPRESSURE
 1.0			PeMinSi
@@ -96,10 +100,6 @@ rz			TypeGeometry
    0.0			zMin
    1.0			zMax
 
-#HEATFLUXLIMITER
-T                       UseHeatFluxLimiter
-0.06                    HeatFluxLimiter
-
 #CONTROLTIMESTEP
 T                       UseTimeStepControl
 
@@ -107,19 +107,19 @@ T                       UseTimeStepControl
 pe			NameVarControl
 
 #CONTROLDECREASE
-0.3                     RejectStepLevel
-0.6                     ReduceStepLevel
-0.8                     IncreaseStepLevel
+0.3			RejectStepLevel
+0.6			ReduceStepLevel
+0.8			IncreaseStepLevel
 
 #CONTROLINCREASE
-1.9                     RejectStepLevel
-1.5                     ReduceStepLevel
-1.2                    IncreaseStepLevel
+1.9			RejectStepLevel
+1.5			ReduceStepLevel
+1.2			IncreaseStepLevel
 
 #CONTROLFACTOR
-0.70                     RejectStepFactor
-0.90                    ReduceStepFactor
-1.20                    IncreaseStepFactor
+0.7			RejectStepFactor
+0.9			ReduceStepFactor
+1.2			IncreaseStepFactor
 
 #OUTERBOUNDARY
 float			xMinBc
@@ -138,49 +138,22 @@ mc3			TypeLimiter
 #SAVELOGFILE
 T			DoSaveLogfile
 RAW			StringLogfile
--5			DnSaveLogfile
-1e-12			DtSaveLogfile
+1			DnSaveLogfile
+-1e-12			DtSaveLogfile
 
 #SAVEPLOT
 1			nPlotfile
 z=0 var idl		PlotString
--20                      DnSavePlot
-1.e-10                 DtSavePlot
+-20			DnSavePlot
+1.e-10			DtSavePlot
 -1.0			DxSavePlot
-rho ux uy Eint p pe level xe be pl tekev trkev tikev elaser
+rho ux uy Eint p pe level tekev trkev tikev elaser
 gamma
-idl los var             StringPlot ! line of sight plot
--1                      DnSavePlot
-1.0e-9                  DtSavePlot
-+2000.0                 ObsPosX
--12000.0                ObsPosY
-0.0                     ObsPosZ
--9.46232                OffsetAngle -atan(2000/12000)
-2000.                   rSizeImage
-0.                      xOffset
-0.                      yOffset
-0.                      rOccult
-0.                      MuLimbDarkening
-400                     nPix
-rho rhoxe rhobe rhopl rhoau rhoay radiograph    NameVar
-g                       NamePar
 
 #TIMESTEPPING
 2			nStage
-0.000001		CflExpl  0.01 to start  (0.00075 works with small Dt
+1e-6			CflExpl
 
 #STOP
-100			MaxIteration
-1.3e-08		tSimulationMax
-
-#RUN #############################################
-
-#TIMESTEPPING
-2			nStage
-0.1		CflExpl  0.01 to start  (0.00075 works with small Dt
-
-#STOP
--10			MaxIteration
-1.3e-08		tSimulationMax
-
-#END
+-1			MaxIteration
+1.3e-09			tSimulationMax
