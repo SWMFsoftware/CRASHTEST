@@ -79,7 +79,7 @@ test_onebeam_run_res:
 		PostProc.pl RESULTS/${RES}
 
 test_onebeam_check:
-	cd output; onebeam.pl
+	cd output; onebeam.pl test_onebeam
 	-(diff  output/test_onebeam_results/error.dat \
 		output/test_onebeam.ref \
 		> output/test_onebeam.diff)
@@ -121,7 +121,7 @@ test_onebeam_amr_run_res:
 		PostProc.pl RESULTS/${RES}
 
 test_onebeam_amr_check:
-	cd output; onebeam_amr.pl
+	cd output; onebeam.pl test_onebeam_amr
 	-(diff  output/test_onebeam_amr_results/error.dat \
 		output/test_onebeam_amr.ref \
 		> output/test_onebeam_amr.diff)
