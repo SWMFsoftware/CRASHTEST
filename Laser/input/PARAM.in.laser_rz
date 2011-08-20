@@ -7,7 +7,7 @@ Tables/5Materials
 #INCLUDE
 Param/CRASH/RZ.in
 
-INCLUDE
+#INCLUDE
 Param/CRASH/AMR2.in
 
 #INCLUDE
@@ -125,7 +125,7 @@ z=0 var idl		PlotString
 -20			DnSavePlot
 1.e-10			DtSavePlot
 -1.0			DxSavePlot
-rho ux uy Eint p pe level tekev trkev tikev elaser
+rho ux uy Eint p pe level tekev trkev tikev elaser dx
 gamma
 
 #TIMESTEPPING
