@@ -4,8 +4,20 @@ Param/CRASH/START.in
 #INCLUDE
 Tables/5Materials
 
+#INCLUDE
+Param/CRASH/RZ.in
+
 INCLUDE
 Param/CRASH/AMR2.in
+
+#INCLUDE
+Param/CRASH/MULTIGROUPCOND.in
+
+KRYLOV
+cg			TypeKrylov
+nul			TypeInitKrylov
+1.0e-6			ErrorMaxKrylov
+900			MaxMatvecKrylov
 
 #PROGRESS
 1			DnProgressShort
@@ -53,41 +65,15 @@ rz			TypeBeam
 -0.125			yBeam
 1.0			AmplitudeRel
 
-#SEMIIMPLICIT
-T			UseSemiImplicit
-radcondsplit		TypeSemiImplicit
-
-#KRYLOV
-cg			TypeKrylov
-nul			TypeInitKrylov
-1.0e-6			ErrorMaxKrylov
-900			MaxMatvecKrylov
-
-#PRECONDITIONER
-left			TypePrecondSide (left, symmetric, right)
-dilu			TypePrecond (MBILU)
-
-#RADIATION
-T			UseGrayDiffusion
-T			UseRadFluxLimiter
-larsen			TypeRadFluxLimiter
-300.0			TradMinSi
-
 #HEATFLUXLIMITER
 T                       UseHeatFluxLimiter
 0.06                    HeatFluxLimiter
-
-#ELECTRONPRESSURE
-1.0			PeMinSi
 
 #CHECKGRIDSIZE
 4			nI
 4			nJ
 1			nK
 100			MinBlockALL
-
-#GRIDGEOMETRY
-rz			TypeGeometry
 
 #GRID
 300			nRootBlockX 300
@@ -121,14 +107,6 @@ pe			NameVarControl
 0.9			ReduceStepFactor
 1.2			IncreaseStepFactor
 
-#OUTERBOUNDARY
-float			xMinBc
-float			xMaxBc
-reflect			yMinBc
-float			yMaxBc
-reflect			zMinBc
-reflect			zMaxBc
-
 #SCHEME
 2			nOrder
 Linde			TypeFlux
@@ -152,8 +130,18 @@ gamma
 
 #TIMESTEPPING
 2			nStage
-1e-6			CflExpl
+1e-3			CflExpl
+
+#STOP
+300			MaxIteration
+-1.3e-9			tSimulationMax
+
+#RUN
+
+#TIMESTEPPING
+2			nStage
+0.1			CflExpl
 
 #STOP
 -1			MaxIteration
-1.3e-09			tSimulationMax
+1.3e-9			tSimulationMax
