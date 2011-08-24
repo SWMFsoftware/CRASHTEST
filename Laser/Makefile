@@ -117,7 +117,7 @@ test_onebeam_amr_run:
 
 test_onebeam_amr_run_res:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e '$$a=70*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
+	perl -pi -e '$$a=68*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./CRASH.exe > runlog; \
 		PostProc.pl RESULTS/${RES}
