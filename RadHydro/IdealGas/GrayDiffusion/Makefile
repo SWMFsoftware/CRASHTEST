@@ -176,7 +176,7 @@ test_lowrie3_amr_run_res:
 test_lowrie3_amr_check:
 	cd output; idl test_lowrie3_amr.pro; \
 		rm -f test_lowrie3_amr_results/*.eps
-	-(${SCRIPTDIR}/DiffNum.pl -a=1e-7  output/test_lowrie3_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -a=3e-7  output/test_lowrie3_amr_results/error.dat \
 		output/test_lowrie3_amr.ref \
 		> output/test_lowrie3_amr.diff)
 	ls -l output/test_lowrie3_amr.diff
