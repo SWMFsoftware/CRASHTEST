@@ -37,6 +37,13 @@ T			DoSaveRestart
 -1			DnSaveRestart
 1.e-9			DtSaveRestart
 
+#USERINPUTBEGIN  ----------------------
+
+#BERYLLIUMDISK
+20.0			WidthBerylliumDisk
+
+#USERINPUTEND    ----------------------
+
 Omega laser pulse can be represented by 10 beams having the following angles
 with respect to the normal:
 50.62, 42.04, 31.6, 41.96, 10.49, 31.37, 31.94, 10.13, 42.37, 31.71
