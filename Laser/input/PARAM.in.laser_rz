@@ -84,6 +84,9 @@ rz			TypeBeam
 -0.125			yBeam
 1.0			AmplitudeRel
 
+#LASERBEAMPROFILE
+4.2			SuperGaussianOrder
+
 #HEATFLUXLIMITER
 T                       UseHeatFluxLimiter
 0.06                    HeatFluxLimiter
