@@ -147,7 +147,7 @@ z=0 var idl		PlotString
 -20			DnSavePlot
 1.e-10			DtSavePlot
 -1.0			DxSavePlot
-rho ux uy Eint p pe level tekev trkev tikev elaser dx
+rho ux uy Eint p pe level tekev trkev tikev zavg elaser dx
 gamma
 idl los var		StringPlot ! line of sight plot
 -1			DnSavePlot
@@ -167,7 +167,7 @@ g			NamePar
 
 #TIMESTEPPING
 2			nStage
-0.1			CflExpl
+0.3			CflExpl
 
 #STOP
 -1			MaxIteration
@@ -177,16 +177,6 @@ g			NamePar
 
 #CONTROLTIMESTEP
 F			UseTimeStepControl
-
-#TIMESTEPPING
-2			nStage
-0.3			CflExpl
-
-#STOP
--1			MaxIteration
-1.3e-9			tSimulationMax
-
-#RUN
 
 #TIMESTEPPING
 2			nStage
