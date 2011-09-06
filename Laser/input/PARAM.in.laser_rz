@@ -112,7 +112,7 @@ T                       UseHeatFluxLimiter
 T			UseTimeStepControl
 
 #CONTROLVAR
-pe			NameVarControl
+eint			NameVarControl
 
 #CONTROLDECREASE
 0.3			RejectStepLevel
@@ -167,7 +167,7 @@ g			NamePar
 
 #TIMESTEPPING
 2			nStage
-0.3			CflExpl
+0.8			CflExpl
 
 #STOP
 -1			MaxIteration
