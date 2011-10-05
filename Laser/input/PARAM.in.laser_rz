@@ -42,6 +42,11 @@ T			DoSaveRestart
 #BERYLLIUMDISK
 20.0			WidthBerylliumDisk
 
+AMRLEVEL
+2			nLevelShock
+2			nLevelAuInterface
+3			nLevelBeryllium
+
 #USERINPUTEND    ----------------------
 
 Omega laser pulse can be represented by 10 beams having the following angles
