@@ -10,7 +10,7 @@ my @SumLaserHeatingRef;
 my $i;
 my $Test = $ARGV[0];
 
-foreach $i (0, 1, 2)
+foreach $i (0, 1, 2, 3)
 {
     $RES = 2**$i;
 
@@ -28,8 +28,9 @@ foreach $i (0, 1, 2)
 $NameFile = ">".$Test."_results/error.dat";
 
 open(FILE, $NameFile);
+print FILE "single ray test\n";
 print FILE "resolution turning_point_error energy_deposition_error\n";
-foreach $i (0, 1, 2)
+foreach $i (0, 1, 2, 3)
 {
     $RES = 2**$i;
     print FILE $RES," ",abs(@PosXhold[$i] - @TurningPoint[$i])," ",abs(@SumLaserHeating[$i] - @SumLaserHeatingRef[$i]),"\n";

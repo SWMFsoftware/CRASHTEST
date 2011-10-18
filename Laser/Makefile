@@ -67,21 +67,23 @@ test_onebeam_rundir: test_rundir
 	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_onebeam_run:
-	make test_onebeam_run_res RES=1
-	make test_onebeam_run_res RES=2
-	make test_onebeam_run_res RES=4
+	for RES in 1 2 4 8; do \
+	  make test_onebeam_run_res RES=$${RES}; \
+	done
 	rm -rf output/test_onebeam_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_onebeam_results
 
 test_onebeam_run_res:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e '$$a=34*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
+	perl -pi -e '$$a=68*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./CRASH.exe > runlog; \
 		PostProc.pl RESULTS/${RES}
 
 test_onebeam_check:
 	cd output; onebeam.pl test_onebeam
+	cd output; idl test_onebeam.pro; \
+		rm -f test_onebeam_results/*.eps
 	-(diff  output/test_onebeam_results/error.dat \
 		output/test_onebeam.ref \
 		> output/test_onebeam.diff)
