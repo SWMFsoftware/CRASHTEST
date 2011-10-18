@@ -97,11 +97,11 @@ rz			TypeGeometry
 #GRIDLEVEL
 1			nLevelArea
 box			NameArea
--80.0			xMinBox
-0.0			yMinBox
+-60.0			xMinBox
+20.0			yMinBox
 0.0			zMinBox
--60.0			xMaxBox
-64.0			yMaxBox
+-45.0			xMaxBox
+35.0			yMaxBox
 1.0			zMaxBox
 
 #GRIDLEVEL

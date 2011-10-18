@@ -111,9 +111,9 @@ test_onebeam_amr_rundir: test_rundir
 	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_onebeam_amr_run:
-	make test_onebeam_amr_run_res RES=1
-	make test_onebeam_amr_run_res RES=2
-	make test_onebeam_amr_run_res RES=4
+	for RES in 1 2 4 8; do \
+	  make test_onebeam_amr_run_res RES=$${RES}; \
+	done
 	rm -rf output/test_onebeam_amr_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_onebeam_amr_results
 
@@ -126,6 +126,8 @@ test_onebeam_amr_run_res:
 
 test_onebeam_amr_check:
 	cd output; onebeam.pl test_onebeam_amr
+	cd output; idl test_onebeam_amr.pro; \
+		rm -f test_onebeam_amr_results/*.eps
 	-(diff  output/test_onebeam_amr_results/error.dat \
 		output/test_onebeam_amr.ref \
 		> output/test_onebeam_amr.diff)
