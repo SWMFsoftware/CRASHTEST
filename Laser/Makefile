@@ -151,7 +151,7 @@ test_laser_rz:
 
 test_laser_rz_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=4,4,1,1000,1000 -nWave=30 -nMaterial=5
+		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5
 	cd ${DIR}; make CRASH PIDL
 
 test_laser_rz_rundir: test_rundir
@@ -165,9 +165,9 @@ test_laser_rz_run:
 
 test_laser_rz_run1:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e '$$a=70; s/\S+(\s*MaxIteration)/$$a$$1/; \
-		$$a=160; s/\S+(\s*nRootBlockX)/$$a$$1/; \
-		$$a=16; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+	perl -pi -e 's/1.3e-8/1.3e-9/g; \
+		$$a=40; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		$$a=4; s/\S+(\s*nRootBlockY)/$$a$$1/; \
 		s/AMR\d\.in/AMR1.in/' PARAM.in; \
 	${MPIRUN} ./CRASH.exe > runlog; \
 	PostProc.pl -M RESULTS/Linde
@@ -175,6 +175,8 @@ test_laser_rz_run1:
 test_laser_rz_check:
 	cd output/test_laser_rz_results/; \
 		tail -n 1 */GM/log*.log > log.dat
+	cd output; idl test_laser_rz.pro; \
+		rm -f test_laser_rz_results/*.eps
 	-(${SCRIPTDIR}/DiffNum.pl \
 		output/test_laser_rz_results/log.dat \
 		output/test_laser_rz.ref \

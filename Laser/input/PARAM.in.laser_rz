@@ -42,11 +42,6 @@ T			DoSaveRestart
 #BERYLLIUMDISK
 20.0			WidthBerylliumDisk
 
-AMRLEVEL
-2			nLevelShock
-2			nLevelAuInterface
-3			nLevelBeryllium
-
 #USERINPUTEND    ----------------------
 
 Omega laser pulse can be represented by 10 beams having the following angles
@@ -71,22 +66,22 @@ rz			TypeBeam
 
 #LASERBEAM
 10.2			SlopeDeg
--0.125			yBeam
+0.0			yBeam
 2.0			AmplitudeRel
 
 #LASERBEAM
 31.7			SlopeDeg
--0.125			yBeam
+0.0			yBeam
 4.0			AmplitudeRel
 
 #LASERBEAM
 42.0			SlopeDeg
--0.125			yBeam
+0.0			yBeam
 3.0			AmplitudeRel
 
 #LASERBEAM
 50.6			SlopeDeg
--0.125			yBeam
+0.0			yBeam
 1.0			AmplitudeRel
 
 #LASERBEAMPROFILE
@@ -97,14 +92,14 @@ T                       UseHeatFluxLimiter
 0.06                    HeatFluxLimiter
 
 #CHECKGRIDSIZE
-4			nI
-4			nJ
+8			nI
+8			nJ
 1			nK
 100			MinBlockALL
 
 #GRID
-300			nRootBlockX 300
-30			nRootBlockY  30
+150			nRootBlockX
+15			nRootBlockY
 1			nRootBlockZ
 -150.0			xMin
 3850.0			xMax
