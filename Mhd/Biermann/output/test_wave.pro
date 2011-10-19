@@ -4,6 +4,7 @@
 
 resdir='test_wave_results/'
 
+loadct,39
 set_device,resdir+'biermann_wave.eps',/eps
 filename=resdir+'[124]0/GM/z*.outs'
 func='bz {bz}+!pi^2/10000*sin(!pi/10*x)*sin(!pi/10*y)/(1+0.1*cos(!pi/10*x))^2

@@ -6,6 +6,7 @@ resdir='test_onebeam_results/'
 !p.charsize=2
 !p.charthick=1
 bottomline=0
+loadct,39
 
 filename=resdir+'1/GM/z=0_var_1_t000.0010_n0000001.out'
 .r getpict
