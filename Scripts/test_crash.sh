@@ -26,6 +26,7 @@ cvs co CRASHTEST
 # Execute all tests. The < /dev/null is needed so that IDL runs even if the
 # user is not logged in.
 
+cd CRASHTEST
 make test MPIRUN='mpirun -np 16' >& test.log < /dev/null
 
 # Store result by yesterday's date
