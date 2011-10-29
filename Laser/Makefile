@@ -166,6 +166,7 @@ test_laser_rz_run:
 test_laser_rz_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/1.3e-8/1.3e-9/g; \
+		$$a=300; s/\S+(\s*nRayPerBeam)/$$a$$1/; \
 		$$a=40; s/\S+(\s*nRootBlockX)/$$a$$1/; \
 		$$a=4; s/\S+(\s*nRootBlockY)/$$a$$1/; \
 		s/AMR\d\.in/AMR1.in/' PARAM.in; \
