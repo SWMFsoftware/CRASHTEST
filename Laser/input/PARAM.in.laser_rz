@@ -131,6 +131,9 @@ eint			NameVarControl
 0.9			ReduceStepFactor
 1.2			IncreaseStepFactor
 
+#CONTROLINIT
+1e-7			UseTimeStepControl
+
 #SCHEME
 2			nOrder
 Linde			TypeFlux
