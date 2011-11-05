@@ -132,7 +132,7 @@ eint			NameVarControl
 1.2			IncreaseStepFactor
 
 #CONTROLINIT
-1e-7			UseTimeStepControl
+1e-7			TimeStepControlInit
 
 #SCHEME
 2			nOrder
