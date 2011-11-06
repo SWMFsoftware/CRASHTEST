@@ -53,7 +53,7 @@ of beams approximately at that angle:
 
 #LASERPULSE
 T			UseLaserHeating
-3.8e12			order of mag below max 3.8e10   PowerSI;  IrradianceSI
+3.0e12			below max 3.8e12   PowerSI;  IrradianceSI
 1.0e-9			tPulse
 1.0e-10			tRaise
 1.0e-10			tDecay
@@ -100,10 +100,10 @@ T                       UseHeatFluxLimiter
 100			MinBlockALL
 
 #GRID
-150			nRootBlockX
+165			nRootBlockX
 15			nRootBlockY
 1			nRootBlockZ
--150.0			xMin
+-550.0			xMin
 3850.0			xMax
    0.0			yMin
  500.0			yMax
