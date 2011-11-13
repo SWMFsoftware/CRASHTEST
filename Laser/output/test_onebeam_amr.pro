@@ -12,7 +12,7 @@ filename=resdir+'1/GM/z=0_var_1_t000.0010_n0000001.out'
 .r getpict
 set_device, resdir + 'single_ray.eps', /eps
 func='{elaser}>1e-6
-plottitle="log(laser energy density deposition)"
+plottitle="log(laser energy deposition)"
 plotmode='contbarloggrid
 .r animate
 close_device,/pdf

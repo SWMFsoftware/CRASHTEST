@@ -34,42 +34,22 @@ READ
 T
 
 #LASERPULSE
-T                UseLaserHeating
-1.0e4            3.8e5		 3.8e10           IrradianceSI
-1.1e-9		 1.0e-10          tPulse
-30.0e-12          100.0e-12          tRaise
-100.0e-12          tDecay
+T			UseLaserHeating
+1.0e4			IrradianceSI
+1.1e-9			tPulse
+30.0e-12		tRaise
+100.0e-12		tDecay
 
-#LASERBEAMS 
-rz		TypeBeam
-1               nRayPerBeam
-24.0            rBeam
--96.0           xBeam
+#LASERBEAMS
+rz			TypeBeam
+1			nRayPerBeam
+0.0			rBeam
+-96.0			xBeam
 
 #LASERBEAM
-10.0		 10.0              SlopeDeg
-0.0               0.0              yBeam
-1.0              AmplitudeRel
-
-SEMIIMPLICIT
-T                       UseSemiImplicit
-radcondsplit 	        TypeSemiImplicit
-
-KRYLOV
-cg                	TypeKrylov
-nul                     TypeInitKrylov
-1.0e-8                  ErrorMaxKrylov
-1200                    MaxMatvecKrylov
-
-PRECONDITIONER
-left                    TypePrecondSide (left, symmetric, right)
-dilu                    TypePrecond (MBILU)
-
-RADIATION
-T                       UseGrayDiffusion
-T                       UseRadFluxLimiter
-larsen                  TypeRadFluxLimiter
-300.0			TradMinSi
+10.0			SlopeDeg
+24.0			yBeam
+1.0			AmplitudeRel
 
 #ELECTRONPRESSURE
 1.0			PeMinSi
@@ -85,12 +65,12 @@ rz			TypeGeometry
 
 #GRID
 34			nRootBlockX 34
-16 			nRootBlockY 16
+12 			nRootBlockY 16
 1			nRootBlockZ
 -96.0			xMin
 -28.0			xMax
 0.0			yMin
-64.0			yMax
+48.0			yMax
 0.0			zMin
 1.0			zMax
 
@@ -139,11 +119,9 @@ rho ux uy Eint p pe level xe be pl tekev trkev tikev elaser
 gamma
 
 #FIXEDTIMESTEP
-T                       UseDtFixed
-1.0e-12                     DtFixedDim [sec]
+T			UseDtFixed
+1.0e-12			DtFixedDim [sec]
 
 #STOP
 -1			MaxIteration
 1.0e-12			tSimulationMax
-
-#END
