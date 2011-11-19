@@ -41,14 +41,15 @@ T			UseLaserHeating
 100.0e-12		tDecay
 
 #LASERBEAMS
-rz			TypeBeam
+3d			TypeBeam
 1			nRayPerBeam
 0.0			rBeam
--96.0			xBeam
+-96.0			xBeam -96
 
 #LASERBEAM
-10.0			SlopeDeg
-24.0			yBeam
+10.0			SlopeDeg10
+7.0			rCr 8
+0.			PhiCr
 1.0			AmplitudeRel
 
 #ELECTRONPRESSURE
@@ -65,28 +66,14 @@ rz			TypeGeometry
 
 #GRID
 34			nRootBlockX 34
-12 			nRootBlockY 16
+8 			nRootBlockY 16
 1			nRootBlockZ
 -96.0			xMin
 -28.0			xMax
 0.0			yMin
-48.0			yMax
+25.0			yMax
 0.0			zMin
 1.0			zMax
-
-#GRIDLEVEL
-1			nLevelArea
-box			NameArea
--60.0			xMinBox
-20.0			yMinBox
-0.0			zMinBox
--45.0			xMaxBox
-35.0			yMaxBox
-1.0			zMaxBox
-
-#GRIDLEVEL
-1			nLevelArea
-initial			NameArea
 
 #UPDATECHECK
 F			DoUpdateCheck

@@ -4,14 +4,6 @@ T
 #BATL
 T			UseBatl
 
-#TESTVAR
-1
-
-#TESTXYZ
-0.0
-42.0
-0.0
-
 #DESCRIPTION
 single ray test: The Physics of Laser Interactions by W.L. Kruer, p. 51
 
@@ -48,7 +40,7 @@ rz			TypeBeam
 
 #LASERBEAM
 10.0			SlopeDeg
-24.0			yBeam
+24.0			rCr
 1.0			AmplitudeRel
 
 #ELECTRONPRESSURE
@@ -64,8 +56,8 @@ rz			TypeBeam
 rz			TypeGeometry
 
 #GRID
-34			nRootBlockX 34
-12 			nRootBlockY 16
+34			nRootBlockX
+12 			nRootBlockY
 1			nRootBlockZ
 -96.0			xMin
 -28.0			xMax

@@ -68,22 +68,22 @@ rz			TypeBeam
 
 #LASERBEAM
 10.2			SlopeDeg
-0.0			yBeam
+0.0			rCr
 2.0			AmplitudeRel
 
 #LASERBEAM
 31.7			SlopeDeg
-0.0			yBeam
+0.0			rCr
 4.0			AmplitudeRel
 
 #LASERBEAM
 42.0			SlopeDeg
-0.0			yBeam
+0.0			rCr
 3.0			AmplitudeRel
 
 #LASERBEAM
 50.6			SlopeDeg
-0.0			yBeam
+0.0			rCr
 1.0			AmplitudeRel
 
 #LASERBEAMPROFILE
