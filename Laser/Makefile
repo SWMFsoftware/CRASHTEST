@@ -157,7 +157,7 @@ test_3d_ray_rundir: test_rundir
 	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_3d_ray_run:
-	for RES in 1; do \
+	for RES in 1 2 4 8; do \
 	  make test_3d_ray_run_res RES=$${RES}; \
 	done
 	rm -rf output/test_3d_ray_results
@@ -165,7 +165,8 @@ test_3d_ray_run:
 
 test_3d_ray_run_res:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e '$$a=68*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
+	perl -pi -e '$$a=68*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+	perl -pi -e '$$a=10*${RES}; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./CRASH.exe > runlog; \
 		PostProc.pl RESULTS/${RES}
