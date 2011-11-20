@@ -7,6 +7,7 @@ test:
 	-@(make test_rz_ray)
 	-@(make test_rz_ray_amr)
 	-@(make test_3d_ray)
+	-@(make test_3d_ray_amr)
 	-@(make test_laser_rz)
 	@ls -l output/*.diff
 
@@ -32,6 +33,7 @@ help:
 	@echo "    test_rz_ray                (run single ray test of Kruer)"
 	@echo "    test_rz_ray_amr            (run single ray test of Kruer)"
 	@echo "    test_3d_ray                (run single ray test of Kruer)"
+	@echo "    test_3d_ray_amr            (run single ray test of Kruer)"
 	@echo "    test_laser_rz              (run laser package with rz-beams)"
 
 test_rundir:
@@ -179,6 +181,51 @@ test_3d_ray_check:
 		output/test_3d_ray.ref \
 		> output/test_3d_ray.diff)
 	ls -l output/test_3d_ray.diff
+
+### single ray test: The Physics of Laser Interactions by W.L. Kruer, p. 51 ###
+
+test_3d_ray_amr:
+	@echo "test_3d_ray_amr_compile..." > output/test_3d_ray_amr.diff
+	make test_3d_ray_amr_compile
+	@echo "test_3d_ray_amr_rundir..." >> output/test_3d_ray_amr.diff
+	make test_3d_ray_amr_rundir
+	@echo "test_3d_ray_amr_run..." >> output/test_3d_ray_amr.diff
+	make test_3d_ray_amr_run
+	@echo "test_3d_ray_amr_check..." >> output/test_3d_ray_amr.diff
+	make test_3d_ray_amr_check
+
+test_3d_ray_amr_compile:
+	cd ${DIR}; ./Config.pl  -e=Crash -u=Crash -g=4,4,1,10000,1 \
+		-nMaterial=5 -nWave=30
+	cd ${DIR}; make CRASH PIDL
+
+test_3d_ray_amr_rundir: test_rundir
+	cp input/PARAM.in.3d_ray_amr ${DIR}/${RUNDIR}/PARAM.in
+	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
+
+test_3d_ray_amr_run:
+	for RES in 1 2 4 8; do \
+	  make test_3d_ray_amr_run_res RES=$${RES}; \
+	done
+	rm -rf output/test_3d_ray_amr_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_3d_ray_amr_results
+
+test_3d_ray_amr_run_res:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e '$$a=68*${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
+	perl -pi -e '$$a=10*${RES}; s/\S+(\s*nRootBlockY)/$$a$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./CRASH.exe > runlog; \
+		PostProc.pl RESULTS/${RES}
+
+test_3d_ray_amr_check:
+	cd output; singleray.pl test_3d_ray_amr
+	cd output; idl test_3d_ray_amr.pro; \
+		rm -f test_3d_ray_amr_results/*.eps
+	-(diff  output/test_3d_ray_amr_results/error.dat \
+		output/test_3d_ray_amr.ref \
+		> output/test_3d_ray_amr.diff)
+	ls -l output/test_3d_ray_amr.diff
 
 ### laser package with rz-beams
 

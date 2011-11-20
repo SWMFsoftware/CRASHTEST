@@ -1,0 +1,134 @@
+#ECHO
+T
+
+#BATL
+T			UseBatl
+
+#DESCRIPTION
+single ray test: The Physics of Laser Interactions by W.L. Kruer, p. 51
+
+#PLANET
+NONE
+
+#INCLUDE
+Tables/5Materials
+
+#IOUNITS
+SI
+
+#NORMALIZATION
+READ
+1.0e-6			Micron
+1.0e+3			km/s
+1000.0			g/cm^3
+
+#LASERRAYTEST
+T
+
+#LASERPULSE
+T			UseLaserHeating
+1.0e4			IrradianceSI
+1.1e-9			tPulse
+30.0e-12		tRaise
+100.0e-12		tDecay
+
+#LASERBEAMS
+3d			TypeBeam
+1			nRayPerBeam
+0.0			rBeam
+-96.0			xBeam -96
+
+#LASERBEAM
+10.0			SlopeDeg10
+7.0			rCr 8
+0.			PhiCr
+1.0			AmplitudeRel
+
+#ELECTRONPRESSURE
+1.0			PeMinSi
+
+#CHECKGRIDSIZE
+4			nI
+4			nJ
+1			nK
+1000			MinBlockALL
+
+#GRIDGEOMETRY
+rz			TypeGeometry
+
+#GRID
+34			nRootBlockX 34
+6 			nRootBlockY 16
+1			nRootBlockZ
+-96.0			xMin
+-28.0			xMax
+0.0			yMin
+25.0			yMax
+0.0			zMin
+1.0			zMax
+
+#GRIDLEVEL
+1			nLevelArea
+box			NameArea
+-60.0			xMinBox
+10.0			yMinBox
+0.0			zMinBox
+-45.0			xMaxBox
+15.0			yMaxBox
+1.0			zMaxBox
+
+#GRIDLEVEL
+1			nLevelArea
+initial			NameArea
+
+#UPDATECHECK
+F			DoUpdateCheck
+
+#NONCONSERVATIVE
+F			UseNonConservative
+
+#OUTERBOUNDARY
+float			xMinBc
+float			xMaxBc
+reflect			yMinBc
+float			yMaxBc
+reflect			zMinBc
+reflect			zMaxBc
+
+#TIMEACCURATE
+T			DoTimeAccurate
+
+#SCHEME
+2			nOrder
+Linde			TypeFlux
+mc3			TypeLimiter
+1.5			LimiterBeta
+
+#SAVELOGFILE
+T			DoSaveLogfile
+RAW			StringLogfile
+1			DnSaveLogfile
+1e-12			DtSaveLogfile
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#PLOTFILENAME
+nanosecond		NameMaxTimeUnit
+
+#SAVEPLOT
+1			nPlotfile
+z=0 var idl		PlotString
+1                      DnSavePlot
+-1.0e-12                 DtSavePlot
+-1.0			DxSavePlot
+rho ux uy Eint p pe level xe be pl tekev trkev tikev elaser
+gamma
+
+#FIXEDTIMESTEP
+T			UseDtFixed
+1.0e-12			DtFixedDim [sec]
+
+#STOP
+-1			MaxIteration
+1.0e-12			tSimulationMax
