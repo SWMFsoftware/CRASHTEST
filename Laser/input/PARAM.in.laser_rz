@@ -149,7 +149,7 @@ RAW			StringLogfile
 #SAVEPLOT
 3			nPlotfile
 z=0 var idl		PlotString
--20			DnSavePlot
+-1			DnSavePlot
 1.e-10			DtSavePlot
 -1.0			DxSavePlot
 rho ux uy Eint p pe level tekev trkev tikev zavg elaser dx
@@ -194,10 +194,6 @@ gamma
 
 #CONTROLTIMESTEP
 F			UseTimeStepControl
-
-#TIMESTEPPING
-2			nStage
-0.8			CflExpl
 
 #STOP
 -1			MaxIteration
