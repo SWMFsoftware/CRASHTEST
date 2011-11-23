@@ -9,6 +9,7 @@ test:
 	-@(make test_3d_ray)
 	-@(make test_3d_ray_amr)
 	-@(make test_laser_rz)
+	-@(make test_3dlaser_rz)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -34,7 +35,8 @@ help:
 	@echo "    test_rz_ray_amr            (run single ray test of Kruer)"
 	@echo "    test_3d_ray                (run single ray test of Kruer)"
 	@echo "    test_3d_ray_amr            (run single ray test of Kruer)"
-	@echo "    test_laser_rz              (run laser package with rz-beams)"
+	@echo "    test_laser_rz              (run laser package in rz with rz-beams)"
+	@echo "    test_3dlaser_rz            (run laser package in rz with 3d-beams)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -277,3 +279,55 @@ test_laser_rz_check:
 		output/test_laser_rz.ref \
 		> output/test_laser_rz.diff)
 	ls -l output/test_laser_rz.diff
+
+### laser package in rz with 3d-beams
+
+test_3dlaser_rz:
+	@echo "test_3dlaser_rz_compile..." \
+		> output/test_3dlaser_rz.diff
+	make test_3dlaser_rz_compile
+	@echo "test_3dlaser_rz_rundir..." \
+		>> output/test_3dlaser_rz.diff
+	make test_3dlaser_rz_rundir
+	@echo "test_3dlaser_rz_run..." \
+		>> output/test_3dlaser_rz.diff
+	make test_3dlaser_rz_run
+	@echo "test_3dlaser_rz_check..." \
+		>> output/test_3dlaser_rz.diff
+	make test_3dlaser_rz_check
+
+test_3dlaser_rz_compile:
+	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
+		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5
+	cd ${DIR}; make CRASH PIDL
+
+test_3dlaser_rz_rundir: test_rundir
+	cp input/PARAM.in.3dlaser_rz ${DIR}/${RUNDIR}/PARAM.in
+	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
+
+test_3dlaser_rz_run:
+	make test_3dlaser_rz_run1
+	rm -rf output/test_3dlaser_rz_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_3dlaser_rz_results
+
+test_3dlaser_rz_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/1.3e-8/1.3e-9/g; \
+		$$a=300; s/\S+(\s*nRayR)/$$a$$1/; \
+		$$a=3; s/\S+(\s*nRayPhi)/$$a$$1/; \
+		$$a=40; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		$$a=4; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+		s/AMR\d\.in/AMR1.in/' PARAM.in; \
+	${MPIRUN} ./CRASH.exe > runlog; \
+	PostProc.pl -M RESULTS/Linde
+
+test_3dlaser_rz_check:
+	cd output/test_3dlaser_rz_results/; \
+		tail -n 1 */GM/log*.log > log.dat
+	cd output; idl test_3dlaser_rz.pro; \
+		rm -f test_3dlaser_rz_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_3dlaser_rz_results/log.dat \
+		output/test_3dlaser_rz.ref \
+		> output/test_3dlaser_rz.diff)
+	ls -l output/test_3dlaser_rz.diff
