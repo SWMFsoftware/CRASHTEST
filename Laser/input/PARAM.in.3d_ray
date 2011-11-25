@@ -41,7 +41,6 @@ T			UseLaserHeating
 #LASERBEAM
 10.0			SlopeDeg10
 7.0			rCr 8
-0.			PhiCr
 1.0			AmplitudeRel
 
 #ELECTRONPRESSURE
