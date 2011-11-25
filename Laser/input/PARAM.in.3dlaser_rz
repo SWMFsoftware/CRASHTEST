@@ -60,9 +60,8 @@ T			UseLaserHeating
 
 Increase the number of rays per beam with increasing resolution
 
-#LASERBEAMS 
+#LASERBEAMS
 3d			TypeBeam
-polar			TypeBeamCoordinates
 900			nRayR
 4			nRayPhi
 410.			rBeam

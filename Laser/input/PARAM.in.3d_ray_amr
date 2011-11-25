@@ -23,7 +23,7 @@ READ
 1000.0			g/cm^3
 
 #LASERRAYTEST
-T
+T			DoLaserRayTest
 
 #LASERPULSE
 T			UseLaserHeating
@@ -34,7 +34,8 @@ T			UseLaserHeating
 
 #LASERBEAMS
 3d			TypeBeam
-1			nRayPerBeam
+1			nRayR
+1			nRayPhi
 0.0			rBeam
 -96.0			xBeam -96
 
