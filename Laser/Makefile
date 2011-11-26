@@ -37,6 +37,7 @@ help:
 	@echo "    test_3d_ray_amr            (run single ray test of Kruer)"
 	@echo "    test_laser_rz              (run laser package in rz with rz-beams)"
 	@echo "    test_3dlaser_rz            (run laser package in rz with 3d-beams)"
+	@echo "    test_laser_3d              (run laser package in 3d)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -331,3 +332,50 @@ test_3dlaser_rz_check:
 		output/test_3dlaser_rz.ref \
 		> output/test_3dlaser_rz.diff)
 	ls -l output/test_3dlaser_rz.diff
+
+### laser package in 3D
+
+test_laser_3d:
+	@echo "test_laser_3d_compile..." \
+		> output/test_laser_3d.diff
+	make test_laser_3d_compile
+	@echo "test_laser_3d_rundir..." \
+		>> output/test_laser_3d.diff
+	make test_laser_3d_rundir
+	@echo "test_laser_3d_run..." \
+		>> output/test_laser_3d.diff
+	make test_laser_3d_run
+	@echo "test_laser_3d_check..." \
+		>> output/test_laser_3d.diff
+	make test_laser_3d_check
+
+test_laser_3d_compile:
+	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
+		-g=4,4,4,1000,1000 -nWave=30 -nMaterial=5
+	cd ${DIR}; make CRASH PIDL
+
+test_laser_3d_rundir: test_rundir
+	cp input/PARAM.in.laser_3d ${DIR}/${RUNDIR}/PARAM.in
+	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
+
+test_laser_3d_run:
+	make test_laser_3d_run1
+	rm -rf output/test_laser_3d_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_laser_3d_results
+
+test_laser_3d_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/1.3e-8/1.3e-9/g' PARAM.in; \
+	${MPIRUN} ./CRASH.exe > runlog; \
+	PostProc.pl -M RESULTS/Linde
+
+test_laser_3d_check:
+	cd output/test_laser_3d_results/; \
+		tail -n 1 */GM/log*.log > log.dat
+	cd output; idl test_laser_3d.pro; \
+		rm -f test_laser_3d_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_laser_3d_results/log.dat \
+		output/test_laser_3d.ref \
+		> output/test_laser_3d.diff)
+	ls -l output/test_laser_3d.diff
