@@ -10,13 +10,23 @@ Param/CRASH/START.in
 Tables/5Materials
 
 #INCLUDE
-Param/CRASH/3D.in
-
-#INCLUDE
 Param/CRASH/AMR1.in
 
 #INCLUDE
 Param/CRASH/MULTIGROUPCOND.in
+
+#OUTERBOUNDARY
+float			xMinBc
+float			xMaxBc
+float			yMinBc
+float			yMaxBc
+float			zMinBc
+float			zMaxBc
+
+#GRIDSYMMETRY
+F			IsMirrorX
+F			IsMirrorY
+F			IsMirrorZ
 
 KRYLOV
 cg			TypeKrylov
@@ -111,8 +121,8 @@ T                       UseHeatFluxLimiter
 
 #GRID
 20			nRootBlockX
-2			nRootBlockY
-2			nRootBlockZ
+4			nRootBlockY
+4			nRootBlockZ
 -550.0			xMin
 3850.0			xMax
 -500.0			yMin
