@@ -3,6 +3,9 @@ Notice when using PARAM.in file:
 2) The number of rays needs to be adjusted with the x,y,z-resolution
 3) PhiCr's are set to zero. In the CRASH experiment they are not.
 
+CPUTIMEMAX
+57000			CpuTimeMax [sec]
+
 #INCLUDE
 Param/CRASH/START.in
 
@@ -77,8 +80,8 @@ Increase the number of rays per beam with increasing resolution
 
 #LASERBEAMS
 3d			TypeBeam
-10			nRayY
-10			nRayZ
+80			nRayY
+80			nRayZ
 410.			rBeam
 -150.0			xBeam
 
@@ -120,9 +123,9 @@ T                       UseHeatFluxLimiter
 100			MinBlockALL
 
 #GRID
-20			nRootBlockX
-4			nRootBlockY
-4			nRootBlockZ
+80			nRootBlockX
+16			nRootBlockY
+16			nRootBlockZ
 -550.0			xMin
 3850.0			xMax
 -500.0			yMin
