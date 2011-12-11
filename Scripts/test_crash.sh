@@ -18,7 +18,7 @@ cvs co HYPRE
 cd ..
 
 # Install CRASH
-Config.pl -install -mpi=openmpi -hypre
+Config.pl -install -hypre
 
 # Checkout the CRASHTEST repository
 cvs co CRASHTEST
