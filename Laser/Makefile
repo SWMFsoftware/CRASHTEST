@@ -299,7 +299,7 @@ test_3dlaser_rz:
 
 test_3dlaser_rz_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5
+		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5 -hypre
 	cd ${DIR}; make CRASH PIDL
 
 test_3dlaser_rz_rundir: test_rundir
