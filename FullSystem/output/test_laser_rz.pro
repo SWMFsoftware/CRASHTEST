@@ -12,14 +12,15 @@ npictmax=1
 
 ; Plot all primitive variables
 multiplot = [2,5,1]
-func='level 1/{dx} ux uy zavg rho p pe tikev tekev trkev'
+func     ='level 1/{dx} ux uy zavg rho p pe tikev tekev trkev'
+plotmode ='contbar contover contbar contbar contbar contbarlog'
+plottitle='level and AMR; ;default'
 
 ; logarithmic plot
 filename = resdir+'Linde/GM/z*.outs'
 set_device,resdir+'laser_rz.eps',/eps,/port
-plotmode='contbar contover contbar contbar contbar contbarlog'
 loadct,39
 .r animate
-close_device,/pdf
+close_device, /pdf
 
 exit
