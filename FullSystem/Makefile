@@ -25,6 +25,7 @@ help:
 	@echo "    test MPIRUN='mpirun -np 3'    (run test with mpirun -np 3)"
 	@echo "    test MPIRUN='mprun -np 2'     (run test with mprun -np 2)"
 	@echo "    test_laser_rz              (run laser package in rz with rz-beams)"
+	@echo "    test_laser_3dcont          (continue test_laser_rz run with 3D)"
 	@echo "    test_3dlaser_rz            (run laser package in rz with 3d-beams)"
 	@echo "    test_3dlaser_rz_nlte       (run laser package in rz with 3d-beams in NLTE"
 	@echo "    test_laser_3d              (run laser package in 3d)"
@@ -92,6 +93,55 @@ test_laser_rz_check:
 		output/test_laser_rz.ref \
 		> output/test_laser_rz.diff)
 	ls -l output/test_laser_rz.diff
+
+### continue 2D run in 3D ####
+
+test_laser_3dcont:
+	@echo "test_laser_3dcont_compile..." \
+		> output/test_laser_3dcont.diff
+	make test_laser_3dcont_compile
+	@echo "test_laser_3dcont_rundir..." \
+		>> output/test_laser_3dcont.diff
+	make test_laser_3dcont_rundir
+	@echo "test_laser_3dcont_run..." \
+		>> output/test_laser_3dcont.diff
+	make test_laser_3dcont_run
+	@echo "test_laser_3dcont_check..." \
+		>> output/test_laser_3dcont.diff
+	make test_laser_3dcont_check
+
+test_laser_3dcont_compile:
+	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
+		-g=4,4,4,1000,1000 -nWave=30 -nMaterial=5
+	cd ${DIR}; make CRASH PIDL
+
+test_laser_3dcont_rundir: test_rundir
+	cp input/PARAM.in.laser_3dcont ${DIR}/${RUNDIR}/PARAM.in
+	cp output/test_laser_rz_results/Linde/GM/z=0_all* \
+		${DIR}/${RUNDIR}/z=0_all.out
+	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
+
+test_laser_3dcont_run:
+	make test_laser_3dcont_run1
+	rm -rf output/test_laser_3dcont_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_laser_3dcont_results
+
+test_laser_3dcont_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/1.3e-8/2e-9/g' PARAM.in; \
+	${MPIRUN} ./CRASH.exe > runlog; \
+	PostProc.pl -M RESULTS/Linde
+
+test_laser_3dcont_check:
+	cd output/test_laser_3dcont_results/; \
+		tail -n 1 */GM/log*.log > log.dat
+	cd output; idl test_laser_3dcont.pro; \
+		rm -f test_laser_3dcont_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_laser_3dcont_results/log.dat \
+		output/test_laser_3dcont.ref \
+		> output/test_laser_3dcont.diff)
+	ls -l output/test_laser_3dcont.diff
 
 ### laser package in rz with 3d-beams and nlte
 
