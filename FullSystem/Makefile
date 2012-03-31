@@ -5,6 +5,7 @@
 test: 
 	@rm -f output/*.diff
 	-@(make test_laser_rz)
+	-@(make test_laser_3dcont)
 	-@(make test_3dlaser_rz)
 	@ls -l output/*.diff
 
@@ -96,7 +97,12 @@ test_laser_rz_check:
 
 ### continue 2D run in 3D ####
 
-test_laser_3dcont:
+CRASH2D = output/test_laser_rz_results/Linde/GM/z=0_all_2_n0_772.outs
+
+${CRASH2D}:
+	make test_laser_rz
+
+test_laser_3dcont: ${CRASH2D}
 	@echo "test_laser_3dcont_compile..." \
 		> output/test_laser_3dcont.diff
 	make test_laser_3dcont_compile
