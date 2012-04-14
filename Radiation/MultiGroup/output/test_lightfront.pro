@@ -10,7 +10,7 @@ multiplot=-3
 func='I01 I02 I03'
 
 filename = resdir+'X_*/GM/cut*.outs'
-set_device, resdir + 'lightfront_x.eps', /eps
+set_device, resdir + 'lightfront_x.eps', /epe, /land
 .r animate
 oplot,[0.7,0.75],[0.8,0.8],linestyle=0,thick=3 & xyouts,0.77,0.78,'resolution=160'
 oplot,[0.7,0.75],[0.7,0.7],linestyle=2,thick=3 & xyouts,0.77,0.68,'resolution= 80'
@@ -18,7 +18,7 @@ oplot,[0.7,0.75],[0.6,0.6],linestyle=1,thick=3 & xyouts,0.77,0.58,'resolution= 4
 close_device,/pdf
 
 filename = resdir+'Y_*/GM/cut*.outs'
-set_device, resdir + 'lightfront_y.eps', /eps
+set_device, resdir + 'lightfront_y.eps', /epe, /land
 .r animate
 oplot,[0.7,0.75],[0.8,0.8],linestyle=0,thick=3 & xyouts,0.77,0.78,'resolution=160'
 oplot,[0.7,0.75],[0.7,0.7],linestyle=2,thick=3 & xyouts,0.77,0.68,'resolution= 80'
@@ -26,7 +26,7 @@ oplot,[0.7,0.75],[0.6,0.6],linestyle=1,thick=3 & xyouts,0.77,0.58,'resolution= 4
 close_device,/pdf
 
 filename = resdir+'Z_*/GM/cut*.outs'
-set_device, resdir + 'lightfront_z.eps', /eps
+set_device, resdir + 'lightfront_z.eps', /epe, /land
 .r animate
 oplot,[0.7,0.75],[0.8,0.8],linestyle=0,thick=3 & xyouts,0.77,0.78,'resolution=160'
 oplot,[0.7,0.75],[0.7,0.7],linestyle=2,thick=3 & xyouts,0.77,0.68,'resolution= 80'
@@ -69,7 +69,7 @@ close,99
 
 !p.charsize=2
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /epe, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),wlog(*,1),psym=-1,thick=4, $

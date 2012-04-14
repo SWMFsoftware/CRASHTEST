@@ -45,7 +45,7 @@ func='temp {temp}-{temp0}'
 plottitle='temperature;temperature error'
 plotmode='contbar'
 multiplot=[2,2,0]
-set_device, resdir + 'temperature.eps', /eps
+set_device, resdir + 'temperature.eps', /epe, /land
 .r animate
 xyouts,0.5,1.07,'Reinicke Meyer-ter Vehn test!Ctop row: 200x200, bottom row 400x400',/norm,charsize=2,alignment=0.5
 close_device,/pdf
@@ -58,7 +58,7 @@ func='rho {rho}-{rho0}'
 plottitle='density;density error'
 plotmode='contbar'
 multiplot=[2,2,0]
-set_device, resdir + 'density.eps', /eps
+set_device, resdir + 'density.eps', /epe, /land
 .r animate
 xyouts,0.5,1.07,'Reinicke Meyer-ter Vehn test!Ctop row: 200x200, bottom row 400x400',/norm,charsize=2,alignment=0.5
 close_device,/pdf
@@ -94,7 +94,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /epe, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-3,1e-1],yrange=[1e-2,1e-0],$

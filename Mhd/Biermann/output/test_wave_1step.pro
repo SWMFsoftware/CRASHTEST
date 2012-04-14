@@ -5,7 +5,7 @@
 resdir='test_wave_1step_results/'
 
 loadct,39
-set_device,resdir+'biermann_wave.eps',/eps
+set_device,resdir+'biermann_wave.eps',/epe, /land
 filename=resdir+'*/GM/z*.outs'
 func='bz {bz}+0.05*!pi^2/10000*sin(!pi/10*x)*sin(!pi/10*y)/(1+0.1*cos(!pi/10*x))^2
 plottitle='B!DZ!N;Error in B!DZ!N'

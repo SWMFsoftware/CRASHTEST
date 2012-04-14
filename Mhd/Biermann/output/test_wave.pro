@@ -5,7 +5,7 @@
 resdir='test_wave_results/'
 
 loadct,39
-set_device,resdir+'biermann_wave.eps',/eps
+set_device,resdir+'biermann_wave.eps',/epe, /land
 filename=resdir+'[124]0/GM/z*.outs'
 func='bz {bz}+!pi^2/10000*sin(!pi/10*x)*sin(!pi/10*y)/(1+0.1*cos(!pi/10*x))^2
 plottitle='B!DZ!N;Error in B!DZ!N'
@@ -60,7 +60,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /epe, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),wlog(*,1),xrange=[1e-2,1e-1],yrange=[1e-3,1e-1],$

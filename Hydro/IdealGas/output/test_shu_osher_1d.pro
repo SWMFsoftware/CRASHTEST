@@ -13,19 +13,19 @@ multiplot=1
 
 filename = filename_ref + resdir+'Rusanov_*/GM/cut*.outs'
 plottitle='Rusanov n=200, 400, 800, 1600'
-set_device, resdir + 'Rusanov.eps', /eps
+set_device, resdir + 'Rusanov.eps', /epe, /land
 .r animate
 close_device,/pdf
 
 filename = filename_ref + resdir+'Linde_*/GM/cut*.outs'
 plottitle='Linde n=200, 400, 800, 1600'
-set_device, resdir + 'Linde.eps', /eps
+set_device, resdir + 'Linde.eps', /epe, /land
 .r animate
 close_device,/pdf
 
 filename = filename_ref + resdir+'Godunov_*/GM/cut*.outs'
 plottitle='Godunov n=200, 400, 800, 1600'
-set_device, resdir + 'Godunov.eps',/eps
+set_device, resdir + 'Godunov.eps',/epe, /land
 .r animate
 close_device,/pdf
 
@@ -68,7 +68,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /epe, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[1e-3,1e-1],[1e-3,1e-1], $

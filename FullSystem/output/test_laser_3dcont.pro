@@ -25,7 +25,7 @@ close_device,/pdf
 
 ; Radiograph image from Y direction
 filename = resdir+'Linde/GM/los_var_6*.outs'
-set_device,resdir+'radiograph_from_y.eps',/eps
+set_device,resdir+'radiograph_from_y.eps',/epe, /land
 loadct,3
 func='randomn(seed,400,400,poisson=50)*smooth(exp({radiograph}/1000),3)'
 multiplot=0
@@ -41,7 +41,7 @@ close_device,/pdf
 
 ; Radiograph image from Z direction
 filename = resdir+'Linde/GM/los_var_7*.outs'
-set_device,resdir+'radiograph_from_z.eps',/eps
+set_device,resdir+'radiograph_from_z.eps',/epe, /land
 loadct,3
 .r animate
 close_device,/pdf

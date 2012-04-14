@@ -29,7 +29,7 @@ close,99
 
 !p.charsize=2
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /epe, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[0.1,1.0],[4e-4,4e-2],linestyle=2,ystyle=1, $

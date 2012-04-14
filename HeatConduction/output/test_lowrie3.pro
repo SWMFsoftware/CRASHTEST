@@ -26,7 +26,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /eps
+set_device, resdir + 'error.eps', /epe, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[1e-3,1e-1],[4e-3,4e-1], $
@@ -54,7 +54,7 @@ transform='n'
 bottomline=0
 plottitle="electron temperature"
 multiplot=[1,2,0]
-set_device, resdir+'grid.eps', /eps
+set_device, resdir+'grid.eps', /epe, /land
 loadct,26
 dpict=10
 .r animate
@@ -69,7 +69,7 @@ func='te'
 npict=11
 .r getpict
 bottomline=0
-set_device, resdir+'Te.eps',/eps
+set_device, resdir+'Te.eps',/epe, /land
 filename= resdir+'Godunov_cond_96/GM/cut*.outs'
 .r getpict
 plot,x,w(*,4),psym=1,xtitle='x',ytitle='electron temperature',charsize=2, $
@@ -101,7 +101,7 @@ func='ti'
 npict=11
 .r getpict
 bottomline=0
-set_device, resdir+'Ti.eps',/eps
+set_device, resdir+'Ti.eps',/epe, /land
 filename= resdir+'Godunov_cond_384/GM/cut*.outs'
 .r getpict
 plot,x,w(*,3),psym=1,xtitle='x',ytitle='ion temperature',charsize=2, $
