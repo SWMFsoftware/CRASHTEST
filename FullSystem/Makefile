@@ -36,6 +36,7 @@ test_rundir:
 		rm -rf ${RUNDIR}; \
 		make rundir RUNDIR=${RUNDIR} STANDALONE=YES GMDIR=`pwd` \
 			DEFAULT_EXE=CRASH.exe;
+	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 clean:
 	rm -f *~ input/*~ output/*~
@@ -67,7 +68,6 @@ test_laser_rz_compile:
 
 test_laser_rz_rundir: test_rundir
 	cp input/PARAM.in.laser_rz ${DIR}/${RUNDIR}/PARAM.in
-	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_laser_rz_run:
 	make test_laser_rz_run1
@@ -125,7 +125,6 @@ test_laser_3dcont_rundir: test_rundir
 	cp input/PARAM.in.laser_3dcont ${DIR}/${RUNDIR}/PARAM.in
 	cp output/test_laser_rz_results/Linde/GM/z=0_all* \
 		${DIR}/${RUNDIR}/z=0_all.out
-	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_laser_3dcont_run:
 	make test_laser_3dcont_run1
@@ -172,7 +171,6 @@ test_3dlaser_rz_nlte_compile:
 
 test_3dlaser_rz_nlte_rundir: test_rundir
 	cp input/PARAM.in.3dlaser_rz_nlte ${DIR}/${RUNDIR}/PARAM.in
-	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_3dlaser_rz_nlte_run:
 	make test_3dlaser_rz_nlte_run1
@@ -224,7 +222,6 @@ test_3dlaser_rz_compile:
 
 test_3dlaser_rz_rundir: test_rundir
 	cp input/PARAM.in.3dlaser_rz ${DIR}/${RUNDIR}/PARAM.in
-	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_3dlaser_rz_run:
 	make test_3dlaser_rz_run1
@@ -276,7 +273,6 @@ test_laser_3d_compile:
 
 test_laser_3d_rundir: test_rundir
 	cp input/PARAM.in.laser_3d ${DIR}/${RUNDIR}/PARAM.in
-	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 test_laser_3d_run:
 	make test_laser_3d_run1
