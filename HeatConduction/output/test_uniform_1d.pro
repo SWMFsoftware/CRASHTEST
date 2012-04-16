@@ -11,7 +11,7 @@ resdir='test_uniform_1d_results/'
 filename=resdir+'200/GM/cut*.outs'
 npict=1
 .r getpict
-set_device, resdir + 'Tmat.eps', /epe, /land
+set_device, resdir + 'Tmat.eps', /eps, /land
 plot,x,w(*,1), $
      xrange=[-5.,5.],yrange=[8.,20.],$
      linestyle=0,thick=3, $
@@ -57,7 +57,7 @@ close,99
 !p.charsize=2
 !p.charthick=1
 
-set_device, resdir + 'error.eps', /epe, /land
+set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,1/wlog(*,0),(wlog(*,1)),xrange=[1e-4,1e-2],yrange=[1e-5,1e-2],$

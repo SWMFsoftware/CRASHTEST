@@ -14,22 +14,22 @@ func='rho ux p'
 !p.thick=3
 
 filename = resdir+'Godunov_*0_/GM/*.outs'
-set_device,resdir+'godunov.eps',/epe, /land
+set_device,resdir+'godunov.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_NONCONS/GM/*.outs'
-set_device,resdir+'godunov_noncons.eps',/epe, /land
+set_device,resdir+'godunov_noncons.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_/GM/*.outs'
-set_device,resdir+'linde.eps',/epe, /land
+set_device,resdir+'linde.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_NONCONS/GM/*.outs'
-set_device,resdir+'linde_noncons.eps',/epe, /land
+set_device,resdir+'linde_noncons.eps',/eps, /land
 .r animate
 close_device,/pdf
 
@@ -88,7 +88,7 @@ close,99
 !p.charthick=1
 !p.thick=3
 
-set_device,resdir+'error.eps',/epe, /land
+set_device,resdir+'error.eps',/eps, /land
 logfilename=resdir+'error.dat'
 .r getlog
 

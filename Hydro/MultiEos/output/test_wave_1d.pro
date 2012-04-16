@@ -13,82 +13,82 @@ func='rho ux p Eint'
 !p.charsize=1.4
 
 filename = resdir+'Godunov_*0_/GM/*.outs'
-set_device,resdir+'godunov.eps',/epe, /land
+set_device,resdir+'godunov.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_limit_lookup.eps',/epe, /land
+set_device,resdir+'godunov_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_MIXED_LIMIT/GM/*.outs'
-set_device,resdir+'godunov_mixed_limit.eps',/epe, /land
+set_device,resdir+'godunov_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_MIXED_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_mixed_limit_lookup.eps',/epe, /land
+set_device,resdir+'godunov_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_NONCONS_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_noncons_lookup.eps',/epe, /land
+set_device,resdir+'godunov_noncons_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_NONCONS_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_noncons_limit_lookup.eps',/epe, /land
+set_device,resdir+'godunov_noncons_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_NONCONS_MIXED_LIMIT/GM/*.outs'
-set_device,resdir+'godunov_noncons_mixed_limit.eps',/epe, /land
+set_device,resdir+'godunov_noncons_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Godunov_*0_NONCONS_MIXED_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_noncons_mixed_limit_lookup.eps',/epe, /land
+set_device,resdir+'godunov_noncons_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_/GM/*.outs'
-set_device,resdir+'linde.eps',/epe, /land
+set_device,resdir+'linde.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_limit_lookup.eps',/epe, /land
+set_device,resdir+'linde_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_MIXED_LIMIT/GM/*.outs'
-set_device,resdir+'linde_mixed_limit.eps',/epe, /land
+set_device,resdir+'linde_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_MIXED_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_mixed_limit_lookup.eps',/epe, /land
+set_device,resdir+'linde_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_NONCONS_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_noncons_lookup.eps',/epe, /land
+set_device,resdir+'linde_noncons_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_NONCONS_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_noncons_limit_lookup.eps',/epe, /land
+set_device,resdir+'linde_noncons_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_NONCONS_MIXED_LIMIT/GM/*.outs'
-set_device,resdir+'linde_noncons_mixed_limit.eps',/epe, /land
+set_device,resdir+'linde_noncons_mixed_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde_*0_NONCONS_MIXED_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_noncons_mixed_limit_lookup.eps',/epe, /land
+set_device,resdir+'linde_noncons_mixed_limit_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
@@ -136,7 +136,7 @@ close,99
 !p.charthick=1
 !p.thick=3
 
-set_device,resdir+'error.eps',/epe, /land
+set_device,resdir+'error.eps',/eps, /land
 logfilename=resdir+'error.dat'
 .r getlog
 
