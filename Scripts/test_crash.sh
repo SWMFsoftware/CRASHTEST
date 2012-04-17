@@ -1,7 +1,11 @@
 #!/bin/csh
-cd ${HOME}/CRASHTEST
+
+# update CRASH_data
+cd ${HOME}/CRASH_data
+cvs update -d
 
 # remove old test and move last test to old one
+cd ${HOME}/CRASHTEST
 rm -rf CRASH_OLD
 mv CRASH CRASH_OLD
 
