@@ -8,17 +8,18 @@ firstpict=2
 npictmax=1
 func='level 1/{dx} ux uy uz rho p pe tekev tikev trkev'
 plotmode='contbar contover contbar contbar contbar contbarlog'
-multiplot=-10
+multiplot=[2,5,1]
+!x.range=[-500,2000]
 !p.charsize=1.4
 
 filename = resdir+'Linde/GM/y*.outs'
-set_device,resdir+'y=0_cut.eps',/eps,/port
+set_device,resdir+'y=0_cut.eps',/eps,/land
 loadct,39
 .r animate
 close_device,/pdf
 
 filename = resdir+'Linde/GM/z*.outs'
-set_device,resdir+'z=0_cut.eps',/eps,/port
+set_device,resdir+'z=0_cut.eps',/eps,/land
 loadct,39
 .r animate
 close_device,/pdf
