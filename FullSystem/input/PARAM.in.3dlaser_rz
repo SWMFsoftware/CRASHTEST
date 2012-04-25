@@ -59,9 +59,9 @@ of beams approximately at that angle:
 #LASERPULSE
 T			UseLaserHeating
 3.0e12			below max 3.8e12   PowerSI;  IrradianceSI
-1.0e-9			tPulse
-1.0e-10			tRaise
-1.0e-10			tDecay
+1.2e-9			tPulse
+2.0e-10			tRaise
+2.0e-10			tDecay
 
 Increase the number of rays per beam with increasing resolution
 
