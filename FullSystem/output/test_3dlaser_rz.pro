@@ -17,7 +17,7 @@ plotmode ='contbar contover contbar contbar contbar contbarlog'
 plottitle='level and AMR; ;default'
 
 ; logarithmic plot
-filename = resdir+'Linde/GM/z*.outs'
+filename = resdir+'Linde/GM/z=0_var_1*.outs'
 set_device,resdir+'laser_rz.eps',/eps,/port
 loadct,39
 .r animate
