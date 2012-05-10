@@ -283,11 +283,12 @@ test_3dlaser_rz_gray_run:
 
 test_3dlaser_rz_gray_run1:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e 's/1.3e-8/1.3e-11/g; \
+	perl -pi -e 's/0.2e-9/5e-12/g; \
 		$$a=300; s/\S+(\s*nRayR)/$$a$$1/; \
 		$$a=3; s/\S+(\s*nRayPhi)/$$a$$1/; \
 		$$a=40; s/\S+(\s*nRootBlockX)/$$a$$1/; \
 		$$a=4; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+		s/#RUN/#END/; \
 		s/AMR\d\.in/AMR1.in/' PARAM.in; \
 	${MPIRUN} ./CRASH.exe > runlog; \
 	PostProc.pl -M RESULTS/Linde
