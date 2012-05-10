@@ -7,6 +7,7 @@ test:
 	-@(make test_laser_rz)
 	-@(make test_laser_3dcont)
 	-@(make test_3dlaser_rz)
+	-@(make test_3dlaser_rz_gray)
 	@ls -l output/*.diff
 
 # Main BATSRUS/CRASH directory
@@ -29,6 +30,7 @@ help:
 	@echo "    test_laser_3dcont          (continue test_laser_rz run with 3D)"
 	@echo "    test_3dlaser_rz            (run laser package in rz with 3d-beams)"
 	@echo "    test_3dlaser_rz_nlte       (run laser package in rz with 3d-beams in NLTE"
+	@echo "    test_3dlaser_rz_gray       (run laser package in rz with 3d-beams and gray diffusion"
 	@echo "    test_laser_3d              (run laser package in 3d)"
 
 test_rundir:
@@ -249,6 +251,57 @@ test_3dlaser_rz_check:
 		output/test_3dlaser_rz.ref \
 		> output/test_3dlaser_rz.diff)
 	ls -l output/test_3dlaser_rz.diff
+
+### laser package in rz with 3d-beams
+
+test_3dlaser_rz_gray:
+	@echo "test_3dlaser_rz_gray_compile..." \
+		> output/test_3dlaser_rz_gray.diff
+	make test_3dlaser_rz_gray_compile
+	@echo "test_3dlaser_rz_gray_rundir..." \
+		>> output/test_3dlaser_rz_gray.diff
+	make test_3dlaser_rz_gray_rundir
+	@echo "test_3dlaser_rz_gray_run..." \
+		>> output/test_3dlaser_rz_gray.diff
+	make test_3dlaser_rz_gray_run
+	@echo "test_3dlaser_rz_gray_check..." \
+		>> output/test_3dlaser_rz_gray.diff
+	make test_3dlaser_rz_gray_check
+
+test_3dlaser_rz_gray_compile:
+	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
+		-g=8,8,1,1000,1000 -nWave=2 -nMaterial=5 -hypre
+	cd ${DIR}; make CRASH PIDL
+
+test_3dlaser_rz_gray_rundir: test_rundir
+	cp input/PARAM.in.3dlaser_rz_gray ${DIR}/${RUNDIR}/PARAM.in
+
+test_3dlaser_rz_gray_run:
+	make test_3dlaser_rz_gray_run1
+	rm -rf output/test_3dlaser_rz_gray_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_3dlaser_rz_gray_results
+
+test_3dlaser_rz_gray_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e 's/1.3e-8/1.3e-11/g; \
+		$$a=300; s/\S+(\s*nRayR)/$$a$$1/; \
+		$$a=3; s/\S+(\s*nRayPhi)/$$a$$1/; \
+		$$a=40; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		$$a=4; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+		s/AMR\d\.in/AMR1.in/' PARAM.in; \
+	${MPIRUN} ./CRASH.exe > runlog; \
+	PostProc.pl -M RESULTS/Linde
+
+test_3dlaser_rz_gray_check:
+	cd output/test_3dlaser_rz_gray_results/; \
+		tail -n 1 */GM/log*.log > log.dat
+	cd output; idl test_3dlaser_rz_gray.pro; \
+		rm -f test_3dlaser_rz_gray_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_3dlaser_rz_gray_results/log.dat \
+		output/test_3dlaser_rz_gray.ref \
+		> output/test_3dlaser_rz_gray.diff)
+	ls -l output/test_3dlaser_rz_gray.diff
 
 ### laser package in 3D
 

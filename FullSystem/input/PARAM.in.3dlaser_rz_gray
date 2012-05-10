@@ -1,0 +1,329 @@
+#INCLUDE
+Param/CRASH/START.in
+
+#INCLUDE
+Param/CRASH/RZ.in
+
+#INCLUDE
+Param/CRASH/AMR2.in
+
+#INCLUDE
+Param/CRASH/MULTIGROUPCOND.in
+
+#KRYLOV
+gmres			TypeKrylov
+nul			TypeInitKrylov
+1.0e-8			ErrorMaxKrylov
+100			MaxMatvecKrylov
+
+#PRECONDITIONER
+left			TypePrecondSide
+HYPRE			TypePrecond
+0			DnInitHypreAmg
+
+#PROGRESS
+1			DnProgressShort
+10000			DnProgressLong
+
+#TEST
+control_time_step
+
+#DESCRIPTION
+Input file for the laser package
+
+#TIMEACCURATE
+T			DoTimeAccurate
+
+#SAVERESTART
+T			DoSaveRestart
+-1			DnSaveRestart
+1.e-9			DtSaveRestart
+
+#USERINPUTBEGIN  ----------------------
+
+#EOSTABLE
+T			UseEosTables
+
+#OPACITYTABLE
+T			UseOpacityTables
+
+#GROUPRANGE
+1.e-7			EnergyPhotonMin
+2.e+4			EnergyPhotonMax
+
+#BERYLLIUMDISK
+20.0			WidthBerylliumDisk
+
+#TUBEDIAMETER
+287.5			rInnerTube [micron]
+312.5			rOuterTube [micron]
+
+#USERINPUTEND    ----------------------
+
+frequency advection of radiation groups is automatically switched off
+for nWave=2
+
+#INCLUDE
+Param/CRASH/TABLE_Xe_EOS.in
+
+#INCLUDE
+Param/CRASH/TABLE_Be_EOS.in
+
+#INCLUDE
+Param/CRASH/TABLE_Pl_EOS.in
+
+#INCLUDE
+Param/CRASH/TABLE_Au_EOS.in
+
+#INCLUDE
+Param/CRASH/TABLE_Ay_EOS.in
+
+#LOOKUPTABLE
+Xe_opac					NameTable
+use param				NameCommand
+Xe_opac_CRASH.dat			NameFile
+real8					TypeFile
+EvMin EvMax				NameTableParam
+1.e-7  					TableParam [eV]
+20000.0					TableParam [eV]
+Opacity(rho,Te) for Xe			StringDescription
+logrho logT Planck(2) Ross(2)		NameVar
+201    	    	       			nIndex1
+0.21801430476				Index1Min [kg/m3]
+2.1801430476E+04			Index1Max [kg/m3]
+201					nIndex2
+3.0E-2					Index2Min [eV]
+1.0E+3					Index2Max [eV]
+
+#LOOKUPTABLE
+Be_opac					NameTable
+use param				NameCommand
+Be_opac_CRASH.dat			NameFile
+real8					TypeFile
+EvMin EvMax				NameTableParam
+1.e-7 					TableParam [eV]
+20000.0					TableParam [eV]
+Opacity(rho,Te) for Be			StringDescription
+logrho logT Planck(2) Ross(2)		NameVar
+201    	    	      			nIndex1
+0.0014965				Index1Min [kg/m3]
+2993.0					Index1Max [kg/m3]
+201					nIndex2
+3.0E-2					Index2Min [eV]
+4.0E+3					Index2Max [eV]
+
+#LOOKUPTABLE
+Pl_opac					NameTable
+use param				NameCommand
+Pl_opac_CRASH.dat			NameFile
+real8					TypeFile
+EvMin EvMax				NameTableParam
+1.e-7 					TableParam [eV]
+20000.0					TableParam [eV]
+Opacity(rho,Te) for Pl			StringDescription
+logrho logT Planck(2) Ross(2)		NameVar
+201    	    	      			nIndex1
+1.62789127801646E-02			Index1Min [kg/m3]
+2.44183691702469E+03			Index1Max [kg/m3]
+201					nIndex2
+5.0E-2					Index2Min [eV]
+1.0E+2					Index2Max [eV]
+
+#LOOKUPTABLE
+Au_opac					NameTable
+use param				NameCommand
+Au_opac_CRASH.dat			NameFile
+real8					TypeFile
+EvMin EvMax				NameTableParam
+1.e-7 					TableParam [eV]
+20000.0					TableParam [eV]
+Opacity(rho,Te) for Au			StringDescription
+logrho logT Planck(2) Ross(2)		NameVar
+201    	    	      			nIndex1
+0.3270688818768				Index1Min [kg/m3]
+3.9248265825216E+04			Index1Max [kg/m3]
+201					nIndex2
+2.0E-1					Index2Min [eV]
+1.0E+2					Index2Max [eV]
+
+#LOOKUPTABLE
+Ay_opac					NameTable
+use param				NameCommand
+Ay_opac_CRASH.dat			NameFile
+real8					TypeFile
+EvMin EvMax				NameTableParam
+1.e-7 					TableParam [eV]
+20000.0					TableParam [eV]
+Opacity(rho,Te) for Ay			StringDescription
+logrho logT Planck(2) Ross(2)		NameVar
+201    	    	      			nIndex1
+1.1083255751072E-02			Index1Min [kg/m3]
+1.6624883626608E+03			Index1Max [kg/m3]
+201					nIndex2
+5.0E-2					Index2Min [eV]
+1.0E+2					Index2Max [eV]
+
+Omega laser pulse can be represented by 10 beams having the following angles
+with respect to the normal:
+50.62, 42.04, 31.6, 41.96, 10.49, 31.37, 31.94, 10.13, 42.37, 31.71
+This is modeled using 4 beams with the power per beam weighted by the number
+of beams approximately at that angle:
+50.6 (times 1), 42.0 (times 3), 31.7 (times 4), 10.2 (times 2)
+
+Below we assume a 3.8 kJ laser energy deposition with a full with half maximum
+(FWHM) duration of 1 ns. We use a laser energy scale factor of 80%, resulting
+in an laser power of 3.0e12 J/s. The linear ramp-up and ramp-down time
+intervals are each 200 ps.
+
+#LASERPULSE
+T			UseLaserHeating
+3.0e12			below max 3.8e12   PowerSI;  IrradianceSI
+1.2e-9			tPulse
+2.0e-10			tRaise
+2.0e-10			tDecay
+
+Increase the number of rays per beam with increasing resolution
+
+#LASERBEAMS
+3d			TypeBeam
+900			nRayR
+4			nRayPhi
+410.			rBeam
+-150.0			xBeam
+
+#LASERBEAM
+10.2			SlopeDeg
+0.0			rCr
+2.0			AmplitudeRel
+
+#LASERBEAM
+31.7			SlopeDeg
+0.0			rCr
+4.0			AmplitudeRel
+
+#LASERBEAM
+42.0			SlopeDeg
+0.0			rCr
+3.0			AmplitudeRel
+
+#LASERBEAM
+50.6			SlopeDeg
+0.0			rCr
+1.0			AmplitudeRel
+
+#LASERBEAMPROFILE
+4.2			SuperGaussianOrder
+
+#HEATFLUXLIMITER
+T                       UseHeatFluxLimiter
+0.06                    HeatFluxLimiter
+
+#CHECKGRIDSIZE
+8			nI
+8			nJ
+1			nK
+100			MinBlockALL
+
+#GRID
+165			nRootBlockX
+15			nRootBlockY
+1			nRootBlockZ
+-550.0			xMin
+3850.0			xMax
+   0.0			yMin
+ 500.0			yMax
+   0.0			zMin
+   1.0			zMax
+
+#CONTROLTIMESTEP
+T			UseTimeStepControl
+
+#CONTROLVAR
+eint			NameVarControl
+
+#CONTROLDECREASE
+0.3			RejectStepLevel
+0.6			ReduceStepLevel
+0.8			IncreaseStepLevel
+
+#CONTROLINCREASE
+1.9			RejectStepLevel
+1.5			ReduceStepLevel
+1.2			IncreaseStepLevel
+
+#CONTROLFACTOR
+0.7			RejectStepFactor
+0.9			ReduceStepFactor
+1.2			IncreaseStepFactor
+
+#CONTROLINIT
+1e-7			TimeStepControlInit
+
+#SCHEME
+2			nOrder
+Linde			TypeFlux
+mc3			TypeLimiter
+1.5			LimiterBeta
+
+#SAVELOGFILE
+T			DoSaveLogfile
+RAW			StringLogfile
+1			DnSaveLogfile
+-1e-12			DtSaveLogfile
+
+#SAVEPLOT
+4			nPlotfile
+z=0 var idl		PlotString
+-1			DnSavePlot
+1.e-10			DtSavePlot
+-1.0			DxSavePlot
+rho ux uy Eint p pe level tekev trkev tikev zavg elaser dx
+gamma
+z=0 all idl_real8	PlotString ! to be read with #CRASH2D
+-1  			DnSavePlot
+1.3e-9			DtSavePlot
+-1.0			DxSavePlot
+idl los var		StringPlot ! line of sight plot
+-1			DnSavePlot
+1.0e-10			DtSavePlot
++2000.0			ObsPosX
+-12000.0		ObsPosY
+0.0			ObsPosZ
+-9.46232		OffsetAngle -atan(2000/12000)
+2000.			rSizeImage
+0.			xOffset
+0.			yOffset
+0.			rOccult
+0.			MuLimbDarkening
+400			nPix
+radiograph		NameVar
+g			NamePar
+cut var idl
+-1			DnSavePlot
+1.e-10			DtSavePlot
+-10000.0		xMinCut
+10000.0			xMaxCut
+0.0			yMinCut
+0.001			yMaxCut
+0.0			zMinCut
+0.001			zMaxCut
+-1.0			DxSavePlot
+rho ux uy Eint p pe level tekev trkev tikev zavg elaser dx
+gamma
+
+#TIMESTEPPING
+2			nStage
+0.8			CflExpl
+
+#STOP
+-1			MaxIteration
+0.2e-9			tSimulationMax
+
+#RUN
+
+#CONTROLTIMESTEP
+F			UseTimeStepControl
+
+#STOP
+-1			MaxIteration
+1.3e-8			tSimulationMax
