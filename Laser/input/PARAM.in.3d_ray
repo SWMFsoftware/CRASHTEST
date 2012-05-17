@@ -1,9 +1,6 @@
 #ECHO
 T
 
-#BATL
-T			UseBatl
-
 #DESCRIPTION
 single ray test: The Physics of Laser Interactions by W.L. Kruer, p. 51
 
