@@ -8,6 +8,9 @@ single ray test: The Physics of Laser Interactions by W.L. Kruer, p. 51
 NONE
 
 #INCLUDE
+Param/CRASH/ICS_STANDARD.in
+
+#INCLUDE
 Tables/5Materials
 
 #IOUNITS
