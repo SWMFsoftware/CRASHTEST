@@ -2,6 +2,9 @@
 Param/CRASH/START.in
 
 #INCLUDE
+Param/CRASH/ICS_STANDARD.in
+
+#INCLUDE
 Param/CRASH/RZ.in
 
 #INCLUDE
@@ -50,13 +53,6 @@ T			UseOpacityTables
 #GROUPRANGE
 1.e-7			EnergyPhotonMin
 2.e+4			EnergyPhotonMax
-
-#BERYLLIUMDISK
-20.0			WidthBerylliumDisk
-
-#TUBEDIAMETER
-287.5			rInnerTube [micron]
-312.5			rOuterTube [micron]
 
 #USERINPUTEND    ----------------------
 

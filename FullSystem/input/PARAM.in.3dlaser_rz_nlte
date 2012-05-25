@@ -2,6 +2,9 @@
 Param/CRASH/START.in
 
 #INCLUDE
+Param/CRASH/ICS_STANDARD.in
+
+#INCLUDE
 Tables/5Materials
 
 #INCLUDE
@@ -43,9 +46,6 @@ T			DoSaveRestart
 1.e-9			DtSaveRestart
 
 #USERINPUTBEGIN  ----------------------
-
-#BERYLLIUMDISK
-20.0			WidthBerylliumDisk
 
 #NLTE
 T                       UseNLTE
