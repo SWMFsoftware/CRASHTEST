@@ -99,7 +99,7 @@ test_laser_rz_check:
 
 ### continue 2D run in 3D ####
 
-CRASH2D = output/test_laser_rz_results/Linde/GM/z=0_all_2_n0_772.outs
+CRASH2D = output/test_laser_rz_results/Linde/GM/z=0_all*.outs
 
 ${CRASH2D}:
 	make test_laser_rz
@@ -125,8 +125,7 @@ test_laser_3dcont_compile:
 
 test_laser_3dcont_rundir: test_rundir
 	cp input/PARAM.in.laser_3dcont ${DIR}/${RUNDIR}/PARAM.in
-	cp output/test_laser_rz_results/Linde/GM/z=0_all* \
-		${DIR}/${RUNDIR}/z=0_all.out
+	cp ${CRASH2D} ${DIR}/${RUNDIR}/z=0_all.out
 
 test_laser_3dcont_run:
 	make test_laser_3dcont_run1
