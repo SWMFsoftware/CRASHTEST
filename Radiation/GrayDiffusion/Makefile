@@ -16,6 +16,8 @@ TESTDIR = CRASHTEST/Radiation/GrayDiffusion
 # Main BATSRUS/CRASH directory
 DIR = ../../..
 
+SCRIPTDIR = ${DIR}/share/Scripts
+
 # All tests are done in this directory:
 RUNDIR = run_test
 
@@ -176,7 +178,8 @@ test_lightfront_run1:
 test_lightfront_check:
 	cd output; idl test_lightfront.pro; \
 		rm -f test_lightfront_results/*.eps
-	-(diff  output/test_lightfront_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -a=1e-9 \
+		output/test_lightfront_results/error.dat \
 		output/test_lightfront.ref \
 		> output/test_lightfront.diff)
 	ls -l output/test_lightfront.diff
