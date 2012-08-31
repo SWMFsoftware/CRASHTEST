@@ -34,12 +34,12 @@ T			DoSaveRestart
 -1			DnSaveRestart
 1.e-9			DtSaveRestart
 
-#USERINPUTBEGIN  ----------------------
+#USERINPUTBEGIN
 
 #NLTE
-T                       UseNLTE
+T
 
-#USERINPUTEND    ----------------------
+#USERINPUTEND
 
 Omega laser pulse can be represented by 10 beams having the following angles
 with respect to the normal:
@@ -48,12 +48,17 @@ This is modeled using 4 beams with the power per beam weighted by the number
 of beams approximately at that angle:
 50.6 (times 1), 42.0 (times 3), 31.7 (times 4), 10.2 (times 2)
 
+Below we assume a 3.8 kJ laser energy deposition with a full with half maximum
+(FWHM) duration of 1 ns. We use a laser energy scale factor of 80%, resulting
+in an laser power of 3.0e12 J/s. The linear ramp-up and ramp-down time
+intervals are each 200 ps.
+
 #LASERPULSE
 T			UseLaserHeating
 3.0e12			below max 3.8e12   PowerSI;  IrradianceSI
-1.0e-9			tPulse
-1.0e-10			tRaise
-1.0e-10			tDecay
+1.2e-9			tPulse
+2.0e-10			tRaise
+2.0e-10			tDecay
 
 Increase the number of rays per beam with increasing resolution
 
@@ -145,13 +150,17 @@ RAW			StringLogfile
 -1e-12			DtSaveLogfile
 
 #SAVEPLOT
-3			nPlotfile
+4			nPlotfile
 z=0 var idl		PlotString
 -1			DnSavePlot
 1.e-10			DtSavePlot
 -1.0			DxSavePlot
 rho ux uy Eint p pe level tekev trkev tikev zavg elaser dx
 gamma
+z=0 all idl_real8	PlotString ! to be read with #CRASH2D
+-1  			DnSavePlot
+1.3e-9			DtSavePlot
+-1.0			DxSavePlot
 idl los var		StringPlot ! line of sight plot
 -1			DnSavePlot
 1.0e-10			DtSavePlot
