@@ -1,0 +1,179 @@
+Begin session: 1
+
+#ECHO
+T                       DoEcho
+
+#DESCRIPTION
+Circularly polarized Alfven wave test			StringDescription
+
+#EQUATION
+MHD                    NameEquation
+       8                            nVar
+
+#USERMODULE
+Waves and GEM, Yingjuan Ma
+ 1.30                  VersionUserModule
+
+#CHECKGRIDSIZE
+       6                              nI
+       1                              nJ
+       1                              nK
+     100                     MinBlockALL
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			TypeIoUnit
+
+#NORMALIZATION
+NONE			TypeNormalization
+
+#SHOCKTUBE
+1.0			rho (left state)
+100.0			Ux
+0.0			Uy
+0.0			Uz
+100.0			Bx
+0.0			By
+0.0			Bz
+1.0			P
+1.0			rho (right state)
+100.0			Ux
+0.0			Uy
+0.0			Uz
+100.0			Bx
+0.0			By
+0.0			Bz
+1.0			P
+
+#GRID
+8                    	nRootBlockX
+1                     	nRootBlockY
+1                     	nRootBlockZ
+-100.                 	xMin
+ 100.                 	xMax
+-1.                   	yMin
+ 1.                   	yMax
+-1.                   	zMin
+ 1.                   	zMax
+
+#OUTERBOUNDARY
+periodic                TypeBcEast
+periodic                TypeBcWest
+float                   TypeBcSouth
+float                   TypeBcNorth
+float                   TypeBcBottom
+float                   TypeBcTop
+
+#USERFLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+F                       UseUserOuterBcs
+T                       UseUserICs
+F                       UseUserSpecifyRefinement
+F                       UseUserLogFiles
+F                       UseUserWritePlot
+F                       UseUserAMR
+F                       UseUserEchoInput
+F                       UseUserB0
+F                       UseUserInitSession
+F                       UseUserUpdateStates
+
+#USERINPUTBEGIN ----------------
+
+#WAVE
+3			RhoUy_
+1000.0			Width
+-0.01			Amplitude
+200.0			LambdaX
+-1.0			LambdaY
+-1.0			LambdaZ
+0.0			Phase
+
+#WAVE
+4			RhoUz_
+1000.0			Width
++0.01			Amplitude
+200.0			LambdaX
+-1.0			LambdaY
+-1.0			LambdaZ
+-90.0			Phase
+
+#WAVE
+6			By_
+1000.0			Width
++0.01			Amplitude
+200.0			LambdaX
+-1.0			LambdaY
+-1.0			LambdaZ
+0.0			Phase
+
+#WAVE
+7			Bz_
+1000.0			Width
+-0.01			Amplitude
+200.0			LambdaX
+-1.0			LambdaY
+-1.0			LambdaZ
+-90.0			Phase
+
+#USERINPUTEND   ----------------
+
+#TEST
+init_hall_resist krylov			TestString
+
+#TESTXYZ
+2.0			xTest		(X coordinate of cell for testing)
+0.5			yTest		(Y coordinate of cell for testing)
+0.5			zTest		(Z coordinate of cell for testing)
+
+#TESTVAR
+6			iVarTest By
+
+#DIVBSOURCE
+F			UseB0Source
+
+#STRICT
+F			UseStrict
+
+#DIVB
+F                       UseDivbSource
+F                       UseDivbDiffusion
+F                       UseProjection
+F                       UseConstrainB
+
+#STRICT
+T			UseStrict
+
+#SCHEME
+4		nOrder
+RoeOld		TypeFlux
+mc3		TypeLimiter
+2.0		BetaLimiter
+
+#SAVERESTART
+F			DoSaveRestart
+
+#SAVELOGFILE
+T			DoSaveLogfile
+raw			StringLog
+1			DnSaveLogfile
+-1.			DtSaveLogfile
+
+#SAVEPLOT
+1
+1d mhd idl_real8       StringPlot
+-1			DnOutput
+0.1			DtOutput
+0.			DxOutput
+
+Alfven wave propagates with ux+B/sqrt(rho)=200, L=200.
+Two full periods are done on the periodic grid.
+#STOP
+-1			MaxIteration
+2.0			tSimulationMax
+
+End session: 1
+#END ############################################################
