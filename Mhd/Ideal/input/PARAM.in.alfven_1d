@@ -121,17 +121,6 @@ F                       UseUserUpdateStates
 
 #USERINPUTEND   ----------------
 
-#TEST
-init_hall_resist krylov			TestString
-
-#TESTXYZ
-2.0			xTest		(X coordinate of cell for testing)
-0.5			yTest		(Y coordinate of cell for testing)
-0.5			zTest		(Z coordinate of cell for testing)
-
-#TESTVAR
-6			iVarTest By
-
 #DIVBSOURCE
 F			UseB0Source
 

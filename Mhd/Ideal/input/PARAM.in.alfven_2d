@@ -87,6 +87,9 @@ F                       UseUserUpdateStates
 
 #USERINPUTBEGIN ----------------
 
+Perturbations of Ux and Bx will become non-zero due to the shock slope,
+but the wave lengths and phases have to be set here.
+
 #WAVE
 2			RhoUx_
 1000.0			Width
