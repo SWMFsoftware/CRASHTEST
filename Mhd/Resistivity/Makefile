@@ -174,3 +174,44 @@ test_wavesemi_check:
 		output/test_wavesemi.ref \
 		> output/test_wavesemi.diff)
 	ls -l output/test_wavesemi.diff
+
+### 2D semi-implicit test in cylindrical coordinates ###
+
+test_wavesemi_cyl:
+	@echo "test_wavesemi_cyl_compile..." > output/test_wavesemi_cyl.diff
+	make test_wavesemi_cyl_compile
+	@echo "test_wavesemi_cyl_rundir..." >> output/test_wavesemi_cyl.diff
+	make test_wavesemi_cyl_rundir
+	@echo "test_wavesemi_cyl_run..." >> output/test_wavesemi_cyl.diff
+	make test_wavesemi_cyl_run
+	@echo "test_wavesemi_cyl_check..." >> output/test_wavesemi_cyl.diff
+	make test_wavesemi_cyl_check
+
+test_wavesemi_cyl_compile:
+	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; make BATSRUS PIDL
+
+test_wavesemi_cyl_rundir: test_rundir
+	cp input/PARAM.in.wavesemi_cyl ${DIR}/${RUNDIR}/PARAM.in
+
+test_wavesemi_cyl_run:
+	for RES in 10; do \
+	 make test_wavesemi_cyl_run1 RES=$${RES}; \
+	done
+	rm -rf output/test_wavesemi_cyl_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_wavesemi_cyl_results
+
+test_wavesemi_cyl_run1:
+	cd ${DIR}/${RUNDIR}; \
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${RES}
+
+test_wavesemi_cyl_check:
+	cd output; idl test_wavesemi_cyl.pro; \
+		rm -f test_wavesemi_cyl_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_wavesemi_cyl_results/error.dat \
+		output/test_wavesemi_cyl.ref \
+		> output/test_wavesemi_cyl.diff)
+	ls -l output/test_wavesemi_cyl.diff
