@@ -1,0 +1,175 @@
+Begin session: 1
+
+#ECHO
+T                       DoEcho
+
+#TEST
+krylov
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			TypeIoUnit
+
+#NORMALIZATION
+NONE			TypeNormalization
+
+#SHOCKTUBE
+1.0			Rho (left state)
+0.0			Ux
+0.0			Uy
+0.0			Uz
+0.0			Bx
+0.0			By
+0.0			Bz
+1.0			P
+1.0			Rho (right state)
+0.0			Ux
+0.0			Uy
+0.0			Uz
+0.0			Bx
+0.0			By
+0.0			Bz
+1.0			P
+
+#CHECKGRIDSIZE
+4			nI
+4			nJ
+1			nK
+1			MinBlockALL
+
+#GRIDGEOMETRY
+cylindrical		TypeGeometry
+
+#GRID
+2			nRootBlockX
+2			nRootBlockY
+1			nRootBlockZ
+-1.0			xMin
+ 1.0			xMax
+-1.0			yMin
+ 1.0			yMax
+-1.0			zMin
+ 1.0			zMax
+
+#OUTERBOUNDARY
+non			TypeBcEast
+user			TypeBcWest
+periodic		TypeBcSouth
+periodic		TypeBcNorth
+periodic		TypeBcBottom
+periodic		TypeBcTop
+
+#USERFLAGS
+F			UseUserInnerBcs
+F			UseUserSource
+F			UseUserPerturbation
+T			UseUserOuterBcs
+T			UseUserICs
+F			UseUserSpecifyRefinement
+F			UseUserLogFiles
+F			UseUserWritePlot
+F			UseUserAMR
+F			UseUserEchoInput
+F			UseUserB0
+F			UseUserInitSession
+T			UseUserUpdateStates
+
+#USERINPUTBEGIN ----------------
+
+#USERPROBLEM
+ResistivityGaussian	UserProblem
+
+#USERINPUTEND   ----------------
+
+#SEMIIMPLICIT
+T			UseSemiImplicit
+resistivity		TypeSemiImplicit
+
+#KRYLOV
+gmres			TypeKrylov
+nul			TypeInitKrylov
+1.0e-8			ErrorMaxKrylov
+100			MaxMatvecKrylov
+
+#PRECONDITIONER
+left                    TypePrecondSide (left, symmetric, right)
+bilu                    TypePrecond (MBILU)
+
+#DIVBSOURCE
+F			UseB0Source
+
+#STRICT
+F			UseStrict
+
+#DIVB
+F			UseDivbSource
+F			UseDivbDiffusion
+F			UseProjection
+F			UseConstrainB
+
+#STRICT
+T			UseStrict
+
+#SCHEME
+2			nOrder
+Linde			TypeFlux
+mc3			TypeLimiter
+1.5			BetaLimiter
+
+#TIMESTEPPING
+1			nStage
+0.8			CflExpl
+
+#UPDATECHECK
+F
+
+#FIXEDTIMESTEP
+T			UseFixedTimeStep
+0.005			DtFixed
+
+#MESSAGEPASS
+all			TypeMessagePass
+
+RESCHANGE
+T			UseAccurateResChange
+
+#RESISTIVITY
+T			UseResistivity
+constant		TypeResistivity
+0.5			Eta0Si
+
+#RESISTIVITYOPTIONS
+F			UseResistiveFlux
+F			UseJouleHeating
+F			UseHeatExchange
+
+#SAVERESTART
+F			DoSaveRestart
+
+#SAVELOGFILE
+T			DoSaveLogfile
+raw			StringLog
+1			DnSaveLogfile
+-1.			DtSaveLogfile
+
+#SAVEPLOT
+1			nPlotFiles
+z=0 VAR idl		StringPlot
+-1			DnOutput
+0.025			DtOutput
+-1.0			DxOutput
+bx bxexact
+g
+
+#SAVEINITIAL
+T			DoSaveInitial
+
+#TIMESIMULATION
+0.1			tSimulation
+
+#STOP
+-1			MaxIteration
+0.3			tSimulationMax
+
