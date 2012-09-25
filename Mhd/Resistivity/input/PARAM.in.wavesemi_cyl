@@ -54,7 +54,7 @@ cylindrical		TypeGeometry
  1.0			zMax
 
 #OUTERBOUNDARY
-non			TypeBcEast
+none			TypeBcEast
 user			TypeBcWest
 periodic		TypeBcSouth
 periodic		TypeBcNorth

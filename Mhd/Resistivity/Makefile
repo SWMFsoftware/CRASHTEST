@@ -7,6 +7,7 @@ test:
 	-@(make test_wave)
 	-@(make test_rzwave)
 	-@(make test_wavesemi)
+	-@(make test_wavesemi_cyl)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -31,6 +32,7 @@ help:
 	@echo "    test_wave                  (run wave test in xy-plane)"
 	@echo "    test_rzwave                (run wave test in rz-plane)"
 	@echo "    test_wavesemi              (run wave test in xy-plane and semi-implicit)"
+	@echo "    test_wavesemi_cyl          (run cylindrical test and semi-implicit)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -195,7 +197,7 @@ test_wavesemi_cyl_rundir: test_rundir
 	cp input/PARAM.in.wavesemi_cyl ${DIR}/${RUNDIR}/PARAM.in
 
 test_wavesemi_cyl_run:
-	for RES in 10; do \
+	for RES in 2 4 8; do \
 	 make test_wavesemi_cyl_run1 RES=$${RES}; \
 	done
 	rm -rf output/test_wavesemi_cyl_results
@@ -203,6 +205,10 @@ test_wavesemi_cyl_run:
 
 test_wavesemi_cyl_run1:
 	cd ${DIR}/${RUNDIR}; \
+        perl -pi -e '$$a=${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+                     $$a=${RES}/2; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+                     $$a=0.001*(2/${RES})**2; s/\S+(\s*DtFixed)/$$a$$1/' PARAM\
+.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
 		PostProc.pl -M RESULTS/${RES}
