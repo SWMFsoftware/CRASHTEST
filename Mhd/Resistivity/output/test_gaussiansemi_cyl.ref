@@ -1,0 +1,5 @@
+Gaussian test for semi-implicit resistivity
+n error
+       2    0.0626804
+       4    0.0221308
+       8   0.00591414

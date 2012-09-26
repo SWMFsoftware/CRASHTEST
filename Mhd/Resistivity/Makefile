@@ -7,7 +7,7 @@ test:
 	-@(make test_wave)
 	-@(make test_rzwave)
 	-@(make test_wavesemi)
-	-@(make test_wavesemi_cyl)
+	-@(make test_gaussiansemi_cyl)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -32,7 +32,7 @@ help:
 	@echo "    test_wave                  (run wave test in xy-plane)"
 	@echo "    test_rzwave                (run wave test in rz-plane)"
 	@echo "    test_wavesemi              (run wave test in xy-plane and semi-implicit)"
-	@echo "    test_wavesemi_cyl          (run cylindrical test and semi-implicit)"
+	@echo "    test_gaussiansemi_cyl          (run cylindrical test and semi-implicit)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -179,45 +179,45 @@ test_wavesemi_check:
 
 ### 2D semi-implicit test in cylindrical coordinates ###
 
-test_wavesemi_cyl:
-	@echo "test_wavesemi_cyl_compile..." > output/test_wavesemi_cyl.diff
-	make test_wavesemi_cyl_compile
-	@echo "test_wavesemi_cyl_rundir..." >> output/test_wavesemi_cyl.diff
-	make test_wavesemi_cyl_rundir
-	@echo "test_wavesemi_cyl_run..." >> output/test_wavesemi_cyl.diff
-	make test_wavesemi_cyl_run
-	@echo "test_wavesemi_cyl_check..." >> output/test_wavesemi_cyl.diff
-	make test_wavesemi_cyl_check
+test_gaussiansemi_cyl:
+	@echo "test_gaussiansemi_cyl_compile..." > output/test_gaussiansemi_cyl.diff
+	make test_gaussiansemi_cyl_compile
+	@echo "test_gaussiansemi_cyl_rundir..." >> output/test_gaussiansemi_cyl.diff
+	make test_gaussiansemi_cyl_rundir
+	@echo "test_gaussiansemi_cyl_run..." >> output/test_gaussiansemi_cyl.diff
+	make test_gaussiansemi_cyl_run
+	@echo "test_gaussiansemi_cyl_check..." >> output/test_gaussiansemi_cyl.diff
+	make test_gaussiansemi_cyl_check
 
-test_wavesemi_cyl_compile:
+test_gaussiansemi_cyl_compile:
 	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=4,4,1,1000,1000
 	cd ${DIR}; make BATSRUS PIDL
 
-test_wavesemi_cyl_rundir: test_rundir
-	cp input/PARAM.in.wavesemi_cyl ${DIR}/${RUNDIR}/PARAM.in
+test_gaussiansemi_cyl_rundir: test_rundir
+	cp input/PARAM.in.gaussiansemi_cyl ${DIR}/${RUNDIR}/PARAM.in
 
-test_wavesemi_cyl_run:
+test_gaussiansemi_cyl_run:
 	for RES in 2 4 8; do \
-	 make test_wavesemi_cyl_run1 RES=$${RES}; \
+	 make test_gaussiansemi_cyl_run1 RES=$${RES}; \
 	done
-	rm -rf output/test_wavesemi_cyl_results
-	mv ${DIR}/${RUNDIR}/RESULTS output/test_wavesemi_cyl_results
+	rm -rf output/test_gaussiansemi_cyl_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_gaussiansemi_cyl_results
 
-test_wavesemi_cyl_run1:
+test_gaussiansemi_cyl_run1:
 	cd ${DIR}/${RUNDIR}; \
         perl -pi -e '$$a=${RES}; s/\S+(\s*nRootBlockX)/$$a$$1/; \
-                     $$a=${RES}/2; s/\S+(\s*nRootBlockY)/$$a$$1/; \
+                     $$a=${RES}; s/\S+(\s*nRootBlockY)/$$a$$1/; \
                      $$a=0.001*(2/${RES})**2; s/\S+(\s*DtFixed)/$$a$$1/' PARAM\
 .in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
 		PostProc.pl -M RESULTS/${RES}
 
-test_wavesemi_cyl_check:
-	cd output; idl test_wavesemi_cyl.pro; \
-		rm -f test_wavesemi_cyl_results/*.eps
+test_gaussiansemi_cyl_check:
+	cd output; idl test_gaussiansemi_cyl.pro; \
+		rm -f test_gaussiansemi_cyl_results/*.eps
 	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_wavesemi_cyl_results/error.dat \
-		output/test_wavesemi_cyl.ref \
-		> output/test_wavesemi_cyl.diff)
-	ls -l output/test_wavesemi_cyl.diff
+		output/test_gaussiansemi_cyl_results/error.dat \
+		output/test_gaussiansemi_cyl.ref \
+		> output/test_gaussiansemi_cyl.diff)
+	ls -l output/test_gaussiansemi_cyl.diff
