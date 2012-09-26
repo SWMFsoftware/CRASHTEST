@@ -136,11 +136,18 @@ F                       UseConstrainB
 #STRICT
 T			UseStrict
 
-#SCHEME
-4		nOrder
+#SCHEME    2nd order
+2		nOrder
 RoeOld		TypeFlux
 mc3		TypeLimiter
 2.0		BetaLimiter
+
+SCHEME    4th order
+4		nOrder
+Simple		TypeFlux
+F		UseFiniteVolume4
+
+
 
 #SAVERESTART
 F			DoSaveRestart
