@@ -73,7 +73,7 @@ test_alfven_1d_run:
 
 test_alfven_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e 's/^\d(\s+nOrder)/${ORDER}$$1/; \
+	perl -pi -e 's/^\#?SCHEME/SCHEME/; s/^(SCHEME\s+${ORDER})/\#$$1/;\
 		     $$a=${RES}/6; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
@@ -118,7 +118,7 @@ test_alfven_2d_run:
 
 test_alfven_2d_run1:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e 's/^\d(\s+nOrder)/${ORDER}$$1/; \
+	perl -pi -e 's/^\#?SCHEME/SCHEME/; s/^(SCHEME\s+${ORDER})/\#$$1/;\
 		     $$a=${RES}/6; s/\S+(\s*nRootBlock[XY])/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
