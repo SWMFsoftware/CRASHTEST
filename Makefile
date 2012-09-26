@@ -45,7 +45,7 @@ clean:
 	-@(cd FullSystem/Version1;             make clean)
 	-@(cd FullSystem/Version2;             make clean)
 	-@(cd FullSystem/Version3;             make clean)
-	-@(cd Mhd/Ideal;                       make cleam)
+	-@(cd Mhd/Ideal;                       make clean)
 	-@(cd Mhd/Biermann;                    make clean)
 	-@(cd Mhd/Resistivity;                 make clean)
 	-@(cd Laser;                           make clean)
