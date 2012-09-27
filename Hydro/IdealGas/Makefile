@@ -4,6 +4,7 @@
 
 test: 
 	@rm -f output/*.diff
+	-@(make test_wave_1d)
 	-@(make test_wave_amr)
 	-@(make test_shu_osher_amr)
 	@ls -l output/*.diff
@@ -59,8 +60,9 @@ test_wave_1d:
 	make test_wave_1d_check
 
 test_wave_1d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,1,1,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,1,1,100,1 -ng=3
 	cd ${DIR}; make BATSRUS PIDL
+	cd ${DIR}; ./Config.pl -ng=2
 
 test_wave_1d_rundir: test_rundir
 	cp input/PARAM.in.wave_1d ${DIR}/${RUNDIR}/PARAM.in
@@ -69,9 +71,16 @@ test_wave_1d_run:
 	for RES in 100 200 400; do \
 	 for ON in "" NONCONS; do \
 	  for FLUX in Linde Godunov; do \
-           make test_wave_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON}; \
+           make test_wave_1d_run1 RES=$${RES} FLUX=$${FLUX} ORDER=2 ON=$${ON}; \
 	  done \
 	 done \
+	done
+	for RES in 100 200 400; do \
+	 for ON in "" NONCONS; do \
+	  for FLUX in Simple Rusanov Godunov; do \
+           make test_wave_1d_run1 RES=$${RES} FLUX=$${FLUX} ORDER=4 ON=$${ON}; \
+	  done \
+         done \
 	done
 	rm -rf output/test_wave_1d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_wave_1d_results
@@ -79,11 +88,13 @@ test_wave_1d_run:
 test_wave_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
+		     s/^\#?SCHEME/SCHEME/; s/^(SCHEME\s+${ORDER})/\#$$1/;\
 		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
-		     $$a=${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
+		     $$a=${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		     ' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
-		PostProc.pl -M RESULTS/${FLUX}_${RES}_${ON}
+		PostProc.pl -M RESULTS/${FLUX}${ORDER}_${RES}_${ON}
 
 test_wave_1d_check:
 	cd output; idl test_wave_1d.pro; \

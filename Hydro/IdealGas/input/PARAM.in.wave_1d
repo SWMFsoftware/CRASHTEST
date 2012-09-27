@@ -20,7 +20,7 @@ T			UseNonConservative
 100			MinBlockALL
 
 #GRID
-10			nRootBlockX
+1			nRootBlockX
 1			nRootBlockY
 1			nRootBlockZ
 -5.0			xMin
@@ -62,49 +62,47 @@ F                       UseUserUpdateStates
 
 #USERINPUTBEGIN -----------------
 
-#WAVE2
+#GAUSSIAN
 1			Rho
-1.0			Width
 0.1			Amplitude
-4.0			LambdaX
+1.0			LambdaX
 -1.0			LambdaY
 -1.0			LambdaZ
-0.0			Phase
+0.0			CenterX
+0.0			CenterY
+0.0			CenterZ
 
-#WAVE2
-5			P
-1.0			Width
-0.06			Amplitude
-4.0			LambdaX
--1.0			LambdaY
--1.0			LambdaZ
-0.0			Phase
+#WAVEINTEGRAL
+T			DoIntegrateWave
+
+#ENTROPY
+0.6			EntropyConstant
 
 #USERINPUTEND ---------------------
 
 #OUTERBOUNDARY
-periodic	xMinBc
-periodic	xMaxBc
-float		yMinBc
-float		yMaxBc
-float		zMinBc
-float		zMaxBc
+periodic		xMinBc
+periodic		xMaxBc
+float			yMinBc
+float			yMaxBc
+float			zMinBc
+float			zMaxBc
 
-#TIMESTEPPING
-2		nStage
-0.8		CflExpl
+#SCHEME      2nd order
+2			nOrder
+Roe			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
 
-#SCHEME
-2		nOrder
-Godunov		TypeFlux
-mc3		TypeLimiter
-2.0		LimiterBeta
+SCHEME	     4th order
+4			nOrder
+Simple			TypeFlux
+F			UseVolumeIntegral4
+F			UseFaceIntegral4
+F			UseLimiter4
 
 #SAVELOGFILE
-T		DoSaveLogfile
-raw		StringLogfile
-1		DnSaveLogfile
--1.		DtSaveLogfile
+F		DoSaveLogfile
 
 #SAVERESTART
 F		DoSaverestart
@@ -116,18 +114,14 @@ second		NameMaxTimeUnit
 T		DoSaveInitial
 
 #SAVEPLOT
-1		nPlotfile
-cut hd idl	PlotString
--1              DnSavePlot
-0.2             DtSavePlot
--5.0		xMinCut
-+5.0		xMaxCut
--0.001		yMinCut
-+0.001		yMaxCut
--0.001		zMinCut
-+0.001		zMaxCut
-0.0             DxSavePlot
+1			nPlotfile
+1d var idl_real8	PlotString
+-1                 	DnSavePlot
+0.2             	DtSavePlot
+0.0         		DxSavePlot
+rho mx p e		NameVar
+g      	       		NamePar
 
 #STOP
 -1		MaxIteration
-3.0		tSimulationMax
+2.0		tSimulationMax
