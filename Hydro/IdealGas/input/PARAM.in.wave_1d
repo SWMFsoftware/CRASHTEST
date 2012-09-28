@@ -14,13 +14,13 @@ NONE			NameNormalization
 T			UseNonConservative
 
 #CHECKGRIDSIZE
-100			nI
+10			nI
 1			nJ
 1			nK
-100			MinBlockALL
+1000			MinBlockALL
 
 #GRID
-1			nRootBlockX
+10			nRootBlockX
 1			nRootBlockY
 1			nRootBlockZ
 -5.0			xMin
@@ -88,18 +88,32 @@ float			yMaxBc
 float			zMinBc
 float			zMaxBc
 
-#SCHEME      2nd order
+#SCHEME      2 ghost cells
 2			nOrder
 Roe			TypeFlux
 mc3			TypeLimiter
 2.0			LimiterBeta
 
-SCHEME	     4th order
+SCHEME	     3 ghost cells
 4			nOrder
-Simple			TypeFlux
+Rusanov			TypeFlux
 F			UseVolumeIntegral4
 F			UseFaceIntegral4
 F			UseLimiter4
+
+SCHEME	     4 ghost cells
+4			nOrder
+Rusanov			TypeFlux
+T			UseVolumeIntegral4
+F			UseFaceIntegral4
+F			UseLimiter4
+
+SCHEME	     5 ghost cells
+4			nOrder
+Rusanov			TypeFlux
+T			UseVolumeIntegral4
+F			UseFaceIntegral4
+T			UseLimiter4
 
 #SAVELOGFILE
 F		DoSaveLogfile
