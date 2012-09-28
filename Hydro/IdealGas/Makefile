@@ -5,6 +5,7 @@
 test: 
 	@rm -f output/*.diff
 	-@(make test_wave_1d)
+	-@(make test_shu_osher_1d)
 	-@(make test_wave_amr)
 	-@(make test_shu_osher_amr)
 	@ls -l output/*.diff
@@ -223,16 +224,19 @@ test_shu_osher_1d:
 	make test_shu_osher_1d_check
 
 test_shu_osher_1d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,1,1,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,1,1,1000,1 -ng=5
 	cd ${DIR}; make BATSRUS PIDL
+	cd ${DIR}; ./Config.pl -ng=2
 
 test_shu_osher_1d_rundir: test_rundir
 	cp input/PARAM.in.shu_osher_1d ${DIR}/${RUNDIR}/PARAM.in
 
 test_shu_osher_1d_run:
-	for RES in 200 400 800 1600; do \
+	for RES in 200 400 800; do \
 	 for FLUX in Rusanov Linde Godunov; do \
-	  make test_shu_osher_1d_run1 RES=$${RES} FLUX=$${FLUX}; \
+	  for NGHOST in 2 3 4 5; do \
+	   make test_shu_osher_1d_run1 RES=$${RES} NGHOST=$${NGHOST} FLUX=$${FLUX}; \
+	  done \
          done \
         done
 	rm -rf output/test_shu_osher_1d_results
@@ -240,11 +244,12 @@ test_shu_osher_1d_run:
 
 test_shu_osher_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=${RES}/100; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+			     s/^\#?SCHEME/SCHEME/; s/^(SCHEME\s+${NGHOST})/\#$$1/;\
 		             s/\S+(\s*TypeFlux)/${FLUX}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
-		PostProc.pl -M RESULTS/${FLUX}_${RES}
+		PostProc.pl -M RESULTS/${FLUX}${NGHOST}_${RES}
 
 test_shu_osher_1d_check:
 	${DIR}/Scripts/IDL/FixEndian.pl -e=machine -i \

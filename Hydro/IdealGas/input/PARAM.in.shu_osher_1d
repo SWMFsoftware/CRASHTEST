@@ -14,13 +14,13 @@ NONE			NameNormalization
 F			UseNonConservative
 
 #CHECKGRIDSIZE
-100			nI
+10			nI
 1			nJ
 1			nK
-100			MinBlockALL
+1000			MinBlockALL
 
 #GRID
-128			nRootBlockX
+20			nRootBlockX
 1			nRootBlockY
 1			nRootBlockZ
 -5.0			xMin
@@ -90,17 +90,41 @@ float		zMaxBc
 2		nStage
 0.8		CflExpl
 
-#SCHEME
+#SCHEME  2 ghost cells
 2		nOrder
 Godunov		TypeFlux
 mc3		TypeLimiter
 2.0		LimiterBeta
 
+SCHEME	3 ghost cells
+4		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+F		UseVolumeIntegral4
+F		UseFaceIntegral4
+F		UseLimiter4
+
+SCHEME  4 ghost cells
+4		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+T		UseVolumeIntegral4
+F		UseFaceIntegral4
+F		UseLimiter4
+
+SCHEME  5 ghost cells
+4		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+T		UseVolumeIntegral4
+F		UseFaceIntegral4
+T		UseLimiter4
+
 #SAVELOGFILE
-T		DoSaveLogfile
-raw		StringLogfile
-1		DnSaveLogfile
--1.		DtSaveLogfile
+F		DoSaveLogfile
 
 #SAVERESTART
 F		DoSaverestart
@@ -114,15 +138,11 @@ T		DoSaveInitial
 !The line is shifted slightly off the Y=Z=0 axis so that PostIDL.exe works OK
 #SAVEPLOT
 1		nPlotfile
-cut hd idl	PlotString
+1d hd idl	PlotString
 -1              DnSavePlot
 0.2             DtSavePlot
 -5.0		xMinCut
 +5.0		xMaxCut
-0.01		yMinCut
-0.011		yMaxCut
-0.01		zMinCut
-0.011		zMaxCut
 0.0             DxSavePlot
 
 !Final time on CLAWPACK page
