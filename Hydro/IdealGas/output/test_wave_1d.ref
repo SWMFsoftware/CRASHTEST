@@ -1,4 +1,4 @@
-Wave test in 1D for Rusanov and Godunov schemes, 2, 3, 4, and 5 ghost cells, energy and pressure equations
+Wave test in 1D for Rusanov and Godunov schemes with 2, 3, 4, and 5 ghost cells, energy and pressure equations
 n g2e g2p r2e r2p g3e g3p r3e r3p r4e r4p r5e r5p
  30 9.865e-02 9.851e-02 1.001e-01 1.004e-01 4.702e-02 4.708e-02 4.750e-02 4.754e-02 4.742e-02 4.746e-02 4.742e-02 4.746e-02
  50 4.974e-02 4.972e-02 4.989e-02 4.990e-02 1.275e-02 1.252e-02 1.274e-02 1.251e-02 1.238e-02 1.214e-02 1.238e-02 1.214e-02

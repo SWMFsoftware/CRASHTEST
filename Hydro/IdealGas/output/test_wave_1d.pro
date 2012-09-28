@@ -69,7 +69,7 @@ wref = w
 
 openw,99,resdir+'error.dat'
 printf,99,'Wave test in 1D for Rusanov and Godunov schemes'+ $
-       ', 2, 3, 4, and 5 ghost cells, energy and pressure equations'
+       ' with 2, 3, 4, and 5 ghost cells, energy and pressure equations'
 printf,99,'n g2e g2p r2e r2p g3e g3p r3e r3p r4e r4p r5e r5p'
 
 ; array of errors indexed by methods and grid resolutions
