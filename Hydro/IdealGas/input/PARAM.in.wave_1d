@@ -97,6 +97,8 @@ mc3			TypeLimiter
 SCHEME	     3 ghost cells
 4			nOrder
 Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
 F			UseVolumeIntegral4
 F			UseFaceIntegral4
 F			UseLimiter4
@@ -104,6 +106,8 @@ F			UseLimiter4
 SCHEME	     4 ghost cells
 4			nOrder
 Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
 T			UseVolumeIntegral4
 F			UseFaceIntegral4
 F			UseLimiter4
@@ -111,6 +115,8 @@ F			UseLimiter4
 SCHEME	     5 ghost cells
 4			nOrder
 Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
 T			UseVolumeIntegral4
 F			UseFaceIntegral4
 T			UseLimiter4
