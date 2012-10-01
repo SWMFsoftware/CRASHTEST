@@ -166,6 +166,7 @@ close,99
 !p.charthick=1
 
 set_device, resdir + 'error.eps', /eps, /land
+loadct,39
 logfilename = resdir + 'error.dat'
 .r getlog
 plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
