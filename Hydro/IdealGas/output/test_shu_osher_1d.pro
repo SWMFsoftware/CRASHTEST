@@ -50,7 +50,7 @@ close_device,/pdf
 
 filename = filename_ref + resdir+'Rusanov4_*/GM/1d*.outs'
 plottitle='Rusanov4 n=200, 400, 800 vs reference'
-set_device, resdir + 'Rusanov3.eps', /eps, /land
+set_device, resdir + 'Rusanov4.eps', /eps, /land
 .r animate
 close_device,/pdf
 
@@ -62,7 +62,7 @@ close_device,/pdf
 
 filename = filename_ref + resdir+'Godunov4_*/GM/1d*.outs'
 plottitle='Godunov4 n=200, 400, 800 vs reference'
-set_device, resdir + 'Godunov3.eps', /eps, /land
+set_device, resdir + 'Godunov4.eps', /eps, /land
 .r animate
 close_device,/pdf
 
