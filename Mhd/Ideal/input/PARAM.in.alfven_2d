@@ -175,6 +175,11 @@ F			UseVolumeIntegral4
 F			UseFaceIntegral4
 F			UseLimiter4
 
+SCHEME		5th order
+5			nOrder
+Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			BetaLimiter
 
 #SAVERESTART
 F			DoSaveRestart

@@ -149,6 +149,18 @@ F			UseVolumeIntegral4
 F			UseFaceIntegral4
 F			UseLimiter4
 
+SCHEME    5th order
+5			nOrder
+Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			BetaLimiter
+
+This is needed for 5th order scheme
+to be REALLY 5th order accurate
+RK       5th order
+3			nState
+0.05			Cfl
+
 #SAVERESTART
 F			DoSaveRestart
 

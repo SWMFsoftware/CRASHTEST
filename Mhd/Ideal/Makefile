@@ -56,14 +56,15 @@ test_alfven_1d:
 	make test_alfven_1d_check
 
 test_alfven_1d_compile:
-	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=6,1,1,1000,1
+	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=6,1,1,1000,1 -ng=3
 	cd ${DIR}; make BATSRUS PIDL
+	#cd ${DIR}; ./Config.pl -ng=2
 
 test_alfven_1d_rundir: test_rundir
 	cp input/PARAM.in.alfven_1d ${DIR}/${RUNDIR}/PARAM.in
 
 test_alfven_1d_run:
-	for ORDER in 2 4; do \
+	for ORDER in 2 4 5; do \
 	  for RES in 24 48 96; do \
 	    make test_alfven_1d_run1 ORDER=$${ORDER} RES=$${RES}; \
 	  done \
@@ -73,7 +74,7 @@ test_alfven_1d_run:
 
 test_alfven_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e 's/^\#?SCHEME/SCHEME/; s/^(SCHEME\s+${ORDER})/\#$$1/;\
+	perl -pi -e 's/^\#?(SCHEME|RK)/$$1/; s/^((SCHEME|RK)\s+${ORDER})/\#$$1/;\
 		     $$a=${RES}/6; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
