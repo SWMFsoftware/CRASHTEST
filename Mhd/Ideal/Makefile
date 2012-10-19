@@ -58,7 +58,7 @@ test_alfven_1d:
 test_alfven_1d_compile:
 	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=6,1,1,1000,1 -ng=3
 	cd ${DIR}; make BATSRUS PIDL
-	#cd ${DIR}; ./Config.pl -ng=2
+	cd ${DIR}; ./Config.pl -ng=2
 
 test_alfven_1d_rundir: test_rundir
 	cp input/PARAM.in.alfven_1d ${DIR}/${RUNDIR}/PARAM.in
