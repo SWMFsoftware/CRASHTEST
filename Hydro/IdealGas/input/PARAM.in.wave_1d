@@ -121,6 +121,24 @@ T			UseVolumeIntegral4
 F			UseFaceIntegral4
 T			UseLimiter4
 
+SCHEME	     MP5RK3 with 3 ghost cells
+5			nOrder
+Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
+
+! The MP5 scheme uses RK3 by default
+
+SCHEME	     MP5RK4 with 3 ghost cells
+5			nOrder
+Rusanov			TypeFlux
+mc3			TypeLimiter
+2.0			LimiterBeta
+
+RK          MP5RK4 with 3 ghost cells
+4		nStage
+0.8		Cfl
+
 #SAVELOGFILE
 F		DoSaveLogfile
 
