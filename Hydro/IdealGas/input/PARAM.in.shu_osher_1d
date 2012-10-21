@@ -90,6 +90,10 @@ float		zMaxBc
 2		nStage
 0.8		CflExpl
 
+! Flattening is on by default for the FIVOL4 scheme
+FLATTENING
+F		UseFlattening
+
 #SCHEME  2 ghost cells
 2		nOrder
 Godunov		TypeFlux
@@ -122,6 +126,12 @@ mc3		TypeLimiter
 T		UseVolumeIntegral4
 F		UseFaceIntegral4
 T		UseLimiter4
+
+SCHEME  MP5 with 3 ghost cells
+5		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
 
 #SAVELOGFILE
 F		DoSaveLogfile

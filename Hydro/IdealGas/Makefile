@@ -234,7 +234,7 @@ test_shu_osher_1d_rundir: test_rundir
 test_shu_osher_1d_run:
 	for RES in 200 400 800; do \
 	 for FLUX in Rusanov Linde Godunov; do \
-	  for NGHOST in 2 3 4 5; do \
+	  for NGHOST in 2 3 4 5 MP5; do \
 	   make test_shu_osher_1d_run1 RES=$${RES} NGHOST=$${NGHOST} FLUX=$${FLUX}; \
 	  done \
          done \

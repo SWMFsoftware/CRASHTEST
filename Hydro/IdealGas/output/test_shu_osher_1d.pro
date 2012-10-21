@@ -84,6 +84,24 @@ set_device, resdir + 'Godunov5.eps', /eps, /land
 .r animate
 close_device,/pdf
 
+filename = filename_ref + resdir+'RusanovMP5_*/GM/1d*.outs'
+plottitle='RusanovMP5 n=200, 400, 800 vs reference'
+set_device, resdir + 'RusanovMP5.eps', /eps, /land
+.r animate
+close_device,/pdf
+
+filename = filename_ref + resdir+'LindeMP5_*/GM/1d*.outs'
+plottitle='LindeMP5 n=200, 400, 800 vs reference'
+set_device, resdir + 'LindeMP5.eps', /eps, /land
+.r animate
+close_device,/pdf
+
+filename = filename_ref + resdir+'GodunovMP5_*/GM/1d*.outs'
+plottitle='GodunovMP5 n=200, 400, 800 vs reference'
+set_device, resdir + 'GodunovMP5.eps', /eps, /land
+.r animate
+close_device,/pdf
+
 !x.range=0
 
 ; 2. calculate errors and save it into a file
@@ -97,11 +115,11 @@ wref = w
 ; start writing error.dat
 openw, 99, resdir + 'error.dat'
 printf,99,'Shu-Osher test in 1D for Rusanov, Linde and Godunov schemes'+ $
-       ' with 2, 3, 4, and 5 ghost cells'
-printf,99,'n r2 l2 g2 r3 l3 g3 r4 l4 g4 r5 l5 g5'
+       ' with TVD2, FIVOL using 3, 4 or 5 ghost cells, and MP5'
+printf,99,'n r2 l2 g2 r3 l3 g3 r4 l4 g4 r5 l5 g5 rMP5 lMP5 gMP5'
 
 ; array of errors indexed by methods and grid resolutions
-errors = fltarr(12,3)
+errors = fltarr(15,3)
 
 ; read the last snapshot 
 npict=10
@@ -155,9 +173,21 @@ filename=resdir+'Godunov5_?00/GM/1d*.outs'
 .r getpict
 errors(11,*) = rel_errors(w0,w1,w2,wref,ivar=[0])
 
-printf,99,200,errors(*,0),format='(i3,12e10.3)'
-printf,99,400,errors(*,1),format='(i3,12e10.3)'
-printf,99,800,errors(*,2),format='(i3,12e10.3)'
+filename=resdir+'RusanovMP5_?00/GM/1d*.outs'
+.r getpict
+errors(12,*) = rel_errors(w0,w1,w2,wref,ivar=[0])
+
+filename=resdir+'LindeMP5_?00/GM/1d*.outs'
+.r getpict
+errors(13,*) = rel_errors(w0,w1,w2,wref,ivar=[0])
+
+filename=resdir+'GodunovMP5_?00/GM/1d*.outs'
+.r getpict
+errors(14,*) = rel_errors(w0,w1,w2,wref,ivar=[0])
+
+printf,99,200,errors(*,0),format='(i3,15e10.3)'
+printf,99,400,errors(*,1),format='(i3,15e10.3)'
+printf,99,800,errors(*,2),format='(i3,15e10.3)'
 
 close,99
 
@@ -190,31 +220,40 @@ oplot,10/wlog(*,0),wlog(*,10),psym=-4,thick=3,color=250,symsize=2
 oplot,10/wlog(*,0),wlog(*,11),psym=-5,thick=3,color=250,symsize=2
 oplot,10/wlog(*,0),wlog(*,12),psym=-6,thick=3,color=250,symsize=2
 
+oplot,10/wlog(*,0),wlog(*,13),psym=-4,thick=3,color=50,symsize=2
+oplot,10/wlog(*,0),wlog(*,14),psym=-5,thick=3,color=50,symsize=2
+oplot,10/wlog(*,0),wlog(*,15),psym=-6,thick=3,color=50,symsize=2
+
 
 x0=0.0012
 x1=0.0015
 x2=0.0017
 x=0.002
-y=0.14
-dy=1.4
+y=0.16
+dy=1.32
+dy2=1.07
 
-oplot,[x0,x2],[y,y],linestyle=2 & xyouts,x,y,'1st order slope'
+oplot,[x0,x2],[y,y],linestyle=2 & xyouts,x,y/dy2,'1st order slope'
 
-y=y/dy & oplot,[x1],[y],psym=4 & xyouts,x,y,'Rusanov2'
-y=y/dy & oplot,[x1],[y],psym=5 & xyouts,x,y,'Linde2'
-y=y/dy & oplot,[x1],[y],psym=6 & xyouts,x,y,'Godunov2'
+y=y/dy & oplot,[x1],[y],psym=4 & xyouts,x,y/dy2,'Rusanov2'
+y=y/dy & oplot,[x1],[y],psym=5 & xyouts,x,y/dy2,'Linde2'
+y=y/dy & oplot,[x1],[y],psym=6 & xyouts,x,y/dy2,'Godunov2'
 
-y=y/dy & oplot,[x1],[y],psym=4,color=100 & xyouts,x,y,'Rusanov3'
-y=y/dy & oplot,[x1],[y],psym=5,color=100 & xyouts,x,y,'Linde3'
-y=y/dy & oplot,[x1],[y],psym=6,color=100 & xyouts,x,y,'Godunov3'
+y=y/dy & oplot,[x1],[y],psym=4,color=100 & xyouts,x,y/dy2,'Rusanov3'
+y=y/dy & oplot,[x1],[y],psym=5,color=100 & xyouts,x,y/dy2,'Linde3'
+y=y/dy & oplot,[x1],[y],psym=6,color=100 & xyouts,x,y/dy2,'Godunov3'
 
-y=y/dy & oplot,[x1],[y],psym=4,color=150 & xyouts,x,y,'Rusanov4'
-y=y/dy & oplot,[x1],[y],psym=5,color=150 & xyouts,x,y,'Linde4'
-y=y/dy & oplot,[x1],[y],psym=6,color=150 & xyouts,x,y,'Godunov4'
+y=y/dy & oplot,[x1],[y],psym=4,color=150 & xyouts,x,y/dy2,'Rusanov4'
+y=y/dy & oplot,[x1],[y],psym=5,color=150 & xyouts,x,y/dy2,'Linde4'
+y=y/dy & oplot,[x1],[y],psym=6,color=150 & xyouts,x,y/dy2,'Godunov4'
 
-y=y/dy & oplot,[x1],[y],psym=4,color=250,symsize=2 & xyouts,x,y,'Rusanov5'
-y=y/dy & oplot,[x1],[y],psym=5,color=250,symsize=2 & xyouts,x,y,'Linde5'
-y=y/dy & oplot,[x1],[y],psym=6,color=250,symsize=2 & xyouts,x,y,'Godunov5'
+y=y/dy & oplot,[x1],[y],psym=4,color=250,symsize=2 & xyouts,x,y/dy2,'Rusanov5'
+y=y/dy & oplot,[x1],[y],psym=5,color=250,symsize=2 & xyouts,x,y/dy2,'Linde5'
+y=y/dy & oplot,[x1],[y],psym=6,color=250,symsize=2 & xyouts,x,y/dy2,'Godunov5'
+
+y=y/dy & oplot,[x1],[y],psym=4,color=50,symsize=2 & xyouts,x,y/dy2,'RusanovMP5'
+y=y/dy & oplot,[x1],[y],psym=5,color=50,symsize=2 & xyouts,x,y/dy2,'LindeMP5'
+y=y/dy & oplot,[x1],[y],psym=6,color=50,symsize=2 & xyouts,x,y/dy2,'GodunovMP5'
 
 
 close_device,/pdf
