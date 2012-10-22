@@ -158,7 +158,7 @@ mc3			TypeLimiter
 This is needed for 5th order scheme
 to be REALLY 5th order accurate
 RK       5th order
-3			nState
+3			nStage
 0.05			Cfl
 
 #SAVERESTART

@@ -22,14 +22,19 @@ set_device,resdir+'order4.eps',/eps, /land
 .r animate
 close_device,/pdf
 
+filename = resdir+'ORDER5_??/GM/*.outs'
+set_device,resdir+'order5.eps',/eps, /land
+.r animate
+close_device,/pdf
+
 ; 2. calculate errors and save them into a file
 
 openw,99,resdir+'error.dat'
 printf,99,'Alfven wave test in 2D'
-printf,99,'n order2 order4'
+printf,99,'n order2 order4 order5'
 
 ; array of errors for a given resolution
-errors = fltarr(2,3)
+errors = fltarr(3,3)
 
 ; compare uy, uz, by, bz only
 iws=[2,3,4,5]
@@ -61,6 +66,19 @@ errors(1,*) = [rel_error(w0,wref0,iws), $
                rel_error(w2,wref2,iws)]
 
 
+filename=resdir+'ORDER5_??/GM/z*.outs'
+; read the initial states
+npict=1
+.r getpict
+wref0=w0 & wref1=w1 & wref2 = w2
+; read final states
+npict=13
+.r getpict
+errors(2,*) = [rel_error(w0,wref0,iws), $
+               rel_error(w1,wref1,iws), $
+               rel_error(w2,wref2,iws)]
+
+
 printf,99,24,errors(*,0),format='(i3,4f13.10)'
 printf,99,48,errors(*,1),format='(i3,4f13.10)'
 printf,99,96,errors(*,2),format='(i3,4f13.10)'
@@ -78,22 +96,33 @@ logfilename=resdir+'error.dat'
 
 ; error.dat header: 'n godunov g_noncons linde l_noncons'
 
-plot_oo,[0.001,0.1],[1e-10,1e-2], $
-  xrange=[0.005,0.1],yrange=[1e-6,1e-1],linestyle=2,xstyle=1,ystyle=1, $
+plot_oo,[0.01,0.1],[1e-6,1e-2], $
+  xrange=[0.001,0.05],yrange=[1e-8,1e-1],linestyle=2,xstyle=1,ystyle=1, $
   xtitle='Grid resolution / wave length', $
   ytitle='Relative error', $
   title="Alfven wave test in 2D"
 
 oplot,[0.01,0.1],[1e-3,1e-1],linestyle=1
 
+oplot,[0.01,0.1],[5e-8,5e-3],linestyle=3
+
 oplot,1./wlog(*,0),wlog(*,1),psym=-4
 oplot,1./wlog(*,0),wlog(*,2),psym=-5
+oplot,1./wlog(*,0),wlog(*,3),psym=-6
 
-oplot,[0.0055,0.006],[1e-3,1e-3],linestyle=1 & xyouts,0.0062,1e-3,'2nd order slope'
-oplot,[0.0057],[3e-3],psym=4 & xyouts,0.0062,3e-3,'2nd order scheme'
+x0=0.0012
+x1=0.0016
+x2=0.002
+x3=sqrt(x0*x1)
 
-oplot,[0.0055,0.006],[1e-4,1e-4],linestyle=2 & xyouts,0.0062,1e-4,'4th order slope'
-oplot,[0.0057],[3e-4],psym=5 & xyouts,0.0062,3e-4,'4th order scheme'
+oplot,[x0,x1],[1.2e-3,1.2e-3],linestyle=1 & xyouts,x2,1e-3,'2nd order slope'
+oplot,[x3],[4e-3],psym=4 & xyouts,x2,3e-3,'2nd order scheme'
+
+oplot,[x0,x1],[1.2e-4,1.2e-4],linestyle=2 & xyouts,x2,1e-4,'4th order slope'
+oplot,[x3],[4e-4],psym=5 & xyouts,x2,3e-4,'4th order scheme'
+
+oplot,[x0,x1],[1.2e-5,1.2e-5],linestyle=3 & xyouts,x2,1e-5,'5th order slope'
+oplot,[x3],[4e-5],psym=6 & xyouts,x2,3e-5,'5th order scheme'
 
 close_device,/pdf
 
