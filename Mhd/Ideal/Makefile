@@ -30,6 +30,7 @@ help:
 	@echo "    test MPIRUN='mprun -np 2'  (run test with mprun -np 2)"
 	@echo "    test_alfven_1d             (run Alfven test in 1D)"
 	@echo "    test_alfven_2d             (run Alfven test in 2D)"
+	@echo "    test_alfven_amr            (run Alfven test with AMR)"
 
 test_rundir:
 	cd ${DIR}; \
