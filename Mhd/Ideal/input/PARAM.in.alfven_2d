@@ -171,9 +171,6 @@ mc3			TypeLimiter
 SCHEME		4th order
 4			nOrder
 Simple			TypeFlux
-F			UseVolumeIntegral4
-F			UseFaceIntegral4
-F			UseLimiter4
 
 SCHEME		5th order
 5			nOrder

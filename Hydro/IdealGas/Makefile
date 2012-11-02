@@ -96,7 +96,8 @@ test_wave_1d_run:
 test_wave_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
-		     s/^\#?(SCHEME|RK)/$$1/; s/^((SCHEME|RK)\s+${NGHOST})/\#$$1/;\
+		     s/^\#(SCHEME4?|RK)/$$1/; \
+		     s/^((SCHEME4?|RK)\s+${NGHOST})/\#$$1/;\
 		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
 		     $$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
 		     ' PARAM.in
@@ -245,7 +246,8 @@ test_shu_osher_1d_run:
 test_shu_osher_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
-			     s/^\#?SCHEME/SCHEME/; s/^(SCHEME\s+${NGHOST})/\#$$1/;\
+			     s/^\#(SCHEME4?)/$$1/; \
+			     s/^(SCHEME4?\s+${NGHOST})/\#$$1/;\
 		             s/\S+(\s*TypeFlux)/${FLUX}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \

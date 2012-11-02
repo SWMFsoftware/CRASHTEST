@@ -94,35 +94,36 @@ float		zMaxBc
 FLATTENING
 F		UseFlattening
 
-#SCHEME  2 ghost cells
+#SCHEME   2 ghost cells
 2		nOrder
 Godunov		TypeFlux
 mc3		TypeLimiter
 2.0		LimiterBeta
 
-SCHEME	3 ghost cells
+SCHEME	 3 ghost cells
 4		nOrder
 Godunov		TypeFlux
 mc3		TypeLimiter
 2.0		LimiterBeta
-F		UseVolumeIntegral4
-F		UseFaceIntegral4
-F		UseLimiter4
 
-SCHEME  4 ghost cells
+SCHEME   4 ghost cells
 4		nOrder
 Godunov		TypeFlux
 mc3		TypeLimiter
 2.0		LimiterBeta
+
+SCHEME4  4 ghost cells
 T		UseVolumeIntegral4
 F		UseFaceIntegral4
 F		UseLimiter4
 
-SCHEME  5 ghost cells
+SCHEME   5 ghost cells
 4		nOrder
 Godunov		TypeFlux
 mc3		TypeLimiter
 2.0		LimiterBeta
+
+SCHEME4  5 ghost cells
 T		UseVolumeIntegral4
 F		UseFaceIntegral4
 T		UseLimiter4
