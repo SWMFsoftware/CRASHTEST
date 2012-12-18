@@ -53,6 +53,10 @@ cylindrical		TypeGeometry
 -1.0			zMin
  1.0			zMax
 
+#FACEBOUNDARY
+0			MinBoundary
+0			MaxBoundary
+
 #OUTERBOUNDARY
 none			TypeBcEast
 user			TypeBcWest
