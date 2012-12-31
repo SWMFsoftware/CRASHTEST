@@ -1,9 +1,6 @@
 #ECHO
 T
 
-#TEST
-krylov
-
 #PLANET
 NONE			NamePlanet
 
