@@ -44,13 +44,13 @@ close_device,/pdf
 
 ; 2. calculate errors and save them into a file
 
-filename='test_wave_1d_ref.out'
+filename='test_wave_amr_ref.out'
 .r getpict
+; copy density and pressure
 wref = w
-
 ; rotate velocity vector by atan(0.5)
-wref(*,2) =  wref(*,1)/sqrt(5d0)
-wref(*,1) = 2*wref(*,1)/sqrt(5d0)
+wref(*,1) = 2*w(*,1)/sqrt(5d0)
+wref(*,2) =   w(*,1)/sqrt(5d0)
 
 openw,99,resdir+'error.dat'
 printf,99,'Wave test with 2D AMR'
