@@ -3,7 +3,7 @@ resdir='test_3dlaser_rz_gray_results/'
 ; 1. plot results for various solvers and resolutions
 
 transform='n'
-firstpict=14
+firstpict=2
 npictmax=1
 !p.charsize=1.2
 
