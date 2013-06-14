@@ -14,16 +14,19 @@ bottomline='"              n ="+snx'
 
 filename = resdir+'ORDER2_??/GM/*.outs'
 set_device,resdir+'order2.eps',/eps, /land
+loadct,39
 .r animate
 close_device,/pdf
 
 filename = resdir+'ORDER4_??/GM/*.outs'
 set_device,resdir+'order4.eps',/eps, /land
+loadct,39
 .r animate
 close_device,/pdf
 
 filename = resdir+'ORDER5_??/GM/*.outs'
 set_device,resdir+'order5.eps',/eps, /land
+loadct,39
 .r animate
 close_device,/pdf
 
@@ -100,6 +103,8 @@ plot_oo,[0.01,0.1],[1e-3,1e-1], $
   ytitle='Relative error', $
   title="Alfven wave test with AMR"
 
+oplot,[0.01,0.1],[2e-4,0.2],linestyle=3
+
 oplot,1./wlog(*,0),wlog(*,1),psym=-4
 oplot,1./wlog(*,0),wlog(*,2),psym=-5
 oplot,1./wlog(*,0),wlog(*,3),psym=-6
@@ -109,7 +114,9 @@ x1=0.0016
 x2=0.002
 x3=sqrt(x0*x1)
 
-oplot,[x0,x1],[1.2e-2,1.2e-2],linestyle=2 & xyouts,x2,1e-2,'2nd order slope'
+oplot,[x0,x1],[4e-2,4e-2],linestyle=2 & xyouts,x2,3e-2,'2nd order slope'
+
+oplot,[x0,x1],[1.2e-2,1.2e-2],linestyle=3 & xyouts,x2,1e-2,'3rd order slope'
 
 oplot,[x3],[4e-3],psym=4 & xyouts,x2,3e-3,'2nd order scheme'
 
