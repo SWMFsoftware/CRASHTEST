@@ -198,7 +198,7 @@ test_infinitemedium:
 	make test_infinitemedium_check
 
 test_infinitemedium_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -f -g=2,2,2,1,1
 	cd ${DIR}; make CRASH PIDL
 
 test_infinitemedium_rundir: test_rundir

@@ -100,7 +100,7 @@ test_infinitemedium:
 	make test_infinitemedium_check
 
 test_infinitemedium_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -nWave=2
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -f -g=2,2,2,1,1 -nWave=2
 	cd ${DIR}; make CRASH PIDL
 
 test_infinitemedium_rundir: test_rundir
@@ -142,7 +142,7 @@ test_planckian:
 	make test_planckian_check
 
 test_planckian_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=2,2,2,1,1 -nWave=80
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -f -g=2,2,2,1,1 -nWave=80
 	cd ${DIR}; make CRASH PIDL
 
 test_planckian_rundir: test_rundir

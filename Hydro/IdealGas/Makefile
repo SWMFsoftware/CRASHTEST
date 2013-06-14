@@ -127,7 +127,7 @@ test_wave_2d:
 	make test_wave_2d_check
 
 test_wave_2d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,1,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -f -g=100,2,1,100,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_wave_2d_rundir: test_rundir
@@ -277,7 +277,7 @@ test_shu_osher_2d:
 	make test_shu_osher_2d_check
 
 test_shu_osher_2d_compile:
-	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=100,2,1,100,1
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -f -g=100,2,1,100,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_shu_osher_2d_rundir: test_rundir

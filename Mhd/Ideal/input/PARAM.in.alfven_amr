@@ -161,6 +161,9 @@ but the wave lengths and phases have to be set here.
 
 #USERINPUTEND   ----------------
 
+#PROLONGATION
+2			nOrderProlong
+
 #SCHEME		2nd order
 2			nOrder
 Rusanov			TypeFlux
