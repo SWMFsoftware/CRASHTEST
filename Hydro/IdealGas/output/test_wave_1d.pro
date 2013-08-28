@@ -56,6 +56,16 @@ set_device,resdir+'rusanovMP5RK4.eps',/eps, /land
 .r animate
 close_device,/pdf
 
+filename = resdir+'RusanovCWENO5RK3_[345]*_/GM/*.outs'
+set_device,resdir+'rusanovCWENO5RK3.eps',/eps, /land
+.r animate
+close_device,/pdf
+
+filename = resdir+'RusanovCWENO5RK4_[345]*_/GM/*.outs'
+set_device,resdir+'rusanovCWENO5RK4.eps',/eps, /land
+.r animate
+close_device,/pdf
+
 filename = resdir+'Rusanov3_[345]*_NONCONS/GM/*.outs'
 set_device,resdir+'rusanov3_noncons.eps',/eps, /land
 .r animate
@@ -81,6 +91,16 @@ set_device,resdir+'rusanovMP5RK4_noncons.eps',/eps, /land
 .r animate
 close_device,/pdf
 
+filename = resdir+'RusanovCWENO5RK3_[345]*_NONCONS/GM/*.outs'
+set_device,resdir+'rusanovCWENO5RK3_noncons.eps',/eps, /land
+.r animate
+close_device,/pdf
+
+filename = resdir+'RusanovCWENO5RK4_[345]*_NONCONS/GM/*.outs'
+set_device,resdir+'rusanovCWENO5RK4_noncons.eps',/eps, /land
+.r animate
+close_device,/pdf
+
 ; 2. calculate errors and save them into a file
 
 filename='test_wave_1d_ref.out'
@@ -89,13 +109,13 @@ wref = w
 
 openw,99,resdir+'error.dat'
 printf,99,'Wave test in 1D for Rusanov and Godunov flux'+ $
-       ' with TVD2, FIVOL with 3, 4, and 5 ghost cells, MP5 with RK3 and RK4,'+ $
+       ' with TVD2, FIVOL with 3, 4, and 5 ghost cells, MP5 with RK3 and RK4, CWENO5'+ $
        ' energy and pressure equations'
 
-printf,99,'n g2e g2p r2e r2p g3e g3p r3e r3p r4e r4p r5e r5p mp5e mp5p mp5rk4e mp5rk4p'
+printf,99,'n g2e g2p r2e r2p g3e g3p r3e r3p r4e r4p r5e r5p mp5e mp5p mp5rk4e mp5rk4p cweno5rk3e cweno5rk3p cweno5rk4e cweno5rk4p'
 
 ; array of errors indexed by methods and grid resolutions
-errors = fltarr(16,5)
+errors = fltarr(20,5)
 
 ; read the last state for comparison
 npict=11
@@ -216,11 +236,40 @@ filename=resdir+'RusanovMP5RK4_???_NONCONS/GM/*.outs'
 .r getpict
 errors(15,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
 
-printf,99, 30,errors(*,0),format='(i3,16e10.3)'
-printf,99, 50,errors(*,1),format='(i3,16e10.3)'
-printf,99,100,errors(*,2),format='(i3,16e10.3)'
-printf,99,200,errors(*,3),format='(i3,16e10.3)'
-printf,99,400,errors(*,4),format='(i3,16e10.3)'
+filename=resdir+'RusanovCWENO5RK3_??_/GM/*.outs'
+.r getpict
+errors(16,0:1) = rel_errors(w0,w1,wref,ivar=ivar)
+filename=resdir+'RusanovCWENO5RK3_???_/GM/*.outs'
+.r getpict
+errors(16,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
+
+filename=resdir+'RusanovCWENO5RK3_??_NONCONS/GM/*.outs'
+.r getpict
+errors(17,0:1) = rel_errors(w0,w1,wref,ivar=ivar)
+filename=resdir+'RusanovCWENO5RK3_???_NONCONS/GM/*.outs'
+.r getpict
+errors(17,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
+
+filename=resdir+'RusanovCWENO5RK4_??_/GM/*.outs'
+.r getpict
+errors(18,0:1) = rel_errors(w0,w1,wref,ivar=ivar)
+filename=resdir+'RusanovCWENO5RK4_???_/GM/*.outs'
+.r getpict
+errors(18,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
+
+filename=resdir+'RusanovCWENO5RK4_??_NONCONS/GM/*.outs'
+.r getpict
+errors(19,0:1) = rel_errors(w0,w1,wref,ivar=ivar)
+filename=resdir+'RusanovCWENO5RK4_???_NONCONS/GM/*.outs'
+.r getpict
+errors(19,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
+
+
+printf,99, 30,errors(*,0),format='(i3,20e10.3)'
+printf,99, 50,errors(*,1),format='(i3,20e10.3)'
+printf,99,100,errors(*,2),format='(i3,20e10.3)'
+printf,99,200,errors(*,3),format='(i3,20e10.3)'
+printf,99,400,errors(*,4),format='(i3,20e10.3)'
 
 close,99
 
@@ -263,6 +312,11 @@ oplot,4/wlog(*,0),wlog(*,14),psym=-7,color=100
 oplot,4/wlog(*,0),wlog(*,15),psym=-6,color=100
 oplot,4/wlog(*,0),wlog(*,16),psym=-4,color=100
 
+oplot,4/wlog(*,0),wlog(*,17),psym=-1,color=200
+oplot,4/wlog(*,0),wlog(*,18),psym=-7,color=200
+oplot,4/wlog(*,0),wlog(*,19),psym=-6,color=200
+oplot,4/wlog(*,0),wlog(*,20),psym=-4,color=200
+
 oplot,[0.0011,0.0015],[0.004,0.004],linestyle=2 & xyouts,0.0016,0.004,'2nd order slope'
 oplot,[0.0012],[0.008],psym=1 & xyouts,0.0016,0.008,'Godunov2 conserv.'
 oplot,[0.0012],[0.016],psym=7 & xyouts,0.0016,0.016,'Godunov2 noncons.'
@@ -279,10 +333,14 @@ oplot,[0.0012],[0.00001] ,psym=7,color=250 & xyouts,0.0016,0.00001, 'Rusanov4 no
 oplot,[0.0012],[0.00002] ,psym=6,color=250 & xyouts,0.0016,0.00002, 'Rusanov5 conserv.'
 oplot,[0.0012],[0.00004] ,psym=4,color=250 & xyouts,0.0016,0.00004, 'Rusanov5 noncons.'
 
-oplot,[0.017],[5e-6] ,psym=1,color=100 & xyouts,0.02,5e-6, 'Rusanov MP5RK3 cons.'
-oplot,[0.017],[1e-5] ,psym=7,color=100 & xyouts,0.02,1e-5, 'Rusanov MP5RK3 nonc.'
-oplot,[0.017],[2e-6] ,psym=6,color=100 & xyouts,0.02,2e-6, 'Rusanov MP5RK4 cons.'
-oplot,[0.017],[1e-6] ,psym=4,color=100 & xyouts,0.02,1e-6, 'Rusanov MP5RK4 nonc.'
+oplot,[0.03],[6e-5] ,  psym=1,color=100 & xyouts,0.035,6e-5, 'Rusanov MP5RK3 cons.',charsize=1.5
+oplot,[0.03],[1e-4] ,  psym=7,color=100 & xyouts,0.035,1e-4, 'Rusanov MP5RK3 nonc.',charsize=1.5
+oplot,[0.03],[3e-5] ,  psym=6,color=100 & xyouts,0.035,3e-5, 'Rusanov MP5RK4 cons.',charsize=1.5
+oplot,[0.03],[1.5e-5] ,psym=4,color=100 & xyouts,0.035,1.5e-5, 'Rusanov MP5RK4 nonc.',charsize=1.5
+oplot,[0.017],[8e-6],  psym=1,color=200 & xyouts,0.02,8e-6, 'Rusanov CWENO5RK3 cons.',charsize=1.5
+oplot,[0.017],[5e-6],  psym=7,color=200 & xyouts,0.02,5e-6, 'Rusanov CWENO5RK3 nonc.',charsize=1.5
+oplot,[0.017],[2e-6],  psym=6,color=200 & xyouts,0.02,2e-6, 'Rusanov CWENO5RK4 cons.',charsize=1.5
+oplot,[0.017],[1e-6],  psym=4,color=200 & xyouts,0.02,1e-6, 'Rusanov CWENO5RK4 nonc.',charsize=1.5
 
 oplot,[0.0011,0.0015],[2e-6,2e-6],linestyle=1 & xyouts,0.0016,2e-6,'4th order slope'
 
