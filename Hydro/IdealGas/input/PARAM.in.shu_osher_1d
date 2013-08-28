@@ -134,6 +134,42 @@ Godunov		TypeFlux
 mc3		TypeLimiter
 2.0		LimiterBeta
 
+SCHEME5 MP5 with 3 ghost cells
+F	    	 DoInterpolateFlux
+mp		 TypeLimiter5
+
+SCHEME  CWENO5 with 3 ghost cells
+5		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+
+SCHEME5 CWENO5 with 3 ghost cells
+F	       DoInterpolateFlux
+cweno	       TypeLimiter5
+F	       UsePerVarLimiter
+
+SCHEME  MP5_InterpolateFlux with 3 ghost cells
+5		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+
+SCHEME5 MP5_InterpolateFlux with 3 ghost cells
+T		DoInterpolateFlux	    
+mp		TypeLimiter5
+
+SCHEME  CWENO5_InterpolateFlux with 3 ghost cells
+5		nOrder
+Godunov		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+
+SCHEME5 CWENO5_InterpolateFlux with 3 ghost cells
+T		DoInterpolateFlux	       	
+cweno		TypeLimiter5
+F		UsePerVarLimiter
+
 #SAVELOGFILE
 F		DoSaveLogfile
 
