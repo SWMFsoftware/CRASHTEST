@@ -85,7 +85,7 @@ test_wave_1d_run:
 	done
 	for RES in 30 50 100 200 400; do \
 	 for ON in "" NONCONS; do \
-	  for NGHOST in 4 5 MP5RK3 MP5RK4; do \
+	  for NGHOST in 4 5 MP5RK3 MP5RK4 CWENO5RK3 CWENO5RK4; do \
            make test_wave_1d_run1 RES=$${RES} FLUX=Rusanov NGHOST=$${NGHOST} ON=$${ON}; \
 	  done \
          done \
@@ -96,8 +96,8 @@ test_wave_1d_run:
 test_wave_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
-		     s/^\#(SCHEME4?|RK)/$$1/; \
-		     s/^((SCHEME4?|RK)\s+${NGHOST})/\#$$1/;\
+		     s/^\#(SCHEME[45]?|RK)/$$1/; \
+		     s/^((SCHEME[45]?|RK)\s+${NGHOST})/\#$$1/;\
 		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
 		     $$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
 		     ' PARAM.in
@@ -235,10 +235,15 @@ test_shu_osher_1d_rundir: test_rundir
 test_shu_osher_1d_run:
 	for RES in 200 400 800; do \
 	 for FLUX in Rusanov Linde Godunov; do \
-	  for NGHOST in 2 3 4 5 MP5; do \
+	  for NGHOST in 2 3 4 5 MP5 CWENO5; do \
 	   make test_shu_osher_1d_run1 RES=$${RES} NGHOST=$${NGHOST} FLUX=$${FLUX}; \
 	  done \
          done \
+        done
+	for RES in 200 400 800; do \
+	 for NGHOST in MP5_InterpolateFlux CWENO5_InterpolateFlux; do \
+	  make test_shu_osher_1d_run1 RES=$${RES} NGHOST=$${NGHOST} FLUX=Rusanov; \
+	 done \
         done
 	rm -rf output/test_shu_osher_1d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_shu_osher_1d_results
@@ -246,8 +251,8 @@ test_shu_osher_1d_run:
 test_shu_osher_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
-			     s/^\#(SCHEME4?)/$$1/; \
-			     s/^(SCHEME4?\s+${NGHOST})/\#$$1/;\
+			     s/^\#(SCHEME[45]?)/$$1/; \
+			     s/^(SCHEME[45]?\s+${NGHOST}\s+)/\#$$1/;\
 		             s/\S+(\s*TypeFlux)/${FLUX}$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./BATSRUS.exe > runlog; \
