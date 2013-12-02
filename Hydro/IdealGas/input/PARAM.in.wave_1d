@@ -130,6 +130,7 @@ mc3			TypeLimiter
 
 SCHEME5	     MP5RK3 with 3 ghost cells
 T	     	    DoInterpolateFlux
+F		    UseFDFaceFlux
 mp		    TypeLimiter5
 
 ! The MP5 scheme uses RK3 by default
@@ -146,6 +147,7 @@ RK          MP5RK4 with 3 ghost cells
 
 SCHEME5	     MP5RK4 with 3 ghost cells
 T	     	    DointerpolateFlux
+F		    UseFDFaceFlux
 mp		    TypeLimiter5
 
 !cweno:
@@ -158,6 +160,7 @@ mc3		       TyperLimiter
 
 SCHEME5	     CWENO5RK3 with 3 ghost cells
 T	     	       DoInterpolateFlux
+F		       UseFDFaceFlux
 cweno		       TypeLimiter5
 F		       UsePerVarLimiter
 
@@ -175,6 +178,7 @@ mc3		       TyperLimiter
 
 SCHEME5	     CWENO5RK4 with 3 ghost cells
 T	     	       DoInterpolateFlux
+F		       UseFDFaceFlux
 cweno		       TypeLimiter5
 F		       UsePerVarLimiter
 
