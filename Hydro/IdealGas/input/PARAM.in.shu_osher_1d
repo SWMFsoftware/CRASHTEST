@@ -136,6 +136,7 @@ mc3		TypeLimiter
 
 SCHEME5 MP5 with 3 ghost cells
 F	    	 DoInterpolateFlux
+F		 UseFDFaceFlux
 mp		 TypeLimiter5
 
 SCHEME  CWENO5 with 3 ghost cells
@@ -146,6 +147,7 @@ mc3		TypeLimiter
 
 SCHEME5 CWENO5 with 3 ghost cells
 F	       DoInterpolateFlux
+F		 UseFDFaceFlux
 cweno	       TypeLimiter5
 F	       UsePerVarLimiter
 
@@ -156,7 +158,8 @@ mc3		TypeLimiter
 2.0		LimiterBeta
 
 SCHEME5 MP5_InterpolateFlux with 3 ghost cells
-T		DoInterpolateFlux	    
+T		DoInterpolateFlux
+F		 UseFDFaceFlux	    
 mp		TypeLimiter5
 
 SCHEME  CWENO5_InterpolateFlux with 3 ghost cells
@@ -167,6 +170,7 @@ mc3		TypeLimiter
 
 SCHEME5 CWENO5_InterpolateFlux with 3 ghost cells
 T		DoInterpolateFlux	       	
+F		 UseFDFaceFlux
 cweno		TypeLimiter5
 F		UsePerVarLimiter
 
