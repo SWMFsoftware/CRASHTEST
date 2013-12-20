@@ -85,7 +85,7 @@ test_wave_1d_run:
 	done
 	for RES in 30 50 100 200 400; do \
 	 for ON in "" NONCONS; do \
-	  for NGHOST in 4 5 MP5RK3 MP5RK4 CWENO5RK3 CWENO5RK4; do \
+	  for NGHOST in 4 5 MP5RK3 MP5RK4 CWENO5RK3 CWENO5RK4 FDCWENO5RK4; do \
            make test_wave_1d_run1 RES=$${RES} FLUX=Rusanov NGHOST=$${NGHOST} ON=$${ON}; \
 	  done \
          done \
@@ -96,8 +96,8 @@ test_wave_1d_run:
 test_wave_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 	perl -pi -e 's/\S+(\s*TypeFlux)/${FLUX}$$1/; \
-		     s/^\#(SCHEME[45]?|RK)/$$1/; \
-		     s/^((SCHEME[45]?|RK)\s+${NGHOST})/\#$$1/;\
+		     s/^\#(SCHEME[45]?|RK|LIMITFLUX)/$$1/; \
+		     s/^((SCHEME[45]?|RK|LIMITFLUX)\s+${NGHOST})/\#$$1/;\
 		     $$a="${ON}"; s/^#(NONCONS)/$$1/; s/^($$a)/#$$1/ if $$a;\
 		     $$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
 		     ' PARAM.in
