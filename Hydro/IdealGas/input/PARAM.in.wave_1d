@@ -186,6 +186,31 @@ RK	     CWENO5RK4 with 3 ghost cells
 4	     	       nState
 0.8		       Cfl
 
+!FDCWENORK4
+
+SCHEME	     FDCWENO5RK4 with 3 ghost cells
+5	     	       nOrder
+Rusanov	     	       TyperFlux
+mc3		       TyperLimiter
+2.0		       LimiterBeta
+
+SCHEME5	     FDCWENO5RK4 with 3 ghost cells
+F	     	       DoInterpolateFlux
+T		       UseFDFaceFlux
+cweno		       TypeLimiter5
+F		       UsePerVarLimiter
+
+LIMITFLUX    FDCWENO5RK4
+T			UseFluxLimiter
+T			UseCenterFlux
+3.e-2			ISValueCriteria
+
+
+RK	     FDCWENO5RK4 with 3 ghost cells
+4	     	       nState
+0.8		       Cfl
+
+
 #SAVELOGFILE
 F		DoSaveLogfile
 

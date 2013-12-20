@@ -66,6 +66,12 @@ set_device,resdir+'rusanovCWENO5RK4.eps',/eps, /land
 .r animate
 close_device,/pdf
 
+filename = resdir+'RusanovFDCWENO5RK4_[345]*_/GM/*.outs'
+set_device,resdir+'rusanovFDCWENO5RK4.eps',/eps, /land
+.r animate
+close_device,/pdf
+
+
 filename = resdir+'Rusanov3_[345]*_NONCONS/GM/*.outs'
 set_device,resdir+'rusanov3_noncons.eps',/eps, /land
 .r animate
@@ -101,6 +107,11 @@ set_device,resdir+'rusanovCWENO5RK4_noncons.eps',/eps, /land
 .r animate
 close_device,/pdf
 
+filename = resdir+'RusanovFDCWENO5RK4_[345]*_NONCONS/GM/*.outs'
+set_device,resdir+'rusanovFDCWENO5RK4_noncons.eps',/eps, /land
+.r animate
+close_device,/pdf
+
 ; 2. calculate errors and save them into a file
 
 filename='test_wave_1d_ref.out'
@@ -109,13 +120,13 @@ wref = w
 
 openw,99,resdir+'error.dat'
 printf,99,'Wave test in 1D for Rusanov and Godunov flux'+ $
-       ' with TVD2, FIVOL with 3, 4, and 5 ghost cells, MP5 with RK3 and RK4, CWENO5'+ $
+       ' with TVD2, FIVOL with 3, 4, and 5 ghost cells, MP5 with RK3 and RK4, CWENO5, FDCWENO5'+ $
        ' energy and pressure equations'
 
-printf,99,'n g2e g2p r2e r2p g3e g3p r3e r3p r4e r4p r5e r5p mp5e mp5p mp5rk4e mp5rk4p cweno5rk3e cweno5rk3p cweno5rk4e cweno5rk4p'
+printf,99,'n g2e g2p r2e r2p g3e g3p r3e r3p r4e r4p r5e r5p mp5e mp5p mp5rk4e mp5rk4p cweno5rk3e cweno5rk3p cweno5rk4e cweno5rk4p fdcweno5rk4e fdcweno5rk4p'
 
 ; array of errors indexed by methods and grid resolutions
-errors = fltarr(20,5)
+errors = fltarr(22,5)
 
 ; read the last state for comparison
 npict=11
@@ -264,12 +275,25 @@ filename=resdir+'RusanovCWENO5RK4_???_NONCONS/GM/*.outs'
 .r getpict
 errors(19,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
 
+filename=resdir+'RusanovFDCWENO5RK4_??_/GM/*.outs'
+.r getpict
+errors(20,0:1) = rel_errors(w0,w1,wref,ivar=ivar)
+filename=resdir+'RusanovFDCWENO5RK4_???_/GM/*.outs'
+.r getpict
+errors(20,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
 
-printf,99, 30,errors(*,0),format='(i3,20e10.3)'
-printf,99, 50,errors(*,1),format='(i3,20e10.3)'
-printf,99,100,errors(*,2),format='(i3,20e10.3)'
-printf,99,200,errors(*,3),format='(i3,20e10.3)'
-printf,99,400,errors(*,4),format='(i3,20e10.3)'
+filename=resdir+'RusanovFDCWENO5RK4_??_NONCONS/GM/*.outs'
+.r getpict
+errors(21,0:1) = rel_errors(w0,w1,wref,ivar=ivar)
+filename=resdir+'RusanovFDCWENO5RK4_???_NONCONS/GM/*.outs'
+.r getpict
+errors(21,2:4) = rel_errors(w0,w1,w2,wref,ivar=ivar)
+
+printf,99, 30,errors(*,0),format='(i3,22e10.3)'
+printf,99, 50,errors(*,1),format='(i3,22e10.3)'
+printf,99,100,errors(*,2),format='(i3,22e10.3)'
+printf,99,200,errors(*,3),format='(i3,22e10.3)'
+printf,99,400,errors(*,4),format='(i3,22e10.3)'
 
 close,99
 
