@@ -62,6 +62,9 @@ infinitemedium		TypeProblem
 T			UseSemiImplicit
 radiation		TypeSemiImplicit  radcond or radiation
 
+#SEMICOEFF
+0.5			SemiImplCoeff
+
 #SEMIKRYLOV
 CG			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
@@ -70,11 +73,6 @@ CG			TypeKrylov
 #SEMIPRECONDITIONER
 T	                DoPrecond
 DILU                    TypePrecond
-
-#IMPLSTEP
-0.5			ImplCoeff
-F			UseBdf2
-F			UseSourceImpl
 
 #RADIATION
 T                       UseRadDiffusion

@@ -67,14 +67,12 @@ GMRES			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
 400                     MaxMatvecKrylov
 
+#SEMICOEFF
+0.5                     SemiImplCoeff
+
 #SEMIPRECONDITIONER
 T	                DoPrecond
 DILU                    TypePrecond
-
-#IMPLSTEP
-0.5                     ImplCoeff
-F                       UseBdf2
-F                       UseSourceImpl
 
 #RADIATION
 T                       UseRadDiffusion

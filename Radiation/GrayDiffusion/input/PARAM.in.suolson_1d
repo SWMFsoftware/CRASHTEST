@@ -62,6 +62,9 @@ suolson			TypeProblem
 T                       UseSemiImplicit
 radcond                 TypeSemiImplicit
 
+#SEMICOEFF
+0.5			SemiImplCoeff
+
 #SEMIKRYLOV
 CG			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
@@ -95,11 +98,6 @@ minmod			TypeLimiter
 #TIMESTEPPING
 1			nStage
 0.8			CflExpl
-
-#IMPLSTEP
-0.5			ImplCoeff
-F			UseBdf2
-F			UseSourceImpl
 
 #UPDATECHECK
 F			UseUpdateCheck
