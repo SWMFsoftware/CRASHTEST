@@ -114,15 +114,10 @@ F                       UseUserUpdateStates
 T                       UseSemiImplicit
 resistivity             TypeSemiImplicit
 
-#KRYLOV
-cg                      TypeKrylov
-nul                     TypeInitKrylov
+#SEMIKRYLOV
+CG                      TypeKrylov
 1.0e-8                  ErrorMaxKrylov
-1000                     MaxMatvecKrylov
-
-#PRECONDITIONER
-left                    TypePrecondSide (left, symmetric, right)
-bilu                    TypePrecond (MBILU)
+1000                    MaxMatvecKrylov
 
 #DIVBSOURCE
 F			UseB0Source

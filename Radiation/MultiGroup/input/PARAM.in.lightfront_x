@@ -83,15 +83,14 @@ lightfront		TypeProblem
 T			UseSemiImplicit
 radiationsplit		TypeSemiImplicit
 
-#KRYLOV
-cg			TypeKrylov
-nul                     TypeInitKrylov
+#SEMIKRYLOV
+CG			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
 400                     MaxMatvecKrylov
 
-#PRECONDITIONER
-left	                TypePrecondSide
-dilu                    TypePrecond
+#SEMIPRECONDITIONER
+T	                DoPrecond
+DILU                    TypePrecond
 
 #RADIATION
 T                       UseGrayDiffusion

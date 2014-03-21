@@ -62,15 +62,14 @@ infinitemedium		TypeProblem
 T			UseSemiImplicit
 radiation		TypeSemiImplicit  radcond or radiation
 
-#KRYLOV
-gmres			TypeKrylov
-nul                     TypeInitKrylov
+#SEMIKRYLOV
+GMRES			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
 400                     MaxMatvecKrylov
 
-#PRECONDITIONER
-left	                TypePrecondSide (left, symmetric, right)
-dilu                    TypePrecond (MBILU)
+#SEMIPRECONDITIONER
+T	                DoPrecond
+DILU                    TypePrecond
 
 #IMPLSTEP
 0.5                     ImplCoeff

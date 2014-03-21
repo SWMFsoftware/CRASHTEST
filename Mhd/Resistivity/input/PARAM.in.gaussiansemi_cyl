@@ -91,15 +91,10 @@ ResistivityGaussian	UserProblem
 T			UseSemiImplicit
 resistivity		TypeSemiImplicit
 
-#KRYLOV
-gmres			TypeKrylov
-nul			TypeInitKrylov
+#SEMIKRYLOV
+GMRES			TypeKrylov
 1.0e-8			ErrorMaxKrylov
 100			MaxMatvecKrylov
-
-#PRECONDITIONER
-left                    TypePrecondSide (left, symmetric, right)
-bilu                    TypePrecond (MBILU)
 
 #DIVBSOURCE
 F			UseB0Source

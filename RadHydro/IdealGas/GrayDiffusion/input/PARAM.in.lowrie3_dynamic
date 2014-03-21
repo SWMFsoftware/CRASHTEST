@@ -105,15 +105,10 @@ initial_lowrie3.dat	NameInputFile
 T			UseSemiImplicit
 radiation			TypeSemiImplicit
 
-#KRYLOV
-gmres			TypeKrylov
-nul			TypeInitKrylov
+#SEMIKRYLOV
+GMRES			TypeKrylov
 1.0e-6			ErrorMaxKrylov
 120			MaxMatvecKrylov
-
-#PRECONDITIONER
-symmetric		TypePrecondSide (left, symmetric, right)
-bilu			TypePrecond (MBILU)
 
 #RADIATION
 T			UseGrayDiffusion

@@ -62,20 +62,19 @@ planckian		TypeProblem
 T			UseSemiImplicit
 radiation		TypeSemiImplicit  radcond or radiation
 
-#KRYLOV
-gmres			TypeKrylov
-nul                     TypeInitKrylov
+#SEMIKRYLOV
+GMRES			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
 100                     MaxMatvecKrylov
+
+#SEMIPRECONDITIONER
+T	                DoPrecond
+DILU                    TypePrecond
 
 #IMPLSTEP
 0.5                     ImplCoeff
 F                       UseBdf2
 F                       UseSourceImpl
-
-#PRECONDITIONER
-left	                TypePrecondSide (left, symmetric, right)
-dilu                    TypePrecond (MBILU)
 
 #RADIATION
 T                       UseRadDiffusion
