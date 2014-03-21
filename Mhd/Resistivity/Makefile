@@ -60,7 +60,7 @@ test_wave:
 	make test_wave_check
 
 test_wave_compile:
-	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_wave_rundir: test_rundir
@@ -103,7 +103,7 @@ test_rzwave:
 	make test_rzwave_check
 
 test_rzwave_compile:
-	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_rzwave_rundir: test_rundir
@@ -146,7 +146,7 @@ test_wavesemi:
 	make test_wavesemi_check
 
 test_wavesemi_compile:
-	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; ./Config.pl -e=MhdHypPe -u=Waves -g=4,4,1,1000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_wavesemi_rundir: test_rundir
@@ -190,7 +190,7 @@ test_gaussiansemi_cyl:
 	make test_gaussiansemi_cyl_check
 
 test_gaussiansemi_cyl_compile:
-	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=4,4,1,1000,1000
+	cd ${DIR}; ./Config.pl -e=Mhd -u=Waves -g=4,4,1,1000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_gaussiansemi_cyl_rundir: test_rundir

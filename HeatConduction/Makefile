@@ -57,7 +57,7 @@ test_uniform_1d:
 	make test_uniform_1d_check
 
 test_uniform_1d_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=100,1,1,16,16
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=100,1,1,16,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_1d_rundir: test_rundir
@@ -100,7 +100,7 @@ test_uniform_2d:
 	make test_uniform_2d_check
 
 test_uniform_2d_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,1,800,800
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,1,800,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_2d_rundir: test_rundir
@@ -144,7 +144,7 @@ test_uniform_2d_amr:
 	make test_uniform_2d_amr_check
 
 test_uniform_2d_amr_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=30,30,1,256,256
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=30,30,1,256,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_uniform_2d_amr_rundir: test_rundir
@@ -187,7 +187,7 @@ test_rmtv:
 	make test_rmtv_check
 
 test_rmtv_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,1,400,400
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=HdEos -g=20,20,1,400,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_rmtv_rundir: test_rundir
@@ -233,7 +233,7 @@ test_lowrie3:
 	make test_lowrie3_check
 
 test_lowrie3_compile:
-	cd ${DIR}; ./Config.pl -u=HeatConduction -e=Crash -g=32,4,1,256,256
+	cd ${DIR}; ./Config.pl -u=HeatConduction -e=Crash -g=32,4,1,256,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie3_rundir: test_rundir

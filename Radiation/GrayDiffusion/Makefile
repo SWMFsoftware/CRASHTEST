@@ -55,7 +55,7 @@ test_suolson_1d:
 	make test_suolson_1d_check
 
 test_suolson_1d_compile:
-	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,1,1,48,48
+	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,1,1,48,1
 	cd ${DIR}; make CRASH PIDL
 
 test_suolson_1d_rundir: test_rundir
@@ -103,7 +103,7 @@ test_suolson_1d_amr:
 	make test_suolson_1d_amr_check
 
 test_suolson_1d_amr_compile:
-	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,1,1,256,256
+	cd ${DIR}; ./Config.pl -u=Marshak -e=HdEosRad -g=10,1,1,256,1
 	cd ${DIR}; make CRASH PIDL
 
 test_suolson_1d_amr_rundir: test_rundir
@@ -152,7 +152,7 @@ test_lightfront:
 	make test_lightfront_check
 
 test_lightfront_compile:
-	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,1000,1000
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=4,4,4,1000,1
 	cd ${DIR}; make CRASH PIDL
 
 test_lightfront_rundir: test_rundir

@@ -65,7 +65,7 @@ test_laser_rz:
 
 test_laser_rz_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5
+		-g=8,8,1,1000,1 -nWave=30 -nMaterial=5
 	cd ${DIR}; make CRASH PIDL
 
 test_laser_rz_rundir: test_rundir
@@ -120,7 +120,7 @@ test_laser_3dcont: ${CRASH2D}
 
 test_laser_3dcont_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=4,4,4,1000,1000 -nWave=30 -nMaterial=5
+		-g=4,4,4,1000,1 -nWave=30 -nMaterial=5
 	cd ${DIR}; make CRASH PIDL
 
 test_laser_3dcont_rundir: test_rundir
@@ -167,7 +167,7 @@ test_3dlaser_rz_nlte:
 
 test_3dlaser_rz_nlte_compile:
 	cd ${DIR}; ./Config.pl -e=CrashTe -u=Crash \
-		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5 -hypre
+		-g=8,8,1,1000,1 -nWave=30 -nMaterial=5 -hypre
 	cd ${DIR}; make CRASH PIDL
 
 test_3dlaser_rz_nlte_rundir: test_rundir
@@ -218,7 +218,7 @@ test_3dlaser_rz:
 
 test_3dlaser_rz_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=8,8,1,1000,1000 -nWave=30 -nMaterial=5 -hypre
+		-g=8,8,1,1000,1 -nWave=30 -nMaterial=5 -hypre
 	cd ${DIR}; make CRASH PIDL
 
 test_3dlaser_rz_rundir: test_rundir
@@ -269,7 +269,7 @@ test_3dlaser_rz_gray:
 
 test_3dlaser_rz_gray_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=8,8,1,1000,1000 -nWave=2 -nMaterial=5 -hypre
+		-g=8,8,1,1000,1 -nWave=2 -nMaterial=5 -hypre
 	cd ${DIR}; make CRASH PIDL
 
 test_3dlaser_rz_gray_rundir: test_rundir
@@ -321,7 +321,7 @@ test_laser_3d:
 
 test_laser_3d_compile:
 	cd ${DIR}; ./Config.pl -e=Crash -u=Crash \
-		-g=4,4,4,1000,1000 -nWave=30 -nMaterial=5
+		-g=4,4,4,1000,1 -nWave=30 -nMaterial=5
 	cd ${DIR}; make CRASH PIDL
 
 test_laser_3d_rundir: test_rundir
