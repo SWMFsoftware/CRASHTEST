@@ -195,7 +195,7 @@ test_lowrie1_semi:
 	make test_lowrie1_semi_check
 
 test_lowrie1_semi_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=24,4,1,256,256
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=24,4,1,256,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie1_semi_rundir: test_rundir
@@ -244,7 +244,7 @@ test_lowrie2_semi:
 	make test_lowrie2_semi_check
 
 test_lowrie2_semi_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,1,256,256
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,1,256,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie2_semi_rundir: test_rundir
@@ -288,7 +288,7 @@ test_lowrie3_semi:
 	make test_lowrie3_semi_check
 
 test_lowrie3_semi_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,1,256,256
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=32,4,1,256,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie3_semi_rundir: test_rundir
@@ -331,7 +331,7 @@ test_lowrie3_dynamic:
 	make test_lowrie3_dynamic_check
 
 test_lowrie3_dynamic_compile:
-	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=4,4,4,2000,2000
+	cd ${DIR}; ./Config.pl -u=GrayDiffusion -e=HdEosRad -g=4,4,4,2000,1
 	cd ${DIR}; make BATSRUS PIDL
 
 test_lowrie3_dynamic_rundir: test_rundir
