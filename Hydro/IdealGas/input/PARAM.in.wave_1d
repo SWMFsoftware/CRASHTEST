@@ -200,12 +200,6 @@ T		       UseFDFaceFlux
 cweno		       TypeLimiter5
 F		       UsePerVarLimiter
 
-LIMITFLUX    FDCWENO5RK4
-T			UseFluxLimiter
-T			UseCenterFlux
-3.e-2			ISValueCriteria
-
-
 RK	     FDCWENO5RK4 with 3 ghost cells
 4	     	       nState
 0.8		       Cfl
