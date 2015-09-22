@@ -33,6 +33,7 @@ help:
 	@echo "    test_suolson_1d_amr        (run Su-Olson Marshak test in 1D with AMR)"
 	@echo "    test_infinitemedium        (run infinitemedium test)"
 	@echo "    test_lightfront            (run lightfront test in 1D)"
+	@echo "    test_diffusionfront        (run diffusion front test in 1D)"
 
 
 test_rundir:
@@ -229,6 +230,36 @@ test_infinitemedium_check:
 		> output/test_infinitemedium.diff)
 	ls -l output/test_infinitemedium.diff
 
+
+### diffusionfront test in 1D ###
+
+test_diffusionfront:
+	@echo "test_diffusionfront_compile..." > output/test_diffusionfront.diff
+	make test_diffusionfront_compile
+	@echo "test_diffusionfront_rundir..." >> output/test_diffusionfront.diff
+	make test_diffusionfront_rundir
+	@echo "test_diffusionfront_run..." >> output/test_diffusionfront.diff
+	make test_diffusionfront_run
+	@echo "test_diffusionfront_check..." >> output/test_diffusionfront.diff
+	make test_diffusionfront_check
+
+test_diffusionfront_compile:
+	cd ${DIR}; ./Config.pl -u=MultiGroup -e=HdEosRad -g=10,1,1,1000,1
+	cd ${DIR}; make CRASH PIDL
+
+test_diffusionfront_rundir: test_rundir
+	cp input/PARAM.in.diffusionfront ${DIR}/${RUNDIR}/PARAM.in
+
+test_diffusionfront_run:
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./CRASH.exe > runlog; \
+		PostProc.pl -M RESULTS/test_diffusionfront
+	rm -rf output/test_diffusionfront_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_diffusionfront_results
+
+test_diffusionfront_check:
+	cd output; idl test_diffusionfront.pro; \
+		rm -f test_diffusionfront_results/*.eps
 
 
 clean:
