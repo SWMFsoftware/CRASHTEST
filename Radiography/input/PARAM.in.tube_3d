@@ -78,9 +78,6 @@ T			DoSaveInitial
 1.0			pDimOutside
 -1.0			xUniformXe
 
-#THREEDIM
-T
-
 MIXEDCELL
 T			UseMixedCell
 0.97			MixLimit
