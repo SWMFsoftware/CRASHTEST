@@ -33,7 +33,7 @@ cd CRASHTEST
 make test MPIRUN='mpirun -np 16' >& test.log < /dev/null
 
 # do this on herot too for the webpage
-ssh herot "cd Sites; rm -rf CRASH_OLD; mv CRASH CRASH_OLD; mkdir CRASH"
+ssh herot.engin.umich.edu "cd Sites; rm -rf CRASH_OLD; mv CRASH CRASH_OLD; mkdir CRASH"
 
 # Store result by yesterday's date
 scp test_results.txt herot.engin.umich.edu:Sites/CRASH_RESULTS/${CHECKOUTDATE}
