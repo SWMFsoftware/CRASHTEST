@@ -11,7 +11,7 @@ test:
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
-TESTDIR = CRASHTEST/Radiography
+TESTDIR = CRASHTEST/Laser
 
 # Main BATSRUS/CRASH directory
 DIR = ../..
@@ -86,7 +86,8 @@ test_rz_ray_check:
 	cd output; singleray.pl test_rz_ray
 	cd output; idl test_rz_ray.pro; \
 		rm -f test_rz_ray_results/*.eps
-	-(diff  output/test_rz_ray_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -r=1e-11 \
+		output/test_rz_ray_results/error.dat \
 		output/test_rz_ray.ref \
 		> output/test_rz_ray.diff)
 	ls -l output/test_rz_ray.diff
@@ -130,7 +131,8 @@ test_rz_ray_amr_check:
 	cd output; singleray.pl test_rz_ray_amr
 	cd output; idl test_rz_ray_amr.pro; \
 		rm -f test_rz_ray_amr_results/*.eps
-	-(diff  output/test_rz_ray_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_rz_ray_amr_results/error.dat \
 		output/test_rz_ray_amr.ref \
 		> output/test_rz_ray_amr.diff)
 	ls -l output/test_rz_ray_amr.diff
@@ -175,7 +177,8 @@ test_3d_ray_check:
 	cd output; singleray.pl test_3d_ray
 	cd output; idl test_3d_ray.pro; \
 		rm -f test_3d_ray_results/*.eps
-	-(diff  output/test_3d_ray_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -r=1e-12 \
+		output/test_3d_ray_results/error.dat \
 		output/test_3d_ray.ref \
 		> output/test_3d_ray.diff)
 	ls -l output/test_3d_ray.diff
@@ -220,7 +223,8 @@ test_3d_ray_amr_check:
 	cd output; singleray.pl test_3d_ray_amr
 	cd output; idl test_3d_ray_amr.pro; \
 		rm -f test_3d_ray_amr_results/*.eps
-	-(diff  output/test_3d_ray_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_3d_ray_amr_results/error.dat \
 		output/test_3d_ray_amr.ref \
 		> output/test_3d_ray_amr.diff)
 	ls -l output/test_3d_ray_amr.diff
