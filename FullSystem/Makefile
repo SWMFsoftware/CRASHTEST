@@ -11,7 +11,7 @@ test:
 	@ls -l output/*.diff
 
 # Main BATSRUS/CRASH directory
-DIR = ../../..
+DIR = ../..
 
 SCRIPTDIR = ${DIR}/share/Scripts
 
