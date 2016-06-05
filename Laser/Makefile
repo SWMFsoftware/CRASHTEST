@@ -223,7 +223,7 @@ test_3d_ray_amr_check:
 	cd output; singleray.pl test_3d_ray_amr
 	cd output; idl test_3d_ray_amr.pro; \
 		rm -f test_3d_ray_amr_results/*.eps
-	-(${SCRIPTDIR}/DiffNum.pl \
+	-(${SCRIPTDIR}/DiffNum.pl -r=1e-11 \
 		output/test_3d_ray_amr_results/error.dat \
 		output/test_3d_ray_amr.ref \
 		> output/test_3d_ray_amr.diff)
