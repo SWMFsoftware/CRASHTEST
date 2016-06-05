@@ -38,10 +38,8 @@ F			UseNonConservative
 box			NameArea
 -0.01			xMinBox
 -0.00125		yMinBox
--1.0			zMinBox
  0.01			xMaxBox
  0.00125		yMaxBox
- 1.0			zMaxBox
 
 #GRIDLEVEL
 1			nLevelArea
