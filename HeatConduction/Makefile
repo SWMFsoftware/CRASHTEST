@@ -81,7 +81,8 @@ test_uniform_1d_run_res:
 test_uniform_1d_check:
 	cd output; idl test_uniform_1d.pro; \
 		rm -f test_uniform_1d_results/*.eps
-	-(diff  output/test_uniform_1d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_uniform_1d_results/error.dat \
 		output/test_uniform_1d.ref \
 		> output/test_uniform_1d.diff)
 	ls -l output/test_uniform_1d.diff
@@ -125,7 +126,8 @@ test_uniform_2d_run_res:
 test_uniform_2d_check:
 	cd output; idl test_uniform_2d.pro; \
 		rm -f test_uniform_2d_results/*.eps
-	-(diff  output/test_uniform_2d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_uniform_2d_results/error.dat \
 		output/test_uniform_2d.ref \
 		> output/test_uniform_2d.diff)
 	ls -l output/test_uniform_2d.diff
@@ -168,7 +170,8 @@ test_uniform_2d_amr_run_res:
 test_uniform_2d_amr_check:
 	cd output; idl test_uniform_2d_amr.pro; \
 		rm -f test_uniform_2d_amr_results/*.eps
-	-(diff  output/test_uniform_2d_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_uniform_2d_amr_results/error.dat \
 		output/test_uniform_2d_amr.ref \
 		> output/test_uniform_2d_amr.diff)
 	ls -l output/test_uniform_2d_amr.diff
@@ -214,7 +217,8 @@ test_rmtv_run_res:
 test_rmtv_check:
 	cd output; idl test_rmtv.pro; \
 		rm -f test_rmtv_results/*.eps
-	-(diff  output/test_rmtv_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_rmtv_results/error.dat \
 		output/test_rmtv.ref \
 		> output/test_rmtv.diff)
 	ls -l output/test_rmtv.diff
@@ -263,7 +267,7 @@ test_lowrie3_run1:
 test_lowrie3_check:
 	cd output; idl test_lowrie3.pro; \
 		rm -f test_lowrie3_results/*.eps
-	-(${SCRIPTDIR}/DiffNum.pl  -t -a=2e-7 \
+	-(${SCRIPTDIR}/DiffNum.pl  -t \
 		output/test_lowrie3_results/error.dat \
 		output/test_lowrie3.ref \
 		> output/test_lowrie3.diff)
