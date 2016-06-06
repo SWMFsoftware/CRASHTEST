@@ -86,7 +86,8 @@ test_suolson_1d_run1:
 test_suolson_1d_check:
 	cd output; idl test_suolson_1d.pro; \
 		rm -f test_suolson_1d_results/*.eps
-	-(diff  output/test_suolson_1d_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -r=2e-4 \
+		output/test_suolson_1d_results/error.dat \
 		output/test_suolson_1d.ref \
 		> output/test_suolson_1d.diff)
 	ls -l output/test_suolson_1d.diff
@@ -134,7 +135,8 @@ test_suolson_1d_amr_run1:
 test_suolson_1d_amr_check:
 	cd output; idl test_suolson_1d_amr.pro; \
 		rm -f test_suolson_1d_amr_results/*.eps
-	-(diff  output/test_suolson_1d_amr_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl -r=2e-4 \
+		output/test_suolson_1d_amr_results/error.dat \
 		output/test_suolson_1d_amr.ref \
 		> output/test_suolson_1d_amr.diff)
 	ls -l output/test_suolson_1d_amr.diff
@@ -225,7 +227,8 @@ test_infinitemedium_run1:
 test_infinitemedium_check:
 	cd output; idl test_infinitemedium.pro; \
 		rm -f test_infinitemedium_results/*.eps
-	-(diff  output/test_infinitemedium_results/error.dat \
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_infinitemedium_results/error.dat \
 		output/test_infinitemedium.ref \
 		> output/test_infinitemedium.diff)
 	ls -l output/test_infinitemedium.diff
