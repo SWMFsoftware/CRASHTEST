@@ -2,7 +2,7 @@ position in cm, Tmat and Trad in eV
 1 0.02E-9 1 1 2
 960
 0.0
-x tmat trad
+x tmat trad param
 2.604167E-03  6.219076E+02  8.016031E+02
 7.812500E-03  6.194879E+02  7.993934E+02
 1.302083E-02  6.170720E+02  7.971823E+02
