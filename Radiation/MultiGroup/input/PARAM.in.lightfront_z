@@ -81,7 +81,7 @@ lightfront		TypeProblem
 
 #SEMIIMPLICIT
 T                       UseSemiImplicit
-radiationsplit          TypeSemiImplicit
+radiation		TypeSemiImplicit
 
 #SEMIKRYLOV
 CG			TypeKrylov
