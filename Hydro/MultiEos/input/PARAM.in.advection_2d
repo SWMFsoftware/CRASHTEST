@@ -3,40 +3,6 @@ Begin session: 1
 #ECHO
 T			DoEcho
 
-LOOKUPTABLE
-pPerRho(e/rho,rho)	NameTable
-save			NameCommand
-table_pPerRho.out	NameFile
-real8			TypeFile
-pPerRho(e/rho,rho) for Xe, Be, Plastic
-logE/Rho logrho pPerRhoXe pPerRhoBe pPerRhoPl
-200			nIndex1
-1e5			Index1Min
-1e14			Index1Max
-200			nIndex2
-0.01			Index2Min
-1e6			Index2Max
-
-! notation:
-! T -> electron temperature
-! C -> specific heat
-! G -> gamma
-! Z -> average ion charge
-! H -> electron heat conduction coef
-LOOKUPTABLE
-Thermo(rho,p/rho)	NameTable
-save			NameCommand
-table_thermo.out	NameFile
-real8			TypeFile
-Thermo(rho,p/rho) for Xe, Be, Plastic
-logrho logpPerRho TXe CXe GXe ZXe HXe TBe CBe GBe ZBe HBe TPl CPl GPl ZPl HPl
-200			nIndex1
-0.01			Index1Min
-1e6			Index1Max
-200			nIndex2
-1e5			Index2Min
-1e13			Index2Max
-
 #PLANET
 NONE
 
@@ -49,28 +15,46 @@ READ
 1.0e+3			km/s
 1000.0			g/cm^3
 
+#INCLUDE
+Param/CRASH/RZ.in
+
 #USERINPUTBEGIN ----------------
+
+#EOSTABLE
+T			UseEosTables
 
 #LEVELSET
 F			UseNonConsLevelSet
 
-#TUBE
-0.0			xEndTube
-300.0			rInnerTube
-400.0			rOuterTube
-150.0			RhoDimTube
-50.0			RhoDimOutside
-1e11			pDimOutside
--1.0			xUniformXe
+#STATEDEFINITION
+     rho   p     mx             StringStateVar
+4                               nMaterialState
+M11  5e-2  100.0  0.0		Name, State
+M12  5e-2  100.0  0.0		Name, State
+M2   0.1   100.0  10.0		Name, State
+M3   0.15  100.0  0.0		Name, State
+
+#STATEINTERFACE
+4                                        nSegment
+M2  M11 250.0,   0.0,  250.0,  300.0     Material1 Material2 x1 y1 x2 y2
+M3  M2    0.0, 300.0,  250.0,  300.0     Material1 Material2 x1 y1 x2 y2
+M3  M11 250.0, 300.0, 1000.0,  300.0     Material1 Material2 x1 y1 x2 y2
+M12 M3    0.0, 400.0, 1000.0,  400.0     Material1 Material2 x1 y1 x2 y2
 
 MIXEDCELL
 T			UseMixedCell
 0.97			MixLimit
 
-CYLINDRICAL
-T			UseCylindrical
-
 #USERINPUTEND   ----------------
+
+#INCLUDE
+Param/CRASH/TABLE_Xe_EOS.in
+
+#INCLUDE
+Param/CRASH/TABLE_Be_EOS.in
+
+#INCLUDE
+Param/CRASH/TABLE_Pl_EOS.in
 
 #TIMEACCURATE
 T			IsTimeAccurate
@@ -80,8 +64,6 @@ T			IsTimeAccurate
 4			nJ
 1			nK
 500			MinBlockALL
-
-tube is 5mm = 500um long, 625 um wide
 
 #GRID
 10			nRootBlockX
@@ -94,45 +76,11 @@ tube is 5mm = 500um long, 625 um wide
  -12.5			zMin
   12.5			zMax
 
-#SHOCKTUBE
-100.		rho [kg/m3] (left state)
-1e5		Ux  [100km/s]
-0.		Uy
-0.		Uz
-0.		Xe
-1.		Be
-0.		Pl
-0.		Eint
-1e11		P  [1e5 MPa]
-50.0		rho (right state)
-1e5		Ux
-0.		Uy
-0.		Uz
-1.		Xe
-0.		Be
-0.		Pl
-0.		Eint
-1e11		P
-
-#SHOCKPOSITION
-250.0			ShockPosition
-0.0			ShockSlope
-
 #UPDATECHECK
 F			DoUpdateCheck
 
 #NONCONSERVATIVE
 T			UseNonConservative
-
-Sheared boundary condition is used for non-zero shock slope
-
-#OUTERBOUNDARY
-float			xMinBc
-float			xMaxBc
-float			yMinBc
-float			yMaxBc
-float			zMinBc
-float			zMaxBc
 
 #TIMESTEPPING
 2			nStage
