@@ -67,7 +67,7 @@ test_advection_1d_rundir: test_rundir
 test_advection_1d_run:
 	for RES in 40 80 160 320; do \
 	 for ON in \
-	 "" NONCONS LIMIT LIMIT_MIXED LIMIT_MIXED_LOOKUP LIMIT_VOLUME_LOOKUP; \
+	 "" NONCONS LIMIT LIMIT_MIXED LIMIT_VOLUME; \
 	 do \
 	  for FLUX in Linde Godunov; do \
 	   make test_advection_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
@@ -176,9 +176,8 @@ test_wave_1d_rundir: test_rundir
 test_wave_1d_run:
 	for RES in 100 200 400; do \
 	 for ON in \
-	    NONCONS_LOOKUP NONCONS_LIMIT_LOOKUP \
-		NONCONS_MIXED_LIMIT NONCONS_MIXED_LIMIT_LOOKUP \
-	    "" LIMIT_LOOKUP MIXED_LIMIT MIXED_LIMIT_LOOKUP; do \
+	    NONCONS NONCONS_LIMIT NONCONS_MIXED_LIMIT \
+	    "" LIMIT MIXED_LIMIT; do \
 	  for FLUX in Linde Godunov; do \
 	   make test_wave_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
 	  done \
