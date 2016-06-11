@@ -41,42 +41,24 @@ F			DoSaverestart
 #SAVEINITIAL
 T			DoSaveInitial
 
-#SHOCKTUBE
-10.		rho 
-0.		Ux  
-0.		Uy
-0.		Uz
-0.		Xe
-1.		Be
-0.		Pl
-0.5		Erad
-0.5		Eint
-1.0		P
-20.0		rho (right state)
-0.		Ux
-0.		Uy
-0.		Uz
-1.		Xe
-0.		Be
-0.		Pl
-0.5		Erad
-0.5		Eint
-1.0		P
-
-#SHOCKPOSITION
-5.0			ShockPosition
-0.0			ShockSlope
-
 #USERINPUTBEGIN ----------------
 
-#TUBE
--5.0			xEndTube
-10.0			rInnerTube
-15.0			rOuterTube
-30.0			RhoDimTube
-10.0			RhoDimOutside
-1.0			pDimOutside
--1.0			xUniformXe
+#STATEDEFINITION
+     rho       p                  StringStateVar
+4                                 nMaterialState
+M11  20.0      1.0                Name, State
+M12  10.0      1.0                Name, State
+M2   10.0      1.0                Name, State
+M3   30.0      1.0                Name, State
+
+#STATEINTERFACE
+6                                        nSegment
+M2  M11   5.0, -10.0,    5.0,   10.0     Material1 Material2 x1 y1 x2 y2
+M3  M2   -5.0,  10.0,    5.0,   10.0     Material1 Material2 x1 y1 x2 y2
+M2  M3   -5.0,  10.0,   -5.0,   15.0     Material1 Material2 x1 y1 x2 y2
+M2  M12  -5.0,  15.0,   -5.0,   20.0     Material1 Material2 x1 y1 x2 y2
+M3  M11   5.0,  10.0,   20.0,   10.0     Material1 Material2 x1 y1 x2 y2
+M12 M3   -5.0,  15.0,   20.0,   15.0     Material1 Material2 x1 y1 x2 y2
 
 MIXEDCELL
 T			UseMixedCell
