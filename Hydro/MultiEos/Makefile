@@ -34,6 +34,7 @@ test_rundir:
 		rm -rf ${RUNDIR}; \
 		make rundir RUNDIR=${RUNDIR} STANDALONE=YES GMDIR=`pwd` \
 			DEFAULT_EXE=CRASH.exe
+	cd ${DIR}/${RUNDIR}; ln -s ../dataCRASH/LookupTables Tables
 
 clean:
 	rm -f *~ input/*~ output/*~
@@ -42,7 +43,7 @@ clean:
 distclean: clean
 
 # These commands are switched off by default
-COMMANDS = LOOKUP|MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
+COMMANDS = MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
 
 ### Advection on 1D grid ###
 
@@ -119,7 +120,7 @@ test_advection_2d_rundir: test_rundir
 test_advection_2d_run:
 	for RES in 40 80 160; do \
 	 for ON in \
-	    "" NONCONS LIMIT LIMIT_LOOKUP LIMIT_MIXED LIMIT_MIXED_LOOKUP; do \
+	    "" NONCONS LIMIT LIMIT_MIXED; do \
 	  for FLUX in Linde Godunov; do \
 	   make test_advection_2d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
 	  done \
