@@ -27,9 +27,9 @@ T			UseEosTables
 F			UseNonConsLevelSet
 
 #STATEDEFINITION
-     rho   p     mx             StringStateVar
+     rho   p      mx            StringStateVar
 4                               nMaterialState
-M11  5e-2  100.0  0.0		Name, State
+M11  5e-2  100.0  5.0		Name, State
 M12  5e-2  100.0  0.0		Name, State
 M2   0.1   100.0  10.0		Name, State
 M3   0.15  100.0  0.0		Name, State

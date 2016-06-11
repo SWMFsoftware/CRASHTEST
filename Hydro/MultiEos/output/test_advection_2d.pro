@@ -30,11 +30,6 @@ set_device,resdir+'godunov_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Godunov_*_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_limit_lookup.eps',/eps, /land
-.r animate
-close_device,/pdf
-
 filename = resdir+'Godunov_*_NONCONS/GM/*.outs'
 set_device,resdir+'godunov_noncons.eps',/eps, /land
 .r animate
@@ -42,11 +37,6 @@ close_device,/pdf
 
 filename = resdir+'Godunov_*_LIMIT_MIXED/GM/*.outs'
 set_device,resdir+'godunov_limit_mixed.eps',/eps, /land
-.r animate
-close_device,/pdf
-
-filename = resdir+'Godunov_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
-set_device,resdir+'godunov_limit_mixed_lookup.eps',/eps, /land
 .r animate
 close_device,/pdf
 
@@ -60,11 +50,6 @@ set_device,resdir+'linde_limit.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*_LIMIT_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_limit_lookup.eps',/eps, /land
-.r animate
-close_device,/pdf
-
 filename = resdir+'Linde_*_NONCONS/GM/*.outs'
 set_device,resdir+'linde_noncons.eps',/eps, /land
 .r animate
@@ -75,20 +60,15 @@ set_device,resdir+'linde_limit_mixed.eps',/eps, /land
 .r animate
 close_device,/pdf
 
-filename = resdir+'Linde_*_LIMIT_MIXED_LOOKUP/GM/*.outs'
-set_device,resdir+'linde_limit_mixed_lookup.eps',/eps, /land
-.r animate
-close_device,/pdf
-
 ; 2. calculate errors and save them into a file
 
 openw,99,resdir+'error.dat'
 printf,99,'Advection test in 2D'
-printf,99,'n godunov g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look ' $
-  +          ' linde l_lim l_noncons l_lim_look l_lim_mix l_lim_mix_look'
+printf,99,'n godunov g_lim g_noncons g_lim_mix ' $
+  +          ' linde l_lim l_noncons l_lim_mix'
 
 ; array of errors for a given resolution
-errors = fltarr(12)
+errors = fltarr(8)
 
 ; read the first snapshot and make it into reference solution
 filename=resdir+'Linde_40_/GM/z*.outs'
@@ -122,22 +102,18 @@ errors(2)=calc_error(w2,wref)
 filename=resdir+'Godunov_40_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
 
 filename=resdir+'Linde_40_/GM/z*.outs ' $
   +      resdir+'Linde_40_LIMIT/GM/z*.outs ' $
   +      resdir+'Linde_40_NONCONS/GM/z*.outs'
 .r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
+errors(4)=calc_error(w0,wref)
+errors(5)=calc_error(w1,wref)
+errors(6)=calc_error(w2,wref)
 
 filename=resdir+'Linde_40_LIMIT_*/GM/z*.outs'
 .r getpict
-errors(9)=calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
+errors(7)=calc_error(w0,wref)
 
 printf,99,40,errors,format='(i3,12f7.4)'
 
@@ -165,22 +141,18 @@ errors(2)=calc_error(w2,wref)
 filename=resdir+'Godunov_80_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
 
 filename=resdir+'Linde_80_/GM/z*.outs ' $
   +      resdir+'Linde_80_LIMIT/GM/z*.outs ' $
   +      resdir+'Linde_80_NONCONS/GM/z*.outs'
 .r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
+errors(4)=calc_error(w0,wref)
+errors(5)=calc_error(w1,wref)
+errors(6)=calc_error(w2,wref)
 
 filename=resdir+'Linde_80_LIMIT_*/GM/z*.outs'
 .r getpict
-errors(9)=calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
+errors(7)=calc_error(w0,wref)
 
 printf,99,80,errors,format='(i3,12f7.4)'
 
@@ -208,22 +180,18 @@ errors(2)=calc_error(w2,wref)
 filename=resdir+'Godunov_160_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(3)=calc_error(w0,wref)
-errors(4)=calc_error(w1,wref)
-errors(5)=calc_error(w2,wref)
 
 filename=resdir+'Linde_160_/GM/z*.outs ' $
   +      resdir+'Linde_160_LIMIT/GM/z*.outs ' $
   +      resdir+'Linde_160_NONCONS/GM/z*.outs'
 .r getpict
-errors(6)=calc_error(w0,wref)
-errors(7)=calc_error(w1,wref)
-errors(8)=calc_error(w2,wref)
+errors(4)=calc_error(w0,wref)
+errors(5)=calc_error(w1,wref)
+errors(6)=calc_error(w2,wref)
 
 filename=resdir+'Linde_160_LIMIT_*/GM/z*.outs'
 .r getpict
-errors(9)=calc_error(w0,wref)
-errors(10)=calc_error(w1,wref)
-errors(11)=calc_error(w2,wref)
+errors(7)=calc_error(w0,wref)
 
 printf,99,160,errors,format='(i3,12f7.4)'
 
@@ -237,7 +205,7 @@ logfilename=resdir+'error.dat'
 .r getlog
 
 ; The Godunov part of the header of error.dat:
-; n godunov g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look
+; n godunov g_lim g_noncons g_lim_mix
 
 set_device,resdir+'error_godunov.eps',/eps, /land
 
@@ -250,22 +218,18 @@ plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
   title="Be/Xe/Plastic advection test in 2D"
 oplot,2/wlog(*,0),wlog(*,1),psym=-1,thick=3
 oplot,2/wlog(*,0),wlog(*,2),psym=-2,thick=3
-oplot,2/wlog(*,0),wlog(*,3),psym=-4,thick=3
-oplot,2/wlog(*,0),wlog(*,5),psym=-5,thick=3
-oplot,2/wlog(*,0),wlog(*,6),psym=-6,thick=3
+oplot,2/wlog(*,0),wlog(*,3),psym=-5,thick=3
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
 xyouts,0.002,0.005,'1st order slope'
 oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.14,'Godunov'
 oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
-oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
-oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.02,'+ #MIXED + #LOOKUP'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.01,'+ #MIXED'
 
 close_device,/pdf
 
 ; The Linde part of the header of error.dat:
-; n linde g_lim g_noncons g_lim_look g_lim_mix g_lim_mix_look
+; n linde g_lim g_noncons g_lim_mix
 
 set_device,resdir+'error_linde.eps',/eps, /land
 
@@ -274,19 +238,15 @@ plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
   xtitle='Grid resolution', $
   ytitle='Relative error', $
   title="Be/Xe/Plastic advection test in 2D"
-oplot,2/wlog(*,0),wlog(*, 7),psym=-1,thick=3
-oplot,2/wlog(*,0),wlog(*, 8),psym=-2,thick=3
-oplot,2/wlog(*,0),wlog(*, 9),psym=-4,thick=3
-oplot,2/wlog(*,0),wlog(*,10),psym=-5,thick=3
-oplot,2/wlog(*,0),wlog(*,11),psym=-6,thick=3
+oplot,2/wlog(*,0),wlog(*,5),psym=-1,thick=3
+oplot,2/wlog(*,0),wlog(*,6),psym=-2,thick=3
+oplot,2/wlog(*,0),wlog(*,7),psym=-5,thick=3
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
 xyouts,0.002,0.005,'1st order slope'
 oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.14,'Linde'
 oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
-oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
-oplot,[0.0015],[0.01],psym=6 & xyouts,0.002,0.01,'+ #MIXED + #LOOKUP'
 
 close_device,/pdf
 
