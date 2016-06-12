@@ -193,17 +193,13 @@ test_tube_3d_rundir: test_rundir
 
 test_tube_3d_run:
 	make test_tube_3d_run1
-	make test_tube_3d_run1 ON=MIXED
 	rm -rf output/test_tube_3d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_tube_3d_results
 
 test_tube_3d_run1:
 	cd ${DIR}/${RUNDIR}; \
-	perl -pi -e '$$a= "${ON}"; s/^#(MIXED)/$$1/; s/^($$a)/#$$1/ if $$a' \
-		PARAM.in
-	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./CRASH.exe > runlog; \
-		PostProc.pl RESULTS/tube_${ON}
+		PostProc.pl RESULTS/tube_
 
 test_tube_3d_check:
 	cd output; idl test_tube_3d.pro; \
@@ -216,15 +212,6 @@ test_tube_3d_check:
 		output/test_tube_3d_y.ref >> output/test_tube_3d.diff)
 	-(${SCRIPTDIR}/DiffNum.pl \
 		output/test_tube_3d_results/tube_/GM/los_var_6*.out \
-		output/test_tube_3d_z.ref >> output/test_tube_3d.diff)
-	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_tube_3d_results/tube_MIXED/GM/los_var_4*.out \
-		output/test_tube_3d_x.ref > output/test_tube_3d.diff)
-	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_tube_3d_results/tube_MIXED/GM/los_var_5*.out \
-		output/test_tube_3d_y.ref >> output/test_tube_3d.diff)
-	-(${SCRIPTDIR}/DiffNum.pl \
-		output/test_tube_3d_results/tube_MIXED/GM/los_var_6*.out \
 		output/test_tube_3d_z.ref >> output/test_tube_3d.diff)
 	ls -l output/test_tube_3d.diff
 

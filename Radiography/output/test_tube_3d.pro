@@ -20,14 +20,4 @@ loadct,39
 .r animate
 close_device,/pdf
 
-filename=resdir+'tube*/GM/los_var_4*.out'
-.r getpict
-w=w0-w1
-func='rho rhoxe rhobe rhopl'
-set_device, resdir + 'level_mixed_diff.eps', /eps, /port
-loadct,39
-.r plotfunc
-close_device,/pdf
-
-
 exit

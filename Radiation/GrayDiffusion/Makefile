@@ -63,22 +63,16 @@ test_suolson_1d_rundir: test_rundir
 	cp input/PARAM.in.suolson_1d ${DIR}/${RUNDIR}/PARAM.in
 
 test_suolson_1d_run:
-	make test_suolson_1d_run1 RES=60  SOLVER=radiation
-	make test_suolson_1d_run1 RES=60  SOLVER=radcond
-	make test_suolson_1d_run1 RES=120 SOLVER=radiation
-	make test_suolson_1d_run1 RES=120 SOLVER=radcond
-	make test_suolson_1d_run1 RES=240 SOLVER=radiation
-	make test_suolson_1d_run1 RES=240 SOLVER=radcond
-	make test_suolson_1d_run1 RES=960 SOLVER=radiation
-	make test_suolson_1d_run1 RES=960 SOLVER=radcond
+	for RES in 60 120 240 960; do \
+	  make test_suolson_1d_amr_run1 RES=$${RES}; \
+	done
 	rm -rf output/test_suolson_1d_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_suolson_1d_results
 
 test_suolson_1d_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=5.0e-5*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
-		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
+		perl -pi -e '$$a=5.0e-5*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./CRASH.exe > runlog; \
 		PostProc.pl -M RESULTS/${SOLVER}_${RES}
@@ -112,22 +106,15 @@ test_suolson_1d_amr_rundir: test_rundir
 	cp input/PARAM.in.suolson_1d_amr ${DIR}/${RUNDIR}/PARAM.in
 
 test_suolson_1d_amr_run:
-	make test_suolson_1d_amr_run1 RES=60  SOLVER=radiation
-	make test_suolson_1d_amr_run1 RES=60  SOLVER=radcond
-	make test_suolson_1d_amr_run1 RES=120 SOLVER=radiation
-	make test_suolson_1d_amr_run1 RES=120 SOLVER=radcond
-	make test_suolson_1d_amr_run1 RES=240 SOLVER=radiation
-	make test_suolson_1d_amr_run1 RES=240 SOLVER=radcond
-	make test_suolson_1d_amr_run1 RES=960 SOLVER=radiation
-	make test_suolson_1d_amr_run1 RES=960 SOLVER=radcond
-	rm -rf output/test_suolson_1d_amr_results
+	for RES in 60 120 240 960; do \
+	  make test_suolson_1d_amr_run1 RES=$${RES}; \
+	done
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_suolson_1d_amr_results
 
 test_suolson_1d_amr_run1:
 	cd ${DIR}/${RUNDIR}; \
 		perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/' PARAM.in; \
-		perl -pi -e '$$a=5.0e-5*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
-		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
+		perl -pi -e '$$a=5.0e-5*60/${RES}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		${MPIRUN} ./CRASH.exe > runlog; \
 		PostProc.pl -M RESULTS/${SOLVER}_${RES}
@@ -208,18 +195,15 @@ test_infinitemedium_rundir: test_rundir
 
 test_infinitemedium_run:
 	cp input/PARAM.in.infinitemedium ${DIR}/${RUNDIR}/PARAM.in; \
-	for SOLVER in radiation radcond; do \
-	 for REDUCEDT in 2 4 8; do \
-	  make test_infinitemedium_run1 REDUCEDT=$${REDUCEDT} SOLVER=$${SOLVER}; \
-	 done \
+	for REDUCEDT in 2 4 8; do \
+	 make test_infinitemedium_run1 REDUCEDT=$${REDUCEDT} SOLVER=$${SOLVER}; \
 	done
 	rm -rf output/test_infinitemedium_results
 	mv ${DIR}/${RUNDIR}/RESULTS output/test_infinitemedium_results
 
 test_infinitemedium_run1:
 	cd ${DIR}/${RUNDIR}; \
-		perl -pi -e '$$a=1.667834e-3/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in; \
-		perl -pi -e 's/\S+(\s*TypeSemiImplicit)/${SOLVER}$$1/' PARAM.in
+		perl -pi -e '$$a=1.667834e-3/${REDUCEDT}; s/\S+(\s*DtFixedDim)/$$a$$1/' PARAM.in
 	cd ${DIR}/${RUNDIR}; \
 		./CRASH.exe > runlog; \
 		PostProc.pl -M RESULTS/${SOLVER}_${REDUCEDT}

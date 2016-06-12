@@ -33,14 +33,11 @@ diffuses into the cold half space on the right. The material
 temperature also rises due to the energy exchange between radiation
 and matter.
 
-The convergence study is performed with two different semi-implicit
-schemes:
+The convergence study is performed with:
 
 - radiation: solves for radiation energy density and it sets the the
              internal energy in a point implicit manner.
-- radcond:   solves implicitly the gray diffusion with the radiation
-             and internal energy densities being the unknowns.
 
-For both schemes we use a Crank-Nicolson approach to achieve second
+Ee use a Crank-Nicolson approach to achieve second
 order accurate time-integration. We expect second order convergence
 rate.

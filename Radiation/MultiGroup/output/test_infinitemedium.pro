@@ -32,12 +32,12 @@ close,99
 set_device, resdir + 'error.eps', /eps, /land
 logfilename = resdir + 'error.dat'
 .r getlog
-plot_oo,[0.1,1.0],[4e-6,4e-4],linestyle=2,ystyle=1, $
-        xrange=[0.1,1.0],yrange=[1e-5,1e-3],$
+plot_oo,[0.1,1.0],[1.5e-3,1.5e-2],linestyle=2,ystyle=1, $
+        xrange=[0.1,1.0],yrange=[2e-3,2e-2],$
         xtitle='time step (arbitrary units)', $
         ytitle='absolute error (at e-folding time)', $
         title="uniform medium test with two groups"
-xyouts,0.5,0.0004,'2nd order slope',charsize=2,charthick=1
+xyouts,0.2,0.006,'1st order slope',charsize=2,charthick=1
 oplot,wlog(*,0),wlog(*,1),psym=-1,thick=4
 oplot,wlog(*,0),wlog(*,2),psym=-4,thick=4
 oplot,[0.12],[0.00072],psym=1 & xyouts,0.13,0.0007,'erad1'

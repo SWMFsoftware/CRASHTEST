@@ -70,7 +70,7 @@ suolson			TypeProblem
 
 #SEMIIMPLICIT
 T                       UseSemiImplicit
-radcond                 TypeSemiImplicit
+radiation		TypeSemiImplicit
 
 #SEMICOEFF
 0.5			SemiImplCoeff
