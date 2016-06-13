@@ -84,13 +84,9 @@ T			UseSemiImplicit
 radiation		TypeSemiImplicit
 
 #SEMIKRYLOV
-CG			TypeKrylov
+GMRES			TypeKrylov
 1.0e-8                  ErrorMaxKrylov
 400                     MaxMatvecKrylov
-
-#SEMIPRECONDITIONER
-T	                DoPrecond
-DILU                    TypePrecond
 
 #RADIATION
 T                       UseGrayDiffusion
