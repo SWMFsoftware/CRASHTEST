@@ -63,10 +63,8 @@ initial			NameArea
 brick			NameArea
 0.0			xCenter
 2.0			yCenter
-0.0			zCenter
 2.0			xSizeBrick
 2.0			ySizeBrick
-2.0			zSizeBrick
 
 #OUTERBOUNDARY
 periodic                TypeBcEast
