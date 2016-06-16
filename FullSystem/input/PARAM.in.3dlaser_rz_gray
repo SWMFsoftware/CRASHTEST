@@ -73,6 +73,7 @@ EvMin EvMax				NameTableParam
 20000.0					TableParam [eV]
 Opacity(rho,Te) for Xe			StringDescription
 logrho logT Planck(2) Ross(2)		NameVar
+2      	    	      			nIndex
 201    	    	       			nIndex1
 0.21801430476				Index1Min [kg/m3]
 2.1801430476E+04			Index1Max [kg/m3]
@@ -90,6 +91,7 @@ EvMin EvMax				NameTableParam
 20000.0					TableParam [eV]
 Opacity(rho,Te) for Be			StringDescription
 logrho logT Planck(2) Ross(2)		NameVar
+2      	    	      			nIndex
 201    	    	      			nIndex1
 0.0014965				Index1Min [kg/m3]
 2993.0					Index1Max [kg/m3]
@@ -107,6 +109,7 @@ EvMin EvMax				NameTableParam
 20000.0					TableParam [eV]
 Opacity(rho,Te) for Pl			StringDescription
 logrho logT Planck(2) Ross(2)		NameVar
+2      	    	      			nIndex
 201    	    	      			nIndex1
 1.62789127801646E-02			Index1Min [kg/m3]
 2.44183691702469E+03			Index1Max [kg/m3]
@@ -124,6 +127,7 @@ EvMin EvMax				NameTableParam
 20000.0					TableParam [eV]
 Opacity(rho,Te) for Au			StringDescription
 logrho logT Planck(2) Ross(2)		NameVar
+2      	    	      			nIndex
 201    	    	      			nIndex1
 0.3270688818768				Index1Min [kg/m3]
 3.9248265825216E+04			Index1Max [kg/m3]
@@ -141,6 +145,7 @@ EvMin EvMax				NameTableParam
 20000.0					TableParam [eV]
 Opacity(rho,Te) for Ay			StringDescription
 logrho logT Planck(2) Ross(2)		NameVar
+2      	    	      			nIndex
 201    	    	      			nIndex1
 1.1083255751072E-02			Index1Min [kg/m3]
 1.6624883626608E+03			Index1Max [kg/m3]
