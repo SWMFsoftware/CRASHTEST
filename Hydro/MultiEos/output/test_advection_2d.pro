@@ -90,32 +90,28 @@ close_device,/pdf
 ; read the last state for comparison
 npict=10
 
-; read at most 3 files at a time
+; read at most 4 files at a time
 filename=resdir+'Godunov_40_/GM/z*.outs ' $
   +      resdir+'Godunov_40_LIMIT/GM/z*.outs ' $
-  +      resdir+'Godunov_40_NONCONS/GM/z*.outs'
+  +      resdir+'Godunov_40_NONCONS/GM/z*.outs ' $
+  +      resdir+'Godunov_40_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(0)=calc_error(w0,wref)
 errors(1)=calc_error(w1,wref)
 errors(2)=calc_error(w2,wref)
-
-filename=resdir+'Godunov_40_LIMIT_*/GM/z*.outs'
-.r getpict
-errors(3)=calc_error(w0,wref)
+errors(3)=calc_error(w3,wref)
 
 filename=resdir+'Linde_40_/GM/z*.outs ' $
   +      resdir+'Linde_40_LIMIT/GM/z*.outs ' $
-  +      resdir+'Linde_40_NONCONS/GM/z*.outs'
+  +      resdir+'Linde_40_NONCONS/GM/z*.outs ' $
+  +      resdir+'Linde_40_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(4)=calc_error(w0,wref)
 errors(5)=calc_error(w1,wref)
 errors(6)=calc_error(w2,wref)
+errors(7)=calc_error(w3,wref)
 
-filename=resdir+'Linde_40_LIMIT_*/GM/z*.outs'
-.r getpict
-errors(7)=calc_error(w0,wref)
-
-printf,99,40,errors,format='(i3,12f7.4)'
+printf,99,40,errors,format='(i3,8f7.4)'
 
 ; resolution 80
 filename=resdir+'Linde_80_/GM/z*.outs'
@@ -129,32 +125,28 @@ wref = w
 ; read the last state for comparison
 npict=10
 
-; read at most 3 files at a time
+; read at most 4 files at a time
 filename=resdir+'Godunov_80_/GM/z*.outs ' $
   +      resdir+'Godunov_80_LIMIT/GM/z*.outs ' $
-  +      resdir+'Godunov_80_NONCONS/GM/z*.outs'
+  +      resdir+'Godunov_80_NONCONS/GM/z*.outs ' $
+  +      resdir+'Godunov_80_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(0)=calc_error(w0,wref)
 errors(1)=calc_error(w1,wref)
 errors(2)=calc_error(w2,wref)
-
-filename=resdir+'Godunov_80_LIMIT_*/GM/z*.outs'
-.r getpict
-errors(3)=calc_error(w0,wref)
+errors(3)=calc_error(w3,wref)
 
 filename=resdir+'Linde_80_/GM/z*.outs ' $
   +      resdir+'Linde_80_LIMIT/GM/z*.outs ' $
-  +      resdir+'Linde_80_NONCONS/GM/z*.outs'
+  +      resdir+'Linde_80_NONCONS/GM/z*.outs ' $
+  +      resdir+'Linde_80_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(4)=calc_error(w0,wref)
 errors(5)=calc_error(w1,wref)
 errors(6)=calc_error(w2,wref)
+errors(7)=calc_error(w3,wref)
 
-filename=resdir+'Linde_80_LIMIT_*/GM/z*.outs'
-.r getpict
-errors(7)=calc_error(w0,wref)
-
-printf,99,80,errors,format='(i3,12f7.4)'
+printf,99,80,errors,format='(i3,8f7.4)'
 
 ; resolution 160
 filename=resdir+'Linde_160_/GM/z*.outs'
@@ -168,32 +160,29 @@ wref = w
 ; read the last state for comparison
 npict=10
 
-; read at most 3 files at a time
+; read at most 4 files at a time
 filename=resdir+'Godunov_160_/GM/z*.outs ' $
   +      resdir+'Godunov_160_LIMIT/GM/z*.outs ' $
-  +      resdir+'Godunov_160_NONCONS/GM/z*.outs'
+  +      resdir+'Godunov_160_NONCONS/GM/z*.outs ' $
+  +      resdir+'Godunov_160_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(0)=calc_error(w0,wref)
 errors(1)=calc_error(w1,wref)
 errors(2)=calc_error(w2,wref)
-
-filename=resdir+'Godunov_160_LIMIT_*/GM/z*.outs'
-.r getpict
-errors(3)=calc_error(w0,wref)
+errors(3)=calc_error(w3,wref)
 
 filename=resdir+'Linde_160_/GM/z*.outs ' $
   +      resdir+'Linde_160_LIMIT/GM/z*.outs ' $
-  +      resdir+'Linde_160_NONCONS/GM/z*.outs'
+  +      resdir+'Linde_160_NONCONS/GM/z*.outs ' $
+  +      resdir+'Linde_160_LIMIT_*/GM/z*.outs'
 .r getpict
 errors(4)=calc_error(w0,wref)
 errors(5)=calc_error(w1,wref)
 errors(6)=calc_error(w2,wref)
-
-filename=resdir+'Linde_160_LIMIT_*/GM/z*.outs'
-.r getpict
-errors(7)=calc_error(w0,wref)
-
-printf,99,160,errors,format='(i3,12f7.4)'
+errors(7)=calc_error(w3,wref)
+print,"help,w2"
+help,w2
+printf,99,160,errors,format='(i3,8f7.4)'
 
 close,99
 
@@ -218,13 +207,15 @@ plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
   title="Be/Xe/Plastic advection test in 2D"
 oplot,2/wlog(*,0),wlog(*,1),psym=-1,thick=3
 oplot,2/wlog(*,0),wlog(*,2),psym=-2,thick=3
-oplot,2/wlog(*,0),wlog(*,3),psym=-5,thick=3
+oplot,2/wlog(*,0),wlog(*,3),psym=-4,thick=3
+oplot,2/wlog(*,0),wlog(*,4),psym=-5,thick=3
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
 xyouts,0.002,0.005,'1st order slope'
 oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.14,'Godunov'
 oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
-oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.01,'+ #MIXED'
+oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
+oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
 
 close_device,/pdf
 
@@ -240,11 +231,13 @@ plot_oo,[1e-3,1e-1],[1e-3,1e-1], $
   title="Be/Xe/Plastic advection test in 2D"
 oplot,2/wlog(*,0),wlog(*,5),psym=-1,thick=3
 oplot,2/wlog(*,0),wlog(*,6),psym=-2,thick=3
-oplot,2/wlog(*,0),wlog(*,7),psym=-5,thick=3
+oplot,2/wlog(*,0),wlog(*,7),psym=-4,thick=3
+oplot,2/wlog(*,0),wlog(*,8),psym=-5,thick=3
 
 oplot,[0.0012,0.0017],[0.005,0.005],linestyle=2
 xyouts,0.002,0.005,'1st order slope'
 oplot,[0.0015],[0.16],psym=1 & xyouts,0.002,0.14,'Linde'
+oplot,[0.0015],[0.04],psym=4 & xyouts,0.002,0.04,'+ #NONCONS'
 oplot,[0.0015],[0.08],psym=2 & xyouts,0.002,0.08,'+ #LIMITER'
 oplot,[0.0015],[0.02],psym=5 & xyouts,0.002,0.02,'+ #MIXED'
 
