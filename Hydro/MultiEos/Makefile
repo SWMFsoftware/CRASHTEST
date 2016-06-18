@@ -43,7 +43,7 @@ clean:
 distclean: clean
 
 # These commands are switched off by default
-COMMANDS = MIXED|VOLUME|LIMITER|NONCONSERVATIVE|CYLINDRICAL
+COMMANDS = MIXED|LIMITER|NONCONSERVATIVE|CYLINDRICAL
 
 ### Advection on 1D grid ###
 
@@ -67,7 +67,7 @@ test_advection_1d_rundir: test_rundir
 test_advection_1d_run:
 	for RES in 40 80 160 320; do \
 	 for ON in \
-	 "" NONCONS LIMIT LIMIT_MIXED LIMIT_VOLUME; \
+	 "" NONCONS LIMIT LIMIT_MIXED; \
 	 do \
 	  for FLUX in Linde Godunov; do \
 	   make test_advection_1d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
