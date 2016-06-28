@@ -23,6 +23,7 @@ Config.pl -install -hypre
 
 # Set current date of check-out
 setenv CHECKOUTDATE `date +%Y.%m.%d`
+setenv CHECKOUTDIR `date +%Y/%m/%d/`
 
 # Checkout the CRASHTEST repository
 cvs co CRASHTEST
@@ -36,7 +37,7 @@ make test MPIRUN='mpirun -np 16' >& test.log < /dev/null
 ssh herot.engin.umich.edu "cd Sites; rm -rf CRASH_OLD; mv CRASH CRASH_OLD; mkdir CRASH"
 
 # Store result by yesterday's date
-scp test_results.txt herot.engin.umich.edu:Sites/CRASH_RESULTS/${CHECKOUTDATE}
+rsync --rsync-path="mkdir -p Sites/CRASH_RESULTS/${CHECKOUTDIR} && rsync" test_results.txt herot.engin.umich.edu:Sites/CRASH_RESULTS/${CHECKOUTDIR}/${CHECKOUTDATE}
 
 # Copy results to a web site
 rsync -az --delete ~/CRASHTEST/CRASH/CRASHTEST/ herot.engin.umich.edu:Sites/CRASH/CRASHTEST/ < /dev/null
