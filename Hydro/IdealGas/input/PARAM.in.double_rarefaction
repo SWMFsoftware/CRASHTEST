@@ -1,0 +1,91 @@
+#ECHO
+T			DoEcho
+
+#PLANET
+NONE			NamePlanet
+
+#IOUNITS
+NONE			NameIoUnits
+
+#NORMALIZATION
+NONE			NameNormalization
+
+#NONCONSERVATIVE
+F			UseNonConservative
+
+#CHECKGRIDSIZE
+10			nI
+1			nJ
+1			nK
+1000			MinBlockALL
+
+#GRID
+20			nRootBlockX
+1			nRootBlockY
+1			nRootBlockZ
+ 0.0			xMin
+ 1.0			xMax
+-0.5			yMin
+ 0.5			yMax
+-0.5			zMin
+ 0.5			zMax
+
+#GAMMA
+1.4			Gamma
+
+#SHOCKTUBE
+1.0			rho (left state)
+-2.0			Ux
+0.0			Uy
+0.0			Uz
+0.4			P
+1.0			rho (right state)
+2.0			Ux
+0.0			Uy
+0.0			Uz
+0.4			P
+
+#SHOCKPOSITION
+0.5			ShockPosition
+0.0			ShockSlope
+
+#OUTERBOUNDARY
+float			xMinBc
+float			xMaxBc
+float			yMinBc
+float			yMaxBc
+float			zMinBc
+float			zMaxBc
+
+#TIMESTEPPING
+2			nStage
+0.8			CflExpl
+
+#SCHEME
+2		nOrder
+Linde		TypeFlux
+mc3		TypeLimiter
+2.0		LimiterBeta
+
+#SAVELOGFILE
+F		DoSaveLogfile
+
+#SAVERESTART
+F		DoSaverestart
+
+#PLOTFILENAME
+second		NameMaxTimeUnit
+
+#SAVEINITIAL
+T		DoSaveInitial
+
+#SAVEPLOT
+1		nPlotfile
+1d hd idl	PlotString
+-1              DnSavePlot
+0.01            DtSavePlot
+0.0             DxSavePlot
+
+#STOP
+-1		MaxIteration
+0.14		tSimulationMax

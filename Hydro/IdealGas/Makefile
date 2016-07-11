@@ -8,6 +8,7 @@ test:
 	-@(make test_shu_osher_1d)
 	-@(make test_wave_amr)
 	-@(make test_shu_osher_amr)
+	-@(make test_double_rarefaction)
 	@ls -l output/*.diff
 
 # Path to this test directory from the main directory
@@ -35,6 +36,7 @@ help:
 	@echo "    test_wave_1d               (run wave test in 1D)"
 	@echo "    test_wave_2d               (run wave test in 2D)"
 	@echo "    test_wave_amr              (run wave test with 2D AMR)"
+	@echo "    test_double_rarefaction    (run double rarefaction test)"
 
 test_rundir:
 	cd ${DIR}; \
@@ -364,3 +366,48 @@ test_shu_osher_amr_check:
 		output/test_shu_osher_amr.ref \
 		> output/test_shu_osher_amr.diff)
 	ls -l output/test_shu_osher_amr.diff
+
+### double rarefaction test ###
+
+test_double_rarefaction:
+	@echo "test_double_rarefaction_compile..." > output/test_double_rarefaction.diff
+	make test_double_rarefaction_compile
+	@echo "test_double_rarefaction_rundir..." >> output/test_double_rarefaction.diff
+	make test_double_rarefaction_rundir
+	@echo "test_double_rarefaction_run..." >> output/test_double_rarefaction.diff
+	make test_double_rarefaction_run
+	@echo "test_double_rarefaction_check..." >> output/test_double_rarefaction.diff
+	make test_double_rarefaction_check
+
+test_double_rarefaction_compile:
+	cd ${DIR}; ./Config.pl -e=Hd -u=Waves -g=10,1,1,1000,1
+	cd ${DIR}; make BATSRUS PIDL
+
+test_double_rarefaction_rundir: test_rundir
+	cp input/PARAM.in.double_rarefaction ${DIR}/${RUNDIR}/PARAM.in
+
+test_double_rarefaction_run:
+	for RES in 200 400 800 3200; do \
+	 for FLUX in HLLDW Linde Godunov; do \
+	  make test_double_rarefaction_run1 RES=$${RES} FLUX=$${FLUX}; \
+         done \
+        done
+	rm -rf output/test_double_rarefaction_results
+	mv ${DIR}/${RUNDIR}/RESULTS output/test_double_rarefaction_results
+
+test_double_rarefaction_run1:
+	cd ${DIR}/${RUNDIR}; \
+	perl -pi -e '$$a=${RES}/10; s/\S+(\s*nRootBlockX)/$$a$$1/; \
+		     s/\S+(\s*TypeFlux)/${FLUX}$$1/' PARAM.in
+	cd ${DIR}/${RUNDIR}; \
+		${MPIRUN} ./BATSRUS.exe > runlog; \
+		PostProc.pl -M RESULTS/${FLUX}_${RES}
+
+test_double_rarefaction_check:
+	cd output; idl test_double_rarefaction.pro; \
+		rm -f test_double_rarefaction_results/*.eps
+	-(${SCRIPTDIR}/DiffNum.pl \
+		output/test_double_rarefaction_results/error.dat \
+		output/test_double_rarefaction.ref \
+		> output/test_double_rarefaction.diff)
+	ls -l output/test_double_rarefaction.diff
