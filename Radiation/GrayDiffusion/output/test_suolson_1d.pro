@@ -4,7 +4,7 @@ physics='hd11'
 
 resdir='test_suolson_1d_results/'
 
-filename = resdir+'radiation_960/GM/cut*.outs suolson_0.02ns.out'
+filename = resdir+'_960/GM/cut*.outs suolson_0.02ns.out'
 npict = 2
 .r getpict
 
