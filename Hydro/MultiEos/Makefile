@@ -121,7 +121,7 @@ test_advection_2d_run:
 	for RES in 40 80 160; do \
 	 for ON in \
 	    "" NONCONS LIMIT LIMIT_MIXED; do \
-	  for FLUX in Linde Godunov HLLDW; do \
+	  for FLUX in Linde Godunov HLLDW HLLC; do \
 	   make test_advection_2d_run1 RES=$${RES} FLUX=$${FLUX} ON=$${ON};\
 	  done \
          done \
